@@ -17,7 +17,8 @@
       <h5>Or</h5>
     </div>
     <div class="row col-md-11 justify-content-around">
-      <button type="button" class="file-button col-md-4">Choose File</button>
+      <input type="file" hidden="true" #input>
+      <button type="button" class="file-button col-md-4" (click)="input.click()">Choose File</button>
       <button type="button" class="file-button col-md-4">Upload your File</button>
     </div>
     <br /><br />
