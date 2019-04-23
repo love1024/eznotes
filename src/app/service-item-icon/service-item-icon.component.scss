@@ -1,0 +1,18 @@
+@import '../../assets/variables.scss';
+.service-item{
+    height:280px;
+    width:100%;
+    background-color: transparent;
+    >div{
+        text-align: center;
+        padding:10%;
+    }
+    i{
+        color:$primary-button-color;
+    }
+}
+img{
+    max-width: 100%;
+    height: auto;
+    color:white;
+}

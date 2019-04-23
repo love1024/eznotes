@@ -1,0 +1,50 @@
+@import '../../assets/variables.scss';
+.pricing{
+    margin-top:80px;
+    height: 220px;
+    background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/money-3523131_1280.jpg);
+    background-position: center;
+    background-size: cover;
+    p{
+        font-size: 60px;
+    }
+}
+.section{
+    background-image: linear-gradient(180deg,rgba(61,131,182,0.83) 0%,rgba(61,131,182,0.71) 100%);
+    background-color: rgba(255,255,255,0);
+}
+
+.grey-background{
+    h1{
+        font-weight: 600;
+        font-size: 60px;
+    }
+}
+
+.pic-div{
+    background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-01.jpg);
+    height: 720px;
+}
+
+input{
+    border-radius: 0px;
+    height: 50px;;
+    border: 2px solid lightgray;
+}
+textarea{
+    border-radius: 0px;
+    border: 2px solid lightgray;
+}
+
+.leave-message{
+    height: 55px;
+    border-radius: 0px;
+}
+
+.button-color{
+    background-color:$primary-button-color;
+    border-color: $primary-button-color;
+    color:white;
+    font-family:  monospace;
+    font-size: 18px;
+}

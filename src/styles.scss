@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/variables.scss';
+.header{
+    height: 80px;
+    background-color: white;
+    img{
+        margin-left:30px;
+    }
+}
+
+.title{
+    color: $nav-title-color;
+    font-family: Times, "Times New Roman", serif;
+    font-weight: 600;
+}
+
+.default-text{
+    color: white;
+}
+.footer{
+    background-color: black;
+    color: grey;
+    font-weight: 800;
+    bottom: 0px;
+}
+header{
+    width:100%;
+    position: fixed;
+    z-index:6;
+}
+.vertical-spacer{
+    min-height:30px;
+}
+
+.icon-color{
+    color:$primary-button-color;
+}
+
+.button-color{
+    background-color:$primary-button-color;
+    border-color: $primary-button-color;
+    color:white;
+}
+
+.login-footer{
+    height:250px;
+    background-color: black;
+    h5{
+        display: inline-block;
+    }
+}
+
+.twitter{
+    background-color: #00aced;
+}
+.linkedin{
+    background-color: #007bb6;
+}
+.facebook{
+    background-color: #3b5998;
+}
+.instagram{
+    background-color: #ea2c59;
+}
+
+.social-media-icon{
+    text-align: center;
+    margin:5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    display: inline-block;
+    i{
+        padding-top:3px;
+    color:white;
+    margin:5px;
+    }
+}
+
+.fa-envelope{
+    margin-right:10px
+}
+.login-form{
+    margin:20px;
+}
+.grey-background{
+    background-color: #f4f4f4f4;
+    padding:20px;
+}
+.grey-gradient-background{
+    background-image: linear-gradient(180deg,#f4f4f4f4 0%,#ffffff 100%);
+}
+.grey-text{
+    color:grey;
+}
+

@@ -1,0 +1,47 @@
+@import '../../assets/variables.scss';
+.blog-image{
+    margin-top:80px;
+    height: 380px;
+    background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/writing-paper-letters-antique-quill_credit-Shutterstock.jpg);
+    background-position: center;
+    background-size: cover;
+    p{
+        font-size: 60px;
+    }
+}
+.section{
+    background-image: linear-gradient(180deg,rgba(61,131,182,0.83) 0%,rgba(61,131,182,0.51) 100%);
+    background-color: rgba(255,255,255,0);
+}
+
+.blog-container{
+    background-image: linear-gradient(180deg,#f4f4f4 0%,#ffffff 100%);
+}
+
+.blog-footer{
+    background-color: $primary-button-color;
+    height: 300px;
+    width:100%; 
+    h2{
+        color: white;
+        font-weight: 800;
+    }
+}
+
+input{
+    border-radius: 0px;
+    height: 50px;;
+    border: 0px solid lightgray;
+}
+
+.button-color{
+    background-color: black;
+    color: white;
+    border-radius: 0px;
+    border:2px solid black;
+    height: 50px;
+}
+.form-div{
+    width:100%
+}
+

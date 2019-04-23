@@ -1,0 +1,174 @@
+<div fxLayout="column">
+  <div class="pricing">
+    <section class="section" fxFlex="100" fxLayoutAlign="center center">
+      <p class="default-text large-text">
+        Simple Pricing Plans To Fit Your Budget
+      </p>
+    </section>
+  </div>
+
+  <div class="grey-background" fxFlex="200px" fxLayoutAlign="center center">
+    <h1>Standard Plans</h1>
+  </div>
+  <div
+    class="grey-gradient-background grey-background"
+    fxFlex
+    fxLayoutAlign="space-around center"
+  >
+    <app-price-info
+      [Content]="Content"
+      [Price]="Price"
+      [Title]="Title"
+    ></app-price-info>
+    <app-price-info
+      [Content]="Content"
+      [Price]="Price"
+      [Title]="Title"
+    ></app-price-info>
+    <app-price-info
+      [Content]="Content"
+      [Price]="Price"
+      [Title]="Title"
+    ></app-price-info>
+  </div>
+  <div
+    class="grey-gradient-background grey-background"
+    fxFlex="150px"
+    fxLayoutAlign="center center"
+  >
+    <h1>Corporate Plans</h1>
+  </div>
+  <div fxFlex="40px" class="grey-background"></div>
+  <div
+    class="grey-gradient-background grey-background"
+    fxFlex
+    fxLayoutAlign="space-around center"
+  >
+    <app-team-info
+      [Content]="Content"
+      [Brief]="Brief"
+      [Title]="Title"
+    ></app-team-info>
+    <app-team-info
+      [Content]="Content"
+      [Brief]="Brief"
+      [Title]="Title"
+    ></app-team-info>
+    <app-team-info
+      [Content]="Content"
+      [Brief]="Brief"
+      [Title]="Title"
+    ></app-team-info>
+  </div>
+
+  <div fxLayout="column" class="grey-background">
+    <div fxLayout="row" style="height:150px" fxLayoutAlign="center center">
+      <br /><br />
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div
+      fxLayout="row"
+      fxFlex
+      style="height:150px;"
+      fxLayoutAlign="center center"
+    >
+      <div fxFlex="10"></div>
+      <div fxFlex="40">
+        <app-faq-item></app-faq-item>
+      </div>
+      <div fxFlex="40">
+        <app-faq-item></app-faq-item>
+      </div>
+      <div fxFlex="10"></div>
+    </div>
+    <br /><br />
+    <div
+      fxLayout="row"
+      fxFlex
+      style="height:150px;"
+      fxLayoutAlign="center center"
+    >
+      <div fxFlex="10"></div>
+      <div fxFlex="40">
+        <app-faq-item></app-faq-item>
+      </div>
+      <div fxFlex="40">
+        <app-faq-item></app-faq-item>
+      </div>
+      <div fxFlex="10"></div>
+    </div>
+
+  </div>
+
+  <div fxFlex="100" class="pic-div">
+    <div fxLayout="row" class="vertical-spacer"></div>
+    <br><br><br>
+    <div fxLayout="row">
+      <div fxFlex="35" fxLayoutAlign="end">
+        <div fxFlex="70" style="background-color: white;">
+          <div style="padding:40px">
+            <h3>Reach Us</h3>
+            <br /><br />
+            <div>
+              <i class="fa fa-2x fa-envelope icon-color"></i>
+              <span style="text-align: center">contact@liivlabs.com</span>
+            </div>
+            <br />
+            <div fxLayoutAlign="center center">
+              <!-- <div fxFlex="10"></div> -->
+              <div class="social-media-icon twitter">
+                <i class="fa fa-lg icon-margin fa-twitter"></i>
+              </div>
+              <div class="social-media-icon linkedin">
+                <i class="fa icon-margin fa-lg fa-linkedin"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="5"></div>
+      <div fxFlex="50" style="background-color: white">
+        <div style="padding: 30px;">
+          <h3>Leave a Message</h3>
+          <form>
+            <div class="form-group">
+              <input
+                type="text"
+                placeholder="Name"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                placeholder="Email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                rows="6"
+                placeholder="Message"
+                column="100"
+              ></textarea>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button
+                type="button"
+                fxFlex="30"
+                class="btn leave-message button-color"
+              >
+                SEND MESSAGE
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

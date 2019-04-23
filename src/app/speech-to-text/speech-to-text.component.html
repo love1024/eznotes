@@ -1,0 +1,62 @@
+<div class="blog-container" fxLayout="column">
+  <div class="blog-image">
+    <section class="section" fxFlex="100" fxLayoutAlign="center center">
+      <h1 class="default-text">Welcome To Our Transcriber!</h1>
+      <p class="default-text">
+        Upload or Record any audio/video and get its transcription instantly.
+      </p>
+    </section>
+  </div>
+</div>
+<br />
+<div class="col-md-12">
+  <div class="row col-md-11 feature-div justify-content-center">
+    <div class="col-md-4">
+      <app-speech-to-text-item></app-speech-to-text-item>
+    </div>
+    <div class="col-md-4">
+      <app-speech-to-text-item></app-speech-to-text-item>
+    </div>
+    <div class="col-md-4">
+      <app-speech-to-text-item></app-speech-to-text-item>
+    </div>
+  </div>
+</div>
+<div class="speech-to-text-div">
+  <br />
+  <div class="col-md-12">
+    <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
+    <div class="col-md-6 offset-md-3">
+      <div class="row justify-content-center">
+        <iframe></iframe>
+      </div>
+      <br />
+      <div class="row justify-content-between">
+        <button type="button" class="btn button-color">Record Video</button>
+        <button type="button" class="btn button-color">
+          Stop Video Recording
+        </button>
+        <button type="button" class="btn button-color">Record Audio</button>
+        <button type="button" class="btn button-color">
+          Stop Audio Recording
+        </button>
+      </div>
+      <br />
+      <div class="row justify-content-center">
+        <button type="button" class="btn button-color">Convert To Text</button>
+      </div>
+    </div><br>
+    <div class="row justify-content-center">
+      <h3>Transcript quality depends on audio quality</h3>
+    </div>
+    <br /><br />
+    <div class="row col-md-8 offset-md-2 justify-content-around">
+      <div class="col-md-6">
+        <app-feedback-item></app-feedback-item>
+      </div>
+      <div class="col-md-6">
+        <app-feedback-item></app-feedback-item>
+      </div>
+    </div>
+  </div>
+</div>
