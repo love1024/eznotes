@@ -1,18 +1,11 @@
 @import "../../assets/variables.scss";
-.blog-image {
-  margin-top: 80px;
-  height: 380px;
+.container-image {
   background-image:url(http://159.89.118.118/wp-content/uploads/2018/04/business-13.jpg);
-  background-position: center;
-  background-size: cover;
   p {
     font-size: 20px;
   }
 }
 
-.section {
-  background-image: linear-gradient(180deg,rgba(12,113,195,0.72) 0%,rgba(12,113,195,0.72) 100%);
-}
 .add-summary-div{
   height:650px;
   background-size: contain;
@@ -30,6 +23,7 @@
       position: relative;
   }
 }
+
 .file-button{
   border:2px solid black;
   border-radius: 4px;
@@ -50,11 +44,6 @@
   font-style:bold;
   height:60px;
   width:100%;
-}
-textarea{
-  border:4px solid black;
-  border-radius: 8px;
-  background-color: white;
 }
 
 .grey-background{
@@ -78,10 +67,5 @@ textarea{
         font-style: bold;
         font-weight: 600;
     }
-}
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
 }
 

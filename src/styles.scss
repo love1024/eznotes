@@ -1,96 +1,146 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/variables.scss';
-.header{
-    height: 80px;
-    background-color: white;
-    img{
-        margin-left:30px;
-    }
+@import "./assets/variables.scss";
+header {
+  width: 100%;
+  position: fixed;
+  z-index: 6;
+  height: 70px;
+  background-color: white;
+  img {
+    margin-left: 20px;
+  }
+  padding: 10px;
+  .navbar {
+    padding-top: 1%;
+  }
+}
+.title {
+  color: $nav-title-color;
+  font-family: Times, "Times New Roman", serif;
+  font-weight: 600;
 }
 
-.title{
-    color: $nav-title-color;
-    font-family: Times, "Times New Roman", serif;
-    font-weight: 600;
+.default-text {
+  color: white;
 }
 
-.default-text{
-    color: white;
-}
-.footer{
-    background-color: black;
-    color: grey;
-    font-weight: 800;
-    bottom: 0px;
-}
-header{
-    width:100%;
-    position: fixed;
-    z-index:6;
-}
-.vertical-spacer{
-    min-height:30px;
+.footer {
+  background-color: black;
+  color: grey;
+  font-weight: 800;
+  bottom: 0px;
 }
 
-.icon-color{
-    color:$primary-button-color;
+.vertical-spacer {
+  min-height: 30px;
 }
 
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
+.icon-color {
+  color: $primary-color;
 }
 
-.login-footer{
-    height:250px;
-    background-color: black;
-    h5{
-        display: inline-block;
-    }
-}
-
-.twitter{
-    background-color: #00aced;
-}
-.linkedin{
-    background-color: #007bb6;
-}
-.facebook{
-    background-color: #3b5998;
-}
-.instagram{
-    background-color: #ea2c59;
-}
-
-.social-media-icon{
-    text-align: center;
-    margin:5px;
-    height: 30px;
-    width: 30px;
-    border-radius: 3px;
+.login-footer {
+  height: 250px;
+  background-color: black;
+  h5 {
     display: inline-block;
-    i{
-        padding-top:3px;
-    color:white;
-    margin:5px;
-    }
+  }
 }
 
-.fa-envelope{
-    margin-right:10px
+.twitter {
+  background-color: #00aced;
 }
-.login-form{
-    margin:20px;
+.linkedin {
+  background-color: #007bb6;
 }
-.grey-background{
-    background-color: #f4f4f4f4;
-    padding:20px;
+.facebook {
+  background-color: #3b5998;
 }
-.grey-gradient-background{
-    background-image: linear-gradient(180deg,#f4f4f4f4 0%,#ffffff 100%);
-}
-.grey-text{
-    color:grey;
+.instagram {
+  background-color: #ea2c59;
 }
 
+.social-media-icon {
+  text-align: center;
+  margin: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 3px;
+  display: inline-block;
+  i {
+    padding-top: 3px;
+    color: white;
+    margin: 5px;
+  }
+}
+
+.fa-envelope {
+  margin-right: 10px;
+}
+.login-form {
+  margin: 20px;
+}
+
+.grey-background {
+  background-color: #f4f4f4f4;
+  padding: 20px;
+}
+
+.grey-gradient-background {
+  background-image: linear-gradient(180deg, #f4f4f4f4 0%, #ffffff 100%);
+}
+.grey-text {
+  color: grey;
+}
+
+.btn.square-button {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  outline: none;
+}
+
+.btn.square-button-black {
+  background-color: black;
+  border-color: black;
+  border: none;
+  color: white;
+  height: 50px;
+  border-radius: 0px;
+  outline: none;
+}
+
+.form-control.square-input {
+  border-radius: 0px;
+  height: 50px;
+  border: 2px solid lightgray;
+}
+
+.top-container {
+  margin-top: 70px;
+  height: 380px;
+  background-position: center;
+  background-size: cover;
+  section {
+    background-image: $primary-image-background;
+  }
+}
+
+.form-control.square-input-without-border {
+  border-radius: 2px;
+  height: 50px;
+  border: 0px;
+}
+
+.form-control.square-textarea {
+  border-radius: 0px;
+  border: 2px solid lightgray;
+}
+
+.black-textarea {
+  border: 4px solid black;
+  border-radius: 8px;
+  background-color: white;
+}

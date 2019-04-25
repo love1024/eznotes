@@ -1,34 +1,16 @@
 @import '../../assets/variables.scss';
-.try-it-free{
-    margin-top:80px;
-    height: 330px;
+.container-image{
     background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-08.jpg);
-    background-position: center;
-    background-size: cover;
     p{
         font-size: 60px;
     }
 }
+
 .form-div{
     height:70%;
     width:80%;
     margin-top: 90px;
     margin-bottom: 90px;
-    border: 6px solid $primary-button-color;
+    border: 6px solid $primary-color;
     box-shadow: 6px 6px 18px 0px rgba(0,0,0,0.3)
-}
-
-.section{
-    background-image: linear-gradient(180deg,rgba(61,131,182,0.83) 0%,rgba(61,131,182,0.71) 100%);
-    background-color: rgba(255,255,255,0);
-}
-
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
-}
-.large-text{
-    font-size: 60px;
-    display: block;
 }

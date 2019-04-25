@@ -18,20 +18,36 @@ const routes: Routes = [
     component: SummaryComponent
   },
   {
-    path: 'qa-summary',
+    path: 'qaSummary',
     component: QaSummaryComponent
   },
-  // {
-  //   path: '',
-  //   component: TryItFreeComponent
-  // },
-  // {
-  //   path: '',
-  //   component: ContactUsComponent
-  // },
+  {
+    path: 'pricing',
+    component: PricingComponent
+  },
+  {
+    path: 'blog',
+    component: BlogsComponent
+  },
+  {
+    path: 'tryFree',
+    component: TryItFreeComponent
+  },
+  {
+    path: 'speechToText',
+    component: SpeechToTextComponent
+  },
+  {
+    path: 'contact',
+    component: ContactUsComponent
+  },
+  {
+    path: 'services',
+    component: ServicesComponent
+  },
   {
     path: '',
-    component: SpeechToTextComponent
+    component: LoginComponent
   }
 ];
 
