@@ -22,6 +22,8 @@ import { SummaryItemComponent } from './summary-item/summary-item.component';
 import { SpeechToTextComponent } from './speech-to-text/speech-to-text.component';
 import { SpeechToTextItemComponent } from './speech-to-text-item/speech-to-text-item.component';
 import { FeedbackItemComponent } from './feedback-item/feedback-item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { FeedbackItemComponent } from './feedback-item/feedback-item.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

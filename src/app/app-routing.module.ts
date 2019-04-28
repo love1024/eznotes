@@ -18,7 +18,7 @@ const routes: Routes = [
     component: SummaryComponent
   },
   {
-    path: 'qaSummary',
+    path: 'qa-summary',
     component: QaSummaryComponent
   },
   {
@@ -34,20 +34,24 @@ const routes: Routes = [
     component: TryItFreeComponent
   },
   {
-    path: 'speechToText',
-    component: SpeechToTextComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'contact',
     component: ContactUsComponent
   },
-  {
-    path: 'services',
-    component: ServicesComponent
-  },
+  // {
+  //   path: '',
+  //   component: TryItFreeComponent
+  // },
+  // {
+  //   path: '',
+  //   component: ContactUsComponent
+  // },
   {
     path: '',
-    component: LoginComponent
+    component: SpeechToTextComponent
   }
 ];
 
@@ -55,4 +59,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

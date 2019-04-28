@@ -1,48 +1,26 @@
 <header>
-  <div class="col-md-12 row">
-    <div class="col-md-2">
+  <div fxLayout="row" fxLayoutAlign="center center" class="header">
+    <div fxFlex="40">
       <img
         src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
       />
     </div>
-    <div class="col-md-5 offset-md-5 justify-content-between navbar">
-      <div>
-        <a><h5 class="title">Home</h5></a>
-      </div>
-      <div>
-        <a routerLink="pricing"><h5 class="title">Pricing</h5></a>
-      </div>
-      <div>
-        <a routerLink="tryFree"><h5 class="title">Try It Free</h5></a>
-      </div>
-      <div>
-        <a routerLink="contact"><h5 class="title">Contact</h5></a>
-      </div>
-      <div>
-        <a routerLink="blog"><h5 class="title">Blog</h5></a>
-      </div>
-      <div>
-        <a routerLink=""><h5 class="title">Login</h5></a>
-      </div>
-      <!-- <div>
-        <a routerLink="summary"><h5 class="title">Summary</h5></a>
-      </div>
-      <div>
-        <a routerLink="qaSummary"><h5 class="title">QA Summary</h5></a>
-      </div>
-      <div>
-          <a routerLink="services"><h5 class="title">Services</h5></a>
-        </div>
-      <div>
-        <a routerLink="speechToText"><h5 class="title">Speech To Text</h5></a>
-      </div> -->
+    <div class="pd-2" fxFlex="60" fxLayoutAlign="end center" fxLayoutGap="20px">
+      <a class="title" routerLink="pricing" (click)="setRouter('pricing')">Pricing</a>
+      <a class="title" routerLink="blog" (click)="setRouter('blog')">Blog</a>
+      <a class="title" routerLink="tryFree" (click)="setRouter('tryfree')">Try It Free</a>
+      <a class="title" routerLink="login" (click)="setRouter('login')">Login</a>
+      <a class="title" routerLink="contact" (click)="setRouter('contact')">Contact</a>
+      <a class="title" routerLink="summary" (click)="setRouter('summary')">Summary</a>
+      <a class="title" routerLink="qa-summary" (click)="setRouter('qasummary')">QA Summary</a>
+      <a class="title" routerLink="" (click)="setRouter('speechtotext')">Speech To Text</a>
     </div>
   </div>
 </header>
 
 <router-outlet></router-outlet>
 
-<div class="col-md-12 login-footer">
+<div fxLayout="row" class="login-footer" fxLayoutGap="20px" *ngIf="showFooter">
   <div fxFlex="5"></div>
   <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
     <div fxFlex="10"></div>
@@ -83,16 +61,18 @@
         <input
           type="email"
           placeholder="Email"
-          class="form-control square-input-without-border"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
         />
       </div>
-      <button type="submit" class="btn square-button col-md-12">
-        SUBSCRIBE
+      <button type="submit" class="button-color btn col-md-12">
+        Subscribe
       </button>
     </form>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5%" class="footer">
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%" class="footer">
   <p>About Us</p>
   <p>FAQ</p>
   <p>Privacy</p>

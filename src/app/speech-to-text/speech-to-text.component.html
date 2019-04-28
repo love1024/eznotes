@@ -1,10 +1,17 @@
 <div fxLayout="column">
-  <div class="top-container container-image">
-    <section fxFlex="100" fxLayoutAlign="center center">
-      <h1 class="default-text">Welcome To Our Transcriber!</h1>
-      <p class="default-text">
-        Upload or Record any audio/video and get its transcription instantly.
-      </p>
+  <div class="blog-image">
+    <section class="section" fxFlex="100">
+      <div fxFlex class="heading">
+        <div class="row">
+          <h1 class="default-text cross-font">Welcome To Our Transcriber!</h1>
+        </div>
+        <div class="row">
+          <p class="default-text cross-font">
+            Upload or Record any audio/video and get its transcription
+            instantly.
+          </p>
+        </div>
+      </div>
     </section>
   </div>
 </div>
@@ -12,13 +19,46 @@
 <div class="col-md-12">
   <div class="row col-md-11 feature-div justify-content-center">
     <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
+      <div class="speech-to-text-item">
+        <div>
+          <div>
+            <i class="fa fa-5x fa-cloud-upload"></i>
+          </div>
+          <br /><br />
+          <h3>SUBMIT</h3>
+          <p>
+            Upload any audio or video file. We accept all file types
+          </p>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
+      <div class="speech-to-text-pencil">
+        <div>
+          <div>
+            <i class="fa fa-5x fa-pencil"></i>
+          </div>
+          <br /><br />
+          <h3>EDIT</h3>
+          <p>
+            Review your transcript with timestamps and speakers.
+          </p>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
+      <div class="speech-to-text-item">
+        <div>
+          <div>
+            <i class="fa fa-5x fa-cloud-download"></i>
+          </div>
+          <br /><br />
+          <h3>Download</h3>
+          <p>
+            Save & export your transcript as MS Word,PDF,SRT,VTT and more.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -28,35 +68,77 @@
     <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
     <div class="col-md-6 offset-md-3">
       <div class="row justify-content-center">
-        <iframe></iframe>
+        <video id="player" autoplay controls></video>
       </div>
       <br />
       <div class="row justify-content-between">
-        <button type="button" class="btn square-button">Record Video</button>
-        <button type="button" class="btn square-button">
+        <button type="button" class="btn button-color" (click)="recordVideo()">
+          Record Video
+        </button>
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="stopRecording()"
+        >
           Stop Video Recording
         </button>
-        <button type="button" class="btn square-button">Record Audio</button>
-        <button type="button" class="btn square-button">
+        <button type="button" class="btn button-color">Record Audio</button>
+        <button type="button" class="btn button-color">
           Stop Audio Recording
         </button>
       </div>
       <br />
       <div class="row justify-content-center">
-        <button type="button" class="btn square-button">Convert To Text</button>
+        <button type="button" class="btn button-color">Convert To Text</button>
       </div>
-    </div><br>
+    </div>
+    <br />
     <div class="row justify-content-center">
       <h3>Transcript quality depends on audio quality</h3>
     </div>
     <br /><br />
     <div class="row col-md-8 offset-md-2 justify-content-around">
       <div class="col-md-6">
-        <app-feedback-item></app-feedback-item>
+        <div class="feedback-item">
+          <div>
+            <div>
+              <img
+                src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
+              />
+            </div>
+            <br />
+            <h3>Good Audio</h3>
+            <p>
+              Little background noise
+            </p>
+            <p>Clear speaker(s)</p>
+            <p>Minimal accents</p>
+
+            <p>Result:90-95% Accuracy</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
-        <app-feedback-item></app-feedback-item>
+        <div class="feedback-item">
+          <div>
+            <div>
+              <img
+                src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-6.png"
+              />
+            </div>
+            <br />
+            <h3>Difficult Audio</h3>
+            <p>
+              Heavy background noise
+            </p>
+            <p>Crosstalk</p>
+            <p>Strong accents</p>
+
+            <p>Result:Mostly Unusable</p>
+          </div>
+        </div>
       </div>
+      <br /><br />
     </div>
   </div>
 </div>

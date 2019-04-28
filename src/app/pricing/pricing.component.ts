@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricingComponent implements OnInit {
 
+  Content=[];
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setAllContents(){
+    this.Content.push('Pay as you Go');
+    this.Content.push('Basic');
+    this.Content.push('Professional');
+
   }
 
 }

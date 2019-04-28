@@ -1,26 +1,56 @@
-@import "../../assets/variables.scss";
-.container-image {
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/telephone-call-communication-technology-163173.jpeg);
-  p {
+@import '../../assets/variables.scss';
+.contact-image{
+    margin-top:80px;
+    height: 330px;
+    background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/telephone-call-communication-technology-163173.jpeg);
+    background-position: center;
+    background-size: cover;
+    p{
+        font-size: 60px;
+    }
+}
+.form-div{
+    height:70%;
+    width:80%;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    border: 6px solid $primary-button-color;
+    box-shadow: 6px 6px 18px 0px rgba(0,0,0,0.3)
+}
+
+.section{
+    background-image: linear-gradient(180deg,rgba(61,131,182,0.83) 0%,rgba(61,131,182,0.71) 100%);
+    background-color: rgba(255,255,255,0);
+}
+
+.button-color{
+    background-color:$primary-button-color;
+    border-color: $primary-button-color;
+    color:white;
+    font-size: 18px;
+}
+
+.large-text{
     font-size: 60px;
-  }
+    display: block;
 }
 
-.leave-message {
-  height: 55px;
-  font-family: monospace;
-  font-size: 18px;
+.leave-message{
+    height: 55px;
+    border-radius: 0px;
+}
+h4{
+    display:inline-block;
 }
 
-h4 {
-  display: inline-block;
+input{
+    border-radius: 0px;
+    height: 50px;;
+    border: 2px solid lightgray;
+}
+textarea{
+    border-radius: 0px;
+    border: 2px solid lightgray;
 }
 
-.container-div {
-  height: 700px;
-  p {
-    font-size: 50px;
-    font-weight: 600;
-    font-family: "Times New Roman", Times, serif;
-  }
-}
+

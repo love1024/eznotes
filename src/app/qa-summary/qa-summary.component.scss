@@ -1,9 +1,40 @@
 @import "../../assets/variables.scss";
-.container-image {
+.blog-image {
+  margin-top: 80px;
+  height: 380px;
   background-image:url(http://159.89.118.118/wp-content/uploads/2019/03/design-background-01.jpg);
+  background-position: center;
+  background-size: cover;
   p {
     font-size: 20px;
   }
+}
+
+.section {
+  background-image: linear-gradient(
+    180deg,
+    rgba(61, 131, 182, 0.69) 0%,
+    rgba(61, 131, 182, 0.89) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .large-text {
+    font-size: 46px;
+  }
+
+  .small-text {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+}
+
+.cross-font {
+  font-family: 'Croissant One', cursive;
 }
 
 .add-summary-div{
@@ -44,6 +75,11 @@
   height:60px;
   width:100%;
 }
+textarea{
+  border:4px solid black;
+  border-radius: 8px;
+  background-color: white;
+}
 
 .grey-background{
     .service-item{
@@ -51,4 +87,44 @@
     }
 }
 
+.summary-item-document {
+  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
+  url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+}
+
+.summary-item-security {
+  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
+  url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg); 
+}
+
+.summary-item:hover {
+  position: relative;
+  top:-5px;
+}
+
+.summary-item{
+  height:400px;
+  width:100%;
+  background-color: $primary-button-color;
+  border-radius: 15px;
+  border-color: $primary-button-color;
+  background-image:  linear-gradient(180deg,rgba(12,113,195,0.89) 0%,rgba(12,113,195,0.89) 100%),
+  url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+  background-position: center;
+  background-size: cover;
+  color:white;
+  >div{
+      text-align: center;
+      padding:10%;
+  }
+  position: relative;
+  top: 0;
+  transition: top 0.5s;
+  cursor: pointer;
+}
+img{
+  max-width: 100%;
+  height: auto;
+  color:white;
+}
 
