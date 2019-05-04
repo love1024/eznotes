@@ -8,12 +8,13 @@
     <div class="pd-2" fxFlex="60" fxLayoutAlign="end center" fxLayoutGap="20px">
       <a class="title" routerLink="pricing" (click)="setRouter('pricing')">Pricing</a>
       <a class="title" routerLink="blog" (click)="setRouter('blog')">Blog</a>
-      <a class="title" routerLink="tryFree" (click)="setRouter('tryfree')">Try It Free</a>
-      <a class="title" routerLink="login" (click)="setRouter('login')">Login</a>
+      <a class="title" routerLink="tryFree" (click)="setRouter('tryfree')" *ngIf="!isLoggedIn">Try It Free</a>
+      <a class="title" routerLink="login" (click)="setRouter('login')" *ngIf="!isLoggedIn">Login</a>
+      <a class="title" routerLink=""  *ngIf="isLoggedIn" (click)="logout()">Logout</a>
       <a class="title" routerLink="contact" (click)="setRouter('contact')">Contact</a>
-      <a class="title" routerLink="summary" (click)="setRouter('summary')">Summary</a>
-      <a class="title" routerLink="qa-summary" (click)="setRouter('qasummary')">QA Summary</a>
-      <a class="title" routerLink="" (click)="setRouter('speechtotext')">Speech To Text</a>
+      <a class="title" routerLink="summary" (click)="setRouter('summary')" *ngIf="isLoggedIn">Summary</a>
+      <a class="title" routerLink="qa-summary" (click)="setRouter('qasummary')" *ngIf="isLoggedIn">QA Summary</a>
+      <a class="title" routerLink="speech-to-text" (click)="setRouter('speech-to-text')" *ngIf="isLoggedIn">Speech To Text</a>
     </div>
   </div>
 </header>

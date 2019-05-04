@@ -48,7 +48,7 @@ export class SummaryComponent implements OnInit {
     this.spinner.show();
     this.summaryService.summaryText(payload).subscribe(res => {
       this.text = res.result;
-      this.spinner.hide();
+       this.spinner.hide();
     });
   }
 
@@ -56,7 +56,6 @@ export class SummaryComponent implements OnInit {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '../../assets/pdf.worker.js';
     const filereader = new FileReader();
     const file:File = event.target.files[0];
-    console.log(file.type);
     filereader.readAsArrayBuffer(file);
     filereader.onload = () => {
       const typedArray = new Uint8Array(<ArrayBuffer>filereader.result);

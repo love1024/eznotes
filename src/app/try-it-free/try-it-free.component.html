@@ -9,10 +9,11 @@
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div class="form-div">
-      <form class="login-form">
+      <form class="login-form" [formGroup]="signupForm">
         <div class="form-group">
           <label>First Name</label>
           <input
+            formControlName="firstName"
             type="email"
             class="form-control"
           />
@@ -20,6 +21,7 @@
         <div class="form-group">
           <label>Last Name</label>
           <input
+          formControlName="lastName"
             type="email"
             class="form-control"
           />
@@ -28,6 +30,7 @@
           <label>User Email</label>
           <input
             type="email"
+            formControlName="email"
             class="form-control"
           />
         </div>
@@ -35,25 +38,33 @@
           <label>User Password</label>
           <input
             type="password"
+            formControlName="password"
             class="form-control"
           />
         </div>
         <div class="form-group">
           <label>Confirm Password</label>
           <input
+          formControlName="confirmPassword"
             type="password"
             class="form-control"
           />
+          <div class="error" *ngIf="confirmError">Cofirm password mismatch</div>
         </div>
+        
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <input formControlName="terms" type="checkbox" class="form-check-input" id="exampleCheck1" />
           <label class="form-check-label" for="exampleCheck1"
-            >Our Terms & Conditions</label
-          >
+            >Our Terms & Conditions</label>
+          <div class="error" *ngIf="termsError">Please accept terms and conditions</div>
         </div>
-        <button type="button" class="btn button-color col-md-12">Submit</button>
+        
+        <div class="error" *ngIf="signupError" >User already exists</div>
+
+        <button type="button" class="btn button-color col-md-12" (click)="onSubmit()" [attr.disabled]="signupForm.valid ? null: ''">Submit</button>
         <br />
       </form>
     </div>
   </div>
 </div>
+<ngx-spinner></ngx-spinner>

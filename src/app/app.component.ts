@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from './service/login/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,15 @@ export class AppComponent implements OnInit {
   title = 'liivlabs';
   showFooter = true;
 
-  constructor(public route: ActivatedRoute){}
+  isLoggedIn = false;
+
+  constructor(public route: ActivatedRoute, private loginService: LoginService){}
 
   ngOnInit(){
+    this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
+      console.log(loggedIn);
+      this.isLoggedIn = loggedIn;
+    });
   }
 
   setRouter(name) {
@@ -21,5 +28,11 @@ export class AppComponent implements OnInit {
     } else {
       this.showFooter = true;
     }
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.loginService.emitLogInOut();
+    this.setRouter('login');
   }
 }
