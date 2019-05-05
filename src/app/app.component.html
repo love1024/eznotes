@@ -1,23 +1,80 @@
-<header>
-  <div fxLayout="row" fxLayoutAlign="center center" class="header">
-    <div fxFlex="40">
-      <img
-        src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
-      />
-    </div>
-    <div class="pd-2" fxFlex="60" fxLayoutAlign="end center" fxLayoutGap="20px">
-      <a class="title" routerLink="pricing" (click)="setRouter('pricing')">Pricing</a>
-      <a class="title" routerLink="blog" (click)="setRouter('blog')">Blog</a>
-      <a class="title" routerLink="tryFree" (click)="setRouter('tryfree')" *ngIf="!isLoggedIn">Try It Free</a>
-      <a class="title" routerLink="login" (click)="setRouter('login')" *ngIf="!isLoggedIn">Login</a>
-      <a class="title" routerLink=""  *ngIf="isLoggedIn" (click)="logout()">Logout</a>
-      <a class="title" routerLink="contact" (click)="setRouter('contact')">Contact</a>
-      <a class="title" routerLink="summary" (click)="setRouter('summary')" *ngIf="isLoggedIn">Summary</a>
-      <a class="title" routerLink="qa-summary" (click)="setRouter('qasummary')" *ngIf="isLoggedIn">QA Summary</a>
-      <a class="title" routerLink="speech-to-text" (click)="setRouter('speech-to-text')" *ngIf="isLoggedIn">Speech To Text</a>
-    </div>
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+  <img
+    src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
+  />
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3"  (click)="toggleCollapsed()">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div
+  [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }" class=" w-100" id="collapsingNavbar3">
+      <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link title" routerLink="pricing" (click)="setRouter('pricing')"
+            >Pricing</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="title nav-link" routerLink="blog" (click)="setRouter('blog')">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="title nav-link menu-item"
+            routerLink="tryFree"
+            (click)="setRouter('tryfree')"
+            *ngIf="!isLoggedIn"
+            >Try It Free</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="title nav-link menu-item"
+            routerLink="login"
+            (click)="setRouter('login')"
+            *ngIf="!isLoggedIn"
+            >Login</a
+          >
+        </li>
+       
+        <li class="nav-item">
+          <a class="title nav-link menu-item" routerLink="contact" (click)="setRouter('contact')"
+            >Contact</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="title nav-link menu-item"
+            routerLink="summary"
+            (click)="setRouter('summary')"
+            *ngIf="isLoggedIn"
+            >Summary</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="title nav-link menu-item"
+            routerLink="qa-summary"
+            (click)="setRouter('qasummary')"
+            *ngIf="isLoggedIn"
+            >QA Summary</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="title nav-link menu-item"
+            routerLink="speech-to-text"
+            (click)="setRouter('speech-to-text')"
+            *ngIf="isLoggedIn"
+            >Speech To Text</a
+          >
+        </li>
+        <li class="nav-item">
+            <a class="title nav-link menu-item" routerLink="" *ngIf="isLoggedIn" (click)="logout()"
+              >Logout</a
+            >
+          </li>
+      </ul>
   </div>
-</header>
+</nav>
 
 <router-outlet></router-outlet>
 
@@ -63,8 +120,6 @@
           type="email"
           placeholder="Email"
           class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
         />
       </div>
       <button type="submit" class="button-color btn col-md-12">
@@ -73,7 +128,12 @@
     </form>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%" class="footer">
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="5%"
+  class="footer"
+>
   <p>About Us</p>
   <p>FAQ</p>
   <p>Privacy</p>

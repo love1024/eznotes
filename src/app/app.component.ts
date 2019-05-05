@@ -10,6 +10,7 @@ import { LoginService } from './service/login/login.service';
 export class AppComponent implements OnInit {
   title = 'liivlabs';
   showFooter = true;
+  collapsed = true;
 
   isLoggedIn = false;
 
@@ -34,5 +35,10 @@ export class AppComponent implements OnInit {
     this.loginService.logout();
     this.loginService.emitLogInOut();
     this.setRouter('login');
+  }
+
+
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
   }
 }

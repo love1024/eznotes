@@ -6,13 +6,18 @@
     letter-spacing: 1px;
 }
 
-.header{
-    height: 80px;
-    background-color: white;
-    img{
-        margin-left:30px;
-    }
-}
+// .header{
+//     height: 80px;
+//     background-color: white;
+//     img{
+//         margin-left:30px;
+//     }
+// }
+// header{
+//     width:100%;
+//     position: fixed;
+//     z-index:6;
+// }
 
 .title{
     color: $nav-title-color;
@@ -29,11 +34,7 @@
     bottom: 0px;
     height:70px;
 }
-header{
-    width:100%;
-    position: fixed;
-    z-index:6;
-}
+
 .vertical-spacer{
     min-height:30px;
 }
@@ -102,9 +103,15 @@ header{
 .cross-font {
     font-family: 'Croissant One', cursive;
   }
-
-
   
 .error {
     color: red;
+}
+
+.navbar{
+    background-color: white;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color:$primary-button-color !important;
 }
