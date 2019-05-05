@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-summary',
@@ -17,7 +17,29 @@ export class SummaryComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    $(window).resize(() => {
+      if ($(window).width() < 1270) {
+        // $('.price-item-container').removeClass('row');
+        // $('.price-item-container').removeClass('justify-content-around');
+        $('.price-items').removeClass('col-3');
+        $('.price-items').addClass('col-md-6 offset-md-2');
+        $('.faq-container').removeClass('row');
+        $('.faq-items').removeClass('col-5');
+        $('.faq-items').addClass('col-md-6 offset-md-1');
+      }
+
+      if ($(window).width() > 1270) {
+        // $('.price-item-container').addClass('row');
+        // $('.price-item-container').addClass('justify-content-around');
+        $('.price-items').addClass('col-3');
+        $('.price-items').removeClass('col-md-6 offset-md-2');
+        $('.faq-items').addClass('col-5');
+        $('.faq-container').addClass('row');
+        $('.faq-items').removeClass('col-md-6 offset-md-1');
+      }
+    });
+  }
 
   handleUpload(event): void {
     this.text = '';

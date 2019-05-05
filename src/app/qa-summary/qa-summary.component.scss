@@ -39,20 +39,20 @@
 
 .add-summary-div{
   height:650px;
-  background-size: contain;
-  background-size: cover;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/3016957-poster-p-1-google-will-power-the-online-learning-revolution-with-moocorg-1024x576-1.jpg);
   h4{
     text-align: center;
     font-style: italic;
     display: inline-block;
     font-weight: 600;
   }
-  image{
-      width:100%;
-      height:auto;
-      position: relative;
-  }
+}
+.image-div{
+  height:650px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/3016957-poster-p-1-google-will-power-the-online-learning-revolution-with-moocorg-1024x576-1.jpg);
+
 }
 .file-button{
   border:2px solid black;
@@ -103,7 +103,7 @@ textarea{
 }
 
 .summary-item{
-  height:400px;
+  height:350px;
   width:100%;
   background-color: $primary-button-color;
   border-radius: 15px;

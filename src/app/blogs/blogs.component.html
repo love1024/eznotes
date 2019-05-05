@@ -5,24 +5,29 @@
     </section>
   </div>
   <div class="vertical-spacer" class="grey-background"></div>
-  <div class="grey-background" fxLayoutAlign="space-between center">
-    <div fxFlex="20"></div>
-    <app-blog-item [src]="images[0]"></app-blog-item>
-
-    <app-blog-item [src]="images[1]"></app-blog-item>
-
-    <app-blog-item [src]="images[2]"></app-blog-item>
-    <div fxFlex="20"></div>
-  </div>
-  <div class="grey-background" fxLayoutAlign="space-between center">
-      <div fxFlex="20"></div>
-      <app-blog-item [src]="images[3]"></app-blog-item>
-  
-      <app-blog-item [src]="images[4]"></app-blog-item>
-  
-      <app-blog-item [src]="images[5]"></app-blog-item>
-      <div fxFlex="20"></div>
+  <div class="grey-background blog-item-container row justify-content-around">
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[0]"></app-blog-item>
     </div>
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[1]"></app-blog-item>
+    </div>
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[2]"></app-blog-item>
+    </div>
+  </div>
+
+  <div class="grey-background blog-item-container row justify-content-around">
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[3]"></app-blog-item>
+    </div>
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[4]"></app-blog-item>
+    </div>
+    <div class="col-3 blog-items">
+      <app-blog-item [src]="images[5]"></app-blog-item>
+    </div>
+  </div>
 </div>
 
 <div fxLayout="row" class="blog-footer">

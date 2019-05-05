@@ -34,17 +34,21 @@
 }
 .add-summary-div{
   height:600px;
-  background-size: contain;
-  background-position: left;
-  background-repeat: no-repeat;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-7.jpg),
-  linear-gradient(180deg,rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 100%);
   h4{
     text-align: center;
     font-style: italic;
     display: inline-block;
   }
   
+}
+
+.image-div{
+  height:600px;
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-7.jpg),
+  linear-gradient(180deg,rgba(255,255,255,0.72) 0%,rgba(255,255,255,0.72) 100%);
 }
 .file-button{
   border:2px solid black;

@@ -18,7 +18,7 @@
 <br />
 <div class="col-md-12">
   <div class="row col-md-11 feature-div justify-content-center">
-    <div class="col-md-4">
+    <div class="col-md-4 icon-item">
       <div class="speech-to-text-item">
         <div>
           <div>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 icon-item">
       <div class="speech-to-text-pencil">
         <div>
           <div>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 icon-item">
       <div class="speech-to-text-item">
         <div>
           <div>
@@ -71,7 +71,7 @@
         <video id="player" autoplay controls></video>
       </div>
       <br />
-      <div class="row justify-content-between">
+      <div class="row justify-content-around button-row">
         <button type="button" class="btn button-color" (click)="recordVideo()">
           Record Video
         </button>
@@ -83,7 +83,7 @@
           Stop Video Recording
         </button>
         <button type="button" class="btn button-color">Record Audio</button>
-        <button type="button" class="btn button-color">
+        <button type="button" class="btn button-color align-self-center">
           Stop Audio Recording
         </button>
       </div>
@@ -95,50 +95,51 @@
     <br />
     <div class="row justify-content-center">
       <h3>Transcript quality depends on audio quality</h3>
-    </div>
-    <br /><br />
-    <div class="row col-md-8 offset-md-2 justify-content-around">
-      <div class="col-md-6">
-        <div class="feedback-item">
-          <div>
-            <div>
-              <img
-                src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
-              />
-            </div>
-            <br />
-            <h3>Good Audio</h3>
-            <p>
-              Little background noise
-            </p>
-            <p>Clear speaker(s)</p>
-            <p>Minimal accents</p>
-
-            <p>Result:90-95% Accuracy</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="feedback-item">
-          <div>
-            <div>
-              <img
-                src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-6.png"
-              />
-            </div>
-            <br />
-            <h3>Difficult Audio</h3>
-            <p>
-              Heavy background noise
-            </p>
-            <p>Crosstalk</p>
-            <p>Strong accents</p>
-
-            <p>Result:Mostly Unusable</p>
-          </div>
-        </div>
-      </div>
-      <br /><br />
-    </div>
+    </div> 
   </div>
 </div>
+<div class="row col-md-8 offset-md-2 justify-content-around feedback-container">
+    <div class="col-6 review-items">
+      <div class="feedback-item">
+        <div>
+          <div>
+            <img
+              src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
+            />
+          </div>
+          <br />
+          <h3>Good Audio</h3>
+          <p>
+            Little background noise
+          </p>
+          <p>Clear speaker(s)</p>
+          <p>Minimal accents</p>
+
+          <p>Result:90-95% Accuracy</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-6 review-items">
+      <div class="feedback-item">
+        <div>
+          <div>
+            <img
+              src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-6.png"
+            />
+          </div>
+          <br />
+          <h3>Difficult Audio</h3>
+          <p>
+            Heavy background noise
+          </p>
+          <p>Crosstalk</p>
+          <p>Strong accents</p>
+
+          <p>Result:Mostly Unusable</p>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <br /><br />

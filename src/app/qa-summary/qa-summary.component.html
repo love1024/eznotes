@@ -8,9 +8,9 @@
   </div>
 </div>
 
-<div class="col-md-12 add-summary-div">
+<div class="row col-md-12 add-summary-div">
   <br /><br />
-  <div class="col-md-7 justify-content-center">
+  <div class="col-6 offset-md-1">
     <h4 class="col-md-11">Enter the text you want to summarize</h4>
     <textarea rows="10" class="col-md-11" columns="100" id="qasummarytextarea" [(ngModel)]="text"> </textarea>
     <div class="row justify-content-center col-md-11">
@@ -31,11 +31,12 @@
       <button type="button" class="generate-summary" (click)="generateSummary()">Generate Summary</button>
     </div>
   </div>
+  <div class="image-div col-5"></div>
 </div>
 <br /><br />
 <div class="grey-background">
   <br>
-  <div class="row justify-content-center ">
+  <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="summary-item summary-item-document">
         <div>
@@ -57,7 +58,7 @@
       <div class="summary-item summary-item-security">
         <div>
           <div>
-            <i class="fa fa-5x fa-file-text-o "></i>
+            <i class="fa fa-5x fa-lock "></i>
           </div>
           <br /><br />
           <h3>Secured Interaction</h3>

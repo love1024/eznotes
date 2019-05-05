@@ -26,6 +26,7 @@
 
 .default-text{
     color: white;
+    text-align: center;
 }
 .footer{
     background-color: black;
@@ -114,4 +115,7 @@
 
 .navbar-light .navbar-nav .nav-link{
     color:$primary-button-color !important;
+}
+.center-text{
+    text-align: center;
 }

@@ -1,141 +1,156 @@
-@import '../../assets/variables.scss';
-.pricing{
-    margin-top:80px;
-    height: 220px;
-    background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/money-3523131_1280.jpg);
-    background-position: center;
-    background-size: cover;
-    p{
-        font-size: 30px;
-    }
+@import "../../assets/variables.scss";
+.pricing {
+  margin-top: 80px;
+  height: 220px;
+  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/money-3523131_1280.jpg);
+  background-position: center;
+  background-size: cover;
+  p {
+    font-size: 30px;
+  }
 }
-.section{
-    background-image: linear-gradient(180deg,rgba(61,131,182,0.83) 0%,rgba(61,131,182,0.71) 100%);
-    background-color: rgba(255,255,255,0);
-}
-
-.grey-background{
-    h1{
-        font-weight: 600;
-        font-size: 60px;
-    }
+.section {
+  background-image: linear-gradient(
+    180deg,
+    rgba(61, 131, 182, 0.83) 0%,
+    rgba(61, 131, 182, 0.71) 100%
+  );
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.pic-div{
-    background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-01.jpg);
-    height: 800px;
-}
-
-input{
-    border-radius: 0px;
-    height: 50px;;
-    border: 2px solid lightgray;
-}
-textarea{
-    border-radius: 0px;
-    border: 2px solid lightgray;
-}
-
-.leave-message{
-    height: 55px;
-    border-radius: 0px;
-}
-
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
-    font-size: 18px;
-}
-.price-dialog{
-    height:530px;
-    width:340px;
-    border:2px solid $primary-button-color;
-    h2{
-        color:$primary-button-color;
-        font-size: 50px;
-    };
-    h1{
-        display:inline-block;
-    }
-    h1{
-        font-weight: 600;
-        font-style: bold;
-    }
-    p{
-        font-size: 15px;
-        font-weight: 600;
-    }
-    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.3);
-}
-
-.price-button{
-    width:40%;
-    height:50px;
-    position: relative;
-    bottom:10px;
-    background-color: white;
-    border:2px solid $primary-button-color;
-    border-radius: 0px;
-    color:$primary-button-color;
+.grey-background {
+  h1 {
     font-weight: 600;
-}
-.price-button:hover{
-    background-color: $primary-button-color;
-    border:2px solid $primary-button-color;
-    color:white;
-}
-.team-dialog{
-    height:500px;
-    width:340px;
-    h2{
-        color:$primary-button-color;
-        font-weight: 700;
-    };
-    p{
-        font-size: 20px;
-        font-weight: 600;
-    }
-    padding:20px;
-    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.3);
-}
-.heading{
-    padding:20px;
-    text-align: center;
-    h4{
-        font-style: bold;
-        font-weight: 800;
-    }
+    font-size: 60px;
+  }
 }
 
-.team-button{
-    width:40%;
-    height: 15%;
-    background-color: white;
-    border:2px solid $primary-button-color;
-    border-radius: 0px;
-    color:$primary-button-color;
+.pic-div {
+  background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-01.jpg);
+  height: 800px;
+}
+
+input {
+  border-radius: 0px;
+  height: 50px;
+  border: 2px solid lightgray;
+}
+textarea {
+  border-radius: 0px;
+  border: 2px solid lightgray;
+}
+
+.leave-message {
+  height: 55px;
+  border-radius: 0px;
+}
+
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
+  font-size: 18px;
+}
+.price-dialog {
+  height: 530px;
+  width: 340px;
+  border: 2px solid $primary-button-color;
+  h2 {
+    color: $primary-button-color;
+    font-size: 50px;
+  }
+  h1 {
+    display: inline-block;
+  }
+  h1 {
     font-weight: 600;
-}
-.team-button:hover{
-    background-color: $primary-button-color;
-    border:2px solid $primary-button-color;
-    color:white;
-}
-.media-body{
-    margin-left: 10px;
-    p{
-        color:grey;
-        font-weight: 300;
-        font-size: 16px;
-    }
-   
-}
-.media{
-    width:90%;
-    i{
-        font-size: 35px;
-        font-weight: 800
-    }
+    font-style: bold;
+  }
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.3);
 }
 
+.price-button {
+  width: 40%;
+  height: 50px;
+  position: relative;
+  bottom: 10px;
+  background-color: white;
+  border: 2px solid $primary-button-color;
+  border-radius: 0px;
+  color: $primary-button-color;
+  font-weight: 600;
+}
+.price-button:hover {
+  background-color: $primary-button-color;
+  border: 2px solid $primary-button-color;
+  color: white;
+}
+.team-dialog {
+  height: 500px;
+  width: 340px;
+  h2 {
+    color: $primary-button-color;
+    font-weight: 700;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  padding: 20px;
+  box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.3);
+}
+.heading {
+  padding: 20px;
+  text-align: center;
+  h4 {
+    font-style: bold;
+    font-weight: 800;
+  }
+}
+
+.team-button {
+  width: 40%;
+  height: 50px;
+  background-color: white;
+  border: 2px solid $primary-button-color;
+  border-radius: 0px;
+  color: $primary-button-color;
+  font-weight: 600;
+}
+.team-button:hover {
+  background-color: $primary-button-color;
+  border: 2px solid $primary-button-color;
+  color: white;
+}
+.media-body {
+  margin-left: 10px;
+  p {
+    color: grey;
+    font-weight: 300;
+    font-size: 16px;
+  }
+}
+.media {
+  width: 90%;
+  i {
+    font-size: 35px;
+    font-weight: 800;
+  }
+}
+
+.faq-title {
+  text-align: center;
+  height: 100px;
+}
+
+.faq-items {
+  height: 120px;
+}
+
+.contact-div {
+  background-color: white;
+}
