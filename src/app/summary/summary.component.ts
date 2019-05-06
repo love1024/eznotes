@@ -3,6 +3,7 @@ import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import * as $ from 'jquery';
+import { FileItem } from '../models/fileitem';
 
 @Component({
   selector: 'app-summary',
@@ -11,6 +12,8 @@ import * as $ from 'jquery';
 })
 export class SummaryComponent implements OnInit {
   text = '';
+  files: FileItem[] = [];
+  currentFile = new FileItem();
 
   constructor(
     private summaryService: SummaryService,
@@ -20,8 +23,6 @@ export class SummaryComponent implements OnInit {
   ngOnInit() {
     $(window).resize(() => {
       if ($(window).width() < 1270) {
-        // $('.price-item-container').removeClass('row');
-        // $('.price-item-container').removeClass('justify-content-around');
         $('.price-items').removeClass('col-3');
         $('.price-items').addClass('col-md-6 offset-md-2');
         $('.faq-container').removeClass('row');
@@ -30,8 +31,6 @@ export class SummaryComponent implements OnInit {
       }
 
       if ($(window).width() > 1270) {
-        // $('.price-item-container').addClass('row');
-        // $('.price-item-container').addClass('justify-content-around');
         $('.price-items').addClass('col-3');
         $('.price-items').removeClass('col-md-6 offset-md-2');
         $('.faq-items').addClass('col-5');
@@ -44,11 +43,14 @@ export class SummaryComponent implements OnInit {
   handleUpload(event): void {
     this.text = '';
     const file: File = event.target.files[0];
-    if(file.type.includes('pdf')){
+    this.currentFile = new FileItem();
+    if(file.type.includes('pdf')) {
       this.readPDFContent(event);
     } else {
       this.readFileContent(file)
       .then((content: any) => {
+        this.currentFile.FileName = file.name;
+        this.currentFile.FileText = content;
         this.text = content;
       });
     }
@@ -70,24 +72,28 @@ export class SummaryComponent implements OnInit {
     this.spinner.show();
     this.summaryService.summaryText(payload).subscribe(res => {
       this.text = res.result;
-       this.spinner.hide();
+      this.currentFile.GeneratedSummaryText = res.result;
+      const obj = Object.assign({}, this.currentFile);
+      this.files.push(obj);
+      this.spinner.hide();
     });
   }
 
   readPDFContent(event) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '../../assets/pdf.worker.js';
     const filereader = new FileReader();
-    const file:File = event.target.files[0];
+    const file: File = event.target.files[0];
+    this.currentFile.FileName = file.name;
     filereader.readAsArrayBuffer(file);
     filereader.onload = () => {
       const typedArray = new Uint8Array(<ArrayBuffer>filereader.result);
       pdfjsLib.getDocument(typedArray).then(
         PDFDocumentInstance => {
           const totalPages = PDFDocumentInstance._pdfInfo.numPages;
-          let str = '';
           for (let i = 1; i <= totalPages; i++) {
             this.getPageText(i, PDFDocumentInstance).then(textPage => {
               this.text = this.text + textPage;
+              this.currentFile.FileText = this.currentFile.FileText + this.text;
             });
           }
         },

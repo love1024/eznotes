@@ -126,3 +126,12 @@ img{
 span {
   display: block;
 }
+
+.card-div{
+  background-color: $primary-button-color;
+  button{color: white;}
+}
+
+.card{
+  border:1px solid $primary-button-color;
+}
