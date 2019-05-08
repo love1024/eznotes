@@ -12,6 +12,33 @@ export class BlogsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    if ($(window).width() < 950) {
+      $('.blog-item-container').removeClass('row');
+      $('.blog-item-container').removeClass('justify-content-around');
+      $('.blog-items').removeClass('col-3');
+      $('.blog-items').addClass('col-md-6');
+    }
+    
+    $(window).resize(() => {
+      if ($(window).width() < 950) {
+        $('.blog-item-container').removeClass('row');
+        $('.blog-item-container').removeClass('justify-content-around');
+        $('.blog-items').removeClass('col-3');
+        $('.blog-items').addClass('col-md-6');
+      }
+
+      if ($(window).width() > 950) {
+        $('.blog-item-container').addClass('row');
+        $('.blog-item-container').addClass('justify-content-around');
+        $('.blog-items').addClass('col-3');
+        $('.blog-items').removeClass('col-md-6');
+      }
+    });
+
+    this.addImages();
+  }
+
+  addImages(){
     this.images.push(
       'http://159.89.118.118/wp-content/uploads/2019/03/african-american-3810584_1280-1080x675.jpg'
     );
@@ -30,21 +57,5 @@ export class BlogsComponent implements OnInit {
     this.images.push(
       'http://159.89.118.118/wp-content/uploads/2018/04/beyond-image-59-400x250.jpg'
     );
-
-    $(window).resize(() => {
-      if ($(window).width() < 950) {
-        $('.blog-item-container').removeClass('row');
-        $('.blog-item-container').removeClass('justify-content-around');
-        $('.blog-items').removeClass('col-3');
-        $('.blog-items').addClass('col-md-6');
-      }
-
-      if ($(window).width() > 950) {
-        $('.blog-item-container').addClass('row');
-        $('.blog-item-container').addClass('justify-content-around');
-        $('.blog-items').addClass('col-3');
-        $('.blog-items').removeClass('col-md-6');
-      }
-    });
   }
 }

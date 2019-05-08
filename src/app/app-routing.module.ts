@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'summary',
     component: SummaryComponent,
-    canActivate: [AuthService]
+    // canActivate: [AuthService]
   },
   {
     path: 'qa-summary',

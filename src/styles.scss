@@ -34,6 +34,10 @@
     font-weight: 800;
     bottom: 0px;
     height:70px;
+    p{
+        margin:20px 20px 0px 20px;
+    }
+   
 }
 
 .vertical-spacer{
@@ -55,6 +59,9 @@
     background-color: black;
     h5{
         display: inline-block;
+    }
+    .default-text{
+        text-align: left;
     }
 }
 
@@ -119,3 +126,5 @@
 .center-text{
     text-align: center;
 }
+
+  

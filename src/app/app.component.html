@@ -1,82 +1,144 @@
-<nav class="navbar navbar-light navbar-expand-lg justify-content-center">
+<nav class="navbar navbar-light navbar-expand-lg col-md-12 justify-content-center">
   <img
     src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
   />
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3"  (click)="toggleCollapsed()">
-      <span class="navbar-toggler-icon"></span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsingNavbar3"
+    (click)="toggleCollapsed()"
+  >
+    <span class="navbar-toggler-icon"></span>
   </button>
   <div
-  [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }" class="w-100" id="collapsingNavbar3">
-      <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-        <li class="nav-item">
-          <a class="nav-link title" routerLink="pricing" (click)="setRouter('pricing')"
-            >Pricing</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="title nav-link" routerLink="blog" (click)="setRouter('blog')">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="title nav-link menu-item"
-            routerLink="tryFree"
-            (click)="setRouter('tryfree')"
-            *ngIf="!isLoggedIn"
-            >Try It Free</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="title nav-link menu-item"
-            routerLink="login"
-            (click)="setRouter('login')"
-            *ngIf="!isLoggedIn"
-            >Login</a
-          >
-        </li>
-       
-        <li class="nav-item">
-          <a class="title nav-link menu-item" routerLink="contact" (click)="setRouter('contact')"
-            >Contact</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="title nav-link menu-item"
-            routerLink="summary"
-            (click)="setRouter('summary')"
-            *ngIf="isLoggedIn"
-            >Summary</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="title nav-link menu-item"
-            routerLink="qa-summary"
-            (click)="setRouter('qasummary')"
-            *ngIf="isLoggedIn"
-            >QA Summary</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="title nav-link menu-item"
-            routerLink="speech-to-text"
-            (click)="setRouter('speech-to-text')"
-            *ngIf="isLoggedIn"
-            >Speech To Text</a
-          >
-        </li>
-        <li class="nav-item">
-            <a class="title nav-link menu-item" routerLink="" *ngIf="isLoggedIn" (click)="logout()"
-              >Logout</a
-            >
-          </li>
-      </ul>
+    [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }"
+    class="w-100"
+    id="collapsingNavbar3"
+  >
+    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+      <li class="nav-item">
+        <a
+          class="nav-link title"
+          routerLink="pricing"
+          (click)="setRouter('pricing')"
+          >Pricing</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="title nav-link" routerLink="blog" (click)="setRouter('blog')"
+          >Blog</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="tryFree"
+          (click)="setRouter('tryfree')"
+          *ngIf="!isLoggedIn"
+          >Try It Free</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="login"
+          (click)="setRouter('login')"
+          *ngIf="!isLoggedIn"
+          >Login</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="contact"
+          (click)="setRouter('contact')"
+          >Contact</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="summary"
+          (click)="setRouter('summary')"
+          *ngIf="isLoggedIn"
+          >Summary</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="qa-summary"
+          (click)="setRouter('qasummary')"
+          *ngIf="isLoggedIn"
+          >QA Summary</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink="speech-to-text"
+          (click)="setRouter('speech-to-text')"
+          *ngIf="isLoggedIn"
+          >Speech To Text</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
+          routerLink=""
+          *ngIf="isLoggedIn"
+          (click)="logout()"
+          >Logout</a
+        >
+      </li>
+    </ul>
   </div>
 </nav>
 
 <router-outlet></router-outlet>
+<!-- <div class="login-footer">
+  <div class="col-md-12 row" *ngIf="showFooter">
+    <div class="col-3 offset-md-1 align-self-center">
+      <h4 class="default-text">Reach Us:</h4>
+      <div>
+        <i class="fa fa-2x fa-envelope icon-color"></i>
+        <h5 class="default-text">Email</h5>
+        <h6 class="default-text">contact@liivlabs.com</h6>
+      </div>
+    </div>
+    <div class="col-3 offset-md-1 align-self-center">
+      <h4 class="default-text">Follow Us:</h4>
+      <div class="justify-content-center align-self-center">
+        <div class="social-media-icon twitter">
+          <i class="fa fa-lg icon-margin fa-twitter"></i>
+        </div>
+        <div class="social-media-icon linkedin">
+          <i class="fa icon-margin fa-lg fa-linkedin"></i>
+        </div>
+        <div class="social-media-icon facebook">
+          <i class="fa fa-lg fa-facebook"></i>
+        </div>
+        <div class="social-media-icon instagram">
+          <i class="fa icon-margin fa-lg fa-instagram"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 align-self-center footer-column">
+      <form class="login-form">
+        <h4 class="default-text">Subscription</h4>
+        <div class="vertical-spacer"></div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" class="form-control" />
+        </div>
+        <button type="submit" class="button-color btn col-md-12">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </div>
+</div> -->
 
 <div fxLayout="row" class="login-footer" fxLayoutGap="20px" *ngIf="showFooter">
   <div fxFlex="5"></div>
@@ -127,13 +189,8 @@
       </button>
     </form>
   </div>
-</div>
-<div
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  fxLayoutGap="5%"
-  class="footer"
->
+</div> 
+<div class="footer row justify-content-center">
   <p>About Us</p>
   <p>FAQ</p>
   <p>Privacy</p>

@@ -8,9 +8,9 @@
   </div>
 </div>
 
-<div class="row col-md-12 add-summary-div">
+<div class="add-summary-div row">
   <br /><br />
-  <div class="col-6 offset-md-1">
+  <div class="col-md-6 offset-md-1">
     <h4 class="col-md-11">Enter the text you want to summarize</h4>
     <textarea rows="10" class="col-md-11" columns="100" id="qasummarytextarea" [(ngModel)]="text"> </textarea>
     <div class="row justify-content-center col-md-11">
@@ -31,7 +31,9 @@
       <button type="button" class="generate-summary" (click)="generateSummary()">Generate Summary</button>
     </div>
   </div>
-  <div class="image-div col-5"></div>
+  <div class="image-div col-md-5">
+    <img src="http://159.89.118.118/wp-content/uploads/2019/03/3016957-poster-p-1-google-will-power-the-online-learning-revolution-with-moocorg-1024x576-1.jpg">
+  </div>
 </div>
 <br /><br />
 <div class="col-md-12">
