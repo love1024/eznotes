@@ -160,6 +160,22 @@ textarea {
 }
 
 @media only screen and (max-width: 800px) {
+  .price-dialog{
+    width:80%;
+    h2{
+      font-size:30px;
+    }
+  }
+  .team-dialog{
+    width: 80%;
+    h4{
+      font-size: 20px;
+    }
+  }
+  .grey-background > h1{
+    font-size: 40px;
+  }
+  
   .grey-gradient-background.row .pic-div.row{
     margin-right: 0px;
   }
@@ -173,8 +189,8 @@ textarea {
   .pic-div.row{
     flex-direction: column;
     .col-3{
-      margin-left: 25%;
-      min-width: 50%;
+      margin-left: 10%;
+      min-width: 80%;
     }
     .col-6{
       margin-left: 10%;
@@ -188,10 +204,20 @@ textarea {
   .contact-div{
     margin-bottom: 10px;
   }
+  .price-button{
+    width:80%;
+  }
+  .team-button{
+    width:80%;
+  }
 }
 
 .contact-mail{
   height:auto;
   width:100%;
   text-align: center;
+}
+.grey-gradient-background.row{
+  margin-left: 0px;
+  margin-right: 0px;
 }

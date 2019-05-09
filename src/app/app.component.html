@@ -1,4 +1,5 @@
-<nav class="navbar navbar-light navbar-expand-lg col-md-12 justify-content-center">
+
+  <nav class="navbar navbar-light navbar-expand-lg justify-content-center">
   <img
     src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
   />
@@ -7,6 +8,7 @@
     type="button"
     data-toggle="collapse"
     data-target="#collapsingNavbar3"
+    #menuButton
     (click)="toggleCollapsed()"
   >
     <span class="navbar-toggler-icon"></span>
@@ -17,16 +19,15 @@
     id="collapsingNavbar3"
   >
     <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-      <li class="nav-item">
+      <li class="nav-item" (click)="menuButton.click()">
         <a
           class="nav-link title"
           routerLink="pricing"
-          (click)="setRouter('pricing')"
           >Pricing</a
         >
       </li>
       <li class="nav-item">
-        <a class="title nav-link" routerLink="blog" (click)="setRouter('blog')"
+        <a class="title nav-link" routerLink="blog" (click)="menuButton.click()"
           >Blog</a
         >
       </li>
@@ -34,7 +35,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="tryFree"
-          (click)="setRouter('tryfree')"
+          (click)="menuButton.click()"
           *ngIf="!isLoggedIn"
           >Try It Free</a
         >
@@ -43,7 +44,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="login"
-          (click)="setRouter('login')"
+          (click)="menuButton.click()"
           *ngIf="!isLoggedIn"
           >Login</a
         >
@@ -53,7 +54,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="contact"
-          (click)="setRouter('contact')"
+          (click)="menuButton.click()"
           >Contact</a
         >
       </li>
@@ -61,7 +62,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="summary"
-          (click)="setRouter('summary')"
+          (click)="menuButton.click()"
           *ngIf="isLoggedIn"
           >Summary</a
         >
@@ -70,7 +71,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="qa-summary"
-          (click)="setRouter('qasummary')"
+          (click)="menuButton.click()"
           *ngIf="isLoggedIn"
           >QA Summary</a
         >
@@ -79,7 +80,7 @@
         <a
           class="title nav-link menu-item"
           routerLink="speech-to-text"
-          (click)="setRouter('speech-to-text')"
+          (click)="menuButton.click()"
           *ngIf="isLoggedIn"
           >Speech To Text</a
         >
@@ -89,7 +90,7 @@
           class="title nav-link menu-item"
           routerLink=""
           *ngIf="isLoggedIn"
-          (click)="logout()"
+          (click)="logout();menuButton.click()"
           >Logout</a
         >
       </li>
@@ -98,17 +99,17 @@
 </nav>
 
 <router-outlet></router-outlet>
-<!-- <div class="login-footer">
-  <div class="col-md-12 row" *ngIf="showFooter">
-    <div class="col-3 offset-md-1 align-self-center">
-      <h4 class="default-text">Reach Us:</h4>
-      <div>
+<div class="login-footer">
+  <div class="row">
+    <div class="col-4 footer-item-1">
+      <h4 class="default-text text-center">Reach Us:</h4>
+      <div class="text-center">
         <i class="fa fa-2x fa-envelope icon-color"></i>
         <h5 class="default-text">Email</h5>
-        <h6 class="default-text">contact@liivlabs.com</h6>
+        <h6 class="default-text text-center">contact@liivlabs.com</h6>
       </div>
     </div>
-    <div class="col-3 offset-md-1 align-self-center">
+    <div class="col-4 footer-item-1">
       <h4 class="default-text">Follow Us:</h4>
       <div class="justify-content-center align-self-center">
         <div class="social-media-icon twitter">
@@ -125,10 +126,9 @@
         </div>
       </div>
     </div>
-    <div class="col-4 align-self-center footer-column">
-      <form class="login-form">
+    <div class="footer-item-2 col-4 footer-column">
+      <form>
         <h4 class="default-text">Subscription</h4>
-        <div class="vertical-spacer"></div>
         <div class="form-group">
           <input type="email" placeholder="Email" class="form-control" />
         </div>
@@ -138,9 +138,9 @@
       </form>
     </div>
   </div>
-</div> -->
+</div>
 
-<div fxLayout="row" class="login-footer" fxLayoutGap="20px" *ngIf="showFooter">
+<!-- <div fxLayout="row" class="login-footer" fxLayoutGap="20px" *ngIf="showFooter">
   <div fxFlex="5"></div>
   <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
     <div fxFlex="10"></div>
@@ -173,7 +173,7 @@
     </div>
   </div>
 
-  <div fxLayout="column" fxFlex="30">
+  <div fxLayout="column" fxFlex="30" class="footer-item">
     <form class="login-form">
       <h4 class="default-text">Subscription</h4>
       <div class="vertical-spacer"></div>
@@ -189,8 +189,8 @@
       </button>
     </form>
   </div>
-</div> 
-<div class="footer row justify-content-center">
+</div>  -->
+<div class="footer col-md-12 row justify-content-center">
   <p>About Us</p>
   <p>FAQ</p>
   <p>Privacy</p>

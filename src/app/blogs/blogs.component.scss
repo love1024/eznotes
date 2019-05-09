@@ -43,6 +43,25 @@ input{
     height: 50px;
 }
 .form-div{
-    width:100%
+    margin-left: 20%;
+    width:60%
+}
+
+@media (max-width: 800px)
+{
+    .blog-items{
+        width:90%;
+        margin-left: 5%;
+        margin-right: 5%
+    }
+    
+}
+.blog-footer.row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.blog-item-container.row{
+    margin-right: 0px;
+    margin-left: 0px;
 }
 

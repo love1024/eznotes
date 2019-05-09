@@ -39,6 +39,10 @@
     }
    
 }
+.footer.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
 
 .vertical-spacer{
     min-height:30px;
@@ -56,6 +60,7 @@
 
 .login-footer{
     height:250px;
+    padding: 20px;
     background-color: black;
     h5{
         display: inline-block;
@@ -126,5 +131,71 @@
 .center-text{
     text-align: center;
 }
+
+
+// @media (max-width: 800px)
+// {
+//     .login-footer{
+//         height: auto;
+//         flex-direction: column !important;
+//        .footer-item{
+//            width: 50% !important;
+//            margin-left: 25% !important;
+//        }
+//     }
+// }
+
+
+@media (max-width: 800px)
+{
+    .login-footer{
+        height: auto;
+        .footer-item-1.col-4{
+            flex: none;
+            max-width:30% !important;
+            width: 30%;
+            height:150px;
+            margin-left:10%;
+            margin-right: 10%;
+            margin-top: 20px;
+        }
+        .footer-item-2.col-4{
+            margin-top: 10px;
+           width: 50% !important;
+           margin-left: 25% !important;
+           flex:none;
+           max-width:50%
+       }
+    }
+}
+
+@media (max-width: 500px)
+{
+    .login-footer{
+        height: auto;
+        .footer-item-1.col-4{
+            flex: none;
+            height:150px;
+            max-width:40% !important;
+            width: 40%;
+            margin-left:5%;
+            margin-right: 5%;
+            margin-top: 20px;
+        }
+        .footer-item-2.col-4{
+            margin-top: 10px;
+           width: 50% !important;
+           margin-left: 25% !important;
+           flex:none;
+           max-width:50%
+       }
+    }
+}
+.row{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+
 
   

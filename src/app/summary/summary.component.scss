@@ -32,69 +32,66 @@
     letter-spacing: 2px;
   }
 }
-.add-summary-div{
-  height:600px;
-  h4{
+.add-summary-div {
+  height: 600px;
+  h4 {
     text-align: center;
     font-style: italic;
     display: inline-block;
   }
-  
 }
 
-.image-div{
-  height:600px;
-  img{
+.image-div {
+  height: 600px;
+  img {
     height: 100%;
-    width:100%;
+    width: 100%;
     margin-left: 25%;
   }
 }
-.file-button{
-  border:2px solid black;
+.file-button {
+  border: 2px solid black;
   border-radius: 4px;
   background-color: white;
-  color:black;
+  color: black;
   font-weight: 500;
-  font-style:bold;
-  height:40px;
-  width:100%;
+  font-style: bold;
+  height: 40px;
+  width: 100%;
 }
 
-.generate-summary{
-  border:4px solid black;
+.generate-summary {
+  border: 4px solid black;
   border-radius: 8px;
   background-color: white;
-  color:black;
+  color: black;
   font-weight: 500;
-  font-style:bold;
-  height:60px;
-  width:100%;
+  font-style: bold;
+  height: 60px;
+  width: 100%;
 }
-textarea{
-  border:4px solid black;
+textarea {
+  border: 4px solid black;
   border-radius: 8px;
   background-color: white;
 }
-
 
 .cross-font {
-  font-family: 'Croissant One', cursive;
+  font-family: "Croissant One", cursive;
 }
 
-
-.summary-item{
-  height:400px;
-  width:100%;
+.summary-item {
+  height: 400px;
+  width: 100%;
   background-color: $primary-button-color;
   border-radius: 15px;
   border-color: $primary-button-color;
   background-position: center;
   background-size: cover;
-  color:white;
-  >div{
-      text-align: center;
-      padding:10%;
+  color: white;
+  > div {
+    text-align: center;
+    padding: 10%;
   }
   position: relative;
   top: 0;
@@ -103,64 +100,75 @@ textarea{
 }
 
 .summary-item-document {
-  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
-  url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+  background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.69) 0%,
+      rgba(12, 113, 195, 0.69) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
 }
 
 .summary-item-security {
-  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
-  url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg); 
+  background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.69) 0%,
+      rgba(12, 113, 195, 0.69) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg);
 }
 
 .summary-item:hover {
   position: relative;
-  top:-5px;
+  top: -5px;
 }
 
-img{
+img {
   max-width: 100%;
   height: auto;
-  color:white;
+  color: white;
 }
 
 span {
   display: block;
 }
 
-.card-div{
+.card-div {
   background-color: $primary-button-color;
-  button{color: white;}
+  button {
+    color: white;
+  }
 }
 
-.card{
-  border:1px solid $primary-button-color;
+.card {
+  border: 1px solid $primary-button-color;
 }
 @media only screen and (max-width: 1000px) {
-  .add-summary-div.row{
-    flex-direction: column;
+  .add-summary-div.row {
+    margin-right: -15px;
+    margin-left: -15px;
   }
-  .add-summary-div{
-    height:auto;
-    .col-md-7{
-      width:90%;
+  .add-summary-div {
+    height: auto;
+    .col-md-7 {
+      width: 90%;
       margin-left: 10%;
       margin-bottom: 10px;
     }
-    .col-md-4{
+    .col-md-4 {
       width: 100%;
       height: auto;
     }
-    button{
+    button {
       margin-bottom: 10px;
     }
-    .image-div{
+    .image-div {
       height: 400px;
+      width:75%;
     }
-
   }
-  .summary-item{
-    width:70%;
-    margin-left: 15%;
+  .summary-item {
+    width: 80%;
+    margin-left: 10%;
     margin-bottom: 10px;
   }
 }

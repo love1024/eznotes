@@ -17,15 +17,20 @@ export class SpeechToTextComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    if ($(window).width() < 900) {
+      $('.feedback-container').removeClass('row justify-content-center');
+      $('.review-items').removeClass('col-4');
+      $('.review-items').addClass('col-md-8 offset-md-2');
+    }
     $(window).resize(() => {
-      if ($(window).width() < 750) {
+      if ($(window).width() < 900) {
         $('.feedback-container').removeClass('row justify-content-center');
-        $('.review-items').removeClass('col-6');
+        $('.review-items').removeClass('col-4');
         $('.review-items').addClass('col-md-8 offset-md-2');
       }
 
-      if ($(window).width() > 750) {
-        $('.review-items').addClass('col-6');
+      if ($(window).width() > 900) {
+        $('.review-items').addClass('col-4');
         $('.feedback-container').addClass('row justify-content-center');
         $('.review-items').removeClass('col-md-8 offset-md-2');
       }

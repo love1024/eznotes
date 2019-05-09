@@ -2,133 +2,87 @@
 .blog-image {
   margin-top: 80px;
   height: 380px;
-  background-image:url(http://159.89.118.118/wp-content/uploads/2018/04/business-13.jpg);
+  background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-13.jpg);
   background-position: center;
   background-size: cover;
   p {
     font-size: 15px;
   }
   text-align: center;
-  .heading{
+  .heading {
     padding: 11% 25%;
   }
-  
 }
 
 .section {
-  background-image: linear-gradient(180deg,rgba(12,113,195,0.72) 0%,rgba(12,113,195,0.72) 100%);
- 
+  background-image: linear-gradient(
+    180deg,
+    rgba(12, 113, 195, 0.72) 0%,
+    rgba(12, 113, 195, 0.72) 100%
+  );
 }
-.add-summary-div{
-  height:650px;
-  background-size: contain;
-  background-size: cover;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/3016957-poster-p-1-google-will-power-the-online-learning-revolution-with-moocorg-1024x576-1.jpg);
-  h4{
-    text-align: center;
-    font-style: italic;
-    display: inline-block;
+.feature-div {
+  box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.3);
+  // margin-left:5%;
+  padding: 15px;
+}
+.icon-item {
+  margin-bottom: 5px;
+}
+.speech-to-text-div {
+  height: 600px;
+  h4 {
+    font-style: bold;
     font-weight: 600;
   }
-  image{
-      width:100%;
-      height:auto;
-      position: relative;
-  }
 }
-.file-button{
-  border:2px solid black;
-  border-radius: 4px;
-  background-color: white;
-  color:black;
-  font-weight: 500;
-  font-style:bold;
-  height:40px;
-  width:100%;
-}
-
-.generate-summary{
-  border:4px solid black;
-  border-radius: 8px;
-  background-color: white;
-  color:black;
-  font-weight: 500;
-  font-style:bold;
-  height:60px;
-  width:100%;
-}
-textarea{
-  border:4px solid black;
-  border-radius: 8px;
-  background-color: white;
-}
-
-.grey-background{
-    .service-item{
-        background-image: linear-gradient(180deg,rgba(12,113,195,0.89) 0%,rgba(12,113,195,0.89) 100%) !important;
-    }
-}
-.feature-div{
-    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.3);
-    margin-left:5%;
-    padding: 15px;
-}
-.icon-item{
-  margin-bottom:5px;
-}
-.speech-to-text-div{
-    height: 600px; 
-    h4{
-        font-style: bold;
-        font-weight: 600;
-    }
-}
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
 }
 video {
   width: 300px;
   height: 200px;
 }
 
-.button-row{
-  button{
-  margin:5px;}
-}
-
-.speech-to-text-item{
-  height:300px;
-  width:100%;
-  background-color: $primary-button-color;
-  border-radius: 15px;
-  border-color: $primary-button-color;
-  background-image: linear-gradient(180deg,#2b87da 0%,#ffffff 100%);
-  color:$primary-button-color;
-  >div{
-      text-align: center;
-      padding:10%;
-  }
-  i{
-      color:white;
+.button-row {
+  button {
+    margin: 5px;
   }
 }
 
-.speech-to-text-pencil{
-  background-image:linear-gradient(360deg,#2b87da 1%,#ffffff 100%);
-  height:300px;
-  width:100%;
+.speech-to-text-item {
+  height: 300px;
+  width: 100%;
   background-color: $primary-button-color;
   border-radius: 15px;
   border-color: $primary-button-color;
-  color:white;
-  >div{
-      text-align: center;
-      padding:10%;
+  background-image: linear-gradient(180deg, #2b87da 0%, #ffffff 100%);
+  color: $primary-button-color;
+  > div {
+    text-align: center;
+    padding: 10%;
   }
-  i{
-      color:white;
+  i {
+    color: white;
+  }
+}
+
+.speech-to-text-pencil {
+  background-image: linear-gradient(360deg, #2b87da 1%, #ffffff 100%);
+  height: 300px;
+  width: 100%;
+  background-color: $primary-button-color;
+  border-radius: 15px;
+  border-color: $primary-button-color;
+  color: white;
+  > div {
+    text-align: center;
+    padding: 10%;
+  }
+  i {
+    color: white;
   }
 }
 
@@ -142,23 +96,34 @@ video {
 //   top:-5px;
 // }
 
-.feedback-item{
-  height:320px;
-  width:100%;
+.feedback-item {
+  height: 320px;
+  width: 100%;
   background-color: transparent;
   border-radius: 15px;
   border-color: $primary-button-color;
-  background-image: linear-gradient(180deg,rgba(0,0,0,0.87) 0%,rgba(0,0,0,0.73) 100%);
-  color:$primary-button-color;
-  >div{
-      text-align: center;
-      padding:10%;
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.87) 0%,
+    rgba(0, 0, 0, 0.73) 100%
+  );
+  color: $primary-button-color;
+  > div {
+    text-align: center;
+    padding: 10%;
   }
-  i{
-      color:$primary-button-color;
+  i {
+    color: $primary-button-color;
   }
-  p{
-      margin:0px;
+  p {
+    margin: 0px;
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .warning {
+    h3 {
+      font-size: 15px;
+    }
+  }
+}

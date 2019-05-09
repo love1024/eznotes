@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     } else {
       this.showFooter = true;
     }
+    this.toggleCollapsed();
   }
 
   logout() {
