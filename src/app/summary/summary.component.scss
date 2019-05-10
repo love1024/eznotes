@@ -22,16 +22,17 @@
   align-items: center;
   width: 100%;
   height: 100%;
-
-  .large-text {
-    font-size: 46px;
-  }
-
-  .small-text {
-    font-size: 18px;
-    letter-spacing: 2px;
-  }
 }
+
+.large-text {
+  font-size: 46px;
+}
+
+.small-text {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
 .add-summary-div {
   height: 600px;
   h4 {
@@ -165,6 +166,14 @@ span {
       height: 300px;
       width:75%;
     }
+  }
+  .large-text {
+    font-size: 30px;
+  }
+
+  .small-text {
+    font-size: 15px;
+    letter-spacing: 2px;
   }
   .summary-item {
     width: 80%;
