@@ -57,6 +57,9 @@ textarea {
   border: 2px solid lightgray;
 }
 @media only screen and (max-width: 1000px) {
+  .contact-div{
+    flex-direction: column;
+  }
   .leave-message {
     width: 100%;
   }
@@ -65,7 +68,18 @@ textarea {
       font-size: 30px;
     }
   }
-  h6{
-      font-size:12px;
+  .col-7{
+    width:80%;
+    margin-left: 10%;
+    flex:none;
+    max-width: 80%;
+    margin-bottom:20px;
+  }
+  .col-3{
+    text-align: center;
+    width:50%;
+    flex:none;
+    max-width:50%;
+    margin-left: 25%;
   }
 }

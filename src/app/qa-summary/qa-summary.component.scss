@@ -47,9 +47,9 @@
   }
 }
 .image-div{
-  height:650px;
-  width:30%;
-  background-position: left;
+  height:100%;
+  width:auto;
+  background-position: center;
   img{
     height:100%;
     width:auto;
@@ -153,8 +153,10 @@ img{
     button{
       margin-bottom: 10px;
     }
-    .image-div{
+    .image-div.col-md-5{
       height: 400px;
+      width:75%;
+      margin-left: 25%;
     }
 
   }

@@ -142,7 +142,7 @@ span {
 .card {
   border: 1px solid $primary-button-color;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
   .add-summary-div.row {
     margin-right: -15px;
     margin-left: -15px;
@@ -162,7 +162,7 @@ span {
       margin-bottom: 10px;
     }
     .image-div {
-      height: 400px;
+      height: 300px;
       width:75%;
     }
   }
