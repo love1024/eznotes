@@ -9,12 +9,18 @@ import { SummaryComponent } from './summary/summary.component';
 import { QaSummaryComponent } from './qa-summary/qa-summary.component';
 import { SpeechToTextComponent } from './speech-to-text/speech-to-text.component';
 import { AuthService } from './service/auth/auth.service';
+import { HomeComponent } from './home/home.component';
+import { ServicesComponent } from './services/services.component';
 
 const routes: Routes = [
   {
     path: 'summary',
     component: SummaryComponent,
-    canActivate: [AuthService]
+    // canActivate: [AuthService]
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'qa-summary',
@@ -36,6 +42,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'services',
+    component: ServicesComponent,
+    canActivate: [AuthService]
   },
   {
     path: 'contact',

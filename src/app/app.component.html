@@ -19,6 +19,13 @@
     id="collapsingNavbar3"
   >
     <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+        <li class="nav-item" (click)="menuButton.click()">
+            <a
+              class="nav-link title"
+              routerLink="home"
+              >Home</a
+            >
+          </li>
       <li class="nav-item" (click)="menuButton.click()">
         <a
           class="nav-link title"
@@ -58,6 +65,14 @@
           >Contact</a
         >
       </li>
+      <li class="nav-item" (click)="menuButton.click()">
+          <a
+            class="nav-link title"
+            routerLink="services"
+            *ngIf="isLoggedIn"
+            >Services</a
+          >
+        </li>
       <li class="nav-item">
         <a
           class="title nav-link menu-item"

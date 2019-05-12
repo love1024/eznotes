@@ -25,6 +25,7 @@ import { FeedbackItemComponent } from './feedback-item/feedback-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CommonModule } from '@angular/common';
     SummaryItemComponent,
     SpeechToTextComponent,
     SpeechToTextItemComponent,
-    FeedbackItemComponent
+    FeedbackItemComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

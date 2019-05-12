@@ -1,0 +1,256 @@
+@import "../../assets/variables.scss";
+.home-image {
+  margin-top: 80px;
+  height: 650px;
+  background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/beyondimage021024x640.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+}
+
+.grey-out {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.large-text {
+  font-size: 70px;
+}
+.medium-text {
+  font-size: 20px;
+}
+
+.info {
+  font-family: "Raleway", Helvetica, Arial, Lucida, sans-serif;
+  font-style: italic;
+  font-size: 25px;
+}
+
+input {
+  border-radius: 0px;
+  height: 50px;
+  border: 0px solid lightgray;
+}
+
+.button-color {
+  background-color: $primary-button-color;
+  color: white;
+
+  border: 2px solid $primary-button-color;
+  height: 50px;
+  width: 150px;
+}
+
+.form-div {
+  width: 100%;
+}
+
+.provide {
+  margin: 50px;
+}
+.vertical-div {
+  height: 70px;
+}
+
+.home-item {
+  height: 450px;
+  width: 100%;
+  background-color: $primary-button-color;
+  border-radius: 15px;
+  border-color: $primary-button-color;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  .content{
+      height: 350px;
+  }
+  padding: 20px;
+}
+.image-1 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+}
+
+.image-2 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg);
+}
+
+.image-1 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+}
+
+.image-2 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg);
+}
+
+.image-3 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/beyond-image-54.jpg);
+}
+
+.image-4 {
+  background-image: linear-gradient(
+      180deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/typing_cover.jpg);
+}
+
+.items {
+  align-items: center;
+}
+
+
+
+.read-more {
+  height: 50px;
+  width: 150px;
+  border: 2px solid white;
+  color: white;
+  font-size: 20px;
+  padding: 0px;
+}
+
+.list-item {
+  height: 100px;
+  i {
+    color: $primary-button-color;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+.video-row {
+  p {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+  }
+}
+
+.video-div {
+  height: 100%;
+  width: 100%;
+}
+
+.home-footer {
+  height: 600px;
+  background-position: center;
+  background-size: cover;
+  background-image: linear-gradient(
+      100deg,
+      rgba(61, 131, 182, 0.69) 0%,
+      rgba(61, 131, 182, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/business-08.jpg);
+  p {
+    font-size: 50px;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.form-div {
+  margin-right: 10%;
+  button {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+
+input {
+  border-radius: 4px;
+}
+.home-footer-heading {
+  height: 200px;
+  width: 100%;
+}
+.heading {
+  h2 {
+    color: $primary-button-color;
+    font-weight: 600;
+    margin-top: 75px;
+  }
+  height: 100px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .video-row {
+    .col-md-3 {
+      width: 70%;
+      flex: none;
+      max-width: 70%;
+      margin-left: 15%;
+    }
+    .col-md-7 {
+      width: 80%;
+      margin-left: 10%;
+      flex: none;
+      max-width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+    .home-image{
+        p{
+            font-size: 30px;
+        }
+        h3{
+            font-size: 20px;
+        }
+    }
+  .home-item {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 10px;
+    h3{
+        font-size: 20px;
+    }
+    p{
+        font-size: 15px;
+    }
+  }
+  .form-div{
+      width:80% !important;
+      max-width:80% !important;
+  }
+  .video-row{
+      p{
+          font-size: 15px;
+      }
+  }
+}

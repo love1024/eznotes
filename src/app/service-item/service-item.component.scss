@@ -15,8 +15,9 @@
         padding:10%;
     }
 }
-img{
-    max-width: 100%;
-    height: auto;
-    color:white;
+.img{
+    max-width: 100px;
+    height: 100px;
+    -webkit-mask-image: url('http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim.png');
+    background-color: white;
 }
