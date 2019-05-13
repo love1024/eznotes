@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
-      console.log(loggedIn);
       this.isLoggedIn = loggedIn;
     });
   }

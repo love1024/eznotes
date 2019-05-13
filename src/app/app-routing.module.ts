@@ -11,12 +11,18 @@ import { SpeechToTextComponent } from './speech-to-text/speech-to-text.component
 import { AuthService } from './service/auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
+import { MyFilesComponent } from './my-files/my-files.component';
 
 const routes: Routes = [
   {
     path: 'summary',
     component: SummaryComponent,
-    // canActivate: [AuthService]
+    canActivate: [AuthService]
+  },
+  {
+    path: 'myfiles',
+    component: MyFilesComponent,
+    canActivate: [AuthService]
   },
   {
     path: 'home',
@@ -59,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

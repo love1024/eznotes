@@ -8,24 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TryItFreeComponent } from './try-it-free/try-it-free.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { PricingComponent } from './pricing/pricing.component';
-import { PriceInfoComponent } from './price-info/price-info.component';
-import { TeamInfoComponent } from './team-info/team-info.component';
-import { FaqItemComponent } from './faq-item/faq-item.component';
 import { BlogItemComponent } from './blog-item/blog-item.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { ServicesComponent } from './services/services.component';
-import { ServiceItemComponent } from './service-item/service-item.component';
-import { ServiceItemIconComponent } from './service-item-icon/service-item-icon.component';
 import { SummaryComponent } from './summary/summary.component';
 import { QaSummaryComponent } from './qa-summary/qa-summary.component';
-import { SummaryItemComponent } from './summary-item/summary-item.component';
 import { SpeechToTextComponent } from './speech-to-text/speech-to-text.component';
-import { SpeechToTextItemComponent } from './speech-to-text-item/speech-to-text-item.component';
-import { FeedbackItemComponent } from './feedback-item/feedback-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
+import { MyFilesComponent } from './my-files/my-files.component';
 
 @NgModule({
   declarations: [
@@ -34,21 +27,14 @@ import { HomeComponent } from './home/home.component';
     TryItFreeComponent,
     ContactUsComponent,
     PricingComponent,
-    PriceInfoComponent,
-    TeamInfoComponent,
-    FaqItemComponent,
     BlogItemComponent,
     BlogsComponent,
     ServicesComponent,
-    ServiceItemComponent,
-    ServiceItemIconComponent,
     SummaryComponent,
     QaSummaryComponent,
-    SummaryItemComponent,
     SpeechToTextComponent,
-    SpeechToTextItemComponent,
-    FeedbackItemComponent,
-    HomeComponent
+    HomeComponent,
+    MyFilesComponent
   ],
   imports: [
     BrowserModule,

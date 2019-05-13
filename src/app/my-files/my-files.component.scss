@@ -1,0 +1,40 @@
+@import "../../assets/variables.scss";
+.blog-image {
+  margin-top: 80px;
+  height: 200px;
+  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-3.jpg);
+  background-position: center;
+  background-size: cover;
+  p {
+    font-size: 20px;
+  }
+  margin-bottom:30px;
+}
+
+.section {
+  background-image: linear-gradient(
+    180deg,
+    rgba(61, 131, 182, 0.69) 0%,
+    rgba(61, 131, 182, 0.89) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.large-text {
+    font-size: 46px;
+  }
+
+  .card-div {
+    background-color: $primary-button-color;
+    button {
+      color: white;
+    }
+  }
+  
+  .card {
+    border: 1px solid $primary-button-color;
+  }

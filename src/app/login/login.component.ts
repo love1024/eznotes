@@ -10,29 +10,33 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
 
   showError = false;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
-    this.loginForm  = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
   onSubmit() {
     this.showError = false;
     this.spinner.show();
     this.loginService.login(this.loginForm.value).subscribe((res: any) => {
-      if(res.type === 'fail') {
+      if (res.type === 'fail') {
         this.showError = true;
       } else {
         this.showError = false;
-        this.router.navigateByUrl('/summary');
+        this.router.navigateByUrl('/home');
       }
       this.spinner.hide();
     });

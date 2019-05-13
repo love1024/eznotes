@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../service/login/login.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  isLoggedIn = false;
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
   }
 
 }

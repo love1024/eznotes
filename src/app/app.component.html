@@ -103,6 +103,14 @@
       <li class="nav-item">
         <a
           class="title nav-link menu-item"
+          routerLink="myfiles"
+          (click)="menuButton.click()"
+          *ngIf="isLoggedIn"
+          >My Files</a
+        >
+      <li class="nav-item">
+        <a
+          class="title nav-link menu-item"
           routerLink=""
           *ngIf="isLoggedIn"
           (click)="logout();menuButton.click()"
