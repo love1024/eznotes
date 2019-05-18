@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       if (res.type === 'fail') {
         this.showError = true;
       } else {
+        this.loginService.emitLogInOut();
         this.showError = false;
         this.router.navigateByUrl('/home');
       }
