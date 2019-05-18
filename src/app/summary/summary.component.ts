@@ -12,8 +12,6 @@ import { FileItem } from '../models/fileitem';
 })
 export class SummaryComponent implements OnInit {
   text = '';
-  files: FileItem[] = [];
-  currentFile = new FileItem();
 
   constructor(
     private summaryService: SummaryService,
@@ -43,14 +41,11 @@ export class SummaryComponent implements OnInit {
   handleUpload(event): void {
     this.text = '';
     const file: File = event.target.files[0];
-    this.currentFile = new FileItem();
     if(file.type.includes('pdf')) {
       this.readPDFContent(event);
     } else {
       this.readFileContent(file)
       .then((content: any) => {
-        this.currentFile.FileName = file.name;
-        this.currentFile.FileText = content;
         this.text = content;
       });
     }
@@ -72,9 +67,6 @@ export class SummaryComponent implements OnInit {
     this.spinner.show();
     this.summaryService.summaryText(payload).subscribe(res => {
       this.text = res.result;
-      this.currentFile.GeneratedSummaryText = res.result;
-      const obj = Object.assign({}, this.currentFile);
-      this.files.push(obj);
       this.spinner.hide();
     });
   }
@@ -83,7 +75,6 @@ export class SummaryComponent implements OnInit {
     pdfjsLib.GlobalWorkerOptions.workerSrc = '../../assets/pdf.worker.js';
     const filereader = new FileReader();
     const file: File = event.target.files[0];
-    this.currentFile.FileName = file.name;
     filereader.readAsArrayBuffer(file);
     filereader.onload = () => {
       const typedArray = new Uint8Array(<ArrayBuffer>filereader.result);
@@ -93,7 +84,6 @@ export class SummaryComponent implements OnInit {
           for (let i = 1; i <= totalPages; i++) {
             this.getPageText(i, PDFDocumentInstance).then(textPage => {
               this.text = this.text + textPage;
-              this.currentFile.FileText = this.currentFile.FileText + this.text;
             });
           }
         },
