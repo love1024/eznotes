@@ -7,7 +7,7 @@ import { LoginService } from '../service/login/login.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn = true;
+  isLoggedIn = false;
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
