@@ -19,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { MyFilesComponent } from './my-files/my-files.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MyFilesComponent } from './my-files/my-files.component';
     QaSummaryComponent,
     SpeechToTextComponent,
     HomeComponent,
-    MyFilesComponent
+    MyFilesComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

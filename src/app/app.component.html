@@ -108,6 +108,14 @@
           *ngIf="isLoggedIn"
           >My Files</a
         >
+        <li class="nav-item">
+            <a
+              class="title nav-link menu-item"
+              routerLink="editor"
+              (click)="menuButton.click()"
+              *ngIf="isLoggedIn"
+              >Editor</a
+            >
       <li class="nav-item">
         <a
           class="title nav-link menu-item"

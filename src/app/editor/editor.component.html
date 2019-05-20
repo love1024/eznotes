@@ -1,0 +1,101 @@
+<div fxLayout="column">
+  <div class="blog-image">
+    <!-- <section class="section">
+      <div class="default-text large-text cross-font">
+        My Files
+      </div>
+    </section> -->
+  </div>
+</div>
+<div class="row main-div">
+  <div class="col-md-1 sidenav-container">
+    <div class="sidenav">
+      <div class="col-md-12 sidebar-item text-center">
+        <i class="fa fa-search"></i>
+        <p class="text-center">Find & Replace</p>
+      </div>
+      <div class="col-md-12 sidebar-item text-center">
+        <i class="fa fa-undo"></i>
+        <p class="text-center">Undo</p>
+      </div>
+      <div class="col-md-12 sidebar-item">
+        <p class="text-center">Highlight</p>
+      </div>
+      <div class="col-md-12 sidebar-item text-center">
+        <i class="fa fa-strikethrough"></i>
+        <p class=" text-center">Strike</p>
+      </div>
+      <div class="col-md-12 sidebar-item text-center">
+        <i class="fa fa-eye"></i>
+        <p class="text-center">Read Along</p>
+      </div>
+      <div class="col-md-12 sidebar-item">
+        <p class="text-center">Shortcuts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7 left-container">
+    <div class="accordion" id="accordionExample">
+      <ng-container *ngFor="let file of files; let i = index">
+        <div class="card">
+          <div class="card-header card-div">
+            <div class="row justify-content-between align-items-center">
+              <p class="mb-0">
+                <button class="btn btn-link" type="button">
+                  <i class="fa fa-play"></i>
+                </button>
+                {{ file.UserName }}
+              </p>
+              <div class="mb-0">
+                <p>{{ file.AudioLength }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="show" data-parent="#accordionExample">
+            <div class="card-body">
+              <p>
+                {{ file.AudioText }}
+              </p>
+            </div>
+          </div>
+          <br />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-md-4 right-container">
+    <div class="row">
+      <video controls class=" video-div">
+        <source
+          type="video/mp4"
+          src="http://159.89.118.118/wp-content/uploads/2018/04/Liivlabs-Modified.mp4"
+        />
+      </video>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-md-3 action-item text-center">
+        <i class="fa fa-play fa-1x "></i>
+        <p>Play</p>
+      </div>
+      <div class="col-md-3 action-item text-center">
+        <i class="fa fa-backward fa-1x"></i>
+        <p>Back - 5s</p>
+      </div>
+      <div class="col-md-3 action-item text-center">
+        <p class="speed">1x</p>
+        <p>Speed</p>
+      </div>
+      <div class="col-md-3 action-item volume text-center">
+        <i class="fa fa-volume-up fa-1x"></i>
+        <p>Play</p>
+      </div>
+    </div>
+
+    <div class="col-md-12 notes-div">
+      <p>Add Notes here</p>
+      <textarea rows="10"> </textarea>
+    </div>
+  </div>
+</div>

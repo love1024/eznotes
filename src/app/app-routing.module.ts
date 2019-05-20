@@ -12,6 +12,7 @@ import { AuthService } from './service/auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
 import { MyFilesComponent } from './my-files/my-files.component';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'myfiles',
     component: MyFilesComponent,
+    canActivate: [AuthService]
+  },
+  {
+    path: 'editor',
+    component: EditorComponent,
     canActivate: [AuthService]
   },
   {
