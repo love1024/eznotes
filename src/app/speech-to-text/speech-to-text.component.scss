@@ -2,7 +2,7 @@
 .blog-image {
   margin-top: 80px;
   margin-bottom: 20px;
-  height: 380px;
+  height: 300px;
   background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-13.jpg);
   background-position: center;
   background-size: cover;
@@ -18,8 +18,8 @@
 .section {
   background-image: linear-gradient(
     180deg,
-    rgba(12, 113, 195, 0.72) 0%,
-    rgba(12, 113, 195, 0.72) 100%
+    rgba(23, 23, 24, 0.72) 0%,
+    rgba(34, 35, 36, 0.72) 100%
   );
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@
   margin-bottom: 5px;
 }
 .speech-to-text-div {
-  height: 600px;
+  height: 500px;
   h4 {
     font-style: bold;
     font-weight: 600;
@@ -123,12 +123,30 @@ video {
     margin: 0px;
   }
 }
+.upload-file{
+  width:60%;
+  height: 70px;
+  background-color: rgba(23, 247, 235, 0.822);
+  border: none;
+  padding-top: 14px;
+  border-radius: 40px;
+  p{
+    font-size: 25px;
+    i{
+      color: yellow;
+      margin-right: 15px;
+      font-size: 25px;
+    }
+  }
+}
 
 @media only screen and (max-width: 800px) {
+  .speech-to-text-div{
+    height: auto;
+  }
   .large-text {
     font-size: 30px;
   }
-
   .small-text {
     font-size: 15px;
     letter-spacing: 1px;
@@ -138,4 +156,21 @@ video {
       font-size: 15px;
     }
   }
+  .upload-file{
+    width:80%;
+    height: 60px;
+    background-color: rgba(23, 247, 235, 0.822);
+    border: none;
+    padding-top: 16px;
+    border-radius: 40px;
+    p{
+      font-size: 17px;
+      i{
+        color: yellow;
+        margin-right: 10px;
+        font-size: 17px;
+      }
+    }
+  }
 }
+

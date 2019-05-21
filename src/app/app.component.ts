@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './service/login/login.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
   isLoggedIn = false;
 
-  constructor(public route: ActivatedRoute, private loginService: LoginService){}
+  constructor(public route: ActivatedRoute, private loginService: LoginService, private router:Router){}
 
   ngOnInit(){
     this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
@@ -40,5 +41,9 @@ export class AppComponent implements OnInit {
 
   toggleCollapsed(): void {
     this.collapsed = !this.collapsed;
+  }
+
+  navigateContactUs(){
+    this.router.navigateByUrl('/contact');
   }
 }

@@ -2,7 +2,7 @@
   <div class="blog-image">
     <section class="section">
       <div class="default-text large-text cross-font">
-        Welcome To Our Summarizer!
+        Summary Generator
       </div>
       <div class="default-text small-text cross-font">
         Valuing Your Time Always!
@@ -19,7 +19,7 @@
   </div>
   <div class="col-md-7 offset-md-1">
     <br /><br />
-    <h4 class="col-md-11">Enter the text you want to summarize</h4>
+    <h4 class="col-md-11">Enter text</h4>
     <textarea rows="10" class="col-md-11" columns="100" [(ngModel)]="text">
     </textarea>
     <div class="row justify-content-center col-md-11">
@@ -27,13 +27,13 @@
     </div>
     <div class="row col-md-11 justify-content-around">
       <input type="file" hidden="true" #input (change)="handleUpload($event)" />
-      <button type="button" class="file-button col-md-4">Choose File</button>
+      <button type="button" class="file-button col-md-4" (click)="navigateMyFiles()">My files</button>
       <button
         type="button"
         class="file-button col-md-4"
         (click)="input.click()"
       >
-        Upload your File
+        Choose File
       </button>
     </div>
     <br /><br />
@@ -49,7 +49,7 @@
   </div>
 </div>
 <br /><br />
-<div class="row col-md-12 justify-content-center">
+<!-- <div class="row col-md-12 justify-content-center">
   <div class="col-md-5">
     <div class="summary-item summary-item-document">
       <div>
@@ -83,5 +83,5 @@
     </div>
   </div>
 </div>
-<br /><br />
+<br /><br /> -->
 <ngx-spinner></ngx-spinner>

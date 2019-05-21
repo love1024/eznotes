@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/variables.scss';
+@import "./assets/variables.scss";
 
 * {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 1px;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
 }
 
 // .header{
@@ -19,183 +19,151 @@
 //     z-index:6;
 // }
 
-.title{
-    color: $nav-title-color;
-    font-weight: 600;
+.title {
+  color: $nav-title-color;
+  font-weight: 600;
 }
 
-.default-text{
-    color: white;
-    text-align: center;
+.default-text {
+  color: white;
+  text-align: center;
 }
-.footer{
-    background-color: black;
-    color: grey;
-    font-weight: 800;
-    bottom: 0px;
-    height:70px;
-    p{
-        margin:20px 20px 0px 20px;
-    }
-   
+.footer {
+  background-color: black;
+  color: grey;
+  font-weight: 800;
+  bottom: 0px;
+  height: 70px;
+  p {
+    margin: 20px 20px 0px 20px;
+  }
 }
-.footer.row{
-    margin-left: 0px;
-    margin-right: 0px;
-}
-
-.vertical-spacer{
-    min-height:30px;
+.footer.row {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
-.icon-color{
-    color:$primary-button-color;
+.vertical-spacer {
+  min-height: 30px;
 }
 
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
+.icon-color {
+  color: $primary-button-color;
 }
 
-.login-footer{
-    height:250px;
-    padding: 20px;
-    background-color: black;
-    h5{
-        display: inline-block;
-    }
-    .default-text{
-        text-align: left;
-    }
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
 }
 
-.twitter{
-    background-color: #00aced;
-}
-.linkedin{
-    background-color: #007bb6;
-}
-.facebook{
-    background-color: #3b5998;
-}
-.instagram{
-    background-color: #ea2c59;
-}
-
-.social-media-icon{
-    text-align: center;
-    margin:5px;
-    height: 30px;
-    width: 30px;
-    border-radius: 3px;
+.login-footer {
+  height: 150px;
+  padding: 20px;
+  background-color: black;
+  h5 {
     display: inline-block;
-    i{
-        padding-top:3px;
-    color:white;
-    margin:5px;
-    }
+  }
+  .default-text {
+    text-align: left;
+  }
 }
 
-.fa-envelope{
-    margin-right:10px
+.twitter {
+  background-color: #00aced;
 }
-.login-form{
-    margin:20px;
+.linkedin {
+  background-color: #007bb6;
 }
-.grey-background{
-    background-color: #f4f4f4f4;
-    padding:20px;
+.facebook {
+  background-color: #3b5998;
 }
-.grey-gradient-background{
-    background-image: linear-gradient(180deg,#f4f4f4f4 0%,#ffffff 100%);
+.instagram {
+  background-color: #ea2c59;
 }
-.grey-text{
-    color:grey;
+
+.social-media-icon {
+  text-align: center;
+  margin: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 3px;
+  display: inline-block;
+  i {
+    padding-top: 3px;
+    color: white;
+    margin: 5px;
+  }
+}
+
+.fa-envelope {
+  margin-right: 10px;
+}
+.login-form {
+  margin: 20px;
+}
+.grey-background {
+  background-color: #f4f4f4f4;
+  padding: 20px;
+}
+.grey-gradient-background {
+  background-image: linear-gradient(180deg, #f4f4f4f4 0%, #ffffff 100%);
+}
+.grey-text {
+  color: grey;
 }
 .cross-font {
-    font-family: 'Croissant One', cursive;
-  }
-  
+  font-family: "Croissant One", cursive;
+}
+
 .error {
-    color: red;
+  color: red;
 }
 
-.navbar{
-    background-color: white;
+.navbar {
+  background-color: white;
 }
 
-.navbar-light .navbar-nav .nav-link{
-    color:$primary-button-color !important;
+.navbar-light .navbar-nav .nav-link {
+  color: $primary-button-color !important;
 }
-.center-text{
-    text-align: center;
+.center-text {
+  text-align: center;
 }
 
+@media (max-width: 800px) {
+  .login-footer {
+    height: auto;
+    .footer-item-1.col-6 {
+      flex: none;
+      max-width: 40% !important;
+      width: 40%;
+      height: 150px;
+      margin-left: 5%;
+      margin-top: 20px;
+    }
+  }
+}
 
-// @media (max-width: 800px)
-// {
-//     .login-footer{
-//         height: auto;
-//         flex-direction: column !important;
-//        .footer-item{
-//            width: 50% !important;
-//            margin-left: 25% !important;
-//        }
+// @media (max-width: 500px) {
+//   .login-footer {
+//     height: auto;
+//     .footer-item-1.col-6 {
+//       flex: none;
+//       height: 150px;
+//       max-width: 40% !important;
+//       width: 40%;
+//       margin-left: 5%;
+//       margin-right: 5%;
+//       margin-top: 20px;
 //     }
+//   }
 // }
-
-
-@media (max-width: 800px)
-{
-    .login-footer{
-        height: auto;
-        .footer-item-1.col-4{
-            flex: none;
-            max-width:30% !important;
-            width: 30%;
-            height:150px;
-            margin-left:10%;
-            margin-right: 10%;
-            margin-top: 20px;
-        }
-        .footer-item-2.col-4{
-            margin-top: 10px;
-           width: 50% !important;
-           margin-left: 25% !important;
-           flex:none;
-           max-width:50%
-       }
-    }
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
-@media (max-width: 500px)
-{
-    .login-footer{
-        height: auto;
-        .footer-item-1.col-4{
-            flex: none;
-            height:150px;
-            max-width:40% !important;
-            width: 40%;
-            margin-left:5%;
-            margin-right: 5%;
-            margin-top: 20px;
-        }
-        .footer-item-2.col-4{
-            margin-top: 10px;
-           width: 50% !important;
-           margin-left: 25% !important;
-           flex:none;
-           max-width:50%
-       }
-    }
+.cursor-pointer{
+    cursor: pointer;
 }
-.row{
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-}
-
-
-
-  

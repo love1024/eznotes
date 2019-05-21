@@ -1,8 +1,7 @@
 <div class="blog-container" fxLayout="column">
   <div class="blog-image">
     <section class="section">
-      <div class="default-text large-text cross-font">Welcome To Query Based</div>
-      <div class="default-text large-text cross-font">Summarizer!</div>
+      <div class="default-text large-text cross-font">Q & A Generator</div>
       <div class="default-text small-text cross-font">Valuing Your Time Always!</div>
     </section>
   </div>
@@ -11,24 +10,24 @@
 <div class="add-summary-div row">
   <br /><br />
   <div class="col-md-6 offset-md-1">
-    <h4 class="col-md-11">Enter the text you want to summarize</h4>
+    <h4 class="col-md-11">Enter text</h4>
     <textarea rows="10" class="col-md-11" columns="100" id="qasummarytextarea" [(ngModel)]="text"> </textarea>
     <div class="row justify-content-center col-md-11">
       <h5>Or</h5>
     </div>
     <div class="row col-md-11 justify-content-around">
         <input type="file" hidden="true" #input (change)="handleUpload($event)">
-      <button type="button" class="file-button col-md-4" >Choose File</button>
+      <button type="button" class="file-button col-md-4" (click)="navigateMyFiles()">My Files</button>
       <button type="button" class="file-button col-md-4" (click)="input.click()">
-        Upload your File
+        Upload File
       </button>
     </div>
     <br /><br />
-    <h4 class="col-md-11">Enter your query</h4>
+    <h4 class="col-md-11">Ask Question</h4>
     <textarea rows="1" class="col-md-11" columns="100" [(ngModel)]="query"> </textarea>
     <br /><br />
     <div class="col-md-5 offset-md-3">
-      <button type="button" class="generate-summary" (click)="generateSummary()">Generate Summary</button>
+      <button type="button" class="generate-summary" (click)="generateSummary()">Generate Answer</button>
     </div>
   </div>
   <div class="image-div col-md-5">
@@ -36,7 +35,7 @@
   </div>
 </div>
 <br /><br />
-<div class="grey-background">
+<!-- <div class="grey-background">
   <br>
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -73,5 +72,5 @@
     </div>
   </div>
   <br /><br />
-</div>
+</div> -->
 <ngx-spinner></ngx-spinner>

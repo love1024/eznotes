@@ -3,6 +3,7 @@ import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import { FileItem } from '../models/fileitem';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qa-summary',
@@ -15,10 +16,15 @@ export class QaSummaryComponent implements OnInit {
 
   constructor(
     private summaryService: SummaryService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
+
+  navigateMyFiles(){
+    this.router.navigateByUrl('/myFiles');
+  }
 
   handleUpload(event): void {
     this.text = '';

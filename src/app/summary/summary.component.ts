@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import * as $ from 'jquery';
 import { FileItem } from '../models/fileitem';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -15,7 +16,8 @@ export class SummaryComponent implements OnInit {
 
   constructor(
     private summaryService: SummaryService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router : Router
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,10 @@ export class SummaryComponent implements OnInit {
         $('.faq-items').removeClass('col-md-6 offset-md-1');
       }
     });
+  }
+
+  navigateMyFiles(){
+    this.router.navigateByUrl('/myFiles');
   }
 
   handleUpload(event): void {
