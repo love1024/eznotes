@@ -1,8 +1,9 @@
 <div fxLayout="column">
   <div class="blog-image">
   <section class="section" fxFlex="100">
-      <div class="default-text upload-file">
+      <div class="default-text upload-file" (click)="input.click()">
         <div>
+          <input type="file" hidden="true" #input>
         <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
       </div>
       </div>

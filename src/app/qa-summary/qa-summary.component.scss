@@ -38,6 +38,7 @@
 }
 
 .add-summary-div{
+  margin-top:50px;
   height:650px;
   h4{
     text-align: center;
@@ -51,8 +52,8 @@
   width:auto;
   background-position: center;
   img{
-    height:100%;
-    width:auto;
+    height:auto;
+    width:100%;
   }
 }
 .file-button{
@@ -123,11 +124,6 @@ textarea{
   transition: top 0.5s;
   cursor: pointer;
 }
-img{
-  max-width: 100%;
-  height: auto;
-  color:white;
-}
 
 .card-div{
   background-color: $primary-button-color;
@@ -140,10 +136,11 @@ img{
 
 @media only screen and (max-width: 1000px) {
   .add-summary-div{
+    margin-top:20px;
     height:auto;
     .col-md-6{
-      width:70%;
-      margin-left: 15%;
+      width:80%;
+      margin-left: 10%;
       margin-bottom: 20px;
     }
     .col-md-5{
@@ -154,9 +151,9 @@ img{
       margin-bottom: 10px;
     }
     .image-div.col-md-5{
-      height: 400px;
-      width:75%;
-      margin-left: 25%;
+      height: 150px;
+      width:80%;
+      margin-left: 10%;
     }
 
   }
