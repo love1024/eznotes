@@ -7,17 +7,13 @@ import { LoginService } from '../service/login/login.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn = false;
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-    this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
-      this.isLoggedIn = loggedIn;
-    });
   }
 
   isLogIn() {
-    return this.isLoggedIn;
+    return this.loginService.isLoggedIn();
   }
 
 }
