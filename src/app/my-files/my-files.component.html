@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<!-- <div fxLayout="column">
   <div class="blog-image">
     <section class="section">
       <div class="default-text large-text cross-font">
@@ -6,14 +6,14 @@
       </div>
     </section>
   </div>
-</div>
-<div class="col-md-10 offset-md-1">
+</div> -->
+<div class="col-md-12">
   <div class="accordion" id="accordionExample">
     <ng-container *ngFor="let file of files; let i = index">
       <div class="card" *ngIf="!file.showEdit">
         <div class="card-header card-div">
           <div class="row justify-content-between align-items-center">
-            <h5 class="mb-0">
+            <p class="mb-0">
               <button
                 class="btn btn-link"
                 type="button"
@@ -23,9 +23,9 @@
                 <i class="fa fa-chevron-down fa-1x" *ngIf="!file.collapse"></i>
               </button>
               {{ file.FileName }}
-            </h5>
-            <h6 class="mb-0">{{ file.CreatedOn }}</h6>
-            <h6 class=" mb-0">{{ file.FileSize }}</h6>
+            </p>
+            <p class="mb-0">{{ file.CreatedOn }}</p>
+            <p class=" mb-0">{{ file.FileSize }}</p>
             <div class="mb-0">
               <i class="fa fa-pencil action-icon" (click)="toggleCard(file)"></i>
               <i class="fa fa-download action-icon"></i>
@@ -46,11 +46,11 @@
       <div class="card" *ngIf="file.showEdit">
         <div class="card-header card-div" id="headingOne">
           <div class="row justify-content-between align-items-center">
-            <h5 class="mb-0">
+            <p class="mb-0">
                 {{ file.FileName }}
-            </h5>
-            <h6 class="mb-0">{{ file.CreatedOn }}</h6>
-            <h6 class=" mb-0">{{ file.FileSize }}</h6>
+            </p>
+            <p class="mb-0">{{ file.CreatedOn }}</p>
+            <p class=" mb-0">{{ file.FileSize }}</p>
             <!-- <div class="mb-0">
               <i class="fa fa-pencil" (click)="toggleCard(file)"></i>
               <i class="fa fa-download"></i>
@@ -64,7 +64,7 @@
           data-parent="#accordionExample"
         >
           <div class="card-body">
-            <textarea rows="5" columns="100" [(ngModel)]="file.GeneratedSummaryText"> </textarea>
+            <textarea rows="4" columns="100" [(ngModel)]="file.GeneratedSummaryText"> </textarea>
           </div>
           <div class="row justify-content-center align-items-center">
             <button class="btn button-color" (click)="toggleCard(file)">

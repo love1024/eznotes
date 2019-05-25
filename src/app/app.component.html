@@ -1,6 +1,7 @@
 <nav class="navbar navbar-light navbar-expand-lg justify-content-center">
   <img
     src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
+    (click)="goToPage('home')"
   />
   <button
     class="navbar-toggler"
@@ -18,50 +19,41 @@
     id="collapsingNavbar3"
   >
     <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-      <li class="nav-item" (click)="menuButton.click()">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="home">Home</a>
       </li>
-      <li class="nav-item" (click)="menuButton.click()">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="pricing">Pricing</a>
       </li>
-      <li class="nav-item">
-        <a class="title nav-link" routerLink="blog" (click)="menuButton.click()"
-          >Blog</a
-        >
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link" routerLink="blog">Blog</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a
           class="title nav-link menu-item"
           routerLink="tryFree"
-          (click)="menuButton.click()"
           *ngIf="!isLoggedIn"
           >Try It Free</a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a
           class="title nav-link menu-item"
           routerLink="login"
-          (click)="menuButton.click()"
           *ngIf="!isLoggedIn"
           >Login</a
         >
       </li>
 
-      <li class="nav-item">
-        <a
-          class="title nav-link menu-item"
-          routerLink="contact"
-          (click)="menuButton.click()"
-          >Contact</a
-        >
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" routerLink="contact">Contact</a>
       </li>
-      <li class="nav-item" (click)="menuButton.click()">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="services" *ngIf="isLoggedIn"
           >Services</a
         >
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a
           class="title nav-link menu-item"
           routerLink="summary"
@@ -88,7 +80,7 @@
           >Speech To Text</a
         >
       </li>
-      <li class="nav-item">
+       <li class="nav-item">
         <a
           class="title nav-link menu-item"
           routerLink="myfiles"
@@ -96,24 +88,19 @@
           *ngIf="isLoggedIn"
           >My Files</a
         >
-      </li>
+      </li> -->
 
-      <li class="nav-item">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = false">
         <a
           class="title nav-link menu-item"
           routerLink="editor"
-          (click)="menuButton.click()"
           *ngIf="isLoggedIn"
           >Editor</a
         >
       </li>
 
-      <li class="nav-item">
-        <a
-          class="title nav-link menu-item"
-          routerLink=""
-          *ngIf="isLoggedIn"
-          (click)="logout(); menuButton.click()"
+      <li class="nav-item" (click)="logout(); menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" *ngIf="isLoggedIn"
           >Logout</a
         >
       </li>
@@ -123,12 +110,15 @@
 
 <router-outlet></router-outlet>
 
-<div class="login-footer">
+<div class="login-footer" *ngIf="showFooter">
   <div class="row justify-items-center">
     <div class="col-6 footer-item-1">
       <h4 class="default-text text-center">Reach Us:</h4>
       <div class="text-center">
-        <i class="fa fa-2x fa-envelope cursor-pointer icon-color" (click)="navigateContactUs()"></i>
+        <i
+          class="fa fa-2x fa-envelope cursor-pointer icon-color"
+          (click)="goToPage('contact')"
+        ></i>
         <!-- <h5 class="default-text">Email</h5>
         <h6 class="default-text text-center">contact@liivlabs.com</h6> -->
       </div>

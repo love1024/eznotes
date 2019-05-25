@@ -29,6 +29,7 @@
   text-align: center;
 }
 .footer {
+  position: relative;
   background-color: black;
   color: grey;
   font-weight: 800;
@@ -122,6 +123,9 @@
 
 .navbar {
   background-color: white;
+  img{
+    cursor: pointer;
+  }
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -166,4 +170,10 @@
 
 .cursor-pointer{
     cursor: pointer;
+}
+.nav-tabs .nav-link{
+  color: $primary-button-color;
+}
+.card-header{
+  padding:5px !important;
 }

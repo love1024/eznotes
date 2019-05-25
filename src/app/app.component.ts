@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './service/login/login.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { SummaryService } from './service/summary/summary.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +12,16 @@ export class AppComponent implements OnInit {
   title = 'liivlabs';
   showFooter = true;
   collapsed = true;
-
   isLoggedIn = false;
 
-  constructor(public route: ActivatedRoute, private loginService: LoginService, private router:Router){}
+  constructor(
+    public route: ActivatedRoute,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
-  ngOnInit(){
-    this.loginService.getLogInOutEmitter().subscribe((loggedIn) => {
+  ngOnInit() {
+    this.loginService.getLogInOutEmitter().subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
   }
@@ -35,15 +38,14 @@ export class AppComponent implements OnInit {
   logout() {
     this.loginService.logout();
     this.loginService.emitLogInOut();
-    this.setRouter('login');
+    this.router.navigateByUrl('home');
   }
-
 
   toggleCollapsed(): void {
     this.collapsed = !this.collapsed;
   }
 
-  navigateContactUs(){
-    this.router.navigateByUrl('/contact');
+  goToPage(route: string) {
+    this.router.navigateByUrl(route);
   }
 }

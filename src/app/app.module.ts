@@ -20,6 +20,11 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { MyFilesComponent } from './my-files/my-files.component';
 import { EditorComponent } from './editor/editor.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { LiivlabsAcademicComponent } from './liivlabs-academic/liivlabs-academic.component';
+import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.component';
+import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
+import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { EditorComponent } from './editor/editor.component';
     SpeechToTextComponent,
     HomeComponent,
     MyFilesComponent,
-    EditorComponent
+    EditorComponent,
+    LiivlabsAcademicComponent,
+    LiivlabsMediaComponent,
+    LiivlabsBusinessComponent,
+    LiivlabsLegalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +55,8 @@ import { EditorComponent } from './editor/editor.component';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

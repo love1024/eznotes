@@ -13,16 +13,15 @@ import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
 import { MyFilesComponent } from './my-files/my-files.component';
 import { EditorComponent } from './editor/editor.component';
+import { LiivlabsAcademicComponent } from './liivlabs-academic/liivlabs-academic.component';
+import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.component';
+import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
+import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.component';
 
 const routes: Routes = [
   {
     path: 'summary',
     component: SummaryComponent,
-    canActivate: [AuthService]
-  },
-  {
-    path: 'myfiles',
-    component: MyFilesComponent,
     canActivate: [AuthService]
   },
   {
@@ -50,6 +49,22 @@ const routes: Routes = [
   {
     path: 'tryFree',
     component: TryItFreeComponent
+  },
+  {
+    path: 'liivlabs-academics',
+    component: LiivlabsAcademicComponent
+  },
+  {
+    path: 'liivlabs-legal',
+    component: LiivlabsLegalComponent
+  },
+  {
+    path: 'liivlabs-business',
+    component: LiivlabsBusinessComponent
+  },
+  {
+    path: 'liivlabs-media',
+    component: LiivlabsMediaComponent
   },
   {
     path: 'login',
