@@ -8,8 +8,34 @@
   </div>
 </div>
 
+<nav class="navbar navbar-expand-lg tab-nav">
+  <ul class="navbar-nav">
+    <li
+      class="nav-item"
+      (click)="setTab('textSummary')"
+      [ngClass]="{ active: tab === 'textSummary', '': tab !== 'textSummary' }"
+    >
+      <a class="nav-link">Text Summary</a>
+    </li>
+    <li
+      class="nav-item"
+      (click)="setTab('question')"
+      [ngClass]="{ active: tab === 'question', '': tab !== 'question' }"
+    >
+      <a class="nav-link short-title">Question & Answer</a>
+    </li>
+    <li
+      class="nav-item"
+      (click)="setTab('editor')"
+      [ngClass]="{ active: tab === 'editor', '': tab !== 'editor' }"
+    >
+      <a class="nav-link">Editor</a>
+    </li>
+  </ul>
+</nav>
+
 <div class="row main-div">
-  <div class="sidenav-container">
+  <div class="sidenav-container" *ngIf="tab === 'editor'">
     <div class="sidenav">
       <div class="col-md-12 sidebar-item text-center">
         <i class="fa fa-search"></i>
@@ -37,13 +63,76 @@
   </div>
 
   <div class="tab-div">
-    <tabset #tabset>
+    <ng-container *ngIf="tab === 'textSummary' || tab === 'question'">
+      <ng-container *ngTemplateOutlet="filesTemplate"></ng-container>
+    </ng-container>
+    <div class="row editor-div" *ngIf="tab === 'editor'">
+      <div class="col-md-8 left-container">
+        <div class="accordion" id="accordionExample">
+          <ng-container *ngFor="let file of files; let i = index">
+            <div class="card">
+              <div class="card-header card-div">
+                <div class="row justify-content-between align-items-center">
+                  <p class="mb-0">
+                    <button class="btn btn-link" type="button">
+                      <i class="fa fa-play"></i>
+                    </button>
+                    {{ file.UserName }}
+                  </p>
+                  <div class="mb-0">
+                    <p>{{ file.AudioLength }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="show" data-parent="#accordionExample">
+                <div class="card-body">
+                  <p>
+                    {{ file.AudioText }}
+                  </p>
+                </div>
+              </div>
+              <br />
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-md-4 right-container">
+        <div class="row">
+          <video controls class=" video-div">
+            <source
+              type="video/mp4"
+              src="http://159.89.118.118/wp-content/uploads/2018/04/Liivlabs-Modified.mp4"
+            />
+          </video>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-3 action-item text-center">
+            <i class="fa fa-play fa-1x "></i>
+            <p>Play</p>
+          </div>
+          <div class="col-md-3 action-item text-center">
+            <i class="fa fa-backward fa-1x"></i>
+            <p>Back - 5s</p>
+          </div>
+          <div class="col-md-3 action-item text-center">
+            <p class="speed">1x</p>
+            <p>Speed</p>
+          </div>
+          <div class="col-md-3 action-item volume text-center">
+            <i class="fa fa-microphone-slash fa-1x"></i>
+            <p>Mute</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <tabset #tabset>
       <tab heading="Text Summary" (click)="editorTab = false">
-        <app-my-files></app-my-files
-      ></tab>
+        <ng-container *ngTemplateOutlet="filesTemplate"></ng-container>
+      </tab>
 
       <tab heading="Q & A" (click)="editorTab = false">
-        <app-my-files></app-my-files>
+          <ng-container *ngTemplateOutlet="filesTemplate"></ng-container>
       </tab>
 
       <tab heading="Editor" (click)="editorTab = true">
@@ -105,13 +194,102 @@
               </div>
             </div>
 
-            <!-- <div class="col-md-12 notes-div">
+            <div class="col-md-12 notes-div">
               <p>Add Notes here</p>
               <textarea rows="10"> </textarea>
-            </div> -->
+            </div>
           </div>
         </div>
       </tab>
-    </tabset>
+    </tabset> -->
   </div>
 </div>
+
+<ng-template #filesTemplate>
+  <div class="col-md-12">
+    <div class="accordion summary-divs" id="accordionExample">
+      <div class="card header-card">
+        <div class="card-header card-div">
+          <div class="row justify-content-between align-items-center">
+            <p class="mb-0 col-3">Name</p>
+            <p class="mb-0 col-2">Size</p>
+            <p class=" mb-0 col-3">Created Date</p>
+            <p class=" mb-0 col-3">Modified Date</p>
+            <p class=" mb-0 col-1">Actions</p>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <ng-container *ngFor="let file of summaryfiles; let i = index">
+        <div class="card" *ngIf="!file.showEdit">
+          <div class="card-header card-div">
+            <div class="row justify-content-between align-items-center">
+              <p class="mb-0 col-3 file">
+                <button
+                  class="btn btn-link"
+                  type="button"
+                  (click)="file.collapse = !file.collapse"
+                >
+                  <i
+                    class="fa fa-chevron-right fa-1x"
+                    *ngIf="file.collapse"
+                  ></i>
+                  <i
+                    class="fa fa-chevron-down fa-1x"
+                    *ngIf="!file.collapse"
+                  ></i>
+                </button>
+                {{ file.FileName }}
+              </p>
+              <p class="mb-0 col-2 small-text size">{{ file.FileSize }}</p>
+              <p class="mb-0 col-3 small-text date">{{ file.CreatedOn }}</p>
+              <p class=" mb-0 col-3 small-text date">{{ file.ModifiedDate }}</p>
+              <p class="mb-0 col-1 actions">
+                <i class="fa fa-pencil action-icon" (click)="toggleCard(file)"></i>
+                <i class="fa fa-download action-icon"></i>
+              </p>
+            </div>
+          </div>
+          <div
+            [ngClass]="{ collapse: file.collapse, show: !file.collapse }"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body">
+              {{ file.GeneratedSummaryText }}
+            </div>
+          </div>
+          <br />
+        </div>
+
+        <div class="card" *ngIf="file.showEdit"> 
+              <div class="card-header card-div" id="headingOne">
+                <div class="row justify-content-between align-items-center">
+                  <p class="mb-0">
+                      {{ file.FileName }}
+                  </p>
+                  <p class="mb-0">{{ file.CreatedOn }}</p>
+                  <p class=" mb-0">{{ file.FileSize }}</p>
+                </div>
+              </div>
+              <div
+                id="collapseOne"
+                class="show"
+                aria-labelledby="headingOne"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <textarea rows="4" columns="100" [(ngModel)]="file.GeneratedSummaryText"> </textarea>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                  <button class="btn button-color" (click)="toggleCard(file)">
+                    Save
+                  </button>
+                </div>
+              </div>
+              <br />
+            </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

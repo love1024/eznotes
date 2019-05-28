@@ -3,7 +3,7 @@
   margin-top: 80px;
   margin-bottom: 20px;
   height: 300px;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-13.jpg);
+  background-image: url(../../assets/landing-splash.png);
   background-position: center;
   background-size: cover;
   p {
@@ -44,7 +44,7 @@
   margin-bottom: 5px;
 }
 .speech-to-text-div {
-  height: 500px;
+  min-height: 400px;
   h4 {
     font-style: bold;
     font-weight: 600;
@@ -54,6 +54,8 @@
   background-color: $primary-button-color;
   border-color: $primary-button-color;
   color: white;
+  outline: none;
+  text-decoration: none;
 }
 video {
   width: 300px;
@@ -100,6 +102,10 @@ video {
   }
 }
 
+.feedback-container{
+  margin-top: 50px;
+}
+
 .feedback-item {
   height: 320px;
   width: 100%;
@@ -127,7 +133,7 @@ video {
   width:60%;
   cursor: pointer;
   height: 70px;
-  background-color: rgba(23, 247, 235, 0.822);
+  background-color:$primary-button-color;
   border: none;
   padding-top: 14px;
   border-radius: 40px;
@@ -139,6 +145,26 @@ video {
       font-size: 25px;
     }
   }
+}
+.player-button{
+  height:50px;
+  width:50px;
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  border-radius: 30px;
+  text-align: center;
+  i{
+    color: white;
+  }
+
+}
+.red-button{
+  height:50px;
+  width:50px;
+  border:3px solid $primary-button-color;
+  border-radius: 30px;
+  border-collapse: red;
+  background-color: red;
 }
 
 @media only screen and (max-width: 800px) {

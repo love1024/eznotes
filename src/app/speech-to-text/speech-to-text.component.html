@@ -1,11 +1,11 @@
 <div fxLayout="column">
   <div class="blog-image">
-  <section class="section" fxFlex="100">
+    <section class="section" fxFlex="100">
       <div class="default-text upload-file" (click)="input.click()">
         <div>
-          <input type="file" hidden="true" #input>
-        <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
-      </div>
+          <input type="file" hidden="true" #input />
+          <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
+        </div>
       </div>
       <!-- <div class="default-text small-text cross-font">
         Upload or Record any audio/video and get its transcription instantly.
@@ -65,11 +65,49 @@
         <video id="player" autoplay controls></video>
       </div>
       <br />
-      <div class="row justify-content-around button-row">
-        <button type="button" class="btn button-color" (click)="recordVideo()">
+      <div class="row col-md-12 justify-content-center button-row">
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordStart = true"
+          *ngIf="!recordStart"
+        >
           Record Video
         </button>
+        <button type="button" class="btn button-color" *ngIf="!recordStart">
+          Record Audio
+        </button>
         <button
+          type="button"
+          class="btn red-button"
+          (click)="recordingStarted = true"
+          *ngIf="recordStart && !recordingStarted"
+        ></button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="recordingStopped = true"
+          *ngIf="recordingStarted"
+        >
+          <i class="fa fa-stop"></i>
+        </button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="recordingPause = true"
+          *ngIf="recordingStarted && !recordingPause"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="recordingPause = false"
+          *ngIf="recordingStarted && recordingPause"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <!-- <button
           type="button"
           class="btn button-color"
           (click)="stopRecording()"
@@ -79,14 +117,32 @@
         <button type="button" class="btn button-color">Record Audio</button>
         <button type="button" class="btn button-color align-self-center">
           Stop Audio Recording
+        </button> -->
+      </div>
+      <div
+        class="row col-md-12 justify-content-center button-row"
+        *ngIf="recordingStopped"
+      >
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordingPause = true; saveRecording()"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordingPause = false"
+        >
+          Delete
         </button>
       </div>
-      <br />
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" *ngIf="recordingSaved">
         <button type="button" class="btn button-color">Convert To Text</button>
       </div>
     </div>
-    <br />
+
     <!-- <div class="row justify-content-center warning">
       <h3>Transcript quality depends on audio quality</h3>
     </div> -->

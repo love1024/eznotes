@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import * as $ from 'jquery';
 import { FileItem } from '../models/fileitem';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -17,7 +17,8 @@ export class SummaryComponent implements OnInit {
   constructor(
     private summaryService: SummaryService,
     private spinner: NgxSpinnerService,
-    private router : Router
+    private router : Router,
+    public route : ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -38,10 +39,14 @@ export class SummaryComponent implements OnInit {
         $('.faq-items').removeClass('col-md-6 offset-md-1');
       }
     });
+   const id = this.route.snapshot.queryParams['id'];
+   if(id > 0){
+    this.text = 'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+   }
   }
 
   navigateMyFiles(){
-    this.router.navigateByUrl('/myFiles');
+    this.router.navigateByUrl('/myfiles');
   }
 
   handleUpload(event): void {

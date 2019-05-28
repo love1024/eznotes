@@ -5,6 +5,7 @@ export class FileItem {
     public GeneratedSummaryText: string;
     public FileSize: string;
     public CreatedOn: string;
+    public ModifiedDate: string;
     public showEdit: boolean;
     public collapse: boolean;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FileItem } from '../models/fileitem';
 
 @Component({
@@ -7,16 +7,16 @@ import { FileItem } from '../models/fileitem';
   styleUrls: ['./my-files.component.scss']
 })
 export class MyFilesComponent implements OnInit {
-  files=new Array<FileItem>();
-
+  files = new Array<FileItem>();
   constructor() {}
 
   ngOnInit() {
     for (let i = 0; i < 6; i++) {
       const fileObj = new FileItem();
       fileObj.FileId = i;
-      fileObj.FileName = 'FirstDocument.pdf';
-      fileObj.CreatedOn = '18-05-2017 17:24:00';
+      fileObj.FileName = 'FirstDocument .pdf';
+      fileObj.CreatedOn = '18-05-2017 17:24';
+      fileObj.ModifiedDate = '18-05-2017 17:24';
       fileObj.collapse = true;
       fileObj.FileSize = '1,113 KB';
       fileObj.GeneratedSummaryText =

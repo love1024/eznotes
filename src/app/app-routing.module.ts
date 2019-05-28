@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [AuthService]
   },
   {
+    path: 'myfiles',
+    component: MyFilesComponent,
+    canActivate: [AuthService]
+  },
+  {
     path: 'home',
     component: HomeComponent
   },

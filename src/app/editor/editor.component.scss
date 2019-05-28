@@ -1,32 +1,8 @@
 @import "../../assets/variables.scss";
-.editor-container {
-  margin-top: 80px;
-}
 .blog-image {
-  margin-top: 80px;
-  //height: 200px;
-  //   background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-3.jpg);
-  //   background-position: center;
-  //   background-size: cover;
-  //   p {
-  //     font-size: 20px;
-  //   }
-  //   margin-bottom: 30px;
+  margin-top: 70px;
 }
 
-// .section {
-//   background-image: linear-gradient(
-//     180deg,
-//     rgba(61, 131, 182, 0.69) 0%,
-//     rgba(61, 131, 182, 0.89) 100%
-//   );
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: 100%;
-// }
 .large-text {
   font-size: 46px;
 }
@@ -37,29 +13,31 @@
   button {
     color: $primary-button-color;
   }
+  p {
+    font-size: 18px;
+  }
 }
 
 .action-icon {
-  margin-right: 20px;
+  margin-right: 10px;
   color: $primary-button-color;
   cursor: pointer;
+}
+
+.summary-divs {
+  p {
+    text-align: center;
+  }
 }
 
 .accordion {
   .card {
     border: 0px;
   }
-  .card-header {
-    padding: 0px;
-  }
 }
 
 .card-body {
   color: grey;
-  padding: 5px;
-  p {
-    font-size: 15px;
-  }
   textarea {
     width: 100%;
     height: 100%;
@@ -76,15 +54,8 @@
   display: inline-block;
 }
 
-.button-color {
-  background-color: $primary-button-color;
-  border-color: $primary-button-color;
-  color: white;
-  width: 80px;
-  margin-bottom: 10px;
-  height: 40px;
-}
 .right-container {
+  margin-top: 20px;
   border-left: 0.5px solid $primary-button-color;
   border-bottom: 0.5px solid $primary-button-color;
   .action-item {
@@ -108,7 +79,7 @@
 }
 
 .left-container {
-  height:650px;
+  height: 650px;
   overflow-y: scroll;
 }
 
@@ -127,8 +98,29 @@
   }
 }
 
-.main-div{
-  height:700px;
+.main-div {
+  height: 700px;
+}
+
+.nav-item.active {
+  background-color: #2755bd;
+}
+.nav-item {
+  width: 150px;
+  text-align: center;
+}
+.navbar{
+  height: 40px;
+}
+
+.tab-nav {
+  width: 100%;
+  padding:0px 0px 0px 5%;
+  background-color: $primary-button-color;
+  a {
+    color: white !important;
+    cursor: pointer;
+  }
 }
 
 .tab-div {
@@ -162,9 +154,23 @@
   border-bottom: 0.5px solid white;
 }
 
-@media only screen and (max-width: 800px) {
-  .main-div{
-    height:auto;
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
+  width: 80px;
+  margin-bottom: 10px;
+  height: 40px;
+}
+@media only screen and (max-width: 900px) {
+  .tab-div {
+    width: 100%;
+  }
+  .tab-nav {
+    padding-left: 0%;
+  }
+  .main-div {
+    height: auto;
   }
   .sidenav-container {
     display: none;
@@ -177,15 +183,12 @@
   .volume {
     display: none;
   }
-  // .editor-div{
-  //   flex-direction: column-reverse;
-  // }
   .right-container {
     position: fixed;
-    bottom:-5px;
+    bottom: -5px;
     width: 101%;
-    z-index:4;
-    margin:0px;
+    z-index: 4;
+    margin: 0px;
     border: none;
     .action-item {
       background-color: $primary-button-color;
@@ -209,5 +212,61 @@
   }
   .video-div {
     display: none;
+  }
+  .action-icon {
+    margin-right: 5px;
+    color: $primary-button-color;
+    cursor: pointer;
+  }
+  .card-div {
+    p {
+      font-size: 17px;
+    }
+    .small-text {
+      font-size: 13px;
+    }
+  }
+  .file {
+    width: 70%;
+    max-width: 70%;
+    flex: none;
+    text-align: left;
+  }
+  .size {
+    width: 30%;
+    max-width: 30%;
+    flex: none;
+  }
+  .date {
+    width: 40%;
+    max-width: 40%;
+    flex: none;
+    padding:0px;
+  }
+  .actions{
+    width:20%;
+    max-width: 20%;
+    padding:0px;
+  }
+  .header-card {
+    display: none;
+  }
+  .nav-item {
+    width: 33%;
+    height:90%;
+  }
+  .navbar-nav {
+    flex-direction: row;
+    width: 100%;
+  }
+  .short-title {
+    font-size: 0px;
+  }
+  .short-title:after {
+    font-size: 17px;
+    content: "Q & A";
+    text-align: center;
+    width: 34%;
+    height:90%;
   }
 }

@@ -23,7 +23,7 @@ export class QaSummaryComponent implements OnInit {
   ngOnInit() {}
 
   navigateMyFiles(){
-    this.router.navigateByUrl('/myFiles');
+    this.router.navigateByUrl('/myfiles');
   }
 
   handleUpload(event): void {

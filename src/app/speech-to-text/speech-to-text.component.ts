@@ -11,8 +11,12 @@ declare var RecordRTCPromisesHandler;
 })
 export class SpeechToTextComponent implements OnInit {
   recorder: any;
-
+  recordingStarted = false;
+  recordingPause = false;
+  recordStart = false;
+  recordingStopped = false;
   stream: any;
+  recordingSaved = false;
 
   constructor(private http: HttpClient) {}
 
@@ -90,5 +94,9 @@ export class SpeechToTextComponent implements OnInit {
         }
       );
     };
+  }
+
+  saveRecording(){
+    this.recordingSaved = true;
   }
 }
