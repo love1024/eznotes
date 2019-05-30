@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class QaSummaryComponent implements OnInit {
   text: string = '';
   query: '';
+  generatedSummary = '';
 
   constructor(
     private summaryService: SummaryService,
@@ -54,7 +55,7 @@ export class QaSummaryComponent implements OnInit {
     };
     this.spinner.show();
     this.summaryService.queryText(payload).subscribe(res => {
-      this.text = res.result;
+      this.generatedSummary = res.result;
       this.spinner.hide();
     });
   }

@@ -2,36 +2,80 @@
   <div class="blog-image">
     <section class="section">
       <div class="default-text large-text cross-font">Q & A Generator</div>
-      <div class="default-text small-text cross-font">Valuing Your Time Always!</div>
+      <div class="default-text small-text cross-font">
+        Valuing Your Time Always!
+      </div>
     </section>
   </div>
 </div>
 
 <div class="add-summary-div row">
   <br /><br />
-  <div class="col-md-6 offset-md-1">
-    <h4 class="col-md-11">Enter text</h4>
-    <textarea rows="10" class="col-md-11" columns="100" id="qasummarytextarea" [(ngModel)]="text"> </textarea>
-    <div class="row justify-content-center col-md-11">
+  <div class="col-md-8">
+    <div class="row textbox-div">
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Enter text</h4>
+        </div>
+        <textarea
+          rows="10"
+          columns="50"
+          id="qasummarytextarea"
+          [(ngModel)]="text"
+        >
+        </textarea>
+      </div>
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Generated Answer</h4>
+        </div>
+        <textarea
+          rows="10"
+          columns="50"
+          [(ngModel)]="generatedSummary"
+          placeholder="Generated summary will be shown here."
+        >
+        </textarea>
+      </div>
+      <br />
+    </div>
+    <div class="row justify-content-center col-md-12">
       <h5>Or</h5>
     </div>
-    <div class="row col-md-11 justify-content-around">
-        <input type="file" hidden="true" #input (change)="handleUpload($event)">
-      <button type="button" class="file-button col-md-4" (click)="navigateMyFiles()">My Files</button>
-      <button type="button" class="file-button col-md-4" (click)="input.click()">
+    <div class="row col-md-12 justify-content-around">
+      <input type="file" hidden="true" #input (change)="handleUpload($event)" />
+      <button
+        type="button"
+        class="file-button col-md-4"
+        (click)="navigateMyFiles()"
+      >
+        My Files
+      </button>
+      <button
+        type="button"
+        class="file-button col-md-4"
+        (click)="input.click()"
+      >
         Upload File
       </button>
     </div>
     <br /><br />
-    <h4 class="col-md-11">Ask Question</h4>
-    <textarea rows="1" class="col-md-11" columns="100" [(ngModel)]="query"> </textarea>
+    <h4 class="col-md-12">Ask Question</h4>
+    <textarea rows="2" class="col-md-10 offset-md-1" columns="100" [(ngModel)]="query">
+    </textarea>
     <br /><br />
-    <div class="col-md-5 offset-md-3">
-      <button type="button" class="generate-summary" (click)="generateSummary()">Generate Answer</button>
+    <div class="col-md-6 offset-md-3">
+      <button
+        type="button"
+        class="generate-summary"
+        (click)="generateSummary()"
+      >
+        Generate Answer
+      </button>
     </div>
   </div>
-  <div class="image-div col-md-5">
-    <img src="assets/Query.jpg">
+  <div class="image-div col-md-4">
+    <img src="assets/Query.jpg" />
   </div>
 </div>
 <br /><br />

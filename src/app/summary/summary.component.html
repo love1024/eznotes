@@ -15,19 +15,38 @@
 </div>
 <div class="row col-md-12 add-summary-div">
   <div class="image-div col-md-4">
-    <img src="assets/Summary.png">
+    <img src="assets/Summary.png" />
   </div>
-  <div class="col-md-7 offset-md-1">
-    <br><br>
-    <h4 class="col-md-11">Enter text</h4>
-    <textarea rows="10" class="col-md-11" columns="100" [(ngModel)]="text">
-    </textarea>
-    <div class="row justify-content-center col-md-11">
+  <div class="col-md-8">
+    <br /><br />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Enter text</h4>
+        </div>
+        <textarea rows="10" columns="50" [(ngModel)]="text"> </textarea>
+      </div>
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Generated Summary</h4>
+        </div>
+        <textarea rows="10" columns="50" [(ngModel)]="generatedSummary" placeholder="Generated summary will be shown here."> </textarea>
+      </div>
+      <br />
+    </div>
+
+    <div class="row justify-content-center col-md-12">
       <h5>Or</h5>
     </div>
-    <div class="row col-md-11 justify-content-around">
+    <div class="row col-md-12 justify-content-around">
       <input type="file" hidden="true" #input (change)="handleUpload($event)" />
-      <button type="button" class="file-button col-md-4" (click)="navigateMyFiles()">My files</button>
+      <button
+        type="button"
+        class="file-button col-md-4"
+        (click)="navigateMyFiles()"
+      >
+        My files
+      </button>
       <button
         type="button"
         class="file-button col-md-4"
@@ -37,7 +56,7 @@
       </button>
     </div>
     <br /><br />
-    <div class="row col-md-11 justify-content-center">
+    <div class="row col-md-12 justify-content-center">
       <button
         type="button"
         class="generate-summary col-md-6"
