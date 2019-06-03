@@ -64,6 +64,7 @@
             <p class="mb-0 col-3 small-text date">{{ file.CreatedOn }}</p>
             <p class=" mb-0 col-3 small-text date">{{ file.ModifiedDate }}</p>
             <p class="mb-0 col-1">
+              <i class="fa fa-pencil action-icon" (click)="editFile(file)"></i>
               <i class="fa fa-download action-icon"></i>
             </p>
           </div>

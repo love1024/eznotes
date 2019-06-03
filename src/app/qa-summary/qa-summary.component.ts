@@ -3,7 +3,7 @@ import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import { FileItem } from '../models/fileitem';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-qa-summary',
@@ -18,10 +18,17 @@ export class QaSummaryComponent implements OnInit {
   constructor(
     private summaryService: SummaryService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private route : ActivatedRoute
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const id = this.route.snapshot.queryParams['id'];
+   if(id > 0){
+    this.text = 'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+    this.generatedSummary = 'LiivLabs provides the highest quality audio-to-text transcription services which is fast, secure, accurate and easy to use.';
+   }
+  }
 
   navigateMyFiles(){
     this.router.navigateByUrl('/myfiles');
