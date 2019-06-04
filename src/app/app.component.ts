@@ -9,7 +9,7 @@ import { SummaryService } from './service/summary/summary.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'liivlabs';
+  title = 'Eznotes';
   showFooter = true;
   collapsed = true;
   isLoggedIn = false;

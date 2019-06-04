@@ -29,7 +29,7 @@ export class MyFilesComponent implements OnInit {
       fileObj.FileSize = '1,113 KB';
       fileObj.FileType = this._FileType.Summary;
       fileObj.GeneratedSummaryText =
-        'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+        'Eznotes provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
 
       this.files.push(fileObj);
     }
@@ -44,7 +44,7 @@ export class MyFilesComponent implements OnInit {
       fileObj.FileSize = '897 KB';
       fileObj.FileType = this._FileType.QA;
       fileObj.GeneratedSummaryText =
-        'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+        'Eznotes provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
       this.files.push(fileObj);
     }
 
@@ -58,7 +58,7 @@ export class MyFilesComponent implements OnInit {
       fileObj.FileSize = '4,002 KB';
       fileObj.FileType =  this._FileType.SpeechToText
       fileObj.GeneratedSummaryText =
-        'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+        'Eznotes provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
 
       this.files.push(fileObj);
     }

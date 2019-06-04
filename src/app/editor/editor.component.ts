@@ -23,7 +23,7 @@ export class EditorComponent implements OnInit {
       audioObj.AudioId = i;
       audioObj.UserName = 'Speaker 1';
       audioObj.AudioText =
-        'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use.';
+        'Eznotes provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use.';
       audioObj.AudioLength = '00:21';
       this.files.push(audioObj);
     }

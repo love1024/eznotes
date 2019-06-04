@@ -25,8 +25,8 @@ export class QaSummaryComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.queryParams['id'];
    if(id > 0){
-    this.text = 'LiivLabs provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
-    this.generatedSummary = 'LiivLabs provides the highest quality audio-to-text transcription services which is fast, secure, accurate and easy to use.';
+    this.text = 'Eznotes provides the highest quality audio-to-text and video-to-text transcription services available on the market through proprietary technology that is fast, secure, accurate and easy to use. We provide the highest quality service with our flexible and cost efficient plans that will improve your workflow and increase your profitability.';
+    this.generatedSummary = 'Eznotes provides the highest quality audio-to-text transcription services which is fast, secure, accurate and easy to use.';
    }
   }
 
