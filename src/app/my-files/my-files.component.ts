@@ -14,9 +14,6 @@ enum FileType{
   styleUrls: ['./my-files.component.scss']
 })
 export class MyFilesComponent implements OnInit {
-
-  
-
   files = new Array<FileItem>();
   _FileType = FileType;
   constructor(private router : Router) {}

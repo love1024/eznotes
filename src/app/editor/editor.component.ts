@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AudioItem } from '../models/audioitem';
-import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+// import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 import { FileItem } from '../models/fileitem';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
-  @ViewChild('tabset') tabset: TabsetComponent;
+  // @ViewChild('tabset') tabset: TabsetComponent;
   files = new Array<AudioItem>();
   summaryfiles = new Array<FileItem>();
   // editorTab = false;
