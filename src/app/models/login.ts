@@ -5,6 +5,14 @@
  * @class Login
  */
 export class Login {
-    public email: number;
+    public emailAddress: number;
     public password: string;
+  }
+
+  export interface ILoginResult {
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
+    token: string;
+    emailVerified: boolean
   }

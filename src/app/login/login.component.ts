@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../service/login/login.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ILoginResult } from '../models/login';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   showError = false;
 
+  errors = [];
+
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -23,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      emailAddress: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -31,15 +34,17 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.showError = false;
     this.spinner.show();
-    this.loginService.login(this.loginForm.value).subscribe((res: any) => {
-      if (res.type === 'fail') {
-        this.showError = true;
-      } else {
-        this.loginService.emitLogInOut();
-        this.showError = false;
-        this.router.navigateByUrl('/home');
-      }
+    this.errors = [];
+    this.loginService.login(this.loginForm.value).subscribe((res: ILoginResult) => {
       this.spinner.hide();
+      if(res.emailVerified) {
+        this.router.navigateByUrl('/home');
+      } else {
+        this.router.navigateByUrl('/verify');
+      }
+    }, (err) => {
+      this.spinner.hide();
+      this.errors = err.error.message;
     });
   }
 }

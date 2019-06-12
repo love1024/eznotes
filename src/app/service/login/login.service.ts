@@ -1,12 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Login } from 'src/app/models/login';
+import { Login, ILoginResult } from 'src/app/models/login';
 import { Observable, throwError } from 'rxjs';
 import { tap, shareReplay, catchError } from 'rxjs/operators';
 
 import * as moment from 'moment';
-import { SignUp } from 'src/app/models/signup';
+import { ISignUp } from 'src/app/models/signup';
+import { IVerify, IVerifyResult } from 'src/app/models/verify';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,6 @@ export class LoginService {
 
   /** Login url  */
   private url = environment.server;
-
-  /** Manager Id */
-  private managerId: number;
 
   /** Emitter to emit login and logout success*/
   private logInOutEmitter: EventEmitter<boolean> = new EventEmitter();
@@ -36,17 +34,20 @@ export class LoginService {
    * @returns {Observable<String>} 
    * @memberof LoginService
    */
-  public login(cred: Login): Observable<String> {
-    return this.httpClient.post<String>(`${this.url}login`, cred)
+  public login(cred: Login): Observable<ILoginResult> {
+    return this.httpClient.post<ILoginResult>(`${this.url}api/account/authenticate`, cred)
       .pipe(
         tap(this.setSession),
-        shareReplay(),
-        catchError(this.handleError)
+        shareReplay()
       )
   }
 
-  public signUp(cred: SignUp): Observable<String> {
-    return this.httpClient.post<String>(`${this.url}login/signup`, cred);
+  public signUp(cred: ISignUp): Observable<ISignUp> {
+    return this.httpClient.post<ISignUp>(`${this.url}api/account/register`, cred);
+  }
+
+  public verifyEmail(data: IVerify): Observable<IVerifyResult> {
+    return this.httpClient.post<IVerifyResult>(`${this.url}api/account/verify`, data);
   }
 
   /**
@@ -56,8 +57,6 @@ export class LoginService {
    */
   public logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('resourceId');
   }
 
   /**
@@ -79,12 +78,9 @@ export class LoginService {
    * @param {any} loginResult 
    * @memberof LoginService
    */
-  public setSession(loginResult) {
+  public setSession(loginResult: ILoginResult) {
     if (loginResult.token) {
-      const expiresAt = moment().add(loginResult.expiresIn, 'second');
-      localStorage.setItem('resourceId', loginResult.resourceId);
       localStorage.setItem('token', loginResult.token);
-      localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     }
   }
 
@@ -95,7 +91,7 @@ export class LoginService {
    * @memberof LoginService
    */
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    return !!localStorage.getItem('token');
   }
 
   /**
@@ -106,17 +102,6 @@ export class LoginService {
    */
   public isLoggedOut() {
     return !this.isLoggedIn();
-  }
-
-
-  /**
-   * Get the current logged in 
-   * manager
-   * @returns 
-   * @memberof LoginService
-   */
-  public getManagerId() {
-    return parseInt(localStorage.getItem("resourceId") || "-1");
   }
 
   /**
@@ -138,19 +123,6 @@ export class LoginService {
     this.logInOutEmitter.emit(this.isLoggedIn());
   }
 
-
-  /**
-   * Get expiration time of token
-   * 
-   * @returns 
-   * @memberof LoginService
-   */
-  getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
-  }
-
   /**
    * Log any server error
    * 
@@ -159,7 +131,6 @@ export class LoginService {
    * @memberof LoginService
    */
   handleError(err: HttpErrorResponse): Observable<any> {
-    console.log(err);
     throw throwError(err);
   }
 

@@ -17,6 +17,7 @@ import { LiivlabsAcademicComponent } from './liivlabs-academic/liivlabs-academic
 import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.component';
 import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
 import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.component';
+import { VerifyComponent } from './verify/verify.component';
 
 const routes: Routes = [
   {
@@ -88,6 +89,10 @@ const routes: Routes = [
     path: 'speech-to-text',
     component: SpeechToTextComponent,
     canActivate: [AuthService]
+  },
+  {
+    path: 'verify',
+    component: VerifyComponent
   },
   {
     path: '',

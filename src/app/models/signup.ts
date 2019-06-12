@@ -4,9 +4,17 @@
  * @export
  * @class Login
  */
-export class SignUp {
-    public email: number;
-    public password: string;
-    public firstName: string;
-    public lastName: string;
-  }
+export interface ISignUp {
+    emailAddress: number;
+    password: string;
+    firstName: string;
+    lastName: string;
+}
+
+export interface ISignUpResult {
+  emailAddress: number;
+  password: string;
+  firstName: string;
+  lastName: string;
+  emailVerified: boolean;
+}

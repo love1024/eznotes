@@ -14,7 +14,7 @@
           <label>First Name</label>
           <input
             formControlName="firstName"
-            type="email"
+            type="text"
             class="form-control"
           />
         </div>
@@ -22,7 +22,7 @@
           <label>Last Name</label>
           <input
           formControlName="lastName"
-            type="email"
+            type="text"
             class="form-control"
           />
         </div>
@@ -30,7 +30,7 @@
           <label>User Email</label>
           <input
             type="email"
-            formControlName="email"
+            formControlName="emailAddress"
             class="form-control"
           />
         </div>
@@ -60,6 +60,7 @@
         </div>
         
         <div class="error" *ngIf="signupError" >User already exists</div>
+        <div class="error" *ngFor="let err of errors">{{err}}</div>
 
         <button type="button" class="btn button-color col-md-12" (click)="onSubmit()" [attr.disabled]="signupForm.valid ? null: ''">Submit</button>
         <br />

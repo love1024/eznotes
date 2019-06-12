@@ -25,6 +25,7 @@ import { LiivlabsAcademicComponent } from './liivlabs-academic/liivlabs-academic
 import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.component';
 import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
 import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.component';
+import { VerifyComponent } from './verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.componen
     LiivlabsAcademicComponent,
     LiivlabsMediaComponent,
     LiivlabsBusinessComponent,
-    LiivlabsLegalComponent
+    LiivlabsLegalComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
