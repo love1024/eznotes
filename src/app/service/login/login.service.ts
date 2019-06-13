@@ -10,6 +10,7 @@ import { ISignUp, ISignUpResult } from 'src/app/models/signup';
 import { IVerify, IVerifyResult } from 'src/app/models/verify';
 import { User } from 'src/app/models/user';
 import { IEmail, IEmailResult } from 'src/app/models/email';
+import { IPasswordResetEmail, IPasswordResetEmailResult, IPasswordReset, IPasswordResetResult } from 'src/app/models/password-reset';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,18 @@ export class LoginService {
       emailTo: email
     }
     return this.httpClient.post<IEmailResult>(`${this.url}api/account/sendverification`, data);
+  }
+
+  public sendResetPasswordEmail(email:string): Observable<IPasswordResetEmailResult> {
+    const data: IPasswordResetEmail = {
+      emailTo: email
+    }
+    return this.httpClient.post<IPasswordResetEmailResult>(`${this.url}api/account/sendpasswordreset`, data);
+  }
+
+  public resetPassword(data: IPasswordReset, token: string): Observable<IPasswordResetResult> {
+    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': ('Bearer ' + token)});  
+    return this.httpClient.post<IPasswordResetResult>(`${this.url}api/account/resetpassword`, data, {headers: headers});
   }
 
   /**

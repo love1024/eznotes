@@ -26,6 +26,8 @@ import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.componen
 import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
 import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.component';
 import { VerifyComponent } from './verify/verify.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { VerifyComponent } from './verify/verify.component';
     LiivlabsMediaComponent,
     LiivlabsBusinessComponent,
     LiivlabsLegalComponent,
-    VerifyComponent
+    VerifyComponent,
+    ForgetPasswordComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

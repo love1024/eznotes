@@ -18,6 +18,8 @@ import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.componen
 import { LiivlabsBusinessComponent } from './liivlabs-business/liivlabs-business.component';
 import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.component';
 import { VerifyComponent } from './verify/verify.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetComponent } from './reset/reset.component';
 
 const routes: Routes = [
   {
@@ -93,6 +95,14 @@ const routes: Routes = [
   {
     path: 'verify',
     component: VerifyComponent
+  },
+  {
+    path: 'forget',
+    component: ForgetPasswordComponent
+  },
+  {
+    path: 'reset',
+    component: ResetComponent
   },
   {
     path: '',

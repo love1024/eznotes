@@ -12,7 +12,7 @@
     <div class="form-div">
       <form class="login-form" [formGroup]="loginForm">
         <div class="form-group">
-          <label for="email">Username or Email address</label>
+          <label for="email">Email address</label>
           <input
             type="email"
             formControlName="emailAddress"
@@ -36,7 +36,7 @@
         <div class="error" *ngFor="let err of errors">{{err}}</div>
         </div>
         <div>
-          <a href="">Forgot your Password?</a>
+          <a routerLink="/forget">Forgot your Password?</a>
         </div>
         <div class="margin-top">
           <a href="" routerLink="/tryFree">Not a member yet? Sign up Now.</a>
