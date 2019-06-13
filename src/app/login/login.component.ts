@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).subscribe((res: ILoginResult) => {
       this.spinner.hide();
       if(res.emailVerified) {
+        this.loginService.emitLogInOut();
         this.router.navigateByUrl('/home');
       } else {
         this.router.navigateByUrl('/verify');

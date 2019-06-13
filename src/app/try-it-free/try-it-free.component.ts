@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../service/login/login.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ISignUp } from '../models/signup';
+import { ISignUp, ISignUpResult } from '../models/signup';
 
 @Component({
   selector: 'app-try-it-free',
@@ -46,8 +46,10 @@ export class TryItFreeComponent implements OnInit {
       this.confirmError = false;
       this.spinner.show();
 
-      this.loginService.signUp(this.signupForm.value).subscribe((res: ISignUp) => {
-        
+      this.loginService.signUp(this.signupForm.value).subscribe((res: ISignUpResult) => {
+        this.loginService.sendEmail(res.emailAddress).subscribe(() => {
+          this.router.navigateByUrl('/verify');
+        }, (err) => this.errors = err.error.message)
       }, (err) => {
         this.errors = err.error.message;
         this.spinner.hide();

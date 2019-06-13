@@ -1,13 +1,15 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Login, ILoginResult } from 'src/app/models/login';
 import { Observable, throwError } from 'rxjs';
 import { tap, shareReplay, catchError } from 'rxjs/operators';
 
 import * as moment from 'moment';
-import { ISignUp } from 'src/app/models/signup';
+import { ISignUp, ISignUpResult } from 'src/app/models/signup';
 import { IVerify, IVerifyResult } from 'src/app/models/verify';
+import { User } from 'src/app/models/user';
+import { IEmail, IEmailResult } from 'src/app/models/email';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,8 @@ export class LoginService {
 
   /** Emitter to emit login and logout success*/
   private logInOutEmitter: EventEmitter<boolean> = new EventEmitter();
+
+  public user: User;
 
   /**
    * Creates an instance of LoginService.
@@ -38,16 +42,27 @@ export class LoginService {
     return this.httpClient.post<ILoginResult>(`${this.url}api/account/authenticate`, cred)
       .pipe(
         tap(this.setSession),
-        shareReplay()
+        tap(this.setUserWithLogin)
       )
   }
 
-  public signUp(cred: ISignUp): Observable<ISignUp> {
-    return this.httpClient.post<ISignUp>(`${this.url}api/account/register`, cred);
+  public signUp(cred: ISignUp): Observable<ISignUpResult> {
+    return this.httpClient.post<ISignUpResult>(`${this.url}api/account/register`, cred)
+      .pipe(
+        tap(this.setUserWithSignUp)
+      );
   }
 
-  public verifyEmail(data: IVerify): Observable<IVerifyResult> {
-    return this.httpClient.post<IVerifyResult>(`${this.url}api/account/verify`, data);
+  public verifyEmail(data: IVerify, token: string): Observable<IVerifyResult> {
+    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': ('Bearer ' + token)});  
+    return this.httpClient.post<IVerifyResult>(`${this.url}api/account/verifyemail`, data, {headers: headers});
+  }
+
+  public sendEmail(email:string): Observable<IEmailResult> {
+    const data: IEmail = {
+      emailTo: email
+    }
+    return this.httpClient.post<IEmailResult>(`${this.url}api/account/sendverification`, data);
   }
 
   /**
@@ -82,6 +97,27 @@ export class LoginService {
     if (loginResult.token) {
       localStorage.setItem('token', loginResult.token);
     }
+  }
+
+  public setUserWithLogin(response: ILoginResult): void {
+    const user : User = {
+      emailAddress: response.emailAddress,
+      firstName: response.firstName,
+      lastName: response.lastName,
+      emailVerified: response.emailVerified
+    }
+    this.user  = new User(user);
+  }
+
+  public setUserWithSignUp(response: ISignUpResult): void {
+    const user : User = {
+      userId: response.userId,
+      emailAddress: response.emailAddress,
+      firstName: response.firstName,
+      lastName: response.lastName,
+      emailVerified: response.emailVerified
+    }
+    this.user  = new User(user);
   }
 
   /**

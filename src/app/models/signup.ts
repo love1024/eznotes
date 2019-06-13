@@ -12,8 +12,8 @@ export interface ISignUp {
 }
 
 export interface ISignUpResult {
-  emailAddress: number;
-  password: string;
+  userId: number;
+  emailAddress: string;
   firstName: string;
   lastName: string;
   emailVerified: boolean;

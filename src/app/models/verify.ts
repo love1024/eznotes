@@ -1,6 +1,5 @@
 export interface IVerify {
-    emailAddress: string;
-    token: string;
+    emailAddress: string
 }
 
 export interface IVerifyResult {
