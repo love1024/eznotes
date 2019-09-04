@@ -25,9 +25,10 @@ export class ResetComponent implements OnInit {
   constructor(private route: ActivatedRoute, private loginService: LoginService,private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    const user = this.loginService.user;
     this.route.queryParams.subscribe((params) => {
-      this.email = params.email;
-      this.token = params.code;
+      this.email = params.email || user.emailAddress;
+      this.token = params.code || user.token;
       if(this.email && this.token) {
         this.isChanging = true;
       } else {
@@ -47,6 +48,8 @@ export class ResetComponent implements OnInit {
       this.spinner.hide();
       this.isChanged = true;
       this.isChanging = false;
+      this.loginService.logout();
+      this.loginService.emitLogInOut();
     },(err) => {
       this.spinner.hide();
       if(err.error) {

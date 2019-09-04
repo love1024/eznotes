@@ -56,4 +56,10 @@ export class TryItFreeComponent implements OnInit {
       });
     }
   }
+
+  onKeydown(event) {
+    if(event.key == "Enter") {
+      this.onSubmit();
+    }
+  }
 }

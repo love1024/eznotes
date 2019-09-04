@@ -4,6 +4,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import { FileItem } from '../models/fileitem';
 import { Router, ActivatedRoute } from '@angular/router';
+import { IQa, IQaCards } from '../models/qa';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-qa-summary',
@@ -12,14 +14,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class QaSummaryComponent implements OnInit {
   text: string = '';
-  query: '';
+  query: string =  '';
   generatedSummary = '';
+  popupQ = '';
+  popupA = '';
+  isPopupOpen = false;
+  isQuestion = true;
+  saved: IQa[] = [];
+  current: IQa[] = [];
+  savedCards: IQaCards[] = [];
+  currentIdx = 0;
 
   constructor(
     private summaryService: SummaryService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private notifier: NotifierService,
   ) {}
 
   ngOnInit() {
@@ -55,15 +66,24 @@ export class QaSummaryComponent implements OnInit {
     });
   }
 
-  generateSummary(): void {
+  generateSummary(popupName ?: string,query?: string): void {
     const payload = {
       Evidence: this.text,
-      Question: this.query
+      Question: query != undefined ? query : this.query
     };
-    this.spinner.show();
+    this.spinner.show(popupName);
     this.summaryService.queryText(payload).subscribe(res => {
-      this.generatedSummary = res.result;
-      this.spinner.hide();
+      this.generatedSummary = res.result || "";
+      this.popupQ = query != undefined ? query : this.query;
+      this.popupA = this.generatedSummary;
+      this.current[this.currentIdx] = {
+        question: this.popupQ,
+        answer: this.popupA
+      }
+      if(!this.isPopupOpen) {
+        this.isPopupOpen = true;
+      }
+      this.spinner.hide(popupName);
     });
   }
 
@@ -105,5 +125,92 @@ export class QaSummaryComponent implements OnInit {
         });
       });
     });
+  }
+
+  closePopup() {
+    this.isPopupOpen = false;
+    this.currentIdx = 0;
+    const exist = this.savedCards.filter((card) => card.id == 1);
+    if(this.saved.length > 0 && exist.length == 0) {
+      this.savedCards.push({
+        id: 1,
+        text: this.text.substr(0, 10) + '...',
+        cards: this.saved
+      });
+    }
+  }
+
+  toggleCard() {
+    this.isQuestion = !this.isQuestion;
+    if(!this.isQuestion && this.popupA == "") {
+      this.generateSummary('popup', this.popupQ);
+    } else {
+    }
+    document.getElementById("focus-area").focus();
+  }
+
+  addQuestion() {
+    this.isQuestion = true;
+    this.current.push({
+      question: '',
+      answer: ''
+    })
+    this.popupQ = '';
+    this.popupA = '';
+    this.currentIdx = this.current.length - 1;
+    this.notifier.notify('success', 'Card added successfully');
+    document.getElementById("focus-area").focus();
+  }
+
+  saveCard() {
+    const exist = this.saved.filter((card) => card.id == this.currentIdx);
+    if(exist.length > 0) {
+      const idx = this.saved.indexOf(exist[0]);
+      this.saved[idx] = {
+        answer: this.popupA,
+        question: this.popupQ,
+        id: this.currentIdx
+      };
+    } else {
+      this.saved.push({
+        answer: this.popupA,
+        question: this.popupQ,
+        id: this.currentIdx
+      })
+    }
+    this.notifier.notify('success', 'Card saved successfully');
+
+  }
+
+  forward(event) {
+    event.stopPropagation();
+    this.isQuestion = true;
+    this.current[this.currentIdx].question = this.popupQ;
+    this.current[this.currentIdx].answer = this.popupA;
+    this.currentIdx++;
+    this.popupQ = this.current[this.currentIdx].question;
+    this.popupA = this.current[this.currentIdx].answer;
+  }
+
+  backward() {
+    event.stopPropagation();
+    this.isQuestion = true;
+    this.current[this.currentIdx].question = this.popupQ;
+    this.current[this.currentIdx].answer = this.popupA;
+    this.currentIdx--;
+    this.popupQ = this.current[this.currentIdx].question;
+    this.popupA = this.current[this.currentIdx].answer;
+  }
+
+  play(id: number) {
+    const card = this.savedCards.filter((card) => card.id == id);
+    this.current = card[0].cards;
+    this.isPopupOpen = true;
+    this.isQuestion = true;
+    this.currentIdx = 0;
+    if(this.current.length > 0) { 
+      this.popupQ = this.current[0].question;
+      this.popupA = this.current[0].answer;
+    }
   }
 }

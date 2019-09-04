@@ -28,6 +28,8 @@ import { LiivlabsLegalComponent } from './liivlabs-legal/liivlabs-legal.componen
 import { VerifyComponent } from './verify/verify.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetComponent } from './reset/reset.component';
+import { NotifierModule } from 'angular-notifier';
+import { QaComponent } from './qa/qa.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { ResetComponent } from './reset/reset.component';
     LiivlabsLegalComponent,
     VerifyComponent,
     ForgetPasswordComponent,
-    ResetComponent
+    ResetComponent,
+    QaComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { ResetComponent } from './reset/reset.component';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NotifierModule
   ],
   providers: [],
   bootstrap: [AppComponent]

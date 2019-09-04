@@ -3,66 +3,20 @@
     <section class="section" fxFlex="100">
       <div class="default-text upload-file" (click)="input.click()">
         <div>
-          <input type="file" hidden="true" #input />
+          <input type="file" #file hidden="true" #input (change)="onFileSelect(file.files)"/>
           <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
         </div>
       </div>
-      <!-- <div class="default-text small-text cross-font">
-        Upload or Record any audio/video and get its transcription instantly.
-      </div> -->
     </section>
   </div>
 </div>
-<!-- <div class="col-md-12">
-  <div class="feature-div row justify-content-center">
-    <div class="col-md-4 icon-item">
-      <div class="speech-to-text-item">
-        <div>
-          <div>
-            <i class="fa fa-5x fa-cloud-upload"></i>
-          </div>
-          <br /><br />
-          <h3>UPLOAD</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 icon-item">
-      <div class="speech-to-text-pencil">
-        <div>
-          <div>
-            <i class="fa fa-5x fa-pencil"></i>
-          </div>
-          <br /><br />
-          <h3>EDIT</h3>
-          <p>
-            Review your transcript with timestamps and speakers.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 icon-item">
-      <div class="speech-to-text-item">
-        <div>
-          <div>
-            <i class="fa fa-5x fa-cloud-download"></i>
-          </div>
-          <br /><br />
-          <h3>Download</h3>
-          <p>
-            Save & export your transcript as MS Word,PDF,SRT,VTT and more.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="speech-to-text-div">
   <br />
   <div class="col-md-12">
     <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
     <div class="col-md-6 offset-md-3">
       <div class="row justify-content-center">
-        <video id="player" autoplay controls></video>
+        <audio #videoPlayer id="player" autoplay controls></audio>
       </div>
       <br />
       <div class="row col-md-12 justify-content-center button-row">
@@ -80,13 +34,13 @@
         <button
           type="button"
           class="btn red-button"
-          (click)="recordingStarted = true"
+          (click)="recordAudio()"
           *ngIf="recordStart && !recordingStarted"
         ></button>
         <button
           type="button"
           class="btn player-button"
-          (click)="recordingStopped = true"
+          (click)="stopRecording()"
           *ngIf="recordingStarted"
         >
           <i class="fa fa-stop"></i>
@@ -94,7 +48,7 @@
         <button
           type="button"
           class="btn player-button"
-          (click)="recordingPause = true"
+          (click)="pauseVideoRecording()"
           *ngIf="recordingStarted && !recordingPause"
         >
           <i class="fa fa-pause"></i>
@@ -102,7 +56,7 @@
         <button
           type="button"
           class="btn player-button"
-          (click)="recordingPause = false"
+          (click)="resumeVideoRecording()"
           *ngIf="recordingStarted && recordingPause"
         >
           <i class="fa fa-play"></i>

@@ -14,5 +14,7 @@ export class Login {
     lastName: string;
     emailAddress: string;
     token: string;
-    emailVerified: boolean
+    emailVerified: boolean;
+    expire: Date;
+    passwordChanged?: boolean;
   }

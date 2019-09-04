@@ -4,6 +4,7 @@ export class User {
     public firstName: string;
     public lastName: string;
     public emailVerified: boolean;
+    public token?: string;
 
     constructor(x: User) {
         this.userId = x.userId;
@@ -11,5 +12,7 @@ export class User {
         this.firstName = x.firstName;
         this.lastName = x.lastName;
         this.emailAddress = x.emailAddress;
+        this.token = x.token;
+        
     }
 }

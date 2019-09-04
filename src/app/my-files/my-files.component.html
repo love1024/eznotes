@@ -9,28 +9,6 @@
 </div>
 <div class="col-md-12">
   <div class="accordion" id="accordionExample">
-    <!-- <table class="table">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Sr No.</th>
-              <th scope="col">Name</th>
-              <th scope="col">Size</th>
-              <th scope="col">Created Date</th>
-              <th scope="col">Modified Date</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let file of files; let i = index">
-              <td>{{i+1}}</td>
-              <td> {{ file.FileName }}</td>
-              <td>{{ file.FileSize }}</td>
-              <td>{{ file.CreatedOn }}</td>
-              <td>{{ file.ModifiedDate }}</td>
-              <td> <i class="fa fa-download action-icon"></i></td>
-            </tr>
-          </tbody>
-        </table> -->
 
     <div class="card header-card">
       <div class="card-header card-div">
@@ -79,34 +57,6 @@
         </div>
         <br />
       </div>
-
-      <!-- <div class="card" *ngIf="file.showEdit"> 
-        <div class="card-header card-div" id="headingOne">
-          <div class="row justify-content-between align-items-center">
-            <p class="mb-0">
-                {{ file.FileName }}
-            </p>
-            <p class="mb-0">{{ file.CreatedOn }}</p>
-            <p class=" mb-0">{{ file.FileSize }}</p>
-          </div>
-        </div>
-        <div
-          id="collapseOne"
-          class="show"
-          aria-labelledby="headingOne"
-          data-parent="#accordionExample"
-        >
-          <div class="card-body">
-            <textarea rows="4" columns="100" [(ngModel)]="file.GeneratedSummaryText"> </textarea>
-          </div>
-          <div class="row justify-content-center align-items-center">
-            <button class="btn button-color" (click)="toggleCard(file)">
-              Save
-            </button>
-          </div>
-        </div>
-        <br />
-      </div> -->
     </ng-container>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../service/login/login.service';
 import { IVerify } from '../models/verify';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-verify',
@@ -19,7 +20,10 @@ export class VerifyComponent implements OnInit {
 
   errors = [];
 
-  constructor(private route: ActivatedRoute, private loginService: LoginService,private spinner: NgxSpinnerService) { }
+  constructor(private route: ActivatedRoute,
+    private notifier: NotifierService,
+     private loginService: LoginService,
+     private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     if(this.loginService.user) {
@@ -35,7 +39,6 @@ export class VerifyComponent implements OnInit {
         this.isVerifying = false;
       }
     });
-
   }
 
   verifyEmail(email:string, token:string): void {
@@ -46,6 +49,8 @@ export class VerifyComponent implements OnInit {
     this.loginService.verifyEmail(data,token).subscribe((res) => {
       this.spinner.hide();
       this.isVerified = true;
+      this.loginService.logout();
+      this.loginService.emitLogInOut();
     },(err) => {
       this.spinner.hide();
       if(err.error) {
@@ -54,7 +59,20 @@ export class VerifyComponent implements OnInit {
     });
   }
 
-  sendEmail(email: string): void {
-
+  sendEmail(): void {
+    if(!this.email) {
+      return;
+    }
+    this.spinner.show();
+    this.errors = [];
+    this.loginService.sendEmail(this.email).subscribe(() => {
+      this.spinner.hide();
+      this.notifier.notify('success', 'Email send successfully');
+    }, (err) => {
+      this.spinner.hide();
+      if(err.error) {
+        this.errors = err.error.message;
+      }
+    });
   }
 }

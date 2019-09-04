@@ -20,6 +20,7 @@ import { LiivlabsMediaComponent } from './liivlabs-media/liivlabs-media.componen
 import { VerifyComponent } from './verify/verify.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetComponent } from './reset/reset.component';
+import { QaComponent } from './qa/qa.component';
 
 const routes: Routes = [
   {
@@ -103,6 +104,10 @@ const routes: Routes = [
   {
     path: 'reset',
     component: ResetComponent
+  },
+  {
+    path: 'qa',
+    component: QaComponent
   },
   {
     path: '',

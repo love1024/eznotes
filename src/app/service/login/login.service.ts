@@ -43,14 +43,14 @@ export class LoginService {
     return this.httpClient.post<ILoginResult>(`${this.url}api/account/authenticate`, cred)
       .pipe(
         tap(this.setSession),
-        tap(this.setUserWithLogin)
+        tap((res) => this.setUserWithLogin(res))
       )
   }
 
   public signUp(cred: ISignUp): Observable<ISignUpResult> {
     return this.httpClient.post<ISignUpResult>(`${this.url}api/account/register`, cred)
       .pipe(
-        tap(this.setUserWithSignUp)
+        tap((res) => this.setUserWithSignUp(res))
       );
   }
 
@@ -85,6 +85,7 @@ export class LoginService {
    */
   public logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('expire');
   }
 
   /**
@@ -110,6 +111,9 @@ export class LoginService {
     if (loginResult.token) {
       localStorage.setItem('token', loginResult.token);
     }
+    if(loginResult.expire) {
+      localStorage.setItem('expire', loginResult.expire.toString());
+    }
   }
 
   public setUserWithLogin(response: ILoginResult): void {
@@ -117,7 +121,8 @@ export class LoginService {
       emailAddress: response.emailAddress,
       firstName: response.firstName,
       lastName: response.lastName,
-      emailVerified: response.emailVerified
+      emailVerified: response.emailVerified,
+      token: response.token
     }
     this.user  = new User(user);
   }
@@ -140,7 +145,7 @@ export class LoginService {
    * @memberof LoginService
    */
   public isLoggedIn() {
-    return !!localStorage.getItem('token');
+      return moment().isBefore(this.getExpiration())
   }
 
   /**
@@ -171,6 +176,26 @@ export class LoginService {
   public emitLogInOut() {
     this.logInOutEmitter.emit(this.isLoggedIn());
   }
+
+  /**
+   * Get expiration time of token
+   * 
+   * @returns 
+   * @memberof LoginService
+   */
+  getExpiration() {
+    const expiration = localStorage.getItem('expire');
+    return moment(expiration);
+  }
+
+  getUser() {
+    const user =  localStorage.getItem('user');
+    if(user) {
+      return JSON.parse(user);
+    }
+    return user;
+  }
+
 
   /**
    * Log any server error

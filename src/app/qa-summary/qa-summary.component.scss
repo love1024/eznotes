@@ -57,19 +57,16 @@
   }
 }
 .file-button{
-  border:2px solid black;
-  border-radius: 4px;
+  border:0;
   background-color: white;
-  color:black;
-  font-weight: 500;
-  font-style:bold;
+  color:blue;
+  font-weight: 600;
   height:40px;
   width:100%;
 }
 
 .generate-summary{
-  border:4px solid black;
-  border-radius: 8px;
+  border:1px solid black;
   font-size: 20px;
   background-color: white;
   color:black;
@@ -79,8 +76,7 @@
   width:100%;
 }
 textarea{
-  border:4px solid black;
-  border-radius: 8px;
+  border:1px solid black;
   background-color: white;
   width:100%;
 }
@@ -110,7 +106,6 @@ textarea{
   height:350px;
   width:100%;
   background-color: $primary-button-color;
-  border-radius: 15px;
   border-color: $primary-button-color;
   background-image:  linear-gradient(180deg,rgba(12,113,195,0.89) 0%,rgba(12,113,195,0.89) 100%),
   url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
@@ -171,4 +166,181 @@ textarea{
 }
 
 
+// qa summary
+.qa-container {
+  z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 500px;
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    justify-content: center;
+}
+
+.qa-input {
+    width: 600px;
+    textarea {
+        padding: 16px;
+    }
+
+    .close-icon {
+      color: white;
+      position: absolute;
+      right: -15px;
+      top: -15px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+}
+
+.qa-question {
+    font-size: 24px;
+}
+
+.button-color {
+    background-color: $primary-button-color;
+    border-color: $primary-button-color;
+    color: white;
+    width: 80px;
+    margin-bottom: 10px;
+    height: 40px;
+  }
+  
+  .button-blue{
+    width:180px;
+    margin-right: 10px;
+  }
+
+
+
+.flip-card {
+  position: relative;
+  background-color: transparent;
+  width: 900px;
+  height: 500px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.rotate .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: white;
+  overflow: hidden;
+  padding-top: 200px;
+  
+  textarea {
+      padding: 16px;
+      border: 0;
+  }
+
+  textarea:focus {
+    outline-width: 0;
+  }
+}
+
+.flip-card-front textarea {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flip-card-back textarea {
+  font-size: 22px;
+  text-align: center;
+}
+
+
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.popup-icon {
+  color: black;
+  cursor: pointer;
+  position: absolute;
+
+  &:hover {
+    color: lightblue;
+  }
+}
+
+.action-icon {
+  margin-right: 20px;
+  color: $primary-button-color;
+  cursor: pointer;
+}
+
+.z-behind {
+  margin-top: 48px;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .flip-card  {
+      width: 500px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .flip-card {
+      width: 300px;
+  }
+  .popup-icon {
+    margin: 0 8px;
+  }
+}
+
+.close-icon {
+  top: 0;
+  right: 0;
+}
+
+.arrow-left {
+  top: 50%;
+  left: 20px;
+}
+
+.arrow-right {
+  top: 50%;
+  right: 20px;
+}
+
+.save-icon {
+  bottom: 15px;
+  right: 20%;
+}
+
+.add-icon {
+  bottom: 15px;
+  left: 20%;
+}
+
+.flip-icon {
+  position: absolute;
+  top:5px;
+  left:5px;
+}
 

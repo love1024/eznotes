@@ -9,7 +9,7 @@
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div class="form-div">
-      <form class="login-form" [formGroup]="signupForm">
+      <form class="login-form" [formGroup]="signupForm"  (keydown)="onKeydown($event)">
         <div class="form-group">
           <label>First Name</label>
           <input

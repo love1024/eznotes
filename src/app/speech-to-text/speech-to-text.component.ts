@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
+import { FileService } from '../service/file/file.service';
 
 declare var RecordRTCPromisesHandler;
 
@@ -18,7 +19,11 @@ export class SpeechToTextComponent implements OnInit {
   stream: any;
   recordingSaved = false;
 
-  constructor(private http: HttpClient) {}
+  @ViewChild("videoPlayer") player;
+
+  constructor(
+    private http: HttpClient,
+    private fileService: FileService) {}
 
   ngOnInit() {
     if ($(window).width() < 900) {
@@ -41,18 +46,61 @@ export class SpeechToTextComponent implements OnInit {
     });
   }
 
-  recordVideo(): void {
-    const player = document.getElementById('player') as HTMLVideoElement;
+  /**
+   * On file select
+   *
+   * @param {*} files
+   * @memberof SpeechToTextComponent
+   */
+  onFileSelect(files: File[]): void {
+    if(files.length == 0) {
+      return;
+    }
 
+    let fileToUpload = files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+
+    this.fileService.uploadFile(formData).subscribe(() => {
+      console.log("HERE");
+    });
+  }
+
+  recordVideo(): void {
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: true })
       .then(stream => {
         this.stream = stream;
-        player.srcObject = stream;
+        this.player.nativeElement.srcObject = stream;
+        this.recorder = new RecordRTCPromisesHandler(stream, {
+          type: 'video'
+        });
+        this.recordingStarted = true;
+        this.recorder.startRecording();
+      });
+  }
+
+  pauseVideoRecording(): void {
+    this.recordingPause = true;
+    this.recorder.recordRTC.pauseRecording();
+  }
+
+  resumeVideoRecording(): void {
+    this.recordingPause = false;
+    this.recorder.recordRTC.resumeRecording();
+  }
+
+  recordAudio(): void {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then(stream => {
+        this.stream = stream;
+        this.player.nativeElement.srcObject = stream;
         this.recorder = new RecordRTCPromisesHandler(stream, {
           type: 'audio',
           mimeType: 'audio/ogg;codecs=opus'
         });
+        this.recordingStarted = true;
         this.recorder.startRecording();
       });
   }
@@ -60,7 +108,14 @@ export class SpeechToTextComponent implements OnInit {
   stopRecording(): void {
     this.recorder.stopRecording().then(() => {
       this.recorder.getBlob().then(video => {
+
+        // Asign video to video player
+        this.player.nativeElement.src = this.player.nativeElement.srcObject = null;
+        this.player.nativeElement.src = URL.createObjectURL(video);
+
+      
         this.stream.stop();
+        this.recordingStopped = true;
         this.callApi(video);
       });
     });
@@ -74,7 +129,7 @@ export class SpeechToTextComponent implements OnInit {
       const audioString = audio.toString().split(',')[1];
 
       const url =
-        'https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyC4m17AKTUPzyL0DiFZNosOKJm9uMXEeXk';
+        'https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyAgAL5lm4soe3VA9JCJI8KMGULGlfW2URw';
       const options = {
         config: {
           encoding: 'OGG_OPUS',

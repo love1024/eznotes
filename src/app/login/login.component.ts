@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.loginForm = this.fb.group({
       emailAddress: ['', Validators.required],
       password: ['', Validators.required]
@@ -37,15 +38,23 @@ export class LoginComponent implements OnInit {
     this.errors = [];
     this.loginService.login(this.loginForm.value).subscribe((res: ILoginResult) => {
       this.spinner.hide();
-      if(res.emailVerified) {
+      if(!res.emailVerified) {
+        this.router.navigateByUrl('/verify');
+      } else if(!res.passwordChanged) {
+        this.router.navigateByUrl('/reset');
+      } else {
         this.loginService.emitLogInOut();
         this.router.navigateByUrl('/home');
-      } else {
-        this.router.navigateByUrl('/verify');
       }
     }, (err) => {
       this.spinner.hide();
       this.errors = err.error.message;
     });
+  }
+
+  onKeydown(event) {
+    if(event.key == "Enter") {
+      this.onSubmit();
+    }
   }
 }

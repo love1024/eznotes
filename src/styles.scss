@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/variables.scss";
+@import "../node_modules/angular-notifier/styles.scss";
 
 * {
   font-family: "Oswald", sans-serif;
@@ -177,4 +178,12 @@
 }
 .card-header{
   padding:5px !important;
+}
+
+.cursor-p {
+  cursor: pointer;
+}
+
+.mt2 {
+  margin-top: 16px;
 }
