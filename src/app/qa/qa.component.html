@@ -1,0 +1,12 @@
+<div class="qa-container">
+  <div class="qa-input">
+    <textarea placeholder="{{query}}" rows="10"></textarea>
+  </div>
+  <div class="qa-question">
+    <p>{{question}}</p>
+  </div>
+  <div class="qa-actions">
+    <button class="btn button-color button-blue"  (click)="yes()">{{yesAction}}</button>
+    <button class="btn button-color button-blue" (click)="no()" *ngIf="noAction">{{noAction}}</button>
+  </div>
+</div>

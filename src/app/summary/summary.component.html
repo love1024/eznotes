@@ -1,38 +1,106 @@
-<div class="blog-container" fxLayout="column">
+<div fxLayout="column">
   <div class="blog-image">
-    <section class="section" fxFlex="100" fxLayoutAlign="center center">
-      <h1 class="default-text">Welcome To Our Summarizer!</h1>
-      <p class="default-text">
-        Valuing Your Time Always! Enter the Text And Get Its Summary Instantly.
-      </p>
+    <section class="section">
+      <div class="default-text large-text cross-font">
+        Summary Generator
+      </div>
+      <div class="default-text small-text cross-font">
+        Valuing Your Time Always!
+      </div>
+      <div class="default-text small-text cross-font">
+        Enter the Text And Get Its Summary Instantly.
+      </div>
     </section>
   </div>
 </div>
-<div class="col-md-12 add-summary-div">
-  <br><br>
-  <div class="col-md-7 offset-sm-5 justify-content-center">
-    <h4 class="col-md-11">Enter the text you want to summarize</h4>
-    <textarea rows="10" class="col-md-11" columns="100"> </textarea>
-    <div class="row justify-content-center col-md-11">
+<div class="row col-md-12 add-summary-div">
+  <div class="image-div col-md-4">
+    <img src="assets/Summary.png" />
+  </div>
+  <div class="col-md-8">
+    <br /><br />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Enter text</h4>
+        </div>
+        <textarea rows="10" columns="50" [(ngModel)]="text"> </textarea>
+      </div>
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Generated Summary</h4>
+        </div>
+        <textarea rows="10" columns="50" [(ngModel)]="generatedSummary" placeholder="Generated summary will be shown here."> </textarea>
+      </div>
+      <br />
+    </div>
+
+    <div class="row justify-content-center col-md-12">
       <h5>Or</h5>
     </div>
-    <div class="row col-md-11 justify-content-around">
-      <button type="button" class="file-button col-md-4">Choose File</button>
-      <button type="button" class="file-button col-md-4">Upload your File</button>
+    <div class="row col-md-12 justify-content-around">
+      <input type="file" hidden="true" #input (change)="handleUpload($event)" />
+      <button
+        type="button"
+        class="file-button col-md-4"
+        (click)="navigateMyFiles()"
+      >
+        My files
+      </button>
+      <button
+        type="button"
+        class="file-button col-md-4"
+        (click)="input.click()"
+      >
+        Upload File
+      </button>
     </div>
     <br /><br />
-    <div class="col-md-5 offset-md-3">
-      <button type="button" class="generate-summary">Generate Summary</button>
+    <div class="row col-md-12 justify-content-center">
+      <button
+        type="button"
+        class="generate-summary col-md-6"
+        (click)="generateSummary()"
+      >
+        Generate Summary
+      </button>
     </div>
   </div>
 </div>
 <br /><br />
-<div class="row col-md-12 justify-content-center">
+<!-- <div class="row col-md-12 justify-content-center">
   <div class="col-md-5">
-    <app-summary-item></app-summary-item>
+    <div class="summary-item summary-item-document">
+      <div>
+        <div>
+          <i class="fa fa-5x fa-file-text-o "></i>
+        </div>
+        <br /><br />
+        <h3>Document Summarization</h3>
+        <p>
+          <span>Providing you the summarization</span>
+          <span>for your documents or the</span>
+          <span>text entered. Keep Reading.</span>
+          <span>We value your time.</span>
+        </p>
+      </div>
+    </div>
   </div>
   <div class="col-md-5">
-    <app-summary-item></app-summary-item>
+    <div class="summary-item summary-item-security">
+      <div>
+        <div>
+          <i class="fa fa-5x fa-lock "></i>
+        </div>
+        <br /><br />
+        <h3>Secured Interaction</h3>
+        <span>Your summarized data will be sent</span>
+        <span>you shortly on your mail and</span>
+        <span>you will get notified on your account.</span>
+        <span>Keep Summarizing.</span>
+      </div>
+    </div>
   </div>
 </div>
-<br /><br />
+<br /><br /> -->
+<ngx-spinner></ngx-spinner>

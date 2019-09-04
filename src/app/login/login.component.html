@@ -3,26 +3,21 @@
     <section class="section" fxFlex>
       <br /><br /><br />
       <div fxLayout="row" fxLayoutAlign="center center">
-        <p class="default-text">Join Today</p>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <h4 class="default-text">
-          Soeoh fhief eife ff hheigh ehfh hheh viehv rhgrhgr ogrg g
-          roghroighrhggpo g gohh ohooo
-        </h4>
+        <p class="default-text">Welcome Back</p>
       </div>
     </section>
   </div>
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div class="form-div">
-      <form class="login-form">
+      <form class="login-form" [formGroup]="loginForm" (keydown)="onKeydown($event)">
         <div class="form-group">
-          <label for="exampleInputEmail1">Username or Email address</label>
+          <label for="email">Email address</label>
           <input
             type="email"
+            formControlName="emailAddress"
             class="form-control"
-            id="exampleInputEmail1"
+            id="email"
             aria-describedby="emailHelp"
           />
         </div>
@@ -30,25 +25,24 @@
           <label for="exampleInputPassword1">Password</label>
           <input
             type="password"
+            formControlName="password"
             class="form-control"
             id="exampleInputPassword1"
           />
         </div>
-        <button type="button" class="btn button-color col-md-12">Submit</button>
+        <button type="button" class="btn button-color col-md-12" (click)="onSubmit()" [attr.disabled]="loginForm.valid ? null: ''">Submit</button>
         <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1"
-            >Remember Me</label
-          >
+        <div class="error margin-top" *ngIf="showError">email and password mismatch</div>
+        <div class="error" *ngFor="let err of errors">{{err}}</div>
         </div>
         <div>
-          <a href="">Lost your Password?</a>
+          <a routerLink="/forget">Forgot your Password?</a>
         </div>
-        <br />
-        <div>
-          <a href="">Not a member yet? Register Now.</a>
+        <div class="margin-top">
+          <a href="" routerLink="/tryFree">Not a member yet? Sign up Now.</a>
         </div>
       </form>
     </div>
   </div>
 </div>
+<ngx-spinner></ngx-spinner>

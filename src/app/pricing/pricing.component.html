@@ -1,174 +1,268 @@
 <div fxLayout="column">
   <div class="pricing">
     <section class="section" fxFlex="100" fxLayoutAlign="center center">
-      <p class="default-text large-text">
+      <p class="default-text cross-font">
         Simple Pricing Plans To Fit Your Budget
       </p>
     </section>
   </div>
 
-  <div class="grey-background" fxFlex="200px" fxLayoutAlign="center center">
+  <div class="grey-background plan-title" fxFlex="150px" fxLayoutAlign="center center">
     <h1>Standard Plans</h1>
   </div>
   <div
-    class="grey-gradient-background grey-background"
-    fxFlex
-    fxLayoutAlign="space-around center"
+    class="grey-gradient-background grey-background
+   row justify-content-around"
   >
-    <app-price-info
-      [Content]="Content"
-      [Price]="Price"
-      [Title]="Title"
-    ></app-price-info>
-    <app-price-info
-      [Content]="Content"
-      [Price]="Price"
-      [Title]="Title"
-    ></app-price-info>
-    <app-price-info
-      [Content]="Content"
-      [Price]="Price"
-      [Title]="Title"
-    ></app-price-info>
+    <div class="price-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Pay As You Go</h2>
+      </div>
+      <br />
+      <div class="center-text">
+        <h1>$0.17</h1>
+        <span class="grey-text">/min</span>
+      </div>
+      <div class="row center-text" style="height:270px;">
+        <div class="col align-self-center">
+          <p>Pay for what you need ($10.20/hr)</p>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="price-button btn">TRY IT FREE</button>
+      </div>
+      <br />
+    </div>
+    <div class="price-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Basic</h2>
+      </div>
+      <br />
+      <div class="center-text">
+        <h1>$27</h1>
+        <span class="grey-text">/month</span>
+      </div>
+      <div class="row center-text" style="height:270px;">
+        <div class="col align-self-center">
+          <p>3 hours of transcription per month ($9/hr)</p>
+          <p>10 minutes of free transcription after every 2 hour</p>
+          <p>Get 10 minutes free on your signup anniversary</p>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="price-button btn">TRY IT FREE</button>
+      </div>
+      <br />
+    </div>
+    <div class="price-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Professional</h2>
+      </div>
+      <br />
+      <div class="center-text">
+        <h1>$40</h1>
+        <span class="grey-text">/month</span>
+      </div>
+      <div class="row center-text" style="height:270px;">
+        <div class="col align-self-center">
+          <p>5 hours of transcription per month ($9/hr)</p>
+          <p>15 minutes of free transcription after every 3 hour</p>
+          <p>Get 15 minutes free on your signup anniversary</p>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="price-button btn">TRY IT FREE</button>
+      </div>
+      <br />
+    </div>
   </div>
+
   <div
-    class="grey-gradient-background grey-background"
+    class="grey-gradient-background grey-background plan-title"
     fxFlex="150px"
     fxLayoutAlign="center center"
   >
     <h1>Corporate Plans</h1>
   </div>
-  <div fxFlex="40px" class="grey-background"></div>
   <div
-    class="grey-gradient-background grey-background"
-    fxFlex
-    fxLayoutAlign="space-around center"
+    class="grey-gradient-background grey-background row justify-content-around"
   >
-    <app-team-info
-      [Content]="Content"
-      [Brief]="Brief"
-      [Title]="Title"
-    ></app-team-info>
-    <app-team-info
-      [Content]="Content"
-      [Brief]="Brief"
-      [Title]="Title"
-    ></app-team-info>
-    <app-team-info
-      [Content]="Content"
-      [Brief]="Brief"
-      [Title]="Title"
-    ></app-team-info>
+    <div class="team-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Small Teams</h2>
+      </div>
+      <br />
+      <div class="heading center-text">
+        <h4>Unlimited Transcription Access for up to 5 Team Members!</h4>
+      </div>
+      <div class="row center-text" style="height:170px;">
+        <div class="col align-self-center">
+          <h4>Admin Dashboard Control</h4>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="team-button btn">CONTACT US</button>
+      </div>
+      <br />
+    </div>
+
+    <div class="team-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Medium Teams</h2>
+      </div>
+      <br />
+      <div class="heading center-text">
+        <h4>Unlimited Transcription Access for up to 15 Team Members!</h4>
+      </div>
+      <div class="row center-text" style="height:170px;">
+        <div class="col align-self-center">
+          <h4>Admin Dashboard Control</h4>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="price-button btn">CONTACT US</button>
+      </div>
+      <br />
+    </div>
+
+    <div class="team-dialog price-items col-3">
+      <div class="vertical-spacer"></div>
+      <div class="center-text">
+        <h2>Large Teams</h2>
+      </div>
+      <br />
+      <div class="heading center-text">
+        <h4>Unlimited Transcription Access for up to 30 Team Members!</h4>
+      </div>
+      <div class="row center-text" style="height:170px;">
+        <div class="col align-self-center">
+          <h4>Admin Dashboard Control</h4>
+        </div>
+      </div>
+      <div class="center-text">
+        <button type="button" class="price-button btn">CONTACT US</button>
+      </div>
+      <br />
+    </div>
   </div>
 
-  <div fxLayout="column" class="grey-background">
-    <div fxLayout="row" style="height:150px" fxLayoutAlign="center center">
-      <br /><br />
-      <h2>Frequently Asked Questions</h2>
+  <div class="grey-background">
+    <div class="row justify-content-center">
+      <div class="col" class="faq-title">
+        <h2>Frequently Asked Questions</h2>
+      </div>
     </div>
-    <div
-      fxLayout="row"
-      fxFlex
-      style="height:150px;"
-      fxLayoutAlign="center center"
-    >
-      <div fxFlex="10"></div>
-      <div fxFlex="40">
-        <app-faq-item></app-faq-item>
-      </div>
-      <div fxFlex="40">
-        <app-faq-item></app-faq-item>
-      </div>
-      <div fxFlex="10"></div>
-    </div>
-    <br /><br />
-    <div
-      fxLayout="row"
-      fxFlex
-      style="height:150px;"
-      fxLayoutAlign="center center"
-    >
-      <div fxFlex="10"></div>
-      <div fxFlex="40">
-        <app-faq-item></app-faq-item>
-      </div>
-      <div fxFlex="40">
-        <app-faq-item></app-faq-item>
-      </div>
-      <div fxFlex="10"></div>
-    </div>
-
-  </div>
-
-  <div fxFlex="100" class="pic-div">
-    <div fxLayout="row" class="vertical-spacer"></div>
-    <br><br><br>
-    <div fxLayout="row">
-      <div fxFlex="35" fxLayoutAlign="end">
-        <div fxFlex="70" style="background-color: white;">
-          <div style="padding:40px">
-            <h3>Reach Us</h3>
-            <br /><br />
-            <div>
-              <i class="fa fa-2x fa-envelope icon-color"></i>
-              <span style="text-align: center">contact@liivlabs.com</span>
-            </div>
-            <br />
-            <div fxLayoutAlign="center center">
-              <!-- <div fxFlex="10"></div> -->
-              <div class="social-media-icon twitter">
-                <i class="fa fa-lg icon-margin fa-twitter"></i>
-              </div>
-              <div class="social-media-icon linkedin">
-                <i class="fa icon-margin fa-lg fa-linkedin"></i>
-              </div>
+    <div class="row faq-container">
+      <div class="col">
+        <div class="col-md-9 offset-md-3 faq-items-left">
+          <div class="media">
+            <i class="fa fa-question-circle icon-color"></i>
+            <div class="media-body">
+              <h5 class="mt-0">
+                What if none of the enterprise plans work for me?
+              </h5>
+              <p>
+                If none of these plans work for you, contact us and we’ll be
+                happy to create a custom plan for you
+              </p>
             </div>
           </div>
         </div>
-      </div>
-      <div fxFlex="5"></div>
-      <div fxFlex="50" style="background-color: white">
-        <div style="padding: 30px;">
-          <h3>Leave a Message</h3>
-          <form>
-            <div class="form-group">
-              <input
-                type="text"
-                placeholder="Name"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-              />
+        <div class="col-md-9 offset-md-3 faq-items-left">
+          <div class="media">
+            <i class="fa fa-question-circle icon-color"></i>
+            <div class="media-body">
+              <h5 class="mt-0">Can I upgrade my plan?</h5>
+              <p>
+                Yes, you can upgrade or cancel your plan anytime.
+              </p>
             </div>
-            <div class="form-group">
-              <input
-                type="email"
-                placeholder="Email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="form-group">
-              <textarea
-                class="form-control"
-                rows="6"
-                placeholder="Message"
-                column="100"
-              ></textarea>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="end center">
-              <button
-                type="button"
-                fxFlex="30"
-                class="btn leave-message button-color"
-              >
-                SEND MESSAGE
-              </button>
-            </div>
-          </form>
+          </div>
+          <br />
         </div>
       </div>
+      <div class="col">
+        <div class="col-md-10 offset-md-2 faq-items-right">
+          <div class="media">
+            <i class="fa fa-question-circle icon-color"></i>
+            <div class="media-body">
+              <h5 class="mt-0">
+                Do you have enterprise discounts?
+              </h5>
+              <p>
+                Yes, contact us and we will discuss.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 offset-md-2 faq-items-right">
+          <div class="media">
+            <i class="fa fa-question-circle icon-color"></i>
+            <div class="media-body">
+              <h5 class="mt-0">Can I get student pricing?</h5>
+              <p>
+                Yes. Sign up for the free trial with a valid student email
+                address.
+              </p>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
+
+<div class="col-md-12 pic-div row">
+  <div class="col-3 offset-md-1 contact-div">
+    <div style="padding:30px;">
+      <h3>Reach Us</h3>
+      <br />
+      <div>
+        <i class="fa fa-2x fa-envelope icon-color"></i>
+        <span class="contact-mail">contact@Eznotes.com</span>
+      </div>
+      <br />
+      <div fxLayoutAlign="center center">
+        <div class="social-media-icon twitter">
+          <i class="fa fa-lg icon-margin fa-twitter"></i>
+        </div>
+        <div class="social-media-icon linkedin">
+          <i class="fa icon-margin fa-lg fa-linkedin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 offset-sm-1 contact-div">
+    <div style="padding: 30px;">
+      <h3>Leave a Message</h3>
+      <form>
+        <div class="form-group">
+          <input type="text" placeholder="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            rows="6"
+            placeholder="Message"
+            column="100"
+          ></textarea>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button type="button" class="btn leave-message button-color">
+            SEND MESSAGE
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -1,25 +1,13 @@
-<div class="blog-container" fxLayout="column">
+<div fxLayout="column">
   <div class="blog-image">
-    <section class="section" fxFlex="100" fxLayoutAlign="center center">
-      <h1 class="default-text">Welcome To Our Transcriber!</h1>
-      <p class="default-text">
-        Upload or Record any audio/video and get its transcription instantly.
-      </p>
+    <section class="section" fxFlex="100">
+      <div class="default-text upload-file" (click)="input.click()">
+        <div>
+          <input type="file" #file hidden="true" #input (change)="onFileSelect(file.files)"/>
+          <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
+        </div>
+      </div>
     </section>
-  </div>
-</div>
-<br />
-<div class="col-md-12">
-  <div class="row col-md-11 feature-div justify-content-center">
-    <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
-    </div>
-    <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
-    </div>
-    <div class="col-md-4">
-      <app-speech-to-text-item></app-speech-to-text-item>
-    </div>
   </div>
 </div>
 <div class="speech-to-text-div">
@@ -28,35 +16,134 @@
     <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
     <div class="col-md-6 offset-md-3">
       <div class="row justify-content-center">
-        <iframe></iframe>
+        <audio #videoPlayer id="player" autoplay controls></audio>
       </div>
       <br />
-      <div class="row justify-content-between">
-        <button type="button" class="btn button-color">Record Video</button>
-        <button type="button" class="btn button-color">
+      <div class="row col-md-12 justify-content-center button-row">
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordStart = true"
+          *ngIf="!recordStart"
+        >
+          Record Video
+        </button>
+        <button type="button" class="btn button-color" *ngIf="!recordStart">
+          Record Audio
+        </button>
+        <button
+          type="button"
+          class="btn red-button"
+          (click)="recordAudio()"
+          *ngIf="recordStart && !recordingStarted"
+        ></button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="stopRecording()"
+          *ngIf="recordingStarted"
+        >
+          <i class="fa fa-stop"></i>
+        </button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="pauseVideoRecording()"
+          *ngIf="recordingStarted && !recordingPause"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="resumeVideoRecording()"
+          *ngIf="recordingStarted && recordingPause"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <!-- <button
+          type="button"
+          class="btn button-color"
+          (click)="stopRecording()"
+        >
           Stop Video Recording
         </button>
         <button type="button" class="btn button-color">Record Audio</button>
-        <button type="button" class="btn button-color">
+        <button type="button" class="btn button-color align-self-center">
           Stop Audio Recording
+        </button> -->
+      </div>
+      <div
+        class="row col-md-12 justify-content-center button-row"
+        *ngIf="recordingStopped"
+      >
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordingPause = true; saveRecording()"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="recordingPause = false"
+        >
+          Delete
         </button>
       </div>
-      <br />
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" *ngIf="recordingSaved">
         <button type="button" class="btn button-color">Convert To Text</button>
       </div>
-    </div><br>
-    <div class="row justify-content-center">
-      <h3>Transcript quality depends on audio quality</h3>
     </div>
-    <br /><br />
-    <div class="row col-md-8 offset-md-2 justify-content-around">
-      <div class="col-md-6">
-        <app-feedback-item></app-feedback-item>
-      </div>
-      <div class="col-md-6">
-        <app-feedback-item></app-feedback-item>
+
+    <!-- <div class="row justify-content-center warning">
+      <h3>Transcript quality depends on audio quality</h3>
+    </div> -->
+  </div>
+</div>
+<div class="row justify-content-center feedback-container">
+  <div class="col-md-4 review-items">
+    <div class="feedback-item">
+      <div>
+        <div>
+          <img
+            src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
+          />
+        </div>
+        <br />
+        <h3>For Excellent Notes</h3>
+        <p>
+          Little background noise
+        </p>
+        <p>Clear speaker(s)</p>
+        <p>Minimal accents</p>
+
+        <p>Result:90-95% Accuracy</p>
       </div>
     </div>
   </div>
+  <br />
+  <!-- <div class="col-md-4 review-items">
+    <div class="feedback-item">
+      <div>
+        <div>
+          <img
+            src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-6.png"
+          />
+        </div>
+        <br />
+        <h3>Difficult Audio</h3>
+        <p>
+          Heavy background noise
+        </p>
+        <p>Crosstalk</p>
+        <p>Strong accents</p>
+
+        <p>Result:Mostly Unusable</p>
+      </div>
+    </div>
+  </div> -->
+  <br />
 </div>
+<br /><br />

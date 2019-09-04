@@ -1,17 +1,38 @@
-@import '../assets/variables.scss';
-.button-color{
-    background-color:$primary-button-color;
-    border-color: $primary-button-color;
-    color:white;
+@import "../assets/variables.scss";
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
 }
 
-input{
-    height:50px;
-    border:0px;
-    border-radius: 3px;
+input {
+  height: 50px;
+  border: 0px;
+  border-radius: 3px;
 }
-button{
-    height:50px;
-    border:0px;
-    border-radius: 3px;
+button {
+  height: 50px;
+  border: 0px;
+  border-radius: 3px;
 }
+
+.pd-2 {
+  padding: 8px;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  height:70px;
+  div{
+    background-color: white;
+  }
+  img{
+    width: 160px;
+    height: 100%;
+  }
+}
+.nav-item > a {
+  text-align: center;
+}
+

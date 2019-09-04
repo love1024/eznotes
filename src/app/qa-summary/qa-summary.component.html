@@ -1,46 +1,101 @@
 <div class="blog-container" fxLayout="column">
   <div class="blog-image">
-    <section class="section" fxFlex="100" fxLayoutAlign="center center">
-      <h1 class="default-text">Welcome To Our Summarizer!</h1>
-      <p class="default-text">
-        Valuing Your Time Always! Enter the Text And Get Its Summary Instantly.
-      </p>
+    <section class="section">
+      <div class="default-text large-text cross-font">Q & A Generator</div>
+      <div class="default-text small-text cross-font">
+        Valuing Your Time Always!
+      </div>
     </section>
   </div>
 </div>
-<div class="col-md-12 add-summary-div">
+<div class="add-summary-div row">
   <br /><br />
-  <div class="col-md-7 justify-content-center">
-    <h4 class="col-md-11">Enter the text you want to summarize</h4>
-    <textarea rows="10" class="col-md-11" columns="100"> </textarea>
-    <div class="row justify-content-center col-md-11">
+  <div class="col-md-8">
+    <div class="row textbox-div">
+      <div class="col-md-6">
+        <div class="row justify-content-center">
+          <h4>Copy & Paste Text Here</h4>
+        </div>
+        <textarea rows="10" columns="50" id="qasummarytextarea" [(ngModel)]="text">
+        </textarea>
+      </div>
+      <div class="col-md-6">
+        <h4 class="col-md-12">Ask Question</h4>
+        <textarea rows="2" class="col-md-10 offset-md-1" columns="100" [(ngModel)]="query">
+        </textarea>
+        <br /><br />
+        <div class="col-md-6 offset-md-3">
+          <button type="button" class="generate-summary" (click)="generateSummary()">
+            Generate Answer
+          </button>
+        </div>
+      </div>
+      <br />
+    </div>
+    <!-- <div class="row justify-content-center col-md-12">
       <h5>Or</h5>
-    </div>
-    <div class="row col-md-11 justify-content-around">
-      <button type="button" class="file-button col-md-4">Choose File</button>
-      <button type="button" class="file-button col-md-4">
-        Upload your File
-      </button>
+    </div> -->
+    <div class="row col-md-6 justify-content-around mt2">
+      <fa name="file-text" size="2x" class="cursor-p" (click)="navigateMyFiles()" title="View my files"></fa>
+      <input type="file" hidden="true" #input (change)="handleUpload($event)" />
+      <fa name="upload" size="2x" class="cursor-p" (click)="input.click()" title="Upload file"></fa>
+      <!-- <button type="button" class="file-button col-md-4" (click)="input.click()">
+        Upload
+      </button> -->
     </div>
     <br /><br />
-    <h4 class="col-md-11">Enter your query</h4>
-    <textarea rows="1" class="col-md-11" columns="100"> </textarea>
-    <br /><br />
-    <div class="col-md-5 offset-md-3">
-      <button type="button" class="generate-summary">Generate Summary</button>
-    </div>
+  </div>
+  <div class="image-div col-md-4">
+    <img src="assets/Query.jpg" />
   </div>
 </div>
-<br /><br />
-<div class="grey-background">
-  <br>
-  <div class="row justify-content-center ">
-    <div class="col-md-6">
-      <app-summary-item></app-summary-item>
+
+<!-- QA Box -->
+<div class="qa-container" *ngIf="isPopupOpen">
+  <div class="flip-card" [ngClass]="{'rotate': !isQuestion}">
+    <div class="flip-card-inner">
+      <div class="flip-card-front" (click)="toggleCard()">
+        <textarea autofocus id="focus-area" placeholder="Enter your text and rotate to get answer" rows="13" [(ngModel)]="popupQ"></textarea>
+      </div>
+      <div class="flip-card-back" (click)="toggleCard()">
+        <textarea placeholder="No answer is here!" [disabled]="true" rows="14" [(ngModel)]="popupA"></textarea>
+      </div>
     </div>
-    <div class="col-md-6">
-      <app-summary-item></app-summary-item>
-    </div>
+    <fa *ngIf="currentIdx > 0" name="backward" title="Previous card" size="2x" class="popup-icon arrow-left" (click)="backward($event)"></fa>
+    <fa name="plus" size="2x" class="popup-icon add-icon" title="Add new question" (click)="addQuestion()"></fa>
+    <fa name="repeat" size="2x" class="popup-icon flip-icon" title="Flip card" (click)="toggleCard()"></fa>
+    <fa name="close" size="2x" class="popup-icon close-icon" title="Close cue cards" (click)="closePopup()"></fa>
+    <fa name="save" size="2x" class="popup-icon save-icon" title="Save this card" (click)="saveCard()"></fa>
+    <fa *ngIf="currentIdx < current.length - 1" title="Next card" name="forward" size="2x" class="popup-icon arrow-right" (click)="forward($event)"></fa>
+    <ngx-spinner name="popup"></ngx-spinner>
   </div>
-  <br /><br />
 </div>
+<div class="col-md-6 z-behind">
+  <div class="accordion" id="accordionExample">
+
+    <div class="card header-card">
+      <div class="card-header card-div">
+        <div class="row justify-content-between align-items-center">
+          <p>Id</p>
+          <p>Text</p>
+          <p>Actions</p>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <ng-container *ngFor="let card of savedCards; let i = index">
+      <div class="row justify-content-between align-items-center">
+        <p class="mb-0 col-1 file">
+          {{ card.id }}
+        </p>
+        <p class="mb-0 col-3 small-text size">{{ card.text }}</p>
+        <p class="mb-0 col-1" (click)="play(card.id)">
+          <i class="fa fa-play action-icon"></i>
+        </p>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>
+<notifier-container></notifier-container>

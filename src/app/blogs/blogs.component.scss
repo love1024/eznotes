@@ -1,12 +1,13 @@
 @import '../../assets/variables.scss';
 .blog-image{
-    margin-top:80px;
+    margin-top:70px;
     height: 380px;
     background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/writing-paper-letters-antique-quill_credit-Shutterstock.jpg);
     background-position: center;
     background-size: cover;
     p{
         font-size: 60px;
+        font-style: italic;
     }
 }
 .section{
@@ -42,6 +43,25 @@ input{
     height: 50px;
 }
 .form-div{
-    width:100%
+    margin-left: 20%;
+    width:60%
+}
+
+@media (max-width: 800px)
+{
+    .blog-items{
+        width:90%;
+        margin-left: 5%;
+        margin-right: 5%
+    }
+    
+}
+.blog-footer.row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.blog-item-container.row{
+    margin-right: 0px;
+    margin-left: 0px;
 }
 

@@ -1,0 +1,278 @@
+@import "../../assets/variables.scss";
+.blog-image {
+  margin-top: 70px;
+}
+
+.large-text {
+  font-size: 46px;
+}
+
+.card-div {
+  background-color: white;
+  color: $primary-button-color;
+  button {
+    color: $primary-button-color;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+
+.action-icon {
+  margin-right: 10px;
+  color: $primary-button-color;
+  cursor: pointer;
+}
+
+.summary-divs {
+  p {
+    text-align: center;
+  }
+}
+
+.accordion {
+  .card {
+    border: 0px;
+  }
+}
+
+.card-body {
+  color: grey;
+  textarea {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    outline: none;
+    text-decoration: none;
+  }
+}
+
+.sidenav-container {
+  padding: 0px !important;
+  height: 100%;
+  width: 5%;
+  display: inline-block;
+}
+
+.right-container {
+  margin-top: 20px;
+  border-left: 0.5px solid $primary-button-color;
+  border-bottom: 0.5px solid $primary-button-color;
+  .action-item {
+    border: 1px solid grey;
+    height: 50px;
+    margin-bottom: 10px;
+    p {
+      color: $primary-button-color;
+      font-size: 12px;
+    }
+    i {
+      color: $primary-button-color;
+    }
+  }
+}
+
+.video-div {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.left-container {
+  height: 700px;
+  overflow-y: scroll;
+}
+
+.speed {
+  font-weight: 600;
+  margin-bottom: 0px;
+  font-size: 17px !important;
+}
+
+.notes-div {
+  textarea {
+    width: 100%;
+    text-decoration: none;
+    outline: none;
+    border: none;
+  }
+}
+
+.main-div {
+  height: 780px;
+}
+
+.nav-item.active {
+  background-color: #2755bd;
+}
+.nav-item {
+  width: 150px;
+  text-align: center;
+}
+.navbar{
+  height: 40px;
+}
+
+.tab-nav {
+  width: 100%;
+  padding:0px 0px 0px 5%;
+  background-color: $primary-button-color;
+  a {
+    color: white !important;
+    cursor: pointer;
+  }
+}
+
+.tab-div {
+  height: 100%;
+  width: 95%;
+}
+.sidenav {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: $primary-button-color;
+  overflow-x: hidden;
+}
+
+.sidenav div {
+  display: block;
+}
+.sidebar-item {
+  height: auto;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-items: center;
+  p {
+    font-size: 9px;
+    color: white;
+  }
+  i {
+    font-size: 15px;
+    color: white;
+  }
+  border-bottom: 0.5px solid white;
+}
+
+.button-color {
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
+  width: 80px;
+  margin-bottom: 10px;
+  height: 40px;
+}
+
+.button-blue{
+  width:180px;
+  border-radius: 0px;
+  margin-right: 10px;
+}
+@media only screen and (max-width: 900px) {
+  .tab-div {
+    width: 100%;
+  }
+  .tab-nav {
+    padding-left: 0%;
+  }
+  .main-div {
+    height: auto;
+  }
+  .sidenav-container {
+    display: none;
+  }
+  .left-container {
+    height: auto;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+  }
+  .volume {
+    display: none;
+  }
+  .right-container {
+    position: fixed;
+    bottom: -5px;
+    width: 101%;
+    z-index: 4;
+    margin: 0px;
+    border: none;
+    .action-item {
+      background-color: $primary-button-color;
+      border: 0.5px solid $primary-button-color;
+      width: 33%;
+      margin-bottom: 5px;
+      height: 70px;
+      padding-top: 12px;
+      p {
+        color: white;
+        font-size: 10px;
+      }
+      i {
+        color: white;
+      }
+    }
+    padding: 0px;
+  }
+  .notes-div {
+    display: none;
+  }
+  .video-div {
+    display: none;
+  }
+  .action-icon {
+    margin-right: 5px;
+    color: $primary-button-color;
+    cursor: pointer;
+  }
+  .card-div {
+    p {
+      font-size: 17px;
+    }
+    .small-text {
+      font-size: 13px;
+    }
+  }
+  .file {
+    width: 70%;
+    max-width: 70%;
+    flex: none;
+    text-align: left;
+  }
+  .size {
+    width: 30%;
+    max-width: 30%;
+    flex: none;
+  }
+  .date {
+    width: 40%;
+    max-width: 40%;
+    flex: none;
+    padding:0px;
+  }
+  .actions{
+    width:20%;
+    max-width: 20%;
+    padding:0px;
+  }
+  .header-card {
+    display: none;
+  }
+  .nav-item {
+    width: 33%;
+    height:90%;
+  }
+  .navbar-nav {
+    flex-direction: row;
+    width: 100%;
+  }
+  .short-title {
+    font-size: 0px;
+  }
+  .short-title:after {
+    font-size: 17px;
+    content: "Q & A";
+    text-align: center;
+    width: 34%;
+    height:90%;
+  }
+}

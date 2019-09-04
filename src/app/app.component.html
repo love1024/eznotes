@@ -1,74 +1,78 @@
-<header>
-  <div fxLayout="row" fxLayoutAlign="center center" class="header">
-    <div fxFlex="40">
-      <img
-        src="http://159.89.118.118/wp-content/uploads/2018/04/Liiv-Labs-Inc_48-blue.png"
-      />
-    </div>
-    <div fxFlex="60" fxLayoutAlign="end center" fxLayoutGap="20px">
-      <a class="title" routerLink="summary">Summary</a>
-      <a class="title" routerLink="qa-summary">QA Summary</a>
-      <a class="title" routerLink="">Speech To Text</a>
-      <h5 class="title">Login</h5>
-    </div>
+<nav class="navbar navbar-light navbar-expand-lg justify-content-center">
+  <img src="assets/logo.png" (click)="goToPage('home')" />
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3" #menuButton
+    (click)="toggleCollapsed()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }" class="w-100" id="collapsingNavbar3">
+    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="nav-link title" routerLink="home">Home</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="nav-link title" routerLink="pricing">Pricing</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link" routerLink="blog">Blog</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" routerLink="tryFree" *ngIf="!isLoggedIn">Try It Free</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" routerLink="login" *ngIf="!isLoggedIn">Login</a>
+      </li>
+
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" routerLink="contact">Contact</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="nav-link title" routerLink="services" *ngIf="isLoggedIn">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="title nav-link menu-item" routerLink="myfiles" (click)="menuButton.click()" *ngIf="isLoggedIn">My
+          Files</a>
+      </li>
+
+      <li class="nav-item" (click)="logout(); menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" *ngIf="isLoggedIn">Logout</a>
+      </li>
+    </ul>
   </div>
-</header>
+</nav>
 
 <router-outlet></router-outlet>
 
-<div fxLayout="row" class="login-footer" fxLayoutGap="20px">
-  <div fxFlex="5"></div>
-  <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
-    <div fxFlex="10"></div>
-    <h4 class="default-text">Reach Us:</h4>
-    <div fxFlex="10"></div>
-    <div>
-      <i class="fa fa-2x fa-envelope icon-color"></i>
-      <h5 class="default-text">Email</h5>
-      <h6 class="default-text">contact@liivlabs.com</h6>
-    </div>
-  </div>
-
-  <div fxLayout="column" fxFlex="30" fxLayoutAlign="start start">
-    <div fxFlex="10"></div>
-    <h4 class="default-text">Follow Us:</h4>
-    <div fxFlex="10"></div>
-    <div>
-      <div class="social-media-icon twitter">
-        <i class="fa fa-lg icon-margin fa-twitter"></i>
-      </div>
-      <div class="social-media-icon linkedin">
-        <i class="fa icon-margin fa-lg fa-linkedin"></i>
-      </div>
-      <div class="social-media-icon facebook">
-        <i class="fa fa-lg fa-facebook"></i>
-      </div>
-      <div class="social-media-icon instagram">
-        <i class="fa icon-margin fa-lg fa-instagram"></i>
+<div class="login-footer" *ngIf="showFooter">
+  <div class="row justify-items-center">
+    <div class="col-6 footer-item-1">
+      <h4 class="default-text text-center">Reach Us:</h4>
+      <div class="text-center">
+        <i class="fa fa-2x fa-envelope cursor-pointer icon-color" (click)="goToPage('contact')"></i>
+        <!-- <h5 class="default-text">Email</h5>
+        <h6 class="default-text text-center">contact@Eznotes.com</h6> -->
       </div>
     </div>
-  </div>
-
-  <div fxLayout="column" fxFlex="30">
-    <form class="login-form">
-      <h4 class="default-text">Subscription</h4>
-      <div class="vertical-spacer"></div>
-      <div class="form-group">
-        <input
-          type="email"
-          placeholder="Email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
+    <div class="col-6 footer-item-1">
+      <h4 class="default-text text-center">Follow Us:</h4>
+      <div class="text-center">
+        <div class="social-media-icon twitter">
+          <i class="fa fa-lg icon-margin fa-twitter"></i>
+        </div>
+        <div class="social-media-icon linkedin">
+          <i class="fa icon-margin fa-lg fa-linkedin"></i>
+        </div>
+        <div class="social-media-icon facebook">
+          <i class="fa fa-lg fa-facebook"></i>
+        </div>
+        <div class="social-media-icon instagram">
+          <i class="fa icon-margin fa-lg fa-instagram"></i>
+        </div>
       </div>
-      <button type="submit" class="button-color btn col-md-12">
-        Subscribe
-      </button>
-    </form>
+    </div>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5%" class="footer">
+
+<div class="footer col-md-12 row justify-content-center">
   <p>About Us</p>
   <p>FAQ</p>
   <p>Privacy</p>

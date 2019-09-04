@@ -1,89 +1,171 @@
 <div class="blog-container" fxLayout="column">
   <div class="blog-image">
-    <section class="section" fxFlex="100" fxLayoutAlign="center center">
-      <p class="default-text large-text">Services</p>
+    <section class="section" fxFlex>
+      <div class="default-text large-text cross-font">Services</div>
     </section>
   </div>
 </div>
 <div class="col-md-12" class="grey-background">
   <div class="col-md-8 offset-md-2">
-    <h3>
-      LiivLabs provides the highest quality audio-to-text and video-to-text
-      transcription services available on the market through proprietary
-      technology that is fast, secure, accurate and easy to use. We provide the
-      highest quality service with our flexible and cost efficient plans that
-      will improve your workflow and increase your profitability.
-    </h3>
+    <p class="info">
+      <strong>Eznotes</strong> provides the highest quality audio-to-text and
+      video-to-text transcription services available on the market through
+      proprietary technology that is fast, secure, accurate and easy to use. We
+      provide the highest quality service with our flexible and cost efficient
+      plans that will improve your workflow and increase your profitability.
+    </p>
     <br /><br />
   </div>
 
   <div class="col-md-12 row">
-    <div class="col-md-4">
-      <app-service-item></app-service-item>
+    <div class="col-md-4" (click)="goToRoute('summary')">
+      <div class="service-item image-1">
+        <div>
+          <div class="row justify-content-center">
+            <div class="item-1"></div>
+          </div>
+          <br /><br />
+          <h3>Summary Generator</h3>
+          <p>Generate your text summaries.</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <app-service-item></app-service-item>
+    <div class="col-md-4" (click)="goToRoute('qa-summary')">
+      <div class="service-item image-2">
+        <div>
+          <div class="row justify-content-center">
+            <div class="item-2"></div>
+          </div>
+          <br /><br />
+          <h3>Q & A Generator</h3>
+          <p>Generate Query based Summaries.</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <app-service-item></app-service-item>
+    <div class="col-md-4" (click)="goToRoute('speech-to-text')">
+      <div class="service-item image-3">
+        <div>
+          <div class="row justify-content-center">
+            <div class="item-3"></div>
+          </div>
+          <br /><br />
+          <h3>Speech To Text</h3>
+          <p>Generate your Transcripts.</p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="provide">
-    <div class="col-md-4 offset-md-4">
+  <!-- <div class="provide">
+    <div class="row justify-content-center">
       <h2>Liiv Labs provides:</h2>
+    </div>
+    <div class="row justify-content-center text-center">
       <h6>(with every purchase, no additional cost)</h6>
     </div>
     <div class="col-md-12 row">
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-microphone "></i>
+            </div>
+            <br />
+            <h4>Proprietary algorithm</h4>
+            <p>Built by our machine learning and speech recognition experts</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-pencil "></i>
+            </div>
+            <br />
+            <h4>Simple editing tool</h4>
+            <p>Quickly clean-up the provided transcript.</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-play "></i>
+            </div>
+            <br />
+            <h4>Review & edit</h4>
+            <p>Adjust the playback speed and skip around easily.</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-12 row">
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-clock-o "></i>
+            </div>
+            <br />
+            <h4>Custom timestamps</h4>
+            <p>knows the timing of every word. Add any timestamps.</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-user-o "></i>
+            </div>
+            <br />
+            <h4>Speaker identification</h4>
+            <p>We mark the change of every speaker and label them.</p>
+          </div>
+        </div>
       </div>
       <div class="col-md-4">
-        <app-service-item-icon></app-service-item-icon>
+        <div class="service-item-icon">
+          <div>
+            <div>
+              <i class="fa fa-5x fa-file-text "></i>
+            </div>
+            <br />
+            <h4>Export transcript</h4>
+            <p>
+              Download your transcript into text (MS Word, PDF) or closed
+              caption files (SRT, VTT).
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="col-md-12 row student student-background">
-  <div class="col-md-6">
-    <div class="col-md-4 offset-md-4">
-      <img
-        src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-18.png"
-      />
-    </div>
+  <div class="col-md-4 offset-md-2">
+    <img
+      src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-18.png"
+    />
   </div>
-  <div class="col-md-6 info">
+  <div class="col-md-2 info">
     <h3>For Students</h3>
     <h5>Interviews</h5>
     <h5>Video Content</h5>
     <h5>Press Conferece</h5>
   </div>
 </div>
-<div class="col-md-12 row student author-background">
-    <div class="col-md-4 offset-md-2 info">
-      <h3>For Bloggers & Authors</h3>
-      <h5>Dictations</h5>
-      <h5>Meetings</h5>
-      <h5>Podcasts</h5>
-    </div>
-    <div class="col-md-6">
-        <div class="col-md-4">
-          <img
-            src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-20.png"
-          />
-        </div>
-      </div>
+<div class="col-md-12 row student author-background"> 
+  <div class="col-md-4 offset-md-2 info">
+    <h3>For Bloggers & Authors</h3>
+    <h5>Dictations</h5>
+    <h5>Meetings</h5>
+    <h5>Podcasts</h5>
   </div>
+  <div class="col-md-4">
+    <img
+      src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-20.png"
+    />
+  </div>-->
+</div>

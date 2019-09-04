@@ -1,0 +1,45 @@
+@import "../../assets/variables.scss";
+
+.qa-container {
+    padding-top: 80px;
+    min-height: 500px;
+    text-align: center;
+}
+
+.qa-input {
+    textarea {
+        padding: 16px;
+        width: 600px;
+    }
+}
+
+.qa-question {
+    font-size: 24px;
+}
+
+.button-color {
+    background-color: $primary-button-color;
+    border-color: $primary-button-color;
+    color: white;
+    width: 80px;
+    margin-bottom: 10px;
+    height: 40px;
+  }
+  
+  .button-blue{
+    width:180px;
+    border-radius: 0px;
+    margin-right: 10px;
+  }
+
+@media only screen and (max-width: 800px) {
+    .qa-input textarea {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .qa-input textarea {
+        width: 400px;
+    }
+}

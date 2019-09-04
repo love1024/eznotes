@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  QaSummaryUrl: 'http://157.230.159.243:5000/',
+  SummaryUrl: 'http://157.230.167.241:5000/',
+  server: 'https://localhost:44324/'
 };
 
 /*
