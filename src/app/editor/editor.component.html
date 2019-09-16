@@ -98,10 +98,10 @@
       </div>
       <div class="col-md-4 right-container">
         <div class="row">
-          <video controls class=" video-div">
+          <video controls class="video-js" data-setup='{}' autoplay>
             <source
-              type="video/mp4"
-              src="http://159.89.118.118/wp-content/uploads/2018/04/Liivlabs-Modified.mp4"
+              type="video/webm"
+              [src]="videoUrl"
             />
           </video>
         </div>

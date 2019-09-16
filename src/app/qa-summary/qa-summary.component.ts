@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
-import { FileItem } from '../models/fileitem';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IQa, IQaCards } from '../models/qa';
 import { NotifierService } from 'angular-notifier';

@@ -3,7 +3,6 @@ import { SummaryService } from '../service/summary/summary.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import pdfjsLib from 'pdfjs-dist';
 import * as $ from 'jquery';
-import { FileItem } from '../models/fileitem';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
