@@ -27,7 +27,6 @@ export class EditorComponent implements OnInit {
 
   highlight = 'highlight';
 
-  wrong= true;
 
   constructor(private route: ActivatedRoute, private fileService: FileService) {}
 
