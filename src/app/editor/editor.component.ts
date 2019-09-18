@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AudioItem } from '../models/audioitem';
 // import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 
@@ -14,7 +14,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditorComponent implements OnInit {
 
-  
+  @ViewChild('videoPlayer') videoplayer: ElementRef;
+
   tab = 'textSummary';
 
   videoUrl = '';
@@ -51,6 +52,28 @@ export class EditorComponent implements OnInit {
   highlightText(event){
     this.currentTime = event.currentTarget.currentTime;
     console.log(this.currentTime);
+  }
+
+  toggleVideo(event: any) {
+    let nativeElement = this.videoplayer.nativeElement;
+    nativeElement.paused ? nativeElement.play() : nativeElement.pause();
+   
+  }
+
+  toggleSpeed(event: any) {
+    let nativeElement = this.videoplayer.nativeElement;
+    nativeElement.playbackRate == 1.0 ? nativeElement.playbackRate = 2.0 : nativeElement.playbackRate = 1.0;
+  }
+
+  toggleAudio(event: any) {
+    let nativeElement = this.videoplayer.nativeElement;
+    nativeElement.muted ? nativeElement.muted = false : nativeElement.muted = true;
+  }
+
+  rewind5Sec(event:any){
+    let nativeElement = this.videoplayer.nativeElement;
+    nativeElement.currentTime -= 5;
+    debugger;
   }
 
 
