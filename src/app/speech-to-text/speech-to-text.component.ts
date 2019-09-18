@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { FileService } from '../service/file/file.service';
+import { NotifierService } from 'angular-notifier';
 
 declare var RecordRTCPromisesHandler;
 
@@ -12,18 +13,32 @@ declare var RecordRTCPromisesHandler;
 })
 export class SpeechToTextComponent implements OnInit {
   recorder: any;
+
+  recordingDisabled = true;
+  recordingInitiated = false;
   recordingStarted = false;
   recordingPause = false;
+
   recordStart = false;
   recordingStopped = false;
   stream: any;
   recordingSaved = false;
 
-  @ViewChild("videoPlayer") player;
+  recordingVideo = true;
+
+  recordedStream: any;
+
+  fileName = '';
+
+  @ViewChild("videoPlayer") videoPlayer;
+
+  @ViewChild("audoPlayer") audioPlayer;
+
+  player: any;
 
   constructor(
-    private http: HttpClient,
-    private fileService: FileService) {}
+    private notificationService: NotifierService,
+    private fileService: FileService) { }
 
   ngOnInit() {
     if ($(window).width() < 900) {
@@ -53,7 +68,7 @@ export class SpeechToTextComponent implements OnInit {
    * @memberof SpeechToTextComponent
    */
   onFileSelect(files: File[]): void {
-    if(files.length == 0) {
+    if (files.length == 0) {
       return;
     }
 
@@ -64,6 +79,28 @@ export class SpeechToTextComponent implements OnInit {
     this.fileService.uploadFile(formData).subscribe(() => {
       console.log("HERE");
     });
+  }
+
+  startRecordingVideo(): void {
+    this.recordingVideo = true;
+    this.recordingInitiated = true;
+    this.recordingDisabled = false;
+    this.player = this.videoPlayer;
+  }
+
+  startRecordingAudio(): void {
+    this.recordingVideo = false;
+    this.recordingInitiated = true;
+    this.recordingDisabled = false;
+    this.player = this.audioPlayer;
+  }
+
+  record(): void {
+    if(this.recordingVideo) {
+      this.recordVideo();
+    } else {
+      this.recordAudio();
+    }
   }
 
   recordVideo(): void {
@@ -77,23 +114,29 @@ export class SpeechToTextComponent implements OnInit {
           mimeType: 'video/webm'
         });
         this.recordingStarted = true;
+        this.recordingInitiated = false;
         this.recorder.startRecording();
+      }).catch((err) => {
+        this.recordingInitiated = false;
+        this.recordingDisabled = true;
       });
   }
 
   pauseVideoRecording(): void {
+    this.recordingStarted = false;
     this.recordingPause = true;
     this.recorder.recordRTC.pauseRecording();
   }
 
   resumeVideoRecording(): void {
     this.recordingPause = false;
+    this.recordingStarted = true;
     this.recorder.recordRTC.resumeRecording();
   }
 
   recordAudio(): void {
     navigator.mediaDevices
-      .getUserMedia({ audio: true, video: true })
+      .getUserMedia({ audio: true, video: false })
       .then(stream => {
         this.stream = stream;
         this.player.nativeElement.srcObject = stream;
@@ -102,8 +145,12 @@ export class SpeechToTextComponent implements OnInit {
           mimeType: 'audio/ogg;codecs=opus'
         });
         this.recordingStarted = true;
+        this.recordingInitiated = false;
         this.recorder.startRecording();
-      });
+      }).catch((err) => {
+        this.recordingInitiated = false;
+        this.recordingDisabled = true;
+      });;
   }
 
   stopRecording(): void {
@@ -114,31 +161,34 @@ export class SpeechToTextComponent implements OnInit {
         this.player.nativeElement.src = this.player.nativeElement.srcObject = null;
         this.player.nativeElement.src = URL.createObjectURL(video);
 
-      
+
         this.stream.stop();
         this.recordingStopped = true;
-        this.callApi(video);
+        this.recordingStarted = false;
+        this.recordedStream = video;
       });
     });
   }
 
   callApi(content): void {
-    // const reader = new FileReader();
-    // reader.readAsDataURL(content);
-    // reader.onloadend = () => {
-    //   const audio = reader.result;
-    //   const audioString = audio.toString().split(',')[1];
+    const formData = new FormData();
+    formData.append('file', content, `${this.fileName}.webm`);
 
-      const formData = new FormData();
-      formData.append('file', content, 'test.webm');
-  
-      this.fileService.uploadFile(formData).subscribe(() => {
-        console.log("HERE");
-      });
-    // };
+    this.fileService.uploadFile(formData).subscribe(() => {
+    });
+    this.notificationService.notify('success', 'File Submit Successfully');
   }
 
-  saveRecording(){
-    this.recordingSaved = true;
+  saveRecording() {
+    this.recordingStopped = false;
+    this.recordingDisabled = true;
+    this.callApi(this.recordedStream);
+  }
+
+  DeleteRecording() {
+    this.recordingStopped = false;
+    this.recordingDisabled = true;
+    this.player.nativeElement.src = this.player.nativeElement.srcObject = null;
+    this.fileName = '';
   }
 }
