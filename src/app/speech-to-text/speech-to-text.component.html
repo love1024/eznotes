@@ -16,7 +16,7 @@
     <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
     <div class="col-md-6 offset-md-3">
       <div class="row justify-content-center">
-        <audio #videoPlayer id="player" autoplay controls></audio>
+        <video #videoPlayer id="player" autoplay controls></video>
       </div>
       <br />
       <div class="row col-md-12 justify-content-center button-row">
@@ -28,13 +28,13 @@
         >
           Record Video
         </button>
-        <button type="button" class="btn button-color" *ngIf="!recordStart">
+        <!-- <button type="button" class="btn button-color" *ngIf="!recordStart">
           Record Audio
-        </button>
+        </button> -->
         <button
           type="button"
           class="btn red-button"
-          (click)="recordAudio()"
+          (click)="recordVideo()"
           *ngIf="recordStart && !recordingStarted"
         ></button>
         <button

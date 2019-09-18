@@ -1,11 +1,20 @@
-export class FileItem {
-    public FileId: number;
-    public FileName: string;
-    public FileText: string;
-    public FileType: number;
-    public GeneratedSummaryText: string;
-    public FileSize: string;
-    public CreatedOn: string;
-    public ModifiedDate: string;
-    public collapse: boolean;
+export interface IFile
+{
+    fileId: number;
+
+    userEmail: string;
+
+    originalName: string;
+
+    originalSize: number;
+
+    videoFileName: string;
+
+    audioFileName: string;
+
+    text: string;
+
+    createdAt: Date | string;
+
+    editedAt: Date | string;
 }
