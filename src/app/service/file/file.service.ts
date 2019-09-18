@@ -33,4 +33,8 @@ export class FileService {
   getFileUrl(name: string): Observable<any> {
     return this.http.get<any>(`${this.api}api/file/fileurl?filename=${name}`);
   }
+
+  getFile(name: string): Observable<any> {
+    return this.http.get<any>(`${this.api}api/file/file?filename=${name}`);
+  }
 }
