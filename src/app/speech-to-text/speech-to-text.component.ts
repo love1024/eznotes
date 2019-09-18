@@ -73,7 +73,8 @@ export class SpeechToTextComponent implements OnInit {
         this.stream = stream;
         this.player.nativeElement.srcObject = stream;
         this.recorder = new RecordRTCPromisesHandler(stream, {
-          type: 'video'
+          type: 'video',
+          mimeType: 'video/webm'
         });
         this.recordingStarted = true;
         this.recorder.startRecording();
@@ -122,33 +123,19 @@ export class SpeechToTextComponent implements OnInit {
   }
 
   callApi(content): void {
-    const reader = new FileReader();
-    reader.readAsDataURL(content);
-    reader.onloadend = () => {
-      const audio = reader.result;
-      const audioString = audio.toString().split(',')[1];
+    // const reader = new FileReader();
+    // reader.readAsDataURL(content);
+    // reader.onloadend = () => {
+    //   const audio = reader.result;
+    //   const audioString = audio.toString().split(',')[1];
 
-      const url =
-        'https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyAgAL5lm4soe3VA9JCJI8KMGULGlfW2URw';
-      const options = {
-        config: {
-          encoding: 'OGG_OPUS',
-          languageCode: 'en-US',
-          sampleRateHertz: 48000
-        },
-        audio: {
-          content: audioString
-        }
-      };
-      this.http.post(url, options).subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    };
+      const formData = new FormData();
+      formData.append('file', content, 'test.webm');
+  
+      this.fileService.uploadFile(formData).subscribe(() => {
+        console.log("HERE");
+      });
+    // };
   }
 
   saveRecording(){
