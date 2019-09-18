@@ -74,7 +74,9 @@
               <div class="card-header card-div">
                 <div class="row justify-content-between align-items-center">
                   <div class="mb-0">
-                    <span *ngFor="let word of filetext.Alternatives[0].Words" ng-class="highlight">{{word.Word}} </span>
+                    <span *ngFor="let word of filetext.Alternatives[0].Words" [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime)}">
+                      {{word.Word}} 
+                    </span>
                   </div>
                 </div>
               </div>
@@ -85,7 +87,8 @@
       </div>
       <div class="col-md-4 right-container">
         <div class="row">
-          <video width="480" height="240" controls class="video-js" data-setup='{}' autoplay *ngIf="videoUrl.length>0">
+          <video width="480" height="240" controls class="video-js" data-setup='{}' autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)"
+            >
             <source
               type="video/webm"
               [src]="videoUrl"

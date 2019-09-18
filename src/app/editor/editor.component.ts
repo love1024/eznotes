@@ -23,6 +23,12 @@ export class EditorComponent implements OnInit {
 
   filetexts = [];
 
+  currentTime = 0;
+
+  highlight = 'highlight';
+
+  wrong= true;
+
   constructor(private route: ActivatedRoute, private fileService: FileService) {}
 
   ngOnInit() {
@@ -41,6 +47,11 @@ export class EditorComponent implements OnInit {
 
   setTab(tabName) {
     this.tab = tabName;
+  }
+
+  highlightText(event){
+    this.currentTime = event.currentTarget.currentTime;
+    console.log(this.currentTime);
   }
 
 
