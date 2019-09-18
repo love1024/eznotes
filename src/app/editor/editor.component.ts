@@ -14,9 +14,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditorComponent implements OnInit {
 
+  
   tab = 'textSummary';
 
   videoUrl = '';
+
+  file:IFile;
+
+  filetexts = [];
+
+  currentTime = 0;
+
+  highlight = 'highlight';
+
 
   constructor(private route: ActivatedRoute, private fileService: FileService) {}
 
@@ -25,12 +35,22 @@ export class EditorComponent implements OnInit {
       const fileName = params['id'];
       this.fileService.getFileUrl(fileName).subscribe((res) => {
         this.videoUrl = res.url;
-      })
+      });
+      this.fileService.getFile(fileName).subscribe((res) => {
+        this.file = res;
+        this.filetexts = JSON.parse(res.text);
+      });
+
     });
   }
 
   setTab(tabName) {
     this.tab = tabName;
+  }
+
+  highlightText(event){
+    this.currentTime = event.currentTarget.currentTime;
+    console.log(this.currentTime);
   }
 
 
