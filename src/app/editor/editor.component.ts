@@ -30,6 +30,12 @@ export class EditorComponent implements OnInit {
 
   completeTranscript = '';
 
+  isPaused = false;
+  
+  isMute = false;
+
+  isSpeedFast = false;
+
 
   constructor(private route: ActivatedRoute, private fileService: FileService) {}
 
@@ -58,24 +64,46 @@ export class EditorComponent implements OnInit {
 
   toggleVideo(event: any) {
     let nativeElement = this.videoplayer.nativeElement;
-    nativeElement.paused ? nativeElement.play() : nativeElement.pause();
-   
+    if(nativeElement.paused)
+    {
+      this.isPaused = false;
+      nativeElement.play();
+    }
+    else{
+      this.isPaused = true;
+      nativeElement.pause();
+    }   
   }
 
   toggleSpeed(event: any) {
     let nativeElement = this.videoplayer.nativeElement;
-    nativeElement.playbackRate == 1.0 ? nativeElement.playbackRate = 2.0 : nativeElement.playbackRate = 1.0;
+    if(nativeElement.playbackRate == 1.0)
+    {
+      this.isSpeedFast = true;
+      nativeElement.playbackRate = 2.0
+    }
+    else{
+      this.isSpeedFast = false;
+      nativeElement.playbackRate = 1.0
+    }   
   }
 
   toggleAudio(event: any) {
     let nativeElement = this.videoplayer.nativeElement;
-    nativeElement.muted ? nativeElement.muted = false : nativeElement.muted = true;
+    if(nativeElement.muted)
+    {
+      this.isMute = false;
+      nativeElement.muted = false;
+    }
+    else{
+      this.isMute = true;
+      nativeElement.muted = true;
+    }   
   }
 
   rewind5Sec(event:any){
     let nativeElement = this.videoplayer.nativeElement;
     nativeElement.currentTime -= 5;
-    debugger;
   }
 
   getCompleteFileTranscript(){
