@@ -125,6 +125,7 @@ export class LoginService {
       token: response.token
     }
     this.user  = new User(user);
+    localStorage.setItem('user',JSON.stringify(this.user));
   }
 
   public setUserWithSignUp(response: ISignUpResult): void {
