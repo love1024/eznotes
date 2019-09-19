@@ -87,8 +87,11 @@
       </div>
       <div class="col-md-4 right-container">
         <div class="row">
+
           <video width="480" height="240"  class="video-js"  data-setup='{}' autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)"
             #videoPlayer>
+
+
             <source
               type="video/webm"
               [src]="videoUrl"

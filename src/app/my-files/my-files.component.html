@@ -43,7 +43,7 @@
             <p class=" mb-0 col-3 small-text date">{{ file.createdAt  | date: 'dd MMM yyyy'}}</p>
             <p class="mb-0 col-1">
               <i class="fa fa-pencil action-icon" (click)="editFile(file)"></i>
-              <i class="fa fa-download action-icon"></i>
+              <i class="fa fa-download action-icon" (click)="downloadFile(file)"></i>
             </p>
           </div>
         </div>

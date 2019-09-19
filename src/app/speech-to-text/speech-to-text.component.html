@@ -3,7 +3,7 @@
     <section class="section" fxFlex="100">
       <div class="default-text upload-file" (click)="input.click()">
         <div>
-          <input type="file" #file hidden="true" #input (change)="onFileSelect(file.files)"/>
+          <input type="file" #file hidden="true" #input (change)="onFileSelect(file.files)" />
           <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
         </div>
       </div>
@@ -13,87 +13,43 @@
 <div class="speech-to-text-div">
   <br />
   <div class="col-md-12">
-    <div class="row justify-content-center"><h4>Record Audio/Video</h4></div>
+    <div class="row justify-content-center">
+      <h4>Record Audio/Video</h4>
+    </div>
     <div class="col-md-6 offset-md-3">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center" [hidden]="!recordingVideo">
         <video #videoPlayer id="player" autoplay controls></video>
+      </div>
+      <div class="row justify-content-center" [hidden]="recordingVideo">
+        <audio #audoPlayer id="player" autoplay controls></audio>
       </div>
       <br />
       <div class="row col-md-12 justify-content-center button-row">
-        <button
-          type="button"
-          class="btn button-color"
-          (click)="recordStart = true"
-          *ngIf="!recordStart"
-        >
+        <button *ngIf="recordingDisabled" type="button" class="btn button-color" (click)="startRecordingVideo()">
           Record Video
         </button>
-        <!-- <button type="button" class="btn button-color" *ngIf="!recordStart">
+        <button *ngIf="recordingDisabled" type="button" class="btn button-color" (click)="startRecordingAudio()">
           Record Audio
-        </button> -->
-        <button
-          type="button"
-          class="btn red-button"
-          (click)="recordVideo()"
-          *ngIf="recordStart && !recordingStarted"
-        ></button>
-        <button
-          type="button"
-          class="btn player-button"
-          (click)="stopRecording()"
-          *ngIf="recordingStarted"
-        >
+        </button>
+        <button type="button" class="btn red-button" (click)="record()" *ngIf="recordingInitiated"></button>
+        <button type="button" class="btn player-button" (click)="stopRecording()" *ngIf="recordingStarted">
           <i class="fa fa-stop"></i>
         </button>
-        <button
-          type="button"
-          class="btn player-button"
-          (click)="pauseVideoRecording()"
-          *ngIf="recordingStarted && !recordingPause"
-        >
+        <button type="button" class="btn player-button" (click)="pauseVideoRecording()" *ngIf="recordingStarted">
           <i class="fa fa-pause"></i>
         </button>
-        <button
-          type="button"
-          class="btn player-button"
-          (click)="resumeVideoRecording()"
-          *ngIf="recordingStarted && recordingPause"
-        >
+        <button type="button" class="btn player-button" (click)="resumeVideoRecording()" *ngIf="recordingPause">
           <i class="fa fa-play"></i>
         </button>
-        <!-- <button
-          type="button"
-          class="btn button-color"
-          (click)="stopRecording()"
-        >
-          Stop Video Recording
-        </button>
-        <button type="button" class="btn button-color">Record Audio</button>
-        <button type="button" class="btn button-color align-self-center">
-          Stop Audio Recording
-        </button> -->
       </div>
-      <div
-        class="row col-md-12 justify-content-center button-row"
-        *ngIf="recordingStopped"
-      >
-        <button
-          type="button"
-          class="btn button-color"
-          (click)="recordingPause = true; saveRecording()"
-        >
+      <div class="row col-md-12 justify-content-center align-center button-row" *ngIf="recordingStopped">
+        <input class="fileName" type="text" placeholder="Enter file name" [(ngModel)]="fileName" />
+        <button [disabled]="!fileName" type="button" class="btn button-color" (click)="saveRecording()">
           Save
         </button>
-        <button
-          type="button"
-          class="btn button-color"
-          (click)="recordingPause = false"
-        >
+        <button type="button" class="btn button-color" (click)="DeleteRecording()">
           Delete
         </button>
-      </div>
-      <div class="row justify-content-center" *ngIf="recordingSaved">
-        <button type="button" class="btn button-color">Convert To Text</button>
       </div>
     </div>
 
@@ -107,9 +63,7 @@
     <div class="feedback-item">
       <div>
         <div>
-          <img
-            src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
-          />
+          <img src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png" />
         </div>
         <br />
         <h3>For Excellent Notes</h3>
@@ -147,3 +101,4 @@
   <br />
 </div>
 <br /><br />
+<notifier-container></notifier-container>
