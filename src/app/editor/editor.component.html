@@ -87,8 +87,11 @@
       </div>
       <div class="col-md-4 right-container">
         <div class="row">
-          <video width="480" height="240" controls  autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)"
-            >
+
+          <video width="480" height="240"  class="video-js"  data-setup='{}' autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)"
+            #videoPlayer>
+
+
             <source
               type="video/webm"
               [src]="videoUrl"
@@ -96,19 +99,19 @@
           </video>
         </div>
         <div class="row align-items-center">
-          <div class="col-md-3 action-item text-center">
+          <div class="col-md-3 action-item text-center" (click)="toggleVideo()">
             <i class="fa fa-play fa-1x "></i>
             <p>Play</p>
           </div>
-          <div class="col-md-3 action-item text-center">
+          <div class="col-md-3 action-item text-center" (click)="rewind5Sec()">
             <i class="fa fa-backward fa-1x"></i>
             <p>Back - 5s</p>
           </div>
-          <div class="col-md-3 action-item text-center">
-            <p class="speed">1x</p>
+          <div class="col-md-3 action-item text-center" (click)="toggleSpeed()">
+            <p class="speed">2x</p>
             <p>Speed</p>
           </div>
-          <div class="col-md-3 action-item volume text-center">
+          <div class="col-md-3 action-item volume text-center" (click)="toggleAudio()">
             <i class="fa fa-microphone-slash fa-1x"></i>
             <p>Mute</p>
           </div>
