@@ -37,4 +37,12 @@ export class FileService {
   getFile(name: string): Observable<any> {
     return this.http.get<any>(`${this.api}api/file/file?filename=${name}`);
   }
+
+  checkNewFile(email:string): Observable<any> {
+    return this.http.get<any>(`${this.api}api/file/alert?email=${email}`);
+  } 
+
+  updateStatusForUser(data):Observable<void> {
+    return this.http.post<void>(`${this.api}api/file/alert`, data);
+  }
 }

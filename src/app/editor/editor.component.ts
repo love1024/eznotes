@@ -28,6 +28,8 @@ export class EditorComponent implements OnInit {
 
   highlight = 'highlight';
 
+  completeTranscript = '';
+
 
   constructor(private route: ActivatedRoute, private fileService: FileService) {}
 
@@ -74,6 +76,12 @@ export class EditorComponent implements OnInit {
     let nativeElement = this.videoplayer.nativeElement;
     nativeElement.currentTime -= 5;
     debugger;
+  }
+
+  getCompleteFileTranscript(){
+    this.filetexts.forEach(filetext => {
+      this.completeTranscript = this.completeTranscript +  filetext.Alternatives[0].Transcript + ' ';
+    });
   }
 
 

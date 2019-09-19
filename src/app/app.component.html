@@ -29,8 +29,8 @@
         <a class="nav-link title" routerLink="services" *ngIf="isLoggedIn">Services</a>
       </li>
       <li class="nav-item">
-        <a class="title nav-link menu-item" routerLink="myfiles" (click)="menuButton.click()" *ngIf="isLoggedIn">My
-          Files</a>
+        <a class="title nav-link menu-item" routerLink="myfiles" (click)="menuButton.click()" (click)="updateStatusForUser()" *ngIf="isLoggedIn">My
+          Files <span class="badge badge-pill badge-dark notify" *ngIf="isNewFile">New</span></a>
       </li>
 
       <li class="nav-item" (click)="logout(); menuButton.click(); showFooter = true">

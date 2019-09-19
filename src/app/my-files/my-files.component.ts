@@ -39,4 +39,6 @@ export class MyFilesComponent implements OnInit {
     }
     this.router.navigate(['editor'], queryParams);
   }
+
+ 
 }
