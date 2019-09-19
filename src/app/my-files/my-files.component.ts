@@ -23,13 +23,8 @@ export class MyFilesComponent implements OnInit {
   ngOnInit() {
     this.fileService.getFiles().subscribe((files) => {
       this.files = files;
-      console.log(this.files);
     })
   }
-
-  // toggleCard(file: FileItem){
-  //   file.showEdit = !file.showEdit;
-  // }
 
   editFile(file: IFile) {
     const queryParams: NavigationExtras = {
@@ -40,5 +35,9 @@ export class MyFilesComponent implements OnInit {
     this.router.navigate(['editor'], queryParams);
   }
 
- 
+  downloadFile(file: IFile) {
+    this.fileService.getFileUrl(file.videoFileName).subscribe((res) => {
+      window.open(res.url, 'blank');
+    });
+  }
 }
