@@ -30,6 +30,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetComponent } from './reset/reset.component';
 import { NotifierModule } from 'angular-notifier';
 import { QaComponent } from './qa/qa.component';
+import { MinuteSecondsPipe } from './shared/minutesSeconds.pipe';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { QaComponent } from './qa/qa.component';
     VerifyComponent,
     ForgetPasswordComponent,
     ResetComponent,
-    QaComponent
+    QaComponent,
+    MinuteSecondsPipe
   ],
   imports: [
     BrowserModule,
