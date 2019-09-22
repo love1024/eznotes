@@ -36,23 +36,15 @@
     </div>
 
     <div class="row justify-content-center col-md-12">
-      <h5>Or</h5>
+      <h5>&nbsp;</h5>
     </div>
     <div class="row col-md-12 justify-content-around">
-      <input type="file" hidden="true" #input (change)="handleUpload($event)" />
       <button
         type="button"
         class="file-button col-md-4"
         (click)="navigateMyFiles()"
       >
         My files
-      </button>
-      <button
-        type="button"
-        class="file-button col-md-4"
-        (click)="input.click()"
-      >
-        Upload File
       </button>
     </div>
     <br /><br />

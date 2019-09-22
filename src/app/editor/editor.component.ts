@@ -1,11 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AudioItem } from '../models/audioitem';
-// import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
-
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFile } from '../models/fileitem';
 import { FileService } from '../service/file/file.service';
-import { HttpClient } from '@angular/common/http';
+import { SummaryService } from '../service/summary/summary.service';
 
 @Component({
   selector: 'app-editor',
@@ -39,7 +36,11 @@ export class EditorComponent implements OnInit {
   spanEdited = '';
 
 
-  constructor(private route: ActivatedRoute, private fileService: FileService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private fileService: FileService,
+    private router: Router,
+    private summaryService: SummaryService,) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -50,6 +51,7 @@ export class EditorComponent implements OnInit {
       this.fileService.getFile(fileName).subscribe((res) => {
         this.file = res;
         this.filetexts = JSON.parse(res.text);
+        this.getCompleteFileTranscript();
       });
 
     });
@@ -61,10 +63,9 @@ export class EditorComponent implements OnInit {
 
   highlightText(event) {
     this.currentTime = event.currentTarget.currentTime;
-    console.log(this.currentTime);
   }
 
-  toggleVideo(event: any) {
+  toggleVideo() {
     let nativeElement = this.videoplayer.nativeElement;
     if (nativeElement.paused) {
       this.isPaused = false;
@@ -76,7 +77,7 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  toggleSpeed(event: any) {
+  toggleSpeed() {
     let nativeElement = this.videoplayer.nativeElement;
     if (nativeElement.playbackRate == 1.0) {
       this.isSpeedFast = true;
@@ -88,7 +89,7 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  toggleAudio(event: any) {
+  toggleAudio() {
     let nativeElement = this.videoplayer.nativeElement;
     if (nativeElement.muted) {
       this.isMute = false;
@@ -100,7 +101,7 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  rewind5Sec(event: any) {
+  rewind5Sec() {
     let nativeElement = this.videoplayer.nativeElement;
     nativeElement.currentTime -= 5;
   }
@@ -133,15 +134,16 @@ export class EditorComponent implements OnInit {
   }
 
 
-  // goToRoute(route){
-  //   switch(route){
-  //     case 'Summary':{
-  //       this.router.navigateByUrl('summary?id='+ 1);
-  //       break;
-  //     }
-  //     case 'QA':{
-  //       this.router.navigateByUrl('qa-summary?id='+ 1);
-  //     }
-  //   }
-  // }
+  goToRoute(route){
+    this.summaryService.textEmitter.next(this.completeTranscript);
+    switch(route){
+      case 'Summary':{
+        this.router.navigateByUrl('summary');
+        break;
+      }
+      case 'QA':{
+        this.router.navigateByUrl('qa-summary');
+      }
+    }
+  }
 }
