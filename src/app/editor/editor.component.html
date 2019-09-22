@@ -73,10 +73,12 @@
             
             <div class="card">
               <div class="card-header card-div">
-                  <h4>Speaker</h4>
+                  <h4>Speaker <span class="headerTime" [attr.data-time]="filetext.Alternatives[0].Words[0].StartTime.Seconds" (click)="updateVideoTime($event)"><i class="fa fa-play fa-1x" ></i>&nbsp;{{filetext.Alternatives[0].Words[0].StartTime.Seconds | minuteSeconds}}</span></h4>
                 <div class="row justify-content-between align-items-center">
                   <div class="mb-0">
-                    <span *ngFor="let word of filetext.Alternatives[0].Words" [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime)}">
+                    <span contenteditable="true" [attr.data-outerindex]="i" [attr.data-innerindex]="index"   [attr.data-time]="word.StartTime.Seconds+word.StartTime.Nanos/1000000000" (dblclick)="updateVideoTime($event)"  (input)="onContentChange($event,$event.target.innerHTML)" *ngFor="let word of filetext.Alternatives[0].Words;let index=index"
+                     [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime
+                     && word.EndTime.Seconds+word.EndTime.Nanos/1000000000 > currentTime)}">
                       {{word.Word}} 
                     </span>
                   </div>
@@ -101,22 +103,22 @@
           </video>
         </div>
         <div class="row align-items-center">
-          <div class="col-md-3 action-item text-center" (click)="toggleVideo()">
+          <div class="col-md-3 action-item text-center cursor" (click)="toggleVideo()">
             <i class="fa fa-play fa-1x " *ngIf="isPaused"></i>
             <i class="fa fa-pause fa-1x " *ngIf="!isPaused"></i>
             <p *ngIf="isPaused">Play</p>
             <p *ngIf="!isPaused">Pause</p>
           </div>
-          <div class="col-md-3 action-item text-center" (click)="rewind5Sec()">
+          <div class="col-md-3 action-item text-center cursor" (click)="rewind5Sec()">
             <i class="fa fa-backward fa-1x"></i>
             <p>Back - 5s</p>
           </div>
-          <div class="col-md-3 action-item text-center" (click)="toggleSpeed()">
+          <div class="col-md-3 action-item text-center cursor" (click)="toggleSpeed()">
             <p class="speed" *ngIf="!isSpeedFast">1x</p>
             <p class="speed" *ngIf="isSpeedFast">2x</p>
             <p >Speed</p>
           </div>
-          <div class="col-md-3 action-item volume text-center" (click)="toggleAudio()">
+          <div class="col-md-3 action-item volume text-center cursor" (click)="toggleAudio()">
             <i class="fa fa-microphone-slash fa-1x" *ngIf="!isMute"></i>
             <i class="fa fa-microphone fa-1x" *ngIf="isMute"></i>
             <p *ngIf="!isMute">Mute</p>

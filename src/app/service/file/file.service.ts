@@ -45,4 +45,8 @@ export class FileService {
   updateStatusForUser(data):Observable<void> {
     return this.http.post<void>(`${this.api}api/file/alert`, data);
   }
+
+  changeFileText(data, fileId): Observable<void> {
+    return this.http.post<void>(`${this.api}api/file/changeFileText?fileId=${fileId}`, data);
+  }
 }
