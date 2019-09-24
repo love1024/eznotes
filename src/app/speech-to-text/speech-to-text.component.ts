@@ -76,8 +76,8 @@ export class SpeechToTextComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
+    this.notificationService.notify('success', 'File Submit Successfully');
     this.fileService.uploadFile(formData).subscribe(() => {
-      console.log("HERE");
     });
   }
 

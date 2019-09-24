@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  QaSummaryUrl: 'http://157.230.159.243:5000/',
-  SummaryUrl: 'http://157.230.167.241:5000/',
-  server: 'https://localhost:44324/'
+  QaSummaryUrl: 'http://34.70.222.216:5000/',
+  SummaryUrl: 'http://34.67.250.189:5000/',
+  server: 'http://35.238.41.11:5050/'
 };
 
 /*

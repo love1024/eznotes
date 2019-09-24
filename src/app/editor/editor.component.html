@@ -93,8 +93,8 @@
           <ng-container *ngFor="let filetext of filetexts; let i = index">
 
             <div class="card">
-              <div class="card-header card-div">
-                <h4>Speaker <span class="headerTime"
+              <div class="card-header">
+                <h4 >Speaker <span class="headerTime card-div"
                     [attr.data-time]="filetext.Alternatives[0].Words[0].StartTime.Seconds"
                     (click)="updateVideoTime($event)"><i
                       class="fa fa-play fa-1x"></i>&nbsp;{{filetext.Alternatives[0].Words[0].StartTime.Seconds | minuteSeconds}}</span>
@@ -119,8 +119,7 @@
       <div class="col-md-4 right-container">
         <div class="row videoDiv">
 
-          <video class="setSize" data-setup='{}' autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)"
-            #videoPlayer>
+          <video class="setSize" autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)" #videoPlayer>
 
 
             <source type="video/webm" [src]="videoUrl" />
