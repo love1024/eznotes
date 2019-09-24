@@ -37,7 +37,7 @@
 <div class="row main-div">
   <div class="sidenav-container">
     <div class="sidenav">
-      <div class="col-md-12 sidebar-item text-center">
+      <div class="col-md-12 sidebar-item text-center cursor" (click)="toggleFindAndReplace()">
         <i class="fa fa-search"></i>
         <p class="text-center">Find & Replace</p>
       </div>
@@ -68,18 +68,45 @@
     </ng-container> -->
     <div class="row editor-div">
       <div class="col-md-8 left-container">
+        <div *ngIf="findReplaceShow">
+          <div class="form-row">
+            <div class="form-group  col-md-5">
+              <input type="text" class="form-control" id="find" placeholder="Find" [(ngModel)]="findWord" (input)="findAllOccurences()">
+            </div>
+            <div class="form-group col-md-4">
+              <button class="btn btn-dark mr-1" (click)="findNextOccurence()">Next</button> 
+              <button class="btn btn-dark mr-1" (click)="findPreviousOccurence()">Previous</button>
+              <span *ngIf="allOccurences.length>0">{{currentIndexOfWord+1}}/{{allOccurences.length}}</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group  col-md-5">
+              <input type="text" class="form-control" id="replace" placeholder="Replace" [(ngModel)]="replaceWord">
+            </div>
+            <div class="form-group col-md-4 ">
+              <button class="btn btn-dark mr-1" (click)="replaceCurrentWord()">Replace</button>
+              <button class="btn btn-dark" (click)="replaceAllWords()">Replace All</button>
+            </div>
+          </div>
+        </div>
         <div class="accordion" id="accordionExample">
           <ng-container *ngFor="let filetext of filetexts; let i = index">
-            
+
             <div class="card">
               <div class="card-header card-div">
-                  <h4>Speaker <span class="headerTime" [attr.data-time]="filetext.Alternatives[0].Words[0].StartTime.Seconds" (click)="updateVideoTime($event)"><i class="fa fa-play fa-1x" ></i>&nbsp;{{filetext.Alternatives[0].Words[0].StartTime.Seconds | minuteSeconds}}</span></h4>
+                <h4>Speaker <span class="headerTime"
+                    [attr.data-time]="filetext.Alternatives[0].Words[0].StartTime.Seconds"
+                    (click)="updateVideoTime($event)"><i
+                      class="fa fa-play fa-1x"></i>&nbsp;{{filetext.Alternatives[0].Words[0].StartTime.Seconds | minuteSeconds}}</span>
+                </h4>
                 <div class="row justify-content-between align-items-center">
                   <div class="mb-0">
-                    <span contenteditable="true" [attr.data-outerindex]="i" [attr.data-innerindex]="index"   [attr.data-time]="word.StartTime.Seconds+word.StartTime.Nanos/1000000000" (dblclick)="updateVideoTime($event)"  (input)="onContentChange($event,$event.target.innerHTML)" *ngFor="let word of filetext.Alternatives[0].Words;let index=index"
-                     [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime
-                     && word.EndTime.Seconds+word.EndTime.Nanos/1000000000 > currentTime)}">
-                      {{word.Word}} 
+                    <span contenteditable="true" [attr.data-outerindex]="i" [attr.data-innerindex]="index"
+                      [attr.data-time]="word.StartTime.Seconds+word.StartTime.Nanos/1000000000"
+                      (dblclick)="updateVideoTime($event)" (input)="onContentChange($event,$event.target.innerHTML)"
+                      *ngFor="let word of filetext.Alternatives[0].Words;let index=index" [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime
+                     && word.EndTime.Seconds+word.EndTime.Nanos/1000000000 > currentTime) || (i == outerIndexOfWord && index == innerIndexOfWord)}" >
+                      {{word.Word}}
                     </span>
                   </div>
                 </div>
@@ -96,10 +123,7 @@
             #videoPlayer>
 
 
-            <source
-              type="video/webm"
-              [src]="videoUrl"
-            />
+            <source type="video/webm" [src]="videoUrl" />
           </video>
         </div>
         <div class="row align-items-center">
@@ -116,13 +140,13 @@
           <div class="col-md-3 action-item text-center cursor" (click)="toggleSpeed()">
             <p class="speed" *ngIf="!isSpeedFast">1x</p>
             <p class="speed" *ngIf="isSpeedFast">2x</p>
-            <p >Speed</p>
+            <p>Speed</p>
           </div>
           <div class="col-md-3 action-item volume text-center cursor" (click)="toggleAudio()">
             <i class="fa fa-microphone-slash fa-1x" *ngIf="!isMute"></i>
             <i class="fa fa-microphone fa-1x" *ngIf="isMute"></i>
             <p *ngIf="!isMute">Mute</p>
-            <p  *ngIf="isMute">UnMute</p>
+            <p *ngIf="isMute">UnMute</p>
           </div>
         </div>
       </div>
@@ -210,7 +234,7 @@
       </tab>
     </tabset> -->
   </div>
-  
+
 </div>
 
 <!-- <ng-template #filesTemplate>

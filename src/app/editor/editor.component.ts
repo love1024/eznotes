@@ -38,6 +38,20 @@ export class EditorComponent implements OnInit {
 
   spanEdited = '';
 
+  findReplaceShow = false;
+
+  findWord = '';
+
+  allOccurences = [];
+
+  outerIndexOfWord = -1;
+
+  innerIndexOfWord = -1;
+
+  currentIndexOfWord = 0;
+
+  replaceWord = '';
+
 
   constructor(private route: ActivatedRoute, private fileService: FileService) { }
 
@@ -61,7 +75,6 @@ export class EditorComponent implements OnInit {
 
   highlightText(event) {
     this.currentTime = event.currentTarget.currentTime;
-    console.log(this.currentTime);
   }
 
   toggleVideo(event: any) {
@@ -112,12 +125,12 @@ export class EditorComponent implements OnInit {
   }
 
   onContentChange(event, html) {
-    html = html.replace(/&nbsp;|nbsp;|&amp;|amp;/g,'');
+    html = html.replace(/&nbsp;|nbsp;|&amp;|amp;/g, '');
     let currentTarget = event.currentTarget
     //fetching the exact word
     let alternativesIndex = currentTarget.dataset.outerindex;
     let wordIndex = currentTarget.dataset.innerindex;
-    let filetexts =JSON.parse(JSON.stringify(this.filetexts));
+    let filetexts = JSON.parse(JSON.stringify(this.filetexts));
     // updating the current text
     filetexts[alternativesIndex].Alternatives[0].Words[wordIndex].Word = html;
     let data = { Text: JSON.stringify(filetexts) };
@@ -130,6 +143,73 @@ export class EditorComponent implements OnInit {
     let timeOfSpan = currentTarget.dataset.time;
     let nativeElement = this.videoplayer.nativeElement;
     nativeElement.currentTime = timeOfSpan;
+  }
+
+  toggleFindAndReplace() {
+    let state = this.findReplaceShow;
+    this.findReplaceShow = !state;
+  }
+
+  findAllOccurences() {
+    this.allOccurences = [];
+    this.currentIndexOfWord = 0;
+    this.filetexts.map((item, outerIndex) => {
+      item.Alternatives[0].Words.map((word, innerIndex) => {
+        if (word.Word == this.findWord) {
+          this.allOccurences.push(`${outerIndex}:${innerIndex}`)
+        }
+      })
+    });
+    this.highlightWordFound(this.allOccurences[this.currentIndexOfWord]);
+  }
+
+  findNextOccurence() {
+    if (this.currentIndexOfWord < this.allOccurences.length - 1) {
+      this.currentIndexOfWord += 1;
+      this.highlightWordFound(this.allOccurences[this.currentIndexOfWord]);
+    }
+
+  }
+
+  findPreviousOccurence() {
+    if (this.currentIndexOfWord > 0) {
+      this.currentIndexOfWord -= 1;
+      this.highlightWordFound(this.allOccurences[this.currentIndexOfWord]);
+    }
+
+  }
+
+  replaceCurrentWord() {
+    let alternativesIndex = this.outerIndexOfWord;
+    let wordIndex = this.innerIndexOfWord;
+    // updating the current text
+    this.filetexts[alternativesIndex].Alternatives[0].Words[wordIndex].Word = this.replaceWord;
+    let data = { Text: JSON.stringify(this.filetexts) };
+    this.fileService.changeFileText(data, this.file.fileId).subscribe(res => {
+    });
+    this.findAllOccurences();
+  }
+
+  replaceAllWords() {
+    this.allOccurences.map((item) => {
+      let indexes = item.split(':');
+      this.outerIndexOfWord = indexes[0];
+      this.innerIndexOfWord = indexes[1];
+      let alternativesIndex = this.outerIndexOfWord;
+      let wordIndex = this.innerIndexOfWord;
+      // updating the current text
+      this.filetexts[alternativesIndex].Alternatives[0].Words[wordIndex].Word = this.replaceWord;
+      let data = { Text: JSON.stringify(this.filetexts) };
+      this.fileService.changeFileText(data, this.file.fileId).subscribe(res => {
+      });
+    });
+    this.findAllOccurences();
+  }
+
+  highlightWordFound(index) {
+    let indexes = index.split(':');
+    this.outerIndexOfWord = indexes[0];
+    this.innerIndexOfWord = indexes[1];
   }
 
 
