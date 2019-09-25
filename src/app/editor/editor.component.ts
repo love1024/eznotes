@@ -201,9 +201,9 @@ export class EditorComponent implements OnInit {
       let wordIndex = this.innerIndexOfWord;
       // updating the current text
       this.filetexts[alternativesIndex].Alternatives[0].Words[wordIndex].Word = this.replaceWord;
-      let data = { Text: JSON.stringify(this.filetexts) };
+    });
+    let data = { Text: JSON.stringify(this.filetexts) };
       this.fileService.changeFileText(data, this.file.fileId).subscribe(res => {
-      });
     });
     this.findAllOccurences();
   }
