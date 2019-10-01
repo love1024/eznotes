@@ -119,7 +119,7 @@
       <div class="col-md-4 right-container">
         <div class="row videoDiv">
 
-          <video class="setSize" autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)" #videoPlayer>
+          <video class="setSize" autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)" (ended)="toggleVideo()" #videoPlayer>
 
 
             <source type="video/webm" [src]="videoUrl" />
