@@ -227,4 +227,16 @@ export class EditorComponent implements OnInit {
       }
     }
   }
+  onSpeakerEdit(event,html){
+    html = html.replace(/&nbsp;|nbsp;|&amp;|amp;/g, '');
+    let currentTarget = event.currentTarget
+    //fetching the exact word
+    let alternativesIndex = currentTarget.dataset.outerindex;
+    let filetexts = JSON.parse(JSON.stringify(this.filetexts));
+    // updating the current text
+    filetexts[alternativesIndex].Alternatives[0].SpeakerName = html;
+    let data = { Text: JSON.stringify(filetexts) };
+    this.fileService.changeFileText(data, this.file.fileId).subscribe(res => {
+    });
+  }
 }

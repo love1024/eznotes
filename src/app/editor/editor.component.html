@@ -94,7 +94,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h4 >Speaker <span class="headerTime card-div"
+                <h4 ><span  [attr.data-outerindex]="i" contenteditable="true" (input)="onSpeakerEdit($event,$event.target.innerHTML)">{{filetext.Alternatives[0].SpeakerName ? filetext.Alternatives[0].SpeakerName: 'Speaker'}}</span><span class="headerTime card-div"
                     [attr.data-time]="filetext.Alternatives[0].Words[0].StartTime.Seconds"
                     (click)="updateVideoTime($event)"><i
                       class="fa fa-play fa-1x"></i>&nbsp;{{filetext.Alternatives[0].Words[0].StartTime.Seconds | minuteSeconds}}</span>
@@ -103,7 +103,7 @@
                   <div class="mb-0">
                     <span contenteditable="true" [attr.data-outerindex]="i" [attr.data-innerindex]="index"
                       [attr.data-time]="word.StartTime.Seconds+word.StartTime.Nanos/1000000000"
-                      (dblclick)="updateVideoTime($event)" (input)="onContentChange($event,$event.target.innerHTML)"
+                      (click)="updateVideoTime($event)" (input)="onContentChange($event,$event.target.innerHTML)"
                       *ngFor="let word of filetext.Alternatives[0].Words;let index=index" [ngClass]="{'highlight': (word.StartTime.Seconds+word.StartTime.Nanos/1000000000 <= currentTime
                      && word.EndTime.Seconds+word.EndTime.Nanos/1000000000 > currentTime) || (i == outerIndexOfWord && index == innerIndexOfWord)}" >
                       {{word.Word}}
@@ -119,7 +119,7 @@
       <div class="col-md-4 right-container">
         <div class="row videoDiv">
 
-          <video class="setSize" autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)" #videoPlayer>
+          <video class="setSize" autoplay *ngIf="videoUrl.length>0" (timeupdate)="highlightText($event)" (ended)="toggleVideo()" #videoPlayer>
 
 
             <source type="video/webm" [src]="videoUrl" />
