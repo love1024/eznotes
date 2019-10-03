@@ -178,10 +178,12 @@ export class SpeechToTextComponent implements OnInit {
   callApi(content): void {
     const formData = new FormData();
     formData.append('file', content, `${this.fileName}.webm`);
-
+    this.loadingBar.start();
     this.fileService.uploadFile(formData).subscribe(() => {
+      this.loadingBar.complete();
+      this.notificationService.notify('success', 'File Submitted Successfully');
     });
-    this.notificationService.notify('success', 'File Submit Successfully');
+   
   }
 
   saveRecording() {
