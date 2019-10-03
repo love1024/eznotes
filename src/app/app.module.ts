@@ -31,6 +31,8 @@ import { ResetComponent } from './reset/reset.component';
 import { NotifierModule } from 'angular-notifier';
 import { QaComponent } from './qa/qa.component';
 import { MinuteSecondsPipe } from './shared/minutesSeconds.pipe';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { MinuteSecondsPipe } from './shared/minutesSeconds.pipe';
     FormsModule,
     CommonModule,
     NgxSpinnerModule,
-    NotifierModule
+    NotifierModule,
+    LoadingBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

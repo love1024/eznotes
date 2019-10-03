@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { FileService } from '../service/file/file.service';
 import { NotifierService } from 'angular-notifier';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 declare var RecordRTCPromisesHandler;
 
@@ -38,7 +39,8 @@ export class SpeechToTextComponent implements OnInit {
 
   constructor(
     private notificationService: NotifierService,
-    private fileService: FileService) { }
+    private fileService: FileService,
+    private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
     if ($(window).width() < 900) {
@@ -76,8 +78,11 @@ export class SpeechToTextComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.notificationService.notify('success', 'File Submit Successfully');
+    // 
+    this.loadingBar.start();
     this.fileService.uploadFile(formData).subscribe(() => {
+      this.loadingBar.complete();  
+      this.notificationService.notify('success', 'File Submitted Successfully');
     });
   }
 
