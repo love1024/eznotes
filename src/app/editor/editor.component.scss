@@ -1,19 +1,19 @@
 @import "../../assets/variables.scss";
-.highlight{
-  background-color: #3D83B6;
+.highlight {
+  background-color: #3d83b6;
   color: #fff;
 }
-.headerTime{
+.headerTime {
   font-size: 12px !important;
   color: black;
   margin-left: 10px;
   cursor: pointer;
 }
-.cursor{
+.cursor {
   cursor: pointer;
 }
-.videoDiv{
-  video{
+.videoDiv {
+  video {
     width: 465px !important;
   }
 }
@@ -53,6 +53,7 @@
   .card {
     border: 0px;
   }
+  margin-top: 8px;
 }
 
 .card-body {
@@ -128,13 +129,13 @@
   width: 150px;
   text-align: center;
 }
-.navbar{
+.navbar {
   height: 40px;
 }
 
 .tab-nav {
   width: 100%;
-  padding:0px 0px 0px 5%;
+  padding: 0px 0px 0px 5%;
   background-color: $primary-button-color;
   a {
     color: white !important;
@@ -154,6 +155,15 @@
   overflow-x: hidden;
 }
 
+.highlight-yellow {
+  background-color: rgb(255, 255, 0);
+  color: black;
+}
+
+.cut {
+  text-decoration: line-through;
+}
+
 .sidenav div {
   display: block;
 }
@@ -162,8 +172,9 @@
   margin-bottom: 5px;
   align-items: center;
   justify-items: center;
+  cursor: pointer;
   p {
-    font-size: 9px;
+    font-size: 12px;
     color: white;
   }
   i {
@@ -182,8 +193,8 @@
   height: 40px;
 }
 
-.button-blue{
-  width:180px;
+.button-blue {
+  width: 180px;
   border-radius: 0px;
   margin-right: 10px;
 }
@@ -266,19 +277,19 @@
     width: 40%;
     max-width: 40%;
     flex: none;
-    padding:0px;
+    padding: 0px;
   }
-  .actions{
-    width:20%;
+  .actions {
+    width: 20%;
     max-width: 20%;
-    padding:0px;
+    padding: 0px;
   }
   .header-card {
     display: none;
   }
   .nav-item {
     width: 33%;
-    height:90%;
+    height: 90%;
   }
   .navbar-nav {
     flex-direction: row;
@@ -292,8 +303,11 @@
     content: "Q & A";
     text-align: center;
     width: 34%;
-    height:90%;
+    height: 90%;
   }
 }
 
-
+.last-saved {
+  font-size: 14px;
+  font-style: italic;
+}

@@ -4,7 +4,14 @@
     <section class="section" fxFlex="100">
       <div class="default-text upload-file" (click)="input.click()">
         <div>
-          <input type="file" #file hidden="true" #input (change)="onFileSelect(file.files)" />
+          <input
+            [disabled]="isSaving ? true : null"
+            type="file"
+            #file
+            hidden="true"
+            #input
+            (change)="onFileSelect(file.files)"
+          />
           <p><i class="fa fa-download fa-1x"></i>Select audio/video file</p>
         </div>
       </div>
@@ -26,29 +33,78 @@
       </div>
       <br />
       <div class="row col-md-12 justify-content-center button-row">
-        <button *ngIf="recordingDisabled" type="button" class="btn button-color" (click)="startRecordingVideo()">
+        <button
+          *ngIf="recordingDisabled"
+          type="button"
+          class="btn button-color"
+          (click)="startRecordingVideo()"
+          [disabled]="isSaving ? true : null"
+        >
           Record Video
         </button>
-        <button *ngIf="recordingDisabled" type="button" class="btn button-color" (click)="startRecordingAudio()">
+        <button
+          *ngIf="recordingDisabled"
+          type="button"
+          class="btn button-color"
+          (click)="startRecordingAudio()"
+          [disabled]="isSaving ? true : null"
+        >
           Record Audio
         </button>
-        <button type="button" class="btn red-button" (click)="record()" *ngIf="recordingInitiated"></button>
-        <button type="button" class="btn player-button" (click)="stopRecording()" *ngIf="recordingStarted">
+        <button
+          type="button"
+          class="btn red-button"
+          (click)="record()"
+          *ngIf="recordingInitiated"
+        ></button>
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="stopRecording()"
+          *ngIf="recordingStarted"
+        >
           <i class="fa fa-stop"></i>
         </button>
-        <button type="button" class="btn player-button" (click)="pauseVideoRecording()" *ngIf="recordingStarted">
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="pauseVideoRecording()"
+          *ngIf="recordingStarted"
+        >
           <i class="fa fa-pause"></i>
         </button>
-        <button type="button" class="btn player-button" (click)="resumeVideoRecording()" *ngIf="recordingPause">
+        <button
+          type="button"
+          class="btn player-button"
+          (click)="resumeVideoRecording()"
+          *ngIf="recordingPause"
+        >
           <i class="fa fa-play"></i>
         </button>
       </div>
-      <div class="row col-md-12 justify-content-center align-center button-row" *ngIf="recordingStopped">
-        <input class="fileName" type="text" placeholder="Enter file name" [(ngModel)]="fileName" />
-        <button [disabled]="!fileName" type="button" class="btn button-color" (click)="saveRecording()">
+      <div
+        class="row col-md-12 justify-content-center align-center button-row"
+        *ngIf="recordingStopped"
+      >
+        <input
+          class="fileName"
+          type="text"
+          placeholder="Enter file name"
+          [(ngModel)]="fileName"
+        />
+        <button
+          [disabled]="!fileName"
+          type="button"
+          class="btn button-color"
+          (click)="saveRecording()"
+        >
           Save
         </button>
-        <button type="button" class="btn button-color" (click)="DeleteRecording()">
+        <button
+          type="button"
+          class="btn button-color"
+          (click)="DeleteRecording()"
+        >
           Delete
         </button>
       </div>
@@ -64,7 +120,9 @@
     <div class="feedback-item">
       <div>
         <div>
-          <img src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png" />
+          <img
+            src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
+          />
         </div>
         <br />
         <h3>For Excellent Notes</h3>
