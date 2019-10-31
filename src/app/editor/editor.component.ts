@@ -228,6 +228,16 @@ export class EditorComponent implements OnInit {
     this.allOccurences = [];
     this.currentIndexOfWord = 0;
     this.filetexts.map((item, outerIndex) => {
+      if (item.Alternatives[0].SpeakerName) {
+        if (item.Alternatives[0].SpeakerName.trim() == this.findWord) {
+          this.allOccurences.push(`${outerIndex}:-1`);
+        }
+      }
+      else {
+        if ("Speaker" == this.findWord) {
+          this.allOccurences.push(`${outerIndex}:-1`);
+        }
+      }
       item.Alternatives[0].Words.map((word, innerIndex) => {
         if (word.Word.trim() == this.findWord) {
           this.allOccurences.push(`${outerIndex}:${innerIndex}`);
@@ -256,14 +266,22 @@ export class EditorComponent implements OnInit {
   replaceCurrentWord() {
     let alternativesIndex = this.outerIndexOfWord;
     let wordIndex = this.innerIndexOfWord;
-    // updating the current text
-    this.filetexts[alternativesIndex].Alternatives[0].Words[
-      wordIndex
-    ].Word = this.replaceWord;
+
+    if (this.innerIndexOfWord == -1) {
+      //updating speaker
+      this.filetexts[alternativesIndex].Alternatives[0].SpeakerName = this.replaceWord;
+    }
+    else {
+      // updating the current text
+      this.filetexts[alternativesIndex].Alternatives[0].Words[
+        wordIndex
+      ].Word = this.replaceWord;
+    }
+
     let data = { Text: JSON.stringify(this.filetexts) };
     this.fileService
       .changeFileText(data, this.file.fileId)
-      .subscribe(res => {});
+      .subscribe(res => { });
     this.findAllOccurences();
   }
 
@@ -274,15 +292,22 @@ export class EditorComponent implements OnInit {
       this.innerIndexOfWord = indexes[1];
       let alternativesIndex = this.outerIndexOfWord;
       let wordIndex = this.innerIndexOfWord;
-      // updating the current text
+      if(this.innerIndexOfWord==-1)
+      {
+        this.filetexts[alternativesIndex].Alternatives[0].SpeakerName= this.replaceWord;
+      }
+      else{
+        // updating the current text
       this.filetexts[alternativesIndex].Alternatives[0].Words[
         wordIndex
       ].Word = this.replaceWord;
+      }
+      
     });
     let data = { Text: JSON.stringify(this.filetexts) };
     this.fileService
       .changeFileText(data, this.file.fileId)
-      .subscribe(res => {});
+      .subscribe(res => { });
     this.findAllOccurences();
   }
 
