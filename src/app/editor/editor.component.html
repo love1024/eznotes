@@ -104,6 +104,8 @@
                 <h4>
                   <span
                     class="text-content-header"
+                    [ngClass]="{
+                      highlight:(i == outerIndexOfWord && innerIndexOfWord == -1)}"
                     [attr.data-outerindex]="i"
                     contenteditable="true"
                     >{{
