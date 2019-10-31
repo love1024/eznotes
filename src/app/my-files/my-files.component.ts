@@ -18,13 +18,15 @@ enum FileType {
   styleUrls: ["./my-files.component.scss"]
 })
 export class MyFilesComponent implements OnInit {
-  sortByNameAsc = true;
+  sortByNameAsc = false;
 
-  sortBySizeAsc = true;
+  sortBySizeAsc = false;
 
-  sortByCreatedAsc = true;
+  sortByCreatedAsc = false;
 
-  sortByEditedAsc = true;
+  sortByEditedAsc = false;
+
+  selected = 0;
 
   withSpeaker = false;
 
@@ -47,6 +49,7 @@ export class MyFilesComponent implements OnInit {
   ngOnInit() {
     this.fileService.getFiles().subscribe(files => {
       this.files = files;
+      this.sortByName();
     });
   }
 
@@ -85,16 +88,18 @@ export class MyFilesComponent implements OnInit {
 
   sortByName() {
     this.sortByNameAsc = !this.sortByNameAsc;
+    this.selected = 0;
     this.files.sort((a, b) => {
       if (this.sortByNameAsc) {
-        return a.originalName < b.originalName ? -1 : 1;
+        return a.originalName.localeCompare(b.originalName);
       } else {
-        return a.originalName < b.originalName ? 1 : -1;
+        return b.originalName.localeCompare(a.originalName);
       }
     });
   }
 
   sortBySize() {
+    this.selected = 1;
     this.sortBySizeAsc = !this.sortBySizeAsc;
     this.files.sort((a, b) => {
       if (this.sortBySizeAsc) {
@@ -106,6 +111,7 @@ export class MyFilesComponent implements OnInit {
   }
 
   sortByCreated() {
+    this.selected = 2;
     this.sortByCreatedAsc = !this.sortByCreatedAsc;
     this.files.sort((a, b) => {
       if (this.sortByCreatedAsc) {
@@ -121,6 +127,7 @@ export class MyFilesComponent implements OnInit {
   }
 
   sortByEdited() {
+    this.selected = 3;
     this.sortByEditedAsc = !this.sortByEditedAsc;
     this.files.sort((a, b) => {
       if (this.sortByEditedAsc) {

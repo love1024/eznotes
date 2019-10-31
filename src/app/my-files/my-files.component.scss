@@ -61,6 +61,11 @@
   }
 }
 
+.center-90 {
+  width: 90%;
+  margin: 0 auto;
+}
+
 .card-body {
   color: grey;
   textarea {
@@ -70,9 +75,6 @@
     outline: none;
     text-decoration: none;
   }
-}
-p {
-  text-align: center;
 }
 
 .button-color {
