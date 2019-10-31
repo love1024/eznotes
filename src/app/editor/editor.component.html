@@ -12,27 +12,29 @@
         <i class="fa fa-search"></i>
         <p class="text-center">Find & Replace</p>
       </div>
-      <!-- <div class="col-md-12 sidebar-item text-center">
-        <i class="fa fa-undo"></i>
-        <p class="text-center">Undo</p>
-      </div> -->
-      <div class="col-md-12 sidebar-item text-center">
+      <div
+        class="col-md-12 sidebar-item text-center"
+        (click)="onHighlightClick()"
+      >
         <i class="fa fa-moon-o"></i>
-        <p class="text-center" (click)="onHighlightClick()">Highlight</p>
+        <p class="text-center">Highlight</p>
       </div>
-      <div class="col-md-12 sidebar-item text-center">
+      <div class="col-md-12 sidebar-item text-center" (click)="onStrikeClick()">
         <i class="fa fa-strikethrough"></i>
-        <p class=" text-center" (click)="onStrikeClick()">Strike</p>
+        <p class=" text-center">Strike</p>
       </div>
-      <div class="col-md-12 sidebar-item text-center">
+      <div
+        class="col-md-12 sidebar-item text-center"
+        (click)="readAlong = !readAlong"
+      >
         <i class="fa fa-eye" [style.color]="readAlong ? 'white' : 'black'"></i>
-        <p
-          class="text-center"
-          [style.color]="readAlong ? 'white' : 'black'"
-          (click)="readAlong = !readAlong"
-        >
+        <p class="text-center" [style.color]="readAlong ? 'white' : 'black'">
           Read Along
         </p>
+      </div>
+      <div class="col-md-12 sidebar-item text-center" (click)="undoClick()">
+        <i class="fa fa-undo"></i>
+        <p class="text-center">Undo</p>
       </div>
       <!-- <div class="col-md-12 sidebar-item">
         <p class="text-center">Shortcuts</p>
@@ -135,6 +137,9 @@
                         word.StartTime.Seconds +
                         word.StartTime.Nanos / 1000000000
                       "
+                      [attr.data-endtime]="
+                        word.EndTime.Seconds + word.EndTime.Nanos / 1000000000
+                      "
                       (click)="updateVideoTime($event)"
                       *ngFor="
                         let word of filetext.Alternatives[0].Words;
@@ -154,7 +159,7 @@
                         cut: word.cut
                       }"
                     >
-                      {{ word.Word }}
+                      {{ word.Word.trim() }}
                     </span>
                   </div>
                 </div>
@@ -168,7 +173,6 @@
         <div class="row videoDiv">
           <video
             class="setSize"
-            autoplay
             *ngIf="videoUrl.length > 0"
             (timeupdate)="highlightText($event)"
             (ended)="toggleVideo()"

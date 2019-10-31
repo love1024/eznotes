@@ -25,13 +25,15 @@ export class EditorComponent implements OnInit {
 
   filetexts = [];
 
+  history = [];
+
   currentTime = 0;
 
   highlight = "highlight";
 
   completeTranscript = "";
 
-  isPaused = false;
+  isPaused = true;
 
   isMute = false;
 
@@ -65,6 +67,12 @@ export class EditorComponent implements OnInit {
 
   changedText = [];
 
+  anyHighlighted = false;
+
+  highlightedIndex = 0;
+
+  highlightedItems = [];
+
   constructor(
     private route: ActivatedRoute,
     private fileService: FileService,
@@ -87,6 +95,16 @@ export class EditorComponent implements OnInit {
         this.filetexts = JSON.parse(res.text);
         this.changedText = JSON.parse(res.text);
         this.getCompleteFileTranscript();
+
+        this.filetexts.forEach(filetext => {
+          filetext.Alternatives[0].Words.map((word, innerIndex) => {
+            if (word.highlight && word.highlightStart) {
+              this.anyHighlighted = true;
+            }
+          });
+        });
+        this.history.push(JSON.parse(JSON.stringify(this.filetexts)));
+        this.findHighlightItems();
       });
     });
 
@@ -103,8 +121,36 @@ export class EditorComponent implements OnInit {
     this.tab = tabName;
   }
 
+  findHighlightItems(): void {
+    this.highlightedItems = [];
+    this.filetexts.forEach(filetext => {
+      filetext.Alternatives[0].Words.map(word => {
+        if (word.highlight && word.highlightStart && word.highlightEnd) {
+          this.highlightedItems.push(word);
+        }
+      });
+    });
+  }
+
+  startHighlight() {
+    if (this.highlightedIndex < this.highlightedItems.length) {
+      const currentWord = this.highlightedItems[this.highlightedIndex];
+      const currentStart = currentWord.highlightStart;
+      const currentEnd = currentWord.highlightEnd;
+      let nativeElement = this.videoplayer.nativeElement;
+      nativeElement.currentTime = currentStart;
+      nativeElement.play();
+      setTimeout(() => {
+        nativeElement.pause();
+        this.highlightedIndex++;
+        this.startHighlight();
+      }, (currentEnd - currentStart) * 1000 + 200);
+    }
+  }
+
   highlightText(event) {
-    this.currentTime = event.currentTarget.currentTime;
+    const time = event.currentTarget.currentTime;
+    this.currentTime = time;
   }
 
   toggleVideo() {
@@ -112,6 +158,9 @@ export class EditorComponent implements OnInit {
     if (nativeElement.paused) {
       this.isPaused = false;
       nativeElement.play();
+      if (this.anyHighlighted) {
+        this.startHighlight();
+      }
     } else {
       this.isPaused = true;
       nativeElement.pause();
@@ -154,10 +203,13 @@ export class EditorComponent implements OnInit {
     });
   }
 
-  onContentChange() {
+  onContentChange(save: boolean = true) {
     let els = document.getElementsByClassName("text-content");
 
     let filetexts = JSON.parse(JSON.stringify(this.filetexts));
+    if (save) {
+      this.history.push(JSON.parse(JSON.stringify(filetexts)));
+    }
     for (let i = 0; i < els.length; i++) {
       let element = els[i] as HTMLSpanElement;
       let html = element.innerText.replace(/&nbsp;|nbsp;|&amp;|amp;/g, "");
@@ -166,30 +218,10 @@ export class EditorComponent implements OnInit {
       let wordIndex = element.dataset.innerindex;
 
       filetexts[alternativesIndex].Alternatives[0].Words[wordIndex].Word = html;
-      if (element.classList.contains("highlight-yellow")) {
-        filetexts[alternativesIndex].Alternatives[0].Words[
-          wordIndex
-        ].highlight = true;
-      } else {
-        filetexts[alternativesIndex].Alternatives[0].Words[
-          wordIndex
-        ].highlight = false;
-      }
-
-      if (element.classList.contains("cut")) {
-        filetexts[alternativesIndex].Alternatives[0].Words[
-          wordIndex
-        ].cut = true;
-      } else {
-        filetexts[alternativesIndex].Alternatives[0].Words[
-          wordIndex
-        ].cut = false;
-      }
     }
 
     this.onSpeakerEdit(filetexts);
 
-    // let filetexts = JSON.parse(JSON.stringify(this.filetexts));
     let data = { Text: JSON.stringify(filetexts) };
     this.lastModified = new Date();
     this.lastModifiedText = "Saving...";
@@ -318,29 +350,81 @@ export class EditorComponent implements OnInit {
   }
 
   onHighlightClick() {
-    let els = document.getElementsByClassName("highlight");
-    if (els && els.length > 0) {
-      const already = els[0].classList.contains("highlight-yellow");
+    this.history.push(JSON.parse(JSON.stringify(this.changedText)));
+    const els = document.getSelection().getRangeAt(0);
+
+    let first: any = els.startContainer.parentElement;
+    let last: any = els.endContainer.parentElement;
+    this.filetexts[first.dataset.outerindex].Alternatives[0].Words[
+      first.dataset.innerindex
+    ].highlightStart = first.dataset.time;
+    this.filetexts[first.dataset.outerindex].Alternatives[0].Words[
+      first.dataset.innerindex
+    ].highlightEnd = last.dataset.endtime;
+
+    while (first !== last.nextElementSibling) {
+      let alternativesIndex = first.dataset.outerindex;
+      let wordIndex = first.dataset.innerindex;
+
+      const already = this.filetexts[alternativesIndex].Alternatives[0].Words[
+        wordIndex
+      ].highlight;
+      const alreadycut = this.filetexts[alternativesIndex].Alternatives[0]
+        .Words[wordIndex].cut;
+
       if (already) {
-        els[0].classList.remove("highlight-yellow");
+        this.assignHighlight(alternativesIndex, wordIndex, false);
       } else {
-        els[0].classList.add("highlight-yellow");
+        this.assignHighlight(alternativesIndex, wordIndex, true);
+        if (alreadycut) {
+          this.assignStrike(alternativesIndex, wordIndex, false);
+        }
       }
+      first = first.nextElementSibling;
     }
-    this.onContentChange();
+
+    this.onContentChange(false);
   }
 
   onStrikeClick() {
-    let els = document.getElementsByClassName("highlight");
-    if (els && els.length > 0) {
-      const already = els[0].classList.contains("cut");
+    this.history.push(JSON.parse(JSON.stringify(this.changedText)));
+    const els = document.getSelection().getRangeAt(0);
+
+    let first: any = els.startContainer.parentElement;
+    let last: any = els.endContainer.parentElement;
+
+    while (first !== last.nextElementSibling) {
+      let alternativesIndex = first.dataset.outerindex;
+      let wordIndex = first.dataset.innerindex;
+
+      const already = this.filetexts[alternativesIndex].Alternatives[0].Words[
+        wordIndex
+      ].cut;
+      const alreadyHighlight = this.filetexts[alternativesIndex].Alternatives[0]
+        .Words[wordIndex].highlight;
       if (already) {
-        els[0].classList.remove("cut");
+        this.assignStrike(alternativesIndex, wordIndex, false);
       } else {
-        els[0].classList.add("cut");
+        this.assignStrike(alternativesIndex, wordIndex, true);
+        if (alreadyHighlight) {
+          this.assignHighlight(alternativesIndex, wordIndex, false);
+        }
       }
+      first = first.nextElementSibling;
     }
-    this.onContentChange();
+    this.onContentChange(false);
+  }
+
+  assignStrike(alternativesIndex, wordIndex, value) {
+    this.filetexts[alternativesIndex].Alternatives[0].Words[
+      wordIndex
+    ].cut = value;
+  }
+
+  assignHighlight(alternativesIndex, wordIndex, value) {
+    this.filetexts[alternativesIndex].Alternatives[0].Words[
+      wordIndex
+    ].highlight = value;
   }
 
   goToRoute(route) {
@@ -354,6 +438,13 @@ export class EditorComponent implements OnInit {
       case "QA": {
         this.router.navigateByUrl("qa-summary");
       }
+    }
+  }
+
+  undoClick() {
+    if (this.history.length > 0) {
+      this.filetexts = this.history.pop();
+      this.onContentChange(false);
     }
   }
 }
