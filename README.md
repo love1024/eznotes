@@ -1,4 +1,4 @@
-# Liivlabs
+# Eazy notes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.  
 Demo - http://35.238.41.11:3000/  (needs to be registered)
