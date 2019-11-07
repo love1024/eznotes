@@ -28,6 +28,10 @@
   font-size: 46px;
 }
 
+.min-height {
+  min-height: 400px;
+}
+
 .card-div {
   background-color: white;
   color: $primary-button-color;
@@ -39,6 +43,11 @@
   }
 }
 
+.pointer {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .action-icon {
   margin-right: 20px;
   color: $primary-button-color;
@@ -48,7 +57,13 @@
 .accordion {
   .card {
     border: 0px;
+    overflow: inherit;
   }
+}
+
+.center-90 {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .card-body {
@@ -60,9 +75,6 @@
     outline: none;
     text-decoration: none;
   }
-}
-p {
-  text-align: center;
 }
 
 .button-color {
@@ -95,27 +107,31 @@ th {
     p {
       font-size: 17px;
     }
-    .small-text{
+    .small-text {
       font-size: 13px;
     }
   }
-  .file{
-    width:70%;
+  .file {
+    width: 70%;
     max-width: 70%;
-    flex:none;
+    flex: none;
     text-align: left;
   }
-  .size{
-    width:30%;
+  .size {
+    width: 30%;
     max-width: 30%;
-    flex:none;
+    flex: none;
   }
-  .date{
-    width:45%;
+  .date {
+    width: 45%;
     max-width: 45%;
-    flex:none;
+    flex: none;
   }
   .header-card {
     display: none;
   }
+}
+
+.filename {
+  outline: none;
 }

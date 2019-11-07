@@ -10,7 +10,7 @@ import { IPasswordReset } from '../models/password-reset';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent implements OnInit {
-  isChanging: boolean = true;
+  isChanging: boolean = false;
 
   isChanged: boolean = false;
 
@@ -27,8 +27,9 @@ export class ResetComponent implements OnInit {
   ngOnInit() {
     const user = this.loginService.user;
     this.route.queryParams.subscribe((params) => {
-      this.email = params.email || user.emailAddress;
-      this.token = params.code || user.token;
+      this.email = params.email || (user ? user.emailAddress : '');
+      this.token = params.code || (user ? user.token : '');
+
       if(this.email && this.token) {
         this.isChanging = true;
       } else {

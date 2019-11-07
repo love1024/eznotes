@@ -1,39 +1,73 @@
 <nav class="navbar navbar-light navbar-expand-lg justify-content-center">
   <img src="assets/logo.png" (click)="goToPage('home')" />
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3" #menuButton
-    (click)="toggleCollapsed()">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsingNavbar3"
+    #menuButton
+    (click)="toggleCollapsed()"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }" class="w-100" id="collapsingNavbar3">
+  <div
+    [ngClass]="{ collapse: collapsed, 'navbar-collapse': true }"
+    class="w-100"
+    id="collapsingNavbar3"
+  >
     <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="home">Home</a>
       </li>
-      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+      <!-- <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="pricing">Pricing</a>
-      </li>
+      </li> -->
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="title nav-link" routerLink="blog">Blog</a>
       </li>
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
-        <a class="title nav-link menu-item" routerLink="tryFree" *ngIf="!isLoggedIn">Try It Free</a>
+        <a
+          class="title nav-link menu-item"
+          routerLink="tryFree"
+          *ngIf="!isLoggedIn"
+          >Try It Free</a
+        >
       </li>
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
-        <a class="title nav-link menu-item" routerLink="login" *ngIf="!isLoggedIn">Login</a>
+        <a
+          class="title nav-link menu-item"
+          routerLink="login"
+          *ngIf="!isLoggedIn"
+          >Login</a
+        >
       </li>
 
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="title nav-link menu-item" routerLink="contact">Contact</a>
       </li>
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
-        <a class="nav-link title" routerLink="services" *ngIf="isLoggedIn">Services</a>
+        <a class="nav-link title" routerLink="speech-to-text" *ngIf="isLoggedIn"
+          >Services</a
+        >
       </li>
       <li class="nav-item">
-        <a class="title nav-link menu-item" routerLink="myfiles" (click)="menuButton.click()" *ngIf="isLoggedIn">My
-          Files</a>
+        <a
+          class="title nav-link menu-item"
+          routerLink="myfiles"
+          (click)="menuButton.click()"
+          (click)="updateStatusForUser()"
+          *ngIf="isLoggedIn"
+          >My Files
+          <span class="badge badge-pill badge-dark notify" *ngIf="isNewFile"
+            >New</span
+          ></a
+        >
       </li>
 
-      <li class="nav-item" (click)="logout(); menuButton.click(); showFooter = true">
+      <li
+        class="nav-item"
+        (click)="logout(); menuButton.click(); showFooter = true"
+      >
         <a class="title nav-link menu-item" *ngIf="isLoggedIn">Logout</a>
       </li>
     </ul>
@@ -47,7 +81,10 @@
     <div class="col-6 footer-item-1">
       <h4 class="default-text text-center">Reach Us:</h4>
       <div class="text-center">
-        <i class="fa fa-2x fa-envelope cursor-pointer icon-color" (click)="goToPage('contact')"></i>
+        <i
+          class="fa fa-2x fa-envelope cursor-pointer icon-color"
+          (click)="goToPage('contact')"
+        ></i>
         <!-- <h5 class="default-text">Email</h5>
         <h6 class="default-text text-center">contact@Eznotes.com</h6> -->
       </div>
