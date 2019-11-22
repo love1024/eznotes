@@ -5,6 +5,7 @@ import { IFile } from "../models/fileitem";
 import { NotifierService } from "angular-notifier";
 import { of, Subject } from "rxjs";
 import * as jsPDF from "jspdf";
+import { LoginService } from "../service/login/login.service";
 
 enum FileType {
   Summary = 1,
@@ -22,7 +23,7 @@ export class MyFilesComponent implements OnInit {
 
   sortBySizeAsc = false;
 
-  sortByCreatedAsc = false;
+  sortByCreatedAsc = true;
 
   sortByEditedAsc = false;
 
@@ -43,18 +44,20 @@ export class MyFilesComponent implements OnInit {
   constructor(
     private router: Router,
     private fileService: FileService,
-    private notifier: NotifierService
+    private notifier: NotifierService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
     this.fileService.getFiles().subscribe(files => {
       this.files = files;
-      this.sortByName();
+      this.sortByCreated();
     });
   }
 
   editFile(file: IFile) {
     file.editedAt = new Date().toJSON();
+
     this.fileService.updateFile(file).subscribe(() => {
       const queryParams: NavigationExtras = {
         queryParams: {
@@ -184,31 +187,44 @@ export class MyFilesComponent implements OnInit {
     let temp = "";
     var doc = new jsPDF();
     let height = 20;
+    let pageHeight = doc.internal.pageSize.height;
+    let currentPage = pageHeight;
 
-    text.forEach(filetext => {
-      if (withSpeaker) {
-        doc.setFontType("bold");
-        let ttext = [
-          filetext.Alternatives[0].SpeakerName
-            ? filetext.Alternatives[0].SpeakerName
-            : "Speaker"
-        ];
+    text.forEach((filetext, idx) => {
+      if (idx < text.length - 1) {
+        if (withSpeaker) {
+          doc.setFontType("bold");
+          let ttext = [
+            filetext.Alternatives[0].SpeakerName
+              ? filetext.Alternatives[0].SpeakerName
+              : "Speaker"
+          ];
+          if (height + 7 > currentPage) {
+            doc.addPage();
+            height = 20;
+            currentPage += pageHeight;
+          }
+          doc.text(15, height, ttext);
+          height += 7;
+        }
 
-        doc.text(15, height, ttext);
-        height += 7;
+        filetext.Alternatives[0].Words.map((word, innerIndex) => {
+          temp = temp + word.Word + " ";
+        });
+        doc.setFontType("normal");
+        const lines = doc.splitTextToSize(temp, 180);
+        if (this.withSpeaker) {
+          lines.push("");
+        }
+        if (height + lines.length * 7 > currentPage) {
+          doc.addPage();
+          height = 20;
+          currentPage += pageHeight;
+        }
+        doc.text(15, height, lines);
+        height += lines.length * 7;
+        temp = "";
       }
-
-      filetext.Alternatives[0].Words.map((word, innerIndex) => {
-        temp = temp + word.Word + " ";
-      });
-      doc.setFontType("normal");
-      const lines = doc.splitTextToSize(temp, 180);
-      if (this.withSpeaker) {
-        lines.push("");
-      }
-      doc.text(15, height, lines);
-      height += lines.length * 7;
-      temp = "";
     });
     doc.save(name + ".pdf");
   }
@@ -223,19 +239,21 @@ export class MyFilesComponent implements OnInit {
     let html = "";
 
     let temp = "";
-    text.forEach(filetext => {
-      if (withSpeaker) {
-        temp += `<h2>${
-          filetext.Alternatives[0].SpeakerName
-            ? filetext.Alternatives[0].SpeakerName
-            : "Speaker"
-        }</h2>`;
+    text.forEach((filetext, idx) => {
+      if (idx < text.length - 1) {
+        if (withSpeaker) {
+          temp += `<h2>${
+            filetext.Alternatives[0].SpeakerName
+              ? filetext.Alternatives[0].SpeakerName
+              : "Speaker"
+          }</h2>`;
+        }
+        filetext.Alternatives[0].Words.map((word, innerIndex) => {
+          temp = temp + word.Word + " ";
+        });
+        html = html + "<p>" + temp + "</p>";
+        temp = "";
       }
-      filetext.Alternatives[0].Words.map((word, innerIndex) => {
-        temp = temp + word.Word + " ";
-      });
-      html = html + "<p>" + temp + "</p>";
-      temp = "";
     });
 
     let sourceHTML = header + html + footer;

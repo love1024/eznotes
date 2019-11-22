@@ -70,6 +70,7 @@
               class="mb-0 col-3 file filename"
               contenteditable="true"
               (input)="changeName(file, $event.target.innerText)"
+              [ngClass]="{ bold: file.isNew }"
             >
               {{ file.originalName }}
             </p>

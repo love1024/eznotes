@@ -25,7 +25,7 @@ export class SpeechToTextComponent implements OnInit {
   stream: any;
   recordingSaved = false;
 
-  recordingVideo = true;
+  recordingVideo = false;
 
   recordedStream: any;
 

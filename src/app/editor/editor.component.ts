@@ -73,6 +73,8 @@ export class EditorComponent implements OnInit {
 
   highlightedItems = [];
 
+  timeoutSub = undefined;
+
   constructor(
     private route: ActivatedRoute,
     private fileService: FileService,
@@ -96,13 +98,6 @@ export class EditorComponent implements OnInit {
         this.changedText = JSON.parse(res.text);
         this.getCompleteFileTranscript();
 
-        this.filetexts.forEach(filetext => {
-          filetext.Alternatives[0].Words.map((word, innerIndex) => {
-            if (word.highlight && word.highlightStart) {
-              this.anyHighlighted = true;
-            }
-          });
-        });
         this.history.push(JSON.parse(JSON.stringify(this.filetexts)));
         this.findHighlightItems();
       });
@@ -130,21 +125,32 @@ export class EditorComponent implements OnInit {
         }
       });
     });
+    if (this.highlightedItems.length > 0) {
+      this.anyHighlighted = true;
+    } else {
+      this.anyHighlighted = false;
+    }
   }
 
   startHighlight() {
+    let nativeElement = this.videoplayer.nativeElement;
     if (this.highlightedIndex < this.highlightedItems.length) {
       const currentWord = this.highlightedItems[this.highlightedIndex];
       const currentStart = currentWord.highlightStart;
       const currentEnd = currentWord.highlightEnd;
-      let nativeElement = this.videoplayer.nativeElement;
       nativeElement.currentTime = currentStart;
       nativeElement.play();
-      setTimeout(() => {
-        nativeElement.pause();
-        this.highlightedIndex++;
-        this.startHighlight();
-      }, (currentEnd - currentStart) * 1000 + 200);
+      this.isPaused = false;
+      if (!this.isPaused) {
+        this.timeoutSub = setTimeout(() => {
+          nativeElement.pause();
+          this.isPaused = true;
+          this.highlightedIndex++;
+          this.startHighlight();
+        }, (currentEnd - currentStart) * 1000 + 200);
+      }
+    } else {
+      this.highlightedIndex = 0;
     }
   }
 
@@ -163,6 +169,7 @@ export class EditorComponent implements OnInit {
       }
     } else {
       this.isPaused = true;
+      clearInterval(this.timeoutSub);
       nativeElement.pause();
     }
   }
@@ -239,16 +246,17 @@ export class EditorComponent implements OnInit {
       let element = els[i] as HTMLSpanElement;
       let html = element.innerText.replace(/&nbsp;|nbsp;|&amp;|amp;/g, "");
       let alternativesIndex = element.dataset.outerindex;
-
-      filetexts[alternativesIndex].Alternatives[0].SpeakerName = html;
+      filetexts[alternativesIndex].Alternatives[0].Words[0].SpeakerTag = html;
     }
   }
 
   updateVideoTime(event) {
     let currentTarget = event.currentTarget;
-    let timeOfSpan = currentTarget.dataset.time;
-    let nativeElement = this.videoplayer.nativeElement;
-    nativeElement.currentTime = timeOfSpan;
+    if (!this.anyHighlighted) {
+      let timeOfSpan = currentTarget.dataset.time;
+      let nativeElement = this.videoplayer.nativeElement;
+      nativeElement.currentTime = timeOfSpan;
+    }
   }
 
   toggleFindAndReplace() {
@@ -259,19 +267,20 @@ export class EditorComponent implements OnInit {
   findAllOccurences() {
     this.allOccurences = [];
     this.currentIndexOfWord = 0;
+    this.outerIndexOfWord = -1;
+    this.innerIndexOfWord = -1;
     this.filetexts.map((item, outerIndex) => {
-      if (item.Alternatives[0].SpeakerName) {
-        if (item.Alternatives[0].SpeakerName.trim() == this.findWord) {
-          this.allOccurences.push(`${outerIndex}:-1`);
-        }
-      }
-      else {
-        if ("Speaker" == this.findWord) {
+      if (item.Alternatives[0].Words[0].SpeakerTag) {
+        if (
+          (item.Alternatives[0].Words[0].SpeakerTag + "")
+            .trim()
+            .toLowerCase() == this.findWord.toLowerCase()
+        ) {
           this.allOccurences.push(`${outerIndex}:-1`);
         }
       }
       item.Alternatives[0].Words.map((word, innerIndex) => {
-        if (word.Word.trim() == this.findWord) {
+        if (word.Word.trim().toLowerCase() == this.findWord.toLowerCase()) {
           this.allOccurences.push(`${outerIndex}:${innerIndex}`);
         }
       });
@@ -301,9 +310,10 @@ export class EditorComponent implements OnInit {
 
     if (this.innerIndexOfWord == -1) {
       //updating speaker
-      this.filetexts[alternativesIndex].Alternatives[0].SpeakerName = this.replaceWord;
-    }
-    else {
+      this.filetexts[
+        alternativesIndex
+      ].Alternatives[0].Words[0].SpeakerTag = this.replaceWord;
+    } else {
       // updating the current text
       this.filetexts[alternativesIndex].Alternatives[0].Words[
         wordIndex
@@ -313,7 +323,7 @@ export class EditorComponent implements OnInit {
     let data = { Text: JSON.stringify(this.filetexts) };
     this.fileService
       .changeFileText(data, this.file.fileId)
-      .subscribe(res => { });
+      .subscribe(res => {});
     this.findAllOccurences();
   }
 
@@ -324,22 +334,21 @@ export class EditorComponent implements OnInit {
       this.innerIndexOfWord = indexes[1];
       let alternativesIndex = this.outerIndexOfWord;
       let wordIndex = this.innerIndexOfWord;
-      if(this.innerIndexOfWord==-1)
-      {
-        this.filetexts[alternativesIndex].Alternatives[0].SpeakerName= this.replaceWord;
-      }
-      else{
+      if (this.innerIndexOfWord == -1) {
+        this.filetexts[
+          alternativesIndex
+        ].Alternatives[0].Words[0].SpeakerTag = this.replaceWord;
+      } else {
         // updating the current text
-      this.filetexts[alternativesIndex].Alternatives[0].Words[
-        wordIndex
-      ].Word = this.replaceWord;
+        this.filetexts[alternativesIndex].Alternatives[0].Words[
+          wordIndex
+        ].Word = this.replaceWord;
       }
-      
     });
     let data = { Text: JSON.stringify(this.filetexts) };
     this.fileService
       .changeFileText(data, this.file.fileId)
-      .subscribe(res => { });
+      .subscribe(res => {});
     this.findAllOccurences();
   }
 
@@ -352,6 +361,7 @@ export class EditorComponent implements OnInit {
   onHighlightClick() {
     this.history.push(JSON.parse(JSON.stringify(this.changedText)));
     const els = document.getSelection().getRangeAt(0);
+    this.highlightedIndex = 0;
 
     let first: any = els.startContainer.parentElement;
     let last: any = els.endContainer.parentElement;
@@ -382,7 +392,7 @@ export class EditorComponent implements OnInit {
       }
       first = first.nextElementSibling;
     }
-
+    this.findHighlightItems();
     this.onContentChange(false);
   }
 
@@ -445,6 +455,7 @@ export class EditorComponent implements OnInit {
     if (this.history.length > 0) {
       this.filetexts = this.history.pop();
       this.onContentChange(false);
+      this.findHighlightItems();
     }
   }
 }

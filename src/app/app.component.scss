@@ -16,6 +16,10 @@ button {
   border-radius: 3px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .pd-2 {
   padding: 8px;
 }
@@ -23,11 +27,11 @@ button {
   position: fixed;
   width: 100%;
   z-index: 10;
-  height:70px;
-  div{
+  height: 70px;
+  div {
     background-color: white;
   }
-  img{
+  img {
     width: 160px;
     height: 100%;
   }
@@ -36,7 +40,7 @@ button {
   text-align: center;
 }
 
-.notify{
+.notify {
   float: right;
-  margin-bottom: -15px
+  margin-bottom: -15px;
 }

@@ -1,20 +1,21 @@
-export interface IFile
-{
-    fileId: number;
+export interface IFile {
+  fileId: number;
 
-    userEmail: string;
+  userEmail: string;
 
-    originalName: string;
+  originalName: string;
 
-    originalSize: number;
+  originalSize: number;
 
-    videoFileName: string;
+  videoFileName: string;
 
-    audioFileName: string;
+  audioFileName: string;
 
-    text: string;
+  text: string;
 
-    createdAt: Date | string;
+  createdAt: Date | string;
 
-    editedAt: Date | string;
+  editedAt: Date | string;
+
+  isNew: boolean;
 }

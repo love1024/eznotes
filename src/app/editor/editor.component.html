@@ -94,51 +94,52 @@
         </div>
         <span class="last-saved">{{ lastModifiedText }}</span>
 
-        <div
-          class="accordion"
-          id="accordionExample"
-          contenteditable="true"
-          (input)="onContentChange()"
-        >
+        <div class="accordion" id="accordionExample">
           <ng-container *ngFor="let filetext of filetexts; let i = index">
-            <div class="card">
+            <div class="card" *ngIf="i < filetexts.length - 1">
               <div class="card-header">
                 <h4>
                   <span
                     class="text-content-header"
                     [ngClass]="{
-                      highlight:(i == outerIndexOfWord && innerIndexOfWord == -1)}"
+                      highlight: i == outerIndexOfWord && innerIndexOfWord == -1
+                    }"
                     [attr.data-outerindex]="i"
                     contenteditable="true"
-                    >{{
-                      filetext.Alternatives[0].SpeakerName
-                        ? filetext.Alternatives[0].SpeakerName
-                        : "Speaker"
+                    (input)="onContentChange()"
+                  >
+                    {{
+                      ((filetext?.Alternatives)[0]?.Words)[0]?.SpeakerTag
                     }}</span
                   ><span
                     class="headerTime card-div"
                     [attr.data-time]="
-                      filetext.Alternatives[0].Words[0].StartTime.Seconds
+                      ((filetext?.Alternatives)[0]?.Words)[0]?.StartTime
+                        ?.Seconds
                     "
                     (click)="updateVideoTime($event)"
                     ><i class="fa fa-play fa-1x"></i>&nbsp;{{
-                      filetext.Alternatives[0].Words[0].StartTime.Seconds
-                        | minuteSeconds
+                      ((filetext?.Alternatives)[0]?.Words)[0]?.StartTime
+                        .Seconds | minuteSeconds
                     }}</span
                   >
                 </h4>
-                <div class="row justify-content-between align-items-center">
+                <div
+                  contenteditable="true"
+                  (input)="onContentChange()"
+                  class="row justify-content-between align-items-center"
+                >
                   <div class="mb-0">
                     <span
                       class="text-content"
                       [attr.data-outerindex]="i"
                       [attr.data-innerindex]="index"
                       [attr.data-time]="
-                        word.StartTime.Seconds +
-                        word.StartTime.Nanos / 1000000000
+                        word?.StartTime.Seconds +
+                        word?.StartTime.Nanos / 1000000000
                       "
                       [attr.data-endtime]="
-                        word.EndTime.Seconds + word.EndTime.Nanos / 1000000000
+                        word?.EndTime.Seconds + word?.EndTime.Nanos / 1000000000
                       "
                       (click)="updateVideoTime($event)"
                       *ngFor="
@@ -147,11 +148,11 @@
                       "
                       [ngClass]="{
                         highlight:
-                          (word.StartTime.Seconds +
-                            word.StartTime.Nanos / 1000000000 <=
+                          (word?.StartTime.Seconds +
+                            word?.StartTime.Nanos / 1000000000 <=
                             currentTime &&
-                            word.EndTime.Seconds +
-                              word.EndTime.Nanos / 1000000000 >
+                            word?.EndTime.Seconds +
+                              word?.EndTime.Nanos / 1000000000 >
                               currentTime &&
                             readAlong) ||
                           (i == outerIndexOfWord && index == innerIndexOfWord),
@@ -175,7 +176,7 @@
             class="setSize"
             *ngIf="videoUrl.length > 0"
             (timeupdate)="highlightText($event)"
-            (ended)="toggleVideo()"
+            (ended)="this.isPaused = true"
             #videoPlayer
           >
             <source type="video/webm" [src]="videoUrl" />

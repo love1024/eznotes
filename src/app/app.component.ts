@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from './service/login/login.service';
-import { SummaryService } from './service/summary/summary.service';
-import { FileService } from './service/file/file.service';
-
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { LoginService } from "./service/login/login.service";
+import { SummaryService } from "./service/summary/summary.service";
+import { FileService } from "./service/file/file.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  title = 'Eznotes';
+  title = "Eznotes";
   showFooter = true;
   collapsed = true;
   isLoggedIn = false;
@@ -30,12 +29,13 @@ export class AppComponent implements OnInit {
     this.loginService.getLogInOutEmitter().subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
-    this.polling = setInterval(()=>{this.checkNewFile()},5000);
-    
+    this.polling = setInterval(() => {
+      this.checkNewFile();
+    }, 5000);
   }
 
   setRouter(name) {
-    if (name === 'pricing' || name === 'blog' || name === 'contact') {
+    if (name === "pricing" || name === "blog" || name === "contact") {
       this.showFooter = false;
     } else {
       this.showFooter = true;
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   logout() {
     this.loginService.logout();
     this.loginService.emitLogInOut();
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl("home");
   }
 
   toggleCollapsed(): void {
@@ -57,16 +57,11 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl(route);
   }
 
-  checkNewFile(){
-    this.fileService.checkNewFile(this.loginService.getUser().emailAddress).subscribe(res => {
-      this.isNewFile = res;
-    });
-  }
-
-  updateStatusForUser(){
-    let fileAlert = {Email:this.loginService.getUser().emailAddress,AnyNew:false}
-    this.fileService.updateStatusForUser(fileAlert).subscribe(res=>{
-      this.isNewFile = false;
-    });
+  checkNewFile() {
+    this.fileService
+      .checkNewFile(this.loginService.getUser().emailAddress)
+      .subscribe(res => {
+        this.isNewFile = res;
+      });
   }
 }
