@@ -6,6 +6,7 @@ import { NotifierService } from "angular-notifier";
 import { of, Subject } from "rxjs";
 import * as jsPDF from "jspdf";
 import { LoginService } from "../service/login/login.service";
+import * as html2pdf from "html2pdf.js";
 
 enum FileType {
   Summary = 1,
@@ -161,21 +162,59 @@ export class MyFilesComponent implements OnInit {
     }
   }
 
+  onPopupOpen(isOpen: boolean): void {
+    // if (!isOpen) {
+    //   this.onSecondStep = false;
+    // }
+  }
+
   giveDownloadFile(file: IFile) {
     this.fileService.getFile(file.videoFileName).subscribe(res => {
-      const text = JSON.parse(res.text);
-      this.getCompleteFileTranscripts(
-        text,
-        file.originalName,
-        this.withSpeaker
-      );
+      if (file.audioFileName) {
+        const text = JSON.parse(res.text);
+        this.getCompleteFileTranscripts(
+          text,
+          file.originalName,
+          this.withSpeaker
+        );
+      } else {
+        this.downloadTextPdf(file.text, file.originalName, file);
+      }
     });
   }
 
   giveDownloadDoc(file: IFile) {
     this.fileService.getFile(file.videoFileName).subscribe(res => {
-      const text = JSON.parse(res.text);
-      this.getCompleteTranscriptDoc(text, file.originalName, this.withSpeaker);
+      if (file.audioFileName) {
+        const text = JSON.parse(res.text);
+        this.getCompleteTranscriptDoc(
+          text,
+          file.originalName,
+          this.withSpeaker
+        );
+      } else {
+        this.getCompleteTranscriptText(res.text, file.originalName, file);
+      }
+    });
+  }
+
+  downloadTextPdf(text: string, name: string, file: IFile) {
+    this.fileService.updateFile(file).subscribe(() => {
+      var doc = new jsPDF();
+      let height = 20;
+      let pageHeight = doc.internal.pageSize.height;
+      let currentPage = pageHeight;
+      const lines = doc.splitTextToSize(text, 180);
+      lines.forEach(line => {
+        doc.text(15, height, line);
+        if (height + 7 > currentPage) {
+          doc.addPage();
+          height = 20;
+          currentPage += pageHeight;
+        }
+        height += 7;
+      });
+      doc.save(name + ".pdf");
     });
   }
 
@@ -227,6 +266,29 @@ export class MyFilesComponent implements OnInit {
       }
     });
     doc.save(name + ".pdf");
+  }
+
+  getCompleteTranscriptText(text: any, name: string, file: IFile) {
+    this.fileService.updateFile(file).subscribe(() => {
+      var header =
+        "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+        "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+        "xmlns='http://www.w3.org/TR/REC-html40'>" +
+        "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+      var footer = "</body></html>";
+      let html = "<p>" + text + "</p>";
+      let sourceHTML = header + html + footer;
+
+      let source =
+        "data:application/vnd.ms-word;charset=utf-8," +
+        encodeURIComponent(sourceHTML);
+      let fileDownload = document.createElement("a");
+      document.body.appendChild(fileDownload);
+      fileDownload.href = source;
+      fileDownload.download = name + ".doc";
+      fileDownload.click();
+      document.body.removeChild(fileDownload);
+    });
   }
 
   getCompleteTranscriptDoc(text: any, name: string, withSpeaker: boolean) {

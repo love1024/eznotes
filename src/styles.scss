@@ -5,6 +5,7 @@
 * {
   font-family: "Oswald", sans-serif;
   letter-spacing: 1px;
+  word-break: break-word;
 }
 
 // .header{
@@ -125,7 +126,7 @@
 
 .navbar {
   background-color: white;
-  img{
+  img {
     cursor: pointer;
   }
 }
@@ -170,14 +171,14 @@
   margin-right: 0px !important;
 }
 
-.cursor-pointer{
-    cursor: pointer;
+.cursor-pointer {
+  cursor: pointer;
 }
-.nav-tabs .nav-link{
+.nav-tabs .nav-link {
   color: $primary-button-color;
 }
-.card-header{
-  padding:5px !important;
+.card-header {
+  padding: 5px !important;
 }
 
 .cursor-p {

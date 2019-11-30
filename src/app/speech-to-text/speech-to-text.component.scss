@@ -2,7 +2,7 @@
 .blog-image {
   margin-top: 80px;
   margin-bottom: 20px;
-  height: 300px;
+  height: 400px;
   background-image: url(../../assets/landing-splash.png);
   background-position: center;
   background-size: cover;
@@ -72,6 +72,26 @@ video {
   align-items: center;
 }
 
+#resultText {
+  background-color: transparent;
+  font-size: 20px;
+  user-select: none;
+  border: 1px solid darkgray;
+  width: 560px;
+  height: 100px;
+  padding: 8px;
+  overflow-y: scroll;
+  position: absolute;
+  z-index: 10000;
+  transform: translate(100px, -152px);
+  overflow-x: hidden;
+  right: 50px;
+  top: 0;
+
+  span {
+    word-break: break-word;
+  }
+}
 
 .fileName {
   height: 40px;
@@ -111,7 +131,7 @@ video {
   }
 }
 
-.feedback-container{
+.feedback-container {
   margin-top: 50px;
 }
 
@@ -138,46 +158,46 @@ video {
     margin: 0px;
   }
 }
-.upload-file{
-  width:60%;
+.upload-file {
+  width: 60%;
+  margin-bottom: 16px;
   cursor: pointer;
   height: 70px;
-  background-color:$primary-button-color;
+  background-color: $primary-button-color;
   border: none;
   padding-top: 14px;
   border-radius: 40px;
-  p{
+  p {
     font-size: 25px;
-    i{
+    i {
       color: yellow;
       margin-right: 15px;
       font-size: 25px;
     }
   }
 }
-.player-button{
-  height:50px;
-  width:50px;
+.player-button {
+  height: 50px;
+  width: 50px;
   background-color: $primary-button-color;
   border-color: $primary-button-color;
   border-radius: 30px;
   text-align: center;
-  i{
+  i {
     color: white;
   }
-
 }
-.red-button{
-  height:50px;
-  width:50px;
-  border:3px solid $primary-button-color;
+.red-button {
+  height: 50px;
+  width: 50px;
+  border: 3px solid $primary-button-color;
   border-radius: 30px;
   border-collapse: red;
   background-color: red;
 }
 
 @media only screen and (max-width: 800px) {
-  .speech-to-text-div{
+  .speech-to-text-div {
     height: auto;
   }
   .large-text {
@@ -192,16 +212,16 @@ video {
       font-size: 15px;
     }
   }
-  .upload-file{
-    width:80%;
+  .upload-file {
+    width: 80%;
     height: 60px;
-    background-color: $primary-button-color;;
+    background-color: $primary-button-color;
     border: none;
     padding-top: 16px;
     border-radius: 40px;
-    p{
+    p {
       font-size: 17px;
-      i{
+      i {
         color: yellow;
         margin-right: 10px;
         font-size: 17px;
@@ -209,4 +229,3 @@ video {
     }
   }
 }
-

@@ -33,6 +33,11 @@ import { QaComponent } from "./qa/qa.component";
 import { MinuteSecondsPipe } from "./shared/minutesSeconds.pipe";
 import { LoadingBarModule } from "@ngx-loading-bar/core";
 import { ConfirmationPopoverModule } from "angular-confirmation-popover";
+import { AngularDraggableModule } from "angular2-draggable";
+
+import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+
+const config: SocketIoConfig = { url: "http://localhost:1337", options: {} };
 
 @NgModule({
   declarations: [
@@ -71,6 +76,8 @@ import { ConfirmationPopoverModule } from "angular-confirmation-popover";
     NgxSpinnerModule,
     NotifierModule,
     LoadingBarModule,
+    AngularDraggableModule,
+    SocketIoModule.forRoot(config),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: "danger" // set defaults here
     })

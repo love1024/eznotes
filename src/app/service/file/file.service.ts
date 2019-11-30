@@ -29,6 +29,14 @@ export class FileService {
     );
   }
 
+  uploadFileWithText(file: IFile): Observable<void> {
+    const user = this.loginService.getUser() || {};
+    return this.http.post<void>(
+      `${this.api}api/file/uploadtext?email=${user.emailAddress}`,
+      file
+    );
+  }
+
   getFiles(): Observable<any> {
     const user = this.loginService.getUser() || {};
     return this.http.get<any>(

@@ -82,7 +82,11 @@
               {{ file.editedAt | date: "dd MMM yyyy" }}
             </p>
             <p class="mb-0 col-2">
-              <i class="fa fa-pencil action-icon" (click)="editFile(file)"></i>
+              <i
+                *ngIf="file.audioFileName"
+                class="fa fa-pencil action-icon"
+                (click)="editFile(file)"
+              ></i>
               <i
                 mwlConfirmationPopover
                 class="fa fa-download action-icon"
@@ -96,6 +100,7 @@
                 [confirmText]="onSecondStep ? 'Pdf' : 'Yes'"
                 [isOpen]="onSecondStep && i == selectedIndex"
                 (confirm)="onDownload(i, true, file)"
+                (isOpenChange)="onPopupOpen($event)"
                 (cancel)="onDownload(i, false, file)"
               ></i>
               <i
