@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 import { IFile } from "../models/fileitem";
 import { FileService } from "../service/file/file.service";
 import { SummaryService } from "../service/summary/summary.service";
@@ -37,7 +37,7 @@ export class EditorComponent implements OnInit {
 
   isMute = false;
 
-  isSpeedFast = false;
+  playbackRate = 1;
 
   spanEdited = "";
 
@@ -69,11 +69,19 @@ export class EditorComponent implements OnInit {
 
   anyHighlighted = false;
 
+  highlightShow = false;
+
+  strikeOutShow = false;
+
+  undoShow = false;
+
   highlightedIndex = 0;
 
   highlightedItems = [];
 
   timeoutSub = undefined;
+
+  fileName: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -94,10 +102,10 @@ export class EditorComponent implements OnInit {
       });
       this.fileService.getFile(fileName).subscribe(res => {
         this.file = res;
+        this.fileName = res.originalName;
         this.filetexts = JSON.parse(res.text);
         this.changedText = JSON.parse(res.text);
         this.getCompleteFileTranscript();
-
         this.history.push(JSON.parse(JSON.stringify(this.filetexts)));
         this.findHighlightItems();
       });
@@ -176,13 +184,11 @@ export class EditorComponent implements OnInit {
 
   toggleSpeed() {
     let nativeElement = this.videoplayer.nativeElement;
-    if (nativeElement.playbackRate == 1.0) {
-      this.isSpeedFast = true;
-      nativeElement.playbackRate = 2.0;
-    } else {
-      this.isSpeedFast = false;
-      nativeElement.playbackRate = 1.0;
+    this.playbackRate = (this.playbackRate + 0.5) % 2.5;
+    if (this.playbackRate == 0) {
+      this.playbackRate = 0.5;
     }
+    nativeElement.playbackRate = this.playbackRate;
   }
 
   toggleAudio() {
@@ -216,6 +222,7 @@ export class EditorComponent implements OnInit {
     let filetexts = JSON.parse(JSON.stringify(this.filetexts));
     if (save) {
       this.history.push(JSON.parse(JSON.stringify(filetexts)));
+      this.undoShow = true;
     }
     for (let i = 0; i < els.length; i++) {
       let element = els[i] as HTMLSpanElement;
@@ -251,11 +258,22 @@ export class EditorComponent implements OnInit {
   }
 
   updateVideoTime(event) {
-    let currentTarget = event.currentTarget;
+    let currentTarget = event.currentTarget as HTMLElement;
     if (!this.anyHighlighted) {
       let timeOfSpan = currentTarget.dataset.time;
       let nativeElement = this.videoplayer.nativeElement;
       nativeElement.currentTime = timeOfSpan;
+    } else {
+      if (currentTarget.classList.contains("highlight-yellow")) {
+        this.highlightShow = true;
+      } else {
+        this.highlightShow = false;
+      }
+      if (currentTarget.classList.contains("cut")) {
+        this.strikeOutShow = true;
+      } else {
+        this.strikeOutShow = false;
+      }
     }
   }
 
@@ -270,7 +288,10 @@ export class EditorComponent implements OnInit {
     this.outerIndexOfWord = -1;
     this.innerIndexOfWord = -1;
     this.filetexts.map((item, outerIndex) => {
-      if (item.Alternatives[0].Words[0].SpeakerTag) {
+      if (
+        item.Alternatives[0].Words[0].SpeakerTag != undefined &&
+        item.Alternatives[0].Words[0].SpeakerTag != null
+      ) {
         if (
           (item.Alternatives[0].Words[0].SpeakerTag + "")
             .trim()
@@ -360,6 +381,7 @@ export class EditorComponent implements OnInit {
 
   onHighlightClick() {
     this.history.push(JSON.parse(JSON.stringify(this.changedText)));
+    this.undoShow = true;
     const els = document.getSelection().getRangeAt(0);
     this.highlightedIndex = 0;
 
@@ -384,8 +406,10 @@ export class EditorComponent implements OnInit {
 
       if (already) {
         this.assignHighlight(alternativesIndex, wordIndex, false);
+        this.highlightShow = false;
       } else {
         this.assignHighlight(alternativesIndex, wordIndex, true);
+        this.highlightShow = true;
         if (alreadycut) {
           this.assignStrike(alternativesIndex, wordIndex, false);
         }
@@ -398,6 +422,7 @@ export class EditorComponent implements OnInit {
 
   onStrikeClick() {
     this.history.push(JSON.parse(JSON.stringify(this.changedText)));
+    this.undoShow = true;
     const els = document.getSelection().getRangeAt(0);
 
     let first: any = els.startContainer.parentElement;
@@ -414,8 +439,10 @@ export class EditorComponent implements OnInit {
         .Words[wordIndex].highlight;
       if (already) {
         this.assignStrike(alternativesIndex, wordIndex, false);
+        this.strikeOutShow = false;
       } else {
         this.assignStrike(alternativesIndex, wordIndex, true);
+        this.strikeOutShow = false;
         if (alreadyHighlight) {
           this.assignHighlight(alternativesIndex, wordIndex, false);
         }
@@ -440,20 +467,29 @@ export class EditorComponent implements OnInit {
   goToRoute(route) {
     this.getCompleteFileTranscript();
     this.summaryService.textEmitter.next(this.completeTranscript);
+    const queryParams: NavigationExtras = {
+      queryParams: {
+        id: this.file.videoFileName
+      }
+    };
     switch (route) {
       case "Summary": {
-        this.router.navigateByUrl("summary");
+        this.router.navigate(["summary"], queryParams);
         break;
       }
       case "QA": {
-        this.router.navigateByUrl("qa-summary");
+        this.router.navigate(["qa-summary"], queryParams);
       }
     }
   }
 
   undoClick() {
+    if (this.history.length == 2) {
+      this.undoShow = false;
+    }
     if (this.history.length > 0) {
       this.filetexts = this.history.pop();
+      this.highlightShow = false;
       this.onContentChange(false);
       this.findHighlightItems();
     }

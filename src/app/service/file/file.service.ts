@@ -48,6 +48,14 @@ export class FileService {
     return this.http.get<any>(`${this.api}api/file/fileurl?filename=${name}`);
   }
 
+  downloadCaptionFile(file: FormData, filename: string) {
+    this.http
+      .post<any>(`${this.api}api/file/caption?filename=${filename}`, file)
+      .subscribe(res => {
+        window.open(res.url, "__blank");
+      });
+  }
+
   deleteFile(id: number): Observable<void> {
     return this.http.get<void>(`${this.api}api/file/delete?id=${id}`);
   }

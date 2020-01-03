@@ -30,7 +30,13 @@
         <div class="row justify-content-center">
           <h4>Generated Summary</h4>
         </div>
-        <textarea rows="10" columns="50" [(ngModel)]="generatedSummary" placeholder="Generated summary will be shown here."> </textarea>
+        <textarea
+          rows="10"
+          columns="50"
+          [(ngModel)]="generatedSummary"
+          placeholder="Generated summary will be shown here."
+        >
+        </textarea>
       </div>
       <br />
     </div>
@@ -42,15 +48,15 @@
       <button
         type="button"
         class="file-button col-md-4"
-        (click)="navigateMyFiles()"
+        (click)="saveSummary()"
       >
-        My files
+        Save
       </button>
     </div>
     <br /><br />
     <div class="row col-md-12 justify-content-center">
       <button
-        type="button"
+        type="button btn button-color button-blue"
         class="generate-summary col-md-6"
         (click)="generateSummary()"
       >
@@ -60,39 +66,4 @@
   </div>
 </div>
 <br /><br />
-<!-- <div class="row col-md-12 justify-content-center">
-  <div class="col-md-5">
-    <div class="summary-item summary-item-document">
-      <div>
-        <div>
-          <i class="fa fa-5x fa-file-text-o "></i>
-        </div>
-        <br /><br />
-        <h3>Document Summarization</h3>
-        <p>
-          <span>Providing you the summarization</span>
-          <span>for your documents or the</span>
-          <span>text entered. Keep Reading.</span>
-          <span>We value your time.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-5">
-    <div class="summary-item summary-item-security">
-      <div>
-        <div>
-          <i class="fa fa-5x fa-lock "></i>
-        </div>
-        <br /><br />
-        <h3>Secured Interaction</h3>
-        <span>Your summarized data will be sent</span>
-        <span>you shortly on your mail and</span>
-        <span>you will get notified on your account.</span>
-        <span>Keep Summarizing.</span>
-      </div>
-    </div>
-  </div>
-</div>
-<br /><br /> -->
 <ngx-spinner></ngx-spinner>

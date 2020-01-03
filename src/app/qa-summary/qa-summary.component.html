@@ -16,16 +16,30 @@
         <div class="row justify-content-center">
           <h4>Copy & Paste Text Here</h4>
         </div>
-        <textarea rows="10" columns="50" id="qasummarytextarea" [(ngModel)]="text">
+        <textarea
+          rows="10"
+          columns="50"
+          id="qasummarytextarea"
+          [(ngModel)]="text"
+        >
         </textarea>
       </div>
       <div class="col-md-6">
         <h4 class="col-md-12">Ask Question</h4>
-        <textarea rows="2" class="col-md-10 offset-md-1" columns="100" [(ngModel)]="query">
+        <textarea
+          rows="2"
+          class="col-md-10 offset-md-1"
+          columns="100"
+          [(ngModel)]="query"
+        >
         </textarea>
         <br /><br />
         <div class="col-md-6 offset-md-3">
-          <button type="button" class="generate-summary" (click)="generateSummary()">
+          <button
+            type="button"
+            class="generate-summary"
+            (click)="generateSummary()"
+          >
             Generate Answer
           </button>
         </div>
@@ -36,7 +50,13 @@
       <h5>Or</h5>
     </div> -->
     <div class="row col-md-6 justify-content-around mt2">
-      <fa name="file-text" size="2x" class="cursor-p" (click)="navigateMyFiles()" title="View my files"></fa>
+      <fa
+        name="file-text"
+        size="2x"
+        class="cursor-p"
+        (click)="navigateMyFiles()"
+        title="View my files"
+      ></fa>
       <!-- <button type="button" class="file-button col-md-4" (click)="input.click()">
         Upload
       </button> -->
@@ -50,49 +70,71 @@
 
 <!-- QA Box -->
 <div class="qa-container" *ngIf="isPopupOpen">
-  <div class="flip-card" [ngClass]="{'rotate': !isQuestion}">
+  <div class="flip-card" [ngClass]="{ rotate: !isQuestion }">
     <div class="flip-card-inner">
       <div class="flip-card-front" (click)="toggleCard()">
-        <textarea autofocus id="focus-area" placeholder="Enter your text and rotate to get answer" rows="13" [(ngModel)]="popupQ"></textarea>
+        <textarea
+          autofocus
+          id="focus-area"
+          placeholder="Enter your text and rotate to get answer"
+          rows="13"
+          [(ngModel)]="popupQ"
+        ></textarea>
       </div>
       <div class="flip-card-back" (click)="toggleCard()">
-        <textarea placeholder="No answer is here!" [disabled]="true" rows="14" [(ngModel)]="popupA"></textarea>
+        <textarea
+          placeholder="No answer is here!"
+          [disabled]="true"
+          rows="14"
+          [(ngModel)]="popupA"
+        ></textarea>
       </div>
     </div>
-    <fa *ngIf="currentIdx > 0" name="backward" title="Previous card" size="2x" class="popup-icon arrow-left" (click)="backward($event)"></fa>
-    <fa name="plus" size="2x" class="popup-icon add-icon" title="Add new question" (click)="addQuestion()"></fa>
-    <fa name="repeat" size="2x" class="popup-icon flip-icon" title="Flip card" (click)="toggleCard()"></fa>
-    <fa name="close" size="2x" class="popup-icon close-icon" title="Close cue cards" (click)="closePopup()"></fa>
-    <fa name="save" size="2x" class="popup-icon save-icon" title="Save this card" (click)="saveCard()"></fa>
-    <fa *ngIf="currentIdx < current.length - 1" title="Next card" name="forward" size="2x" class="popup-icon arrow-right" (click)="forward($event)"></fa>
+    <fa
+      *ngIf="currentIdx > 0"
+      name="backward"
+      title="Previous card"
+      size="2x"
+      class="popup-icon arrow-left"
+      (click)="backward($event)"
+    ></fa>
+    <fa
+      name="plus"
+      size="2x"
+      class="popup-icon add-icon"
+      title="Add new question"
+      (click)="addQuestion()"
+    ></fa>
+    <fa
+      name="repeat"
+      size="2x"
+      class="popup-icon flip-icon"
+      title="Flip card"
+      (click)="toggleCard()"
+    ></fa>
+    <fa
+      name="close"
+      size="2x"
+      class="popup-icon close-icon"
+      title="Close cue cards"
+      (click)="closePopup()"
+    ></fa>
+    <fa
+      name="save"
+      size="2x"
+      class="popup-icon save-icon"
+      title="Save this card"
+      (click)="saveCard()"
+    ></fa>
+    <fa
+      *ngIf="currentIdx < current.length - 1"
+      title="Next card"
+      name="forward"
+      size="2x"
+      class="popup-icon arrow-right"
+      (click)="forward($event)"
+    ></fa>
     <ngx-spinner name="popup"></ngx-spinner>
-  </div>
-</div>
-<div class="col-md-6 z-behind">
-  <div class="accordion" id="accordionExample">
-
-    <div class="card header-card">
-      <div class="card-header card-div">
-        <div class="row justify-content-between align-items-center">
-          <p>Id</p>
-          <p>Text</p>
-          <p>Actions</p>
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <ng-container *ngFor="let card of savedCards; let i = index">
-      <div class="row justify-content-between align-items-center">
-        <p class="mb-0 col-1 file">
-          {{ card.id }}
-        </p>
-        <p class="mb-0 col-3 small-text size">{{ card.text }}</p>
-        <p class="mb-0 col-1" (click)="play(card.id)">
-          <i class="fa fa-play action-icon"></i>
-        </p>
-      </div>
-    </ng-container>
   </div>
 </div>
 <ngx-spinner></ngx-spinner>

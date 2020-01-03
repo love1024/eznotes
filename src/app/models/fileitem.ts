@@ -18,4 +18,16 @@ export interface IFile {
   editedAt?: Date | string;
 
   isNew?: boolean;
+
+  hasSummary?: boolean;
+
+  hasQa?: boolean;
+
+  summaryInput?: string;
+
+  summary?: string;
+
+  qaInput?: string;
+
+  qa?: string;
 }

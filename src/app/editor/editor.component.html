@@ -9,32 +9,58 @@
         class="col-md-12 sidebar-item text-center cursor"
         (click)="toggleFindAndReplace()"
       >
-        <i class="fa fa-search"></i>
-        <p class="text-center">Find & Replace</p>
+        <i
+          class="fa fa-search"
+          [style.color]="findReplaceShow ? 'black' : 'white'"
+        ></i>
+        <p
+          class="text-center"
+          [style.color]="findReplaceShow ? 'black' : 'white'"
+        >
+          Find & Replace
+        </p>
       </div>
       <div
         class="col-md-12 sidebar-item text-center"
         (click)="onHighlightClick()"
       >
-        <i class="fa fa-moon-o"></i>
-        <p class="text-center">Highlight</p>
+        <i
+          class="fa fa-moon-o"
+          [style.color]="highlightShow ? 'black' : 'white'"
+        ></i>
+        <p
+          class="text-center"
+          [style.color]="highlightShow ? 'black' : 'white'"
+        >
+          Highlight
+        </p>
       </div>
       <div class="col-md-12 sidebar-item text-center" (click)="onStrikeClick()">
-        <i class="fa fa-strikethrough"></i>
-        <p class=" text-center">Strike</p>
+        <i
+          class="fa fa-strikethrough"
+          [style.color]="strikeOutShow ? 'black' : 'white'"
+        ></i>
+        <p
+          class=" text-center"
+          [style.color]="strikeOutShow ? 'black' : 'white'"
+        >
+          Strike
+        </p>
       </div>
       <div
         class="col-md-12 sidebar-item text-center"
         (click)="readAlong = !readAlong"
       >
-        <i class="fa fa-eye" [style.color]="readAlong ? 'white' : 'black'"></i>
-        <p class="text-center" [style.color]="readAlong ? 'white' : 'black'">
+        <i class="fa fa-eye" [style.color]="readAlong ? 'black' : 'white'"></i>
+        <p class="text-center" [style.color]="readAlong ? 'black' : 'white'">
           Read Along
         </p>
       </div>
       <div class="col-md-12 sidebar-item text-center" (click)="undoClick()">
-        <i class="fa fa-undo"></i>
-        <p class="text-center">Undo</p>
+        <i class="fa fa-undo" [style.color]="undoShow ? 'black' : 'white'"></i>
+        <p class="text-center" [style.color]="undoShow ? 'black' : 'white'">
+          Undo
+        </p>
       </div>
       <!-- <div class="col-md-12 sidebar-item">
         <p class="text-center">Shortcuts</p>
@@ -94,6 +120,21 @@
         </div>
 
         <div class="accordion" id="accordionExample">
+          <span class="fileName">{{ fileName }} - </span>&nbsp;
+          <span>{{ lastModifiedText }}</span>
+          <button
+            class="btn button-color button-blue generate"
+            (click)="goToRoute('Summary')"
+          >
+            Generate Summary
+          </button>
+          <button
+            class="btn button-color button-blue"
+            (click)="goToRoute('QA')"
+          >
+            Generate Q & A
+          </button>
+          <hr />
           <ng-container *ngFor="let filetext of filetexts; let i = index">
             <div class="card" *ngIf="i < filetexts.length - 1">
               <div class="card-header">
@@ -202,8 +243,7 @@
             class="col-md-3 action-item text-center cursor"
             (click)="toggleSpeed()"
           >
-            <p class="speed" *ngIf="!isSpeedFast">1x</p>
-            <p class="speed" *ngIf="isSpeedFast">2x</p>
+            <p class="speed">{{ playbackRate }}x</p>
             <p>Speed</p>
           </div>
           <div
@@ -217,18 +257,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <br />
-    <div class="row col-md-8 justify-content-center">
-      <button
-        class="btn button-color button-blue"
-        (click)="goToRoute('Summary')"
-      >
-        Generate Summary
-      </button>
-      <button class="btn button-color button-blue" (click)="goToRoute('QA')">
-        Generate Q & A
-      </button>
     </div>
   </div>
 </div>

@@ -8,6 +8,16 @@
   border-bottom: 2px solid #3d83b6;
 }
 
+.fileName {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.generate {
+  margin-left: 32px;
+}
+
 .headerTime {
   font-size: 12px !important;
   color: black;
@@ -188,6 +198,17 @@
     color: white;
   }
   border-bottom: 0.5px solid white;
+
+  &:hover {
+    p,
+    i {
+      color: black !important;
+    }
+  }
+
+  &:active {
+    transform: translateY(5px);
+  }
 }
 
 .button-color {

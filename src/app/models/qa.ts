@@ -1,11 +1,8 @@
 export interface IQa {
-    id?: number;
-    question: string;
-    answer: string;
+  question: string;
+  answer: string;
 }
 
 export interface IQaCards {
-    id?: number;
-    text: string;
-    cards: IQa[]
+  cards: IQa[];
 }

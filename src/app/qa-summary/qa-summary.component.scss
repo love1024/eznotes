@@ -2,7 +2,7 @@
 .blog-image {
   margin-top: 80px;
   height: 380px;
-  background-image:url(http://159.89.118.118/wp-content/uploads/2019/03/design-background-01.jpg);
+  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/design-background-01.jpg);
   background-position: center;
   background-size: cover;
   p {
@@ -34,87 +34,103 @@
 }
 
 .cross-font {
-  font-family: 'Croissant One', cursive;
+  font-family: "Croissant One", cursive;
 }
 
-.add-summary-div{
-  margin-top:50px;
-  height:650px;
-  h4{
+.add-summary-div {
+  margin-top: 50px;
+  height: 650px;
+  h4 {
     text-align: center;
     font-style: italic;
     display: inline-block;
     font-weight: 600;
   }
 }
-.image-div{
-  height:100%;
-  width:auto;
+.image-div {
+  height: 100%;
+  width: auto;
   background-position: center;
-  img{
-    height:auto;
-    width:100%;
+  img {
+    height: auto;
+    width: 100%;
   }
 }
-.file-button{
-  border:0;
+.file-button {
+  border: 0;
   background-color: white;
-  color:blue;
+  color: blue;
   font-weight: 600;
-  height:40px;
-  width:100%;
+  height: 40px;
+  width: 100%;
 }
 
-.generate-summary{
-  border:1px solid black;
+.generate-summary {
+  border: 1px solid black;
   font-size: 20px;
   background-color: white;
-  color:black;
+  color: black;
   font-weight: 500;
-  font-style:bold;
-  height:60px;
-  width:100%;
+  font-style: bold;
+  height: 60px;
+  width: 100%;
 }
-textarea{
-  border:1px solid black;
+textarea {
+  border: 1px solid black;
   background-color: white;
-  width:100%;
+  width: 100%;
 }
 
-.grey-background{
-    .service-item{
-        background-image: linear-gradient(180deg,rgba(12,113,195,0.89) 0%,rgba(12,113,195,0.89) 100%) !important;
-    }
+.grey-background {
+  .service-item {
+    background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.89) 0%,
+      rgba(12, 113, 195, 0.89) 100%
+    ) !important;
+  }
 }
 
 .summary-item-document {
-  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
-  url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+  background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.69) 0%,
+      rgba(12, 113, 195, 0.69) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
 }
 
 .summary-item-security {
-  background-image:  linear-gradient(180deg,rgba(12,113,195,0.69) 0%,rgba(12,113,195,0.69) 100%),
-  url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg); 
+  background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.69) 0%,
+      rgba(12, 113, 195, 0.69) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/home-office-06.jpg);
 }
 
 .summary-item:hover {
   position: relative;
-  top:-5px;
+  top: -5px;
 }
 
-.summary-item{
-  height:350px;
-  width:100%;
+.summary-item {
+  height: 350px;
+  width: 100%;
   background-color: $primary-button-color;
   border-color: $primary-button-color;
-  background-image:  linear-gradient(180deg,rgba(12,113,195,0.89) 0%,rgba(12,113,195,0.89) 100%),
-  url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
+  background-image: linear-gradient(
+      180deg,
+      rgba(12, 113, 195, 0.89) 0%,
+      rgba(12, 113, 195, 0.89) 100%
+    ),
+    url(http://159.89.118.118/wp-content/uploads/2018/04/travel-portrait-04.jpg);
   background-position: center;
   background-size: cover;
-  color:white;
-  >div{
-      text-align: center;
-      padding:10%;
+  color: white;
+  > div {
+    text-align: center;
+    padding: 10%;
   }
   position: relative;
   top: 0;
@@ -122,102 +138,100 @@ textarea{
   cursor: pointer;
 }
 
-.card-div{
+.card-div {
   background-color: $primary-button-color;
-  button{color: white;}
+  button {
+    color: white;
+  }
 }
 
-.card{
-  border:1px solid $primary-button-color;
+.card {
+  border: 1px solid $primary-button-color;
 }
 
 @media only screen and (max-width: 1000px) {
-  .add-summary-div{
-    textarea{
-      margin-bottom:20px;
-    }
-    margin-top:20px;
-    height:auto;
-    .col-md-6{
-      width:94%;  
-      margin-left: 3%;
-      padding:0px;
+  .add-summary-div {
+    textarea {
       margin-bottom: 20px;
     }
-    .col-md-4{
+    margin-top: 20px;
+    height: auto;
+    .col-md-6 {
+      width: 94%;
+      margin-left: 3%;
+      padding: 0px;
+      margin-bottom: 20px;
+    }
+    .col-md-4 {
       width: 100%;
       height: auto;
     }
-    button{
+    button {
       margin-bottom: 10px;
     }
-    .image-div.col-md-4{
+    .image-div.col-md-4 {
       height: 150px;
-      width:80%;
+      width: 80%;
       margin-left: 10%;
     }
-
   }
-  .summary-item{
-    width:90%;
+  .summary-item {
+    width: 90%;
     margin-left: 5%;
     margin-bottom: 20px;
   }
 }
 
-
 // qa summary
 .qa-container {
   z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 500px;
-    margin: 0 auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    height: 100%;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 500px;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  justify-content: center;
 }
 
 .qa-input {
-    width: 600px;
-    textarea {
-        padding: 16px;
-    }
+  width: 600px;
+  textarea {
+    padding: 16px;
+  }
 
-    .close-icon {
-      color: white;
-      position: absolute;
-      right: -15px;
-      top: -15px;
-      transform: scale(1.2);
-      cursor: pointer;
-    }
+  .close-icon {
+    color: white;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
 }
 
 .qa-question {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .button-color {
-    background-color: $primary-button-color;
-    border-color: $primary-button-color;
-    color: white;
-    width: 80px;
-    margin-bottom: 10px;
-    height: 40px;
-  }
-  
-  .button-blue{
-    width:180px;
-    margin-right: 10px;
-  }
+  background-color: $primary-button-color;
+  border-color: $primary-button-color;
+  color: white;
+  width: 80px;
+  margin-bottom: 10px;
+  height: 40px;
+}
 
-
+.button-blue {
+  width: 180px;
+  margin-right: 10px;
+}
 
 .flip-card {
   position: relative;
@@ -241,7 +255,8 @@ textarea{
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -249,10 +264,10 @@ textarea{
   background-color: white;
   overflow: hidden;
   padding-top: 200px;
-  
+
   textarea {
-      padding: 16px;
-      border: 0;
+    padding: 16px;
+    border: 0;
   }
 
   textarea:focus {
@@ -270,8 +285,6 @@ textarea{
   font-size: 22px;
   text-align: center;
 }
-
-
 
 .flip-card-back {
   transform: rotateY(180deg);
@@ -299,14 +312,14 @@ textarea{
 }
 
 @media only screen and (max-width: 800px) {
-  .flip-card  {
-      width: 500px;
+  .flip-card {
+    width: 500px;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .flip-card {
-      width: 300px;
+    width: 300px;
   }
   .popup-icon {
     margin: 0 8px;
@@ -340,7 +353,6 @@ textarea{
 
 .flip-icon {
   position: absolute;
-  top:5px;
-  left:5px;
+  top: 5px;
+  left: 5px;
 }
-

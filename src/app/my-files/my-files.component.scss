@@ -32,6 +32,15 @@
   min-height: 400px;
 }
 
+.download-item {
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.download-item:hover {
+  color: $primary-button-color;
+}
+
 .card-div {
   background-color: white;
   color: $primary-button-color;
@@ -40,6 +49,9 @@
   }
   p {
     font-size: 18px;
+  }
+  .row {
+    margin-bottom: 8px;
   }
 }
 

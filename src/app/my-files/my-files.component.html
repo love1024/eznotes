@@ -23,7 +23,7 @@
               *ngIf="!sortByNameAsc && selected == 0"
             ></i>
           </p>
-          <p class="mb-0 col-2 pointer" (click)="sortBySize()">
+          <p class="mb-0 col-1 pointer" (click)="sortBySize()">
             Size
             <i
               class="fa fa-caret-down"
@@ -56,6 +56,17 @@
               *ngIf="!sortByEditedAsc && selected == 3"
             ></i>
           </p>
+          <p class=" mb-0 col-1 pointer" (click)="sortByEdited()">
+            File Type
+            <i
+              class="fa fa-caret-down"
+              *ngIf="sortByEditedAsc && selected == 3"
+            ></i>
+            <i
+              class="fa fa-caret-up"
+              *ngIf="!sortByEditedAsc && selected == 3"
+            ></i>
+          </p>
           <p class=" mb-0 col-2 pointer">Actions</p>
         </div>
       </div>
@@ -74,35 +85,63 @@
             >
               {{ file.originalName }}
             </p>
-            <p class="mb-0 col-2 small-text size">{{ file.originalSize }} kb</p>
+            <p
+              class="mb-0 col-1 small-text size"
+              *ngIf="!file.hasSummary && !file.hasQa"
+            >
+              {{ file.originalSize }} kb
+            </p>
+            <p class="mb-0 col-1 small-text size" *ngIf="file.hasSummary">-</p>
+            <p class="mb-0 col-1 small-text size" *ngIf="file.hasQa">-</p>
             <p class="mb-0 col-2 small-text date">
               {{ file.createdAt | date: "dd MMM yyyy" }}
             </p>
             <p class=" mb-0 col-3 small-text date">
               {{ file.editedAt | date: "dd MMM yyyy" }}
             </p>
+            <p class=" mb-0 col-1 small-text date">
+              {{
+                file.hasSummary
+                  ? "Summary"
+                  : file.hasQa
+                  ? "QA"
+                  : "Transcription"
+              }}
+            </p>
             <p class="mb-0 col-2">
+              <i class="fa fa-pencil action-icon" (click)="editFile(file)"></i>
               <i
-                *ngIf="file.audioFileName"
-                class="fa fa-pencil action-icon"
-                (click)="editFile(file)"
-              ></i>
-              <i
-                mwlConfirmationPopover
+                *ngIf="file.hasSummary || file.hasQa"
                 class="fa fa-download action-icon"
-                [popoverTitle]="'Download'"
-                [popoverMessage]="
-                  onSecondStep
-                    ? 'File type to download?'
-                    : 'Download file with Speaker?'
-                "
-                [cancelText]="onSecondStep ? 'Docs' : 'No'"
-                [confirmText]="onSecondStep ? 'Pdf' : 'Yes'"
-                [isOpen]="onSecondStep && i == selectedIndex"
-                (confirm)="onDownload(i, true, file)"
-                (isOpenChange)="onPopupOpen($event)"
-                (cancel)="onDownload(i, false, file)"
-              ></i>
+                (popperOnShown)="onDownloadShown(file)"
+                [popper]="summaryDownload"
+                [popperTrigger]="'click'"
+                [popperHideOnClickOutside]="true"
+                [popperHideOnScroll]="true"
+                [popperPlacement]="'left'"
+                [popperStyles]="{
+                  'background-color': '#fff',
+                  border: 0,
+                  padding: '16px 32px'
+                }"
+              >
+              </i>
+              <i
+                *ngIf="!file.hasSummary && !file.hasQa"
+                class="fa fa-download action-icon"
+                (popperOnShown)="onDownloadShown(file)"
+                [popper]="transcriptionDownload"
+                [popperTrigger]="'click'"
+                [popperHideOnClickOutside]="true"
+                [popperHideOnScroll]="true"
+                [popperPlacement]="'left'"
+                [popperStyles]="{
+                  'background-color': '#fff',
+                  border: 0,
+                  padding: '16px 32px'
+                }"
+              >
+              </i>
               <i
                 mwlConfirmationPopover
                 class="fa fa-trash action-icon"
@@ -113,14 +152,6 @@
             </p>
           </div>
         </div>
-        <!-- <div
-          [ngClass]="{ collapse: file.collapse, show: !file.collapse }"
-          data-parent="#accordionExample"
-        >
-          <div class="card-body">
-            {{ file.text }}
-          </div>
-        </div> -->
         <br />
       </div>
     </ng-container>
@@ -128,3 +159,22 @@
 </div>
 
 <notifier-container></notifier-container>
+<ngx-spinner></ngx-spinner>
+
+<popper-content #summaryDownload>
+  <p class="bold download-item" (click)="onSummaryDownload()">Download</p>
+</popper-content>
+
+<popper-content #transcriptionDownload>
+  <p class="download-item" (click)="onDownload(true, false)">Download Pdf</p>
+  <p class="download-item" (click)="onDownload(true, true)">
+    Download Pdf(Speaker)
+  </p>
+  <p class="download-item" (click)="onDownload(false, false)">Download Docs</p>
+  <p class="download-item" (click)="onDownload(false, true)">
+    Download Docs(Speaker)
+  </p>
+  <p class="download-item" (click)="onCaptionDownload()">
+    Download Caption Video
+  </p>
+</popper-content>

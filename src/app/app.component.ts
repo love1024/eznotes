@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { LoginService } from "./service/login/login.service";
 import { SummaryService } from "./service/summary/summary.service";
 import { FileService } from "./service/file/file.service";
@@ -28,10 +28,21 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = this.loginService.isLoggedIn();
     this.loginService.getLogInOutEmitter().subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
+      if (this.isLoggedIn) {
+        this.polling = setInterval(() => {
+          // this.checkNewFile();
+        }, 5000);
+      } else {
+        clearInterval(this.polling);
+      }
     });
-    this.polling = setInterval(() => {
-      this.checkNewFile();
-    }, 5000);
+
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 
   setRouter(name) {

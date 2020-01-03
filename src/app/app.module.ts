@@ -34,10 +34,12 @@ import { MinuteSecondsPipe } from "./shared/minutesSeconds.pipe";
 import { LoadingBarModule } from "@ngx-loading-bar/core";
 import { ConfirmationPopoverModule } from "angular-confirmation-popover";
 import { AngularDraggableModule } from "angular2-draggable";
+import { NgxPopperModule } from "ngx-popper";
 
-import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+// import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+import { LiveTextWindowComponent } from "./live-text-window/live-text-window.component";
 
-const config: SocketIoConfig = { url: "http://localhost:1337", options: {} };
+// const config: SocketIoConfig = { url: "http://localhost:1337" };
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ const config: SocketIoConfig = { url: "http://localhost:1337", options: {} };
     ForgetPasswordComponent,
     ResetComponent,
     QaComponent,
-    MinuteSecondsPipe
+    MinuteSecondsPipe,
+    LiveTextWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ const config: SocketIoConfig = { url: "http://localhost:1337", options: {} };
     NotifierModule,
     LoadingBarModule,
     AngularDraggableModule,
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
+    NgxPopperModule.forRoot({}),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: "danger" // set defaults here
     })

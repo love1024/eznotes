@@ -4,7 +4,7 @@ import * as $ from "jquery";
 import { FileService } from "../service/file/file.service";
 import { NotifierService } from "angular-notifier";
 import { LoadingBarService } from "@ngx-loading-bar/core";
-import { Socket } from "ngx-socket-io";
+// import { Socket } from "ngx-socket-io";
 import { IFile } from "../models/fileitem";
 
 declare var RecordRTCPromisesHandler;
@@ -41,6 +41,8 @@ export class SpeechToTextComponent implements OnInit {
 
   removeLastSentence = false;
 
+  showWarning = false;
+
   liveTranscriptionInput: any;
 
   liveTranscriptionProcessor: any;
@@ -58,14 +60,13 @@ export class SpeechToTextComponent implements OnInit {
   constructor(
     private notificationService: NotifierService,
     private fileService: FileService,
-    private loadingBar: LoadingBarService,
-    private socketEvent: Socket
+    private loadingBar: LoadingBarService // private socketEvent: Socket
   ) {
-    this.socketEvent.fromEvent("connect").subscribe(e => this.socketConnect(e));
-    this.socketEvent
-      .fromEvent("messages")
-      .subscribe(e => this.socketMessages(e));
-    this.socketEvent.fromEvent("speechData").subscribe(e => this.socketData(e));
+    // this.socketEvent.fromEvent("connect").subscribe(e => this.socketConnect(e));
+    // this.socketEvent
+    //   .fromEvent("messages")
+    //   .subscribe(e => this.socketMessages(e));
+    // this.socketEvent.fromEvent("speechData").subscribe(e => this.socketData(e));
   }
 
   ngOnInit() {
@@ -108,11 +109,13 @@ export class SpeechToTextComponent implements OnInit {
       "Please wait. We are processing file!"
     );
 
+    this.showWarning = true;
     this.isSaving = true;
     this.loadingBar.start();
     this.fileService.uploadFile(formData).subscribe(() => {
       this.loadingBar.complete();
       this.isSaving = false;
+      this.showWarning = false;
       this.notificationService.notify("success", "File Processed Successfully");
     });
   }
@@ -141,6 +144,11 @@ export class SpeechToTextComponent implements OnInit {
     this.isLiveNotes = true;
     this.recordingDisabled = false;
     this.player = this.audioPlayer;
+    const tab = window.open(
+      location.origin + "/live-text",
+      "",
+      "width=1200, height=145"
+    );
   }
 
   record(): void {
@@ -186,7 +194,7 @@ export class SpeechToTextComponent implements OnInit {
   recordAudio(): void {
     let context, processor;
     if (this.isLiveNotes) {
-      this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
+      // this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
       let AudioContext =
         (window as any).AudioContext || (window as any).webkitAudioContext;
       context = new AudioContext({
@@ -232,7 +240,7 @@ export class SpeechToTextComponent implements OnInit {
 
   stopRecording(): void {
     if (this.isLiveNotes) {
-      this.socketEvent.emit("endGoogleCloudStream", "");
+      // this.socketEvent.emit("endGoogleCloudStream", "");
       if (this.liveTranscriptionInput) {
         this.liveTranscriptionInput.disconnect(this.liveTranscriptionProcessor);
       }
@@ -263,8 +271,10 @@ export class SpeechToTextComponent implements OnInit {
     const formData = new FormData();
     formData.append("file", content, `${this.fileName}.webm`);
     this.loadingBar.start();
+    this.showWarning = true;
     this.fileService.uploadFile(formData).subscribe(() => {
       this.loadingBar.complete();
+      this.showWarning = false;
       this.notificationService.notify("success", "File Submitted Successfully");
     });
   }
@@ -303,7 +313,7 @@ export class SpeechToTextComponent implements OnInit {
     var left = e.inputBuffer.getChannelData(0);
     // var left16 = convertFloat32ToInt16(left); // old 32 to 16 function
     var left16 = this.downsampleBuffer(left, 44100, 16000);
-    this.socketEvent.emit("binaryData", left16);
+    // this.socketEvent.emit("binaryData", left16);
   }
 
   downsampleBuffer(buffer, sampleRate, outSampleRate) {
@@ -339,7 +349,7 @@ export class SpeechToTextComponent implements OnInit {
   }
 
   socketConnect(data) {
-    this.socketEvent.emit("join", "Server Connected to Client");
+    // this.socketEvent.emit("join", "Server Connected to Client");
   }
 
   socketMessages(data) {
@@ -386,12 +396,6 @@ export class SpeechToTextComponent implements OnInit {
       //add children to empty span
       let edit = data.results[0].alternatives[0].transcript.split(" ");
 
-      // if (this.finalText) {
-      //   this.finalText.results.push(data.results[0]);
-      // } else {
-      //   this.finalText = data;
-      // }
-
       for (var i = 0; i < edit.length; i++) {
         let newSpan = document.createElement("span");
         newSpan.innerHTML = edit[i];
@@ -409,5 +413,9 @@ export class SpeechToTextComponent implements OnInit {
 
       this.removeLastSentence = false;
     }
+    setTimeout(() => {
+      let resultText = document.getElementById("resultText");
+      localStorage.setItem("liveText", resultText.innerText);
+    }, 0);
   }
 }

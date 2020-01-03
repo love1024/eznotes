@@ -7,6 +7,7 @@ import { of, Subject } from "rxjs";
 import * as jsPDF from "jspdf";
 import { LoginService } from "../service/login/login.service";
 import * as html2pdf from "html2pdf.js";
+import { NgxSpinnerService } from "ngx-spinner";
 
 enum FileType {
   Summary = 1,
@@ -32,17 +33,14 @@ export class MyFilesComponent implements OnInit {
 
   withSpeaker = false;
 
-  isPdf = false;
-
-  onSecondStep = false;
-
-  selectedIndex = -1;
-
   files: IFile[] = [];
+
+  selectedFile: IFile;
 
   subject$ = new Subject<string>();
 
   constructor(
+    private spinner: NgxSpinnerService,
     private router: Router,
     private fileService: FileService,
     private notifier: NotifierService,
@@ -62,10 +60,17 @@ export class MyFilesComponent implements OnInit {
     this.fileService.updateFile(file).subscribe(() => {
       const queryParams: NavigationExtras = {
         queryParams: {
-          id: file.videoFileName
+          id: file.videoFileName,
+          edit: true
         }
       };
-      this.router.navigate(["editor"], queryParams);
+      if (file.hasSummary) {
+        this.router.navigate(["summary"], queryParams);
+      } else if (file.hasQa) {
+        this.router.navigate(["qa-summary"], queryParams);
+      } else {
+        this.router.navigate(["editor"], queryParams);
+      }
     });
   }
 
@@ -146,26 +151,41 @@ export class MyFilesComponent implements OnInit {
     });
   }
 
-  onDownload(index: number, isCancel: boolean, file: IFile): void {
-    if (this.onSecondStep) {
-      this.onSecondStep = false;
-      this.isPdf = isCancel;
-      if (this.isPdf) {
-        this.giveDownloadFile(file);
-      } else {
-        this.giveDownloadDoc(file);
-      }
+  onDownloadShown(file: IFile): void {
+    this.selectedFile = file;
+  }
+
+  onDownload(isPdf, withSepaker): void {
+    this.withSpeaker = withSepaker;
+    if (isPdf) {
+      this.giveDownloadFile(this.selectedFile);
     } else {
-      this.onSecondStep = true;
-      this.withSpeaker = isCancel;
-      this.selectedIndex = index;
+      this.giveDownloadDoc(this.selectedFile);
     }
   }
 
-  onPopupOpen(isOpen: boolean): void {
-    // if (!isOpen) {
-    //   this.onSecondStep = false;
-    // }
+  onCaptionDownload(): void {
+    const subtitle = this.convertGSTTToSRT(this.selectedFile.text);
+    const myblob = new Blob([subtitle], {
+      type: "text/plain"
+    });
+    const formData = new FormData();
+    formData.append("file", myblob, this.selectedFile.videoFileName);
+    this.notifier.notify("success", "File download in progress");
+    this.fileService.downloadCaptionFile(
+      formData,
+      this.selectedFile.videoFileName
+    );
+  }
+
+  onSummaryDownload() {
+    this.downloadTextPdf(
+      this.selectedFile.hasSummary
+        ? this.selectedFile.summary
+        : this.selectedFile.qa,
+      this.selectedFile.originalName,
+      this.selectedFile
+    );
   }
 
   giveDownloadFile(file: IFile) {
@@ -329,5 +349,49 @@ export class MyFilesComponent implements OnInit {
     fileDownload.download = name + ".doc";
     fileDownload.click();
     document.body.removeChild(fileDownload);
+  }
+
+  convertGSTTToSRT(string) {
+    var obj = JSON.parse(string);
+    var i = 1;
+    var result = "";
+    for (const line of obj) {
+      result += i++;
+      result += "\n";
+      var word = line.Alternatives[0].Words[0];
+      var ttime = word.StartTime.Seconds + word.StartTime.Nanos / 1000000000;
+      var time = this.convertSecondStringToRealtime(ttime + "");
+      result += this.formatTime(time) + " --> ";
+
+      word = line.Alternatives[0].Words[line.Alternatives[0].Words.length - 1];
+      ttime = word.EndTime.Seconds + word.EndTime.Nanos / 1000000000;
+      time = this.convertSecondStringToRealtime(ttime + "");
+      result += this.formatTime(time) + "\n";
+      result += line.Alternatives[0].Transcript + "\n\n";
+    }
+    return result;
+  }
+
+  formatTime(time) {
+    return (
+      String(time.hours).padStart(2, "0") +
+      ":" +
+      String(time.minutes).padStart(2, "0") +
+      ":" +
+      String(time.seconds).padStart(2, "0") +
+      ",000"
+    );
+  }
+
+  convertSecondStringToRealtime(string) {
+    var seconds = string.substring(0, string.length - 1);
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    seconds = Math.floor((seconds % 3600) % 60);
+    return {
+      hours,
+      minutes,
+      seconds
+    };
   }
 }
