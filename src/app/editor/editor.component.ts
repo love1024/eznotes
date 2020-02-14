@@ -83,6 +83,8 @@ export class EditorComponent implements OnInit {
 
   fileName: string = "";
 
+  currentUserEmail = "";
+
   constructor(
     private route: ActivatedRoute,
     private fileService: FileService,
@@ -97,18 +99,21 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const fileName = params["id"];
+      this.currentUserEmail = params["email"];
       this.fileService.getFileUrl(fileName).subscribe(res => {
         this.videoUrl = res.url;
       });
-      this.fileService.getFile(fileName).subscribe(res => {
-        this.file = res;
-        this.fileName = res.originalName;
-        this.filetexts = JSON.parse(res.text);
-        this.changedText = JSON.parse(res.text);
-        this.getCompleteFileTranscript();
-        this.history.push(JSON.parse(JSON.stringify(this.filetexts)));
-        this.findHighlightItems();
-      });
+      this.fileService
+        .getFile(fileName, this.currentUserEmail)
+        .subscribe(res => {
+          this.file = res;
+          this.fileName = res.originalName;
+          this.filetexts = JSON.parse(res.text);
+          this.changedText = JSON.parse(res.text);
+          this.getCompleteFileTranscript();
+          this.history.push(JSON.parse(JSON.stringify(this.filetexts)));
+          this.findHighlightItems();
+        });
     });
 
     setInterval(() => {
@@ -165,6 +170,12 @@ export class EditorComponent implements OnInit {
   highlightText(event) {
     const time = event.currentTarget.currentTime;
     this.currentTime = time;
+
+    let els = document.getElementsByClassName("highlight");
+    if (els.length > 0 && this.readAlong) {
+      const el = els[0];
+      el.scrollIntoView(false);
+    }
   }
 
   toggleVideo() {
@@ -241,10 +252,12 @@ export class EditorComponent implements OnInit {
     this.lastModifiedText = "Saving...";
 
     this.isSaving = true;
-    this.fileService.changeFileText(data, this.file.fileId).subscribe(res => {
-      this.isSaving = false;
-      this.changedText = filetexts;
-    });
+    this.fileService
+      .changeFileText(data, this.file.videoFileName, this.currentUserEmail)
+      .subscribe(res => {
+        this.isSaving = false;
+        this.changedText = filetexts;
+      });
   }
 
   onSpeakerEdit(filetexts: any) {
@@ -343,7 +356,7 @@ export class EditorComponent implements OnInit {
 
     let data = { Text: JSON.stringify(this.filetexts) };
     this.fileService
-      .changeFileText(data, this.file.fileId)
+      .changeFileText(data, this.file.videoFileName, this.currentUserEmail)
       .subscribe(res => {});
     this.findAllOccurences();
   }
@@ -367,8 +380,9 @@ export class EditorComponent implements OnInit {
       }
     });
     let data = { Text: JSON.stringify(this.filetexts) };
+
     this.fileService
-      .changeFileText(data, this.file.fileId)
+      .changeFileText(data, this.file.videoFileName, this.currentUserEmail)
       .subscribe(res => {});
     this.findAllOccurences();
   }
@@ -469,7 +483,8 @@ export class EditorComponent implements OnInit {
     this.summaryService.textEmitter.next(this.completeTranscript);
     const queryParams: NavigationExtras = {
       queryParams: {
-        id: this.file.videoFileName
+        id: this.file.videoFileName,
+        email: this.currentUserEmail
       }
     };
     switch (route) {

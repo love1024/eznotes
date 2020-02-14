@@ -2,17 +2,17 @@
   <div class="blog-image">
     <section class="section">
       <div class="default-text large-text cross-font">
-        My Files
+        My Notes
       </div>
     </section>
   </div>
 </div>
-<div class="col-md-12 center-90 min-height">
+<div class="col-md-12 center-90 min-height table">
   <div class="accordion" id="accordionExample">
     <div class="card header-card">
       <div class="card-header card-div">
         <div class="row justify-content-between align-items-center">
-          <p class="mb-0 col-3 pointer" (click)="sortByName()">
+          <p class="mb-0 col-2 pointer" (click)="sortByName()">
             Name
             <i
               class="fa fa-caret-down"
@@ -34,37 +34,48 @@
               *ngIf="!sortBySizeAsc && selected == 1"
             ></i>
           </p>
+          <p class="mb-0 col-2 pointer" (click)="sortByOwner()">
+            Owner
+            <i
+              class="fa fa-caret-down"
+              *ngIf="sortByOwnerAsc && selected == 2"
+            ></i>
+            <i
+              class="fa fa-caret-up"
+              *ngIf="!sortByOwnerAsc && selected == 2"
+            ></i>
+          </p>
           <p class=" mb-0 col-2 pointer" (click)="sortByCreated()">
             Created Date
             <i
               class="fa fa-caret-down"
-              *ngIf="sortByCreatedAsc && selected == 2"
+              *ngIf="sortByCreatedAsc && selected == 3"
             ></i>
             <i
               class="fa fa-caret-up"
-              *ngIf="!sortByCreatedAsc && selected == 2"
+              *ngIf="!sortByCreatedAsc && selected == 3"
             ></i>
           </p>
-          <p class=" mb-0 col-3 pointer" (click)="sortByEdited()">
+          <p class=" mb-0 col-2 pointer" (click)="sortByEdited()">
             Modified Date
             <i
               class="fa fa-caret-down"
-              *ngIf="sortByEditedAsc && selected == 3"
+              *ngIf="sortByEditedAsc && selected == 4"
             ></i>
             <i
               class="fa fa-caret-up"
-              *ngIf="!sortByEditedAsc && selected == 3"
+              *ngIf="!sortByEditedAsc && selected == 4"
             ></i>
           </p>
           <p class=" mb-0 col-1 pointer" (click)="sortByEdited()">
             File Type
             <i
               class="fa fa-caret-down"
-              *ngIf="sortByEditedAsc && selected == 3"
+              *ngIf="sortByEditedAsc && selected == 5"
             ></i>
             <i
               class="fa fa-caret-up"
-              *ngIf="!sortByEditedAsc && selected == 3"
+              *ngIf="!sortByEditedAsc && selected == 5"
             ></i>
           </p>
           <p class=" mb-0 col-2 pointer">Actions</p>
@@ -74,11 +85,11 @@
     <br />
 
     <ng-container *ngFor="let file of files; let i = index">
-      <div class="card" *ngIf="!file.showEdit">
+      <div class="card">
         <div class="card-header card-div">
           <div class="row justify-content-between align-items-center">
             <p
-              class="mb-0 col-3 file filename"
+              class="mb-0 col-2 file filename"
               contenteditable="true"
               (input)="changeName(file, $event.target.innerText)"
               [ngClass]="{ bold: file.isNew }"
@@ -89,14 +100,17 @@
               class="mb-0 col-1 small-text size"
               *ngIf="!file.hasSummary && !file.hasQa"
             >
-              {{ file.originalSize }} kb
+              {{ (file.originalSize / 1048576).toFixed(2) }} Mb
             </p>
             <p class="mb-0 col-1 small-text size" *ngIf="file.hasSummary">-</p>
             <p class="mb-0 col-1 small-text size" *ngIf="file.hasQa">-</p>
             <p class="mb-0 col-2 small-text date">
+              {{ file.userEmail }}
+            </p>
+            <p class="mb-0 col-2 small-text date">
               {{ file.createdAt | date: "dd MMM yyyy" }}
             </p>
-            <p class=" mb-0 col-3 small-text date">
+            <p class=" mb-0 col-2 small-text date">
               {{ file.editedAt | date: "dd MMM yyyy" }}
             </p>
             <p class=" mb-0 col-1 small-text date">
@@ -136,9 +150,11 @@
                 [popperHideOnScroll]="true"
                 [popperPlacement]="'left'"
                 [popperStyles]="{
-                  'background-color': '#fff',
+                  'background-color': 'white',
                   border: 0,
-                  padding: '16px 32px'
+                  padding: '16px 0',
+                  'border-radius': 0,
+                  'box-shadow': '0px 0px 6px lightgray'
                 }"
               >
               </i>
@@ -166,15 +182,24 @@
 </popper-content>
 
 <popper-content #transcriptionDownload>
-  <p class="download-item" (click)="onDownload(true, false)">Download Pdf</p>
+  <p class="download-item" (click)="onDownload(true, false)">
+    <i class="fa fa-file-pdf-o  action-icon" style="color: gray"></i>
+    Download Pdf
+  </p>
   <p class="download-item" (click)="onDownload(true, true)">
+    <i class="fa fa-file-pdf-o  action-icon" style="color: gray"></i>
     Download Pdf(Speaker)
   </p>
-  <p class="download-item" (click)="onDownload(false, false)">Download Docs</p>
+  <p class="download-item" (click)="onDownload(false, false)">
+    <i class="fa fa-file-text-o action-icon" style="color: gray"></i> Download
+    Docs
+  </p>
   <p class="download-item" (click)="onDownload(false, true)">
+    <i class="fa fa-file-text-o action-icon" style="color: gray"></i>
     Download Docs(Speaker)
   </p>
   <p class="download-item" (click)="onCaptionDownload()">
+    <i class="fa fa-file-video-o action-icon" style="color: gray"></i>
     Download Caption Video
   </p>
 </popper-content>

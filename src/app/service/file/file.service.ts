@@ -40,7 +40,7 @@ export class FileService {
   getFiles(): Observable<any> {
     const user = this.loginService.getUser() || {};
     return this.http.get<any>(
-      `${this.api}api/file/files?email=${user.emailAddress}`
+      `${this.api}api/file/files?userId=${user.userId}`
     );
   }
 
@@ -60,8 +60,18 @@ export class FileService {
     return this.http.get<void>(`${this.api}api/file/delete?id=${id}`);
   }
 
-  updateFile(file: IFile): Observable<void> {
-    return this.http.post<void>(`${this.api}api/file/update`, file);
+  updateFile(file: IFile, email: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.api}api/file/update?email=${email}`,
+      file
+    );
+  }
+
+  updateFileUse(file: IFile, email: string): Observable<void> {
+    return this.http.post<void>(
+      `${this.api}api/file/updateuse?email=${email}`,
+      file
+    );
   }
 
   changeName(data, fileId): Observable<void> {
@@ -71,8 +81,10 @@ export class FileService {
     );
   }
 
-  getFile(name: string): Observable<any> {
-    return this.http.get<any>(`${this.api}api/file/file?filename=${name}`);
+  getFile(name: string, email: string): Observable<any> {
+    return this.http.get<any>(
+      `${this.api}api/file/file?filename=${name}&email=${email}`
+    );
   }
 
   checkNewFile(email: string): Observable<any> {
@@ -83,9 +95,9 @@ export class FileService {
     return this.http.post<void>(`${this.api}api/file/alert`, data);
   }
 
-  changeFileText(data, fileId): Observable<void> {
+  changeFileText(data, filename, email): Observable<void> {
     return this.http.post<void>(
-      `${this.api}api/file/changeFileText?fileId=${fileId}`,
+      `${this.api}api/file/changeFileText?filename=${filename}&email=${email}`,
       data
     );
   }

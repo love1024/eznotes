@@ -1,22 +1,30 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Login, ILoginResult } from 'src/app/models/login';
-import { Observable, throwError } from 'rxjs';
-import { tap, shareReplay, catchError } from 'rxjs/operators';
+import { Injectable, EventEmitter } from "@angular/core";
+import { environment } from "src/environments/environment";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders
+} from "@angular/common/http";
+import { Login, ILoginResult } from "src/app/models/login";
+import { Observable, throwError } from "rxjs";
+import { tap, shareReplay, catchError } from "rxjs/operators";
 
-import * as moment from 'moment';
-import { ISignUp, ISignUpResult } from 'src/app/models/signup';
-import { IVerify, IVerifyResult } from 'src/app/models/verify';
-import { User } from 'src/app/models/user';
-import { IEmail, IEmailResult } from 'src/app/models/email';
-import { IPasswordResetEmail, IPasswordResetEmailResult, IPasswordReset, IPasswordResetResult } from 'src/app/models/password-reset';
+import * as moment from "moment";
+import { ISignUp, ISignUpResult } from "src/app/models/signup";
+import { IVerify, IVerifyResult } from "src/app/models/verify";
+import { User } from "src/app/models/user";
+import { IEmail, IEmailResult } from "src/app/models/email";
+import {
+  IPasswordResetEmail,
+  IPasswordResetEmailResult,
+  IPasswordReset,
+  IPasswordResetResult
+} from "src/app/models/password-reset";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LoginService {
-
   /** Login url  */
   private url = environment.server;
 
@@ -27,74 +35,99 @@ export class LoginService {
 
   /**
    * Creates an instance of LoginService.
-   * @param {HttpClient} httpClient 
+   * @param {HttpClient} httpClient
    * @memberof LoginService
    */
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Send the login request to server for token
-   * 
-   * @param {Login} cred 
-   * @returns {Observable<String>} 
+   *
+   * @param {Login} cred
+   * @returns {Observable<String>}
    * @memberof LoginService
    */
   public login(cred: Login): Observable<ILoginResult> {
-    return this.httpClient.post<ILoginResult>(`${this.url}api/account/authenticate`, cred)
+    return this.httpClient
+      .post<ILoginResult>(`${this.url}api/account/authenticate`, cred)
       .pipe(
         tap(this.setSession),
-        tap((res) => this.setUserWithLogin(res))
-      )
-  }
-
-  public signUp(cred: ISignUp): Observable<ISignUpResult> {
-    return this.httpClient.post<ISignUpResult>(`${this.url}api/account/register`, cred)
-      .pipe(
-        tap((res) => this.setUserWithSignUp(res))
+        tap(res => this.setUserWithLogin(res))
       );
   }
 
-  public verifyEmail(data: IVerify, token: string): Observable<IVerifyResult> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': ('Bearer ' + token)});  
-    return this.httpClient.post<IVerifyResult>(`${this.url}api/account/verifyemail`, data, {headers: headers});
+  public signUp(cred: ISignUp): Observable<ISignUpResult> {
+    return this.httpClient
+      .post<ISignUpResult>(`${this.url}api/account/register`, cred)
+      .pipe(tap(res => this.setUserWithSignUp(res)));
   }
 
-  public sendEmail(email:string): Observable<IEmailResult> {
+  public verifyEmail(data: IVerify, token: string): Observable<IVerifyResult> {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    });
+    return this.httpClient.post<IVerifyResult>(
+      `${this.url}api/account/verifyemail`,
+      data,
+      { headers: headers }
+    );
+  }
+
+  public sendEmail(email: string): Observable<IEmailResult> {
     const data: IEmail = {
       emailTo: email
-    }
-    return this.httpClient.post<IEmailResult>(`${this.url}api/account/sendverification`, data);
+    };
+    return this.httpClient.post<IEmailResult>(
+      `${this.url}api/account/sendverification`,
+      data
+    );
   }
 
-  public sendResetPasswordEmail(email:string): Observable<IPasswordResetEmailResult> {
+  public sendResetPasswordEmail(
+    email: string
+  ): Observable<IPasswordResetEmailResult> {
     const data: IPasswordResetEmail = {
       emailTo: email
-    }
-    return this.httpClient.post<IPasswordResetEmailResult>(`${this.url}api/account/sendpasswordreset`, data);
+    };
+    return this.httpClient.post<IPasswordResetEmailResult>(
+      `${this.url}api/account/sendpasswordreset`,
+      data
+    );
   }
 
-  public resetPassword(data: IPasswordReset, token: string): Observable<IPasswordResetResult> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': ('Bearer ' + token)});  
-    return this.httpClient.post<IPasswordResetResult>(`${this.url}api/account/resetpassword`, data, {headers: headers});
+  public resetPassword(
+    data: IPasswordReset,
+    token: string
+  ): Observable<IPasswordResetResult> {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    });
+    return this.httpClient.post<IPasswordResetResult>(
+      `${this.url}api/account/resetpassword`,
+      data,
+      { headers: headers }
+    );
   }
 
   /**
    * Logout from the application
-   * 
+   *
    * @memberof LoginService
    */
   public logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expire');
-    localStorage.removeItem('user');
+    localStorage.removeItem("token");
+    localStorage.removeItem("expire");
+    localStorage.removeItem("user");
   }
 
   /**
    * Change password of given id
-   * 
-   * @param {number} id 
-   * @param {*} data 
-   * @returns 
+   *
+   * @param {number} id
+   * @param {*} data
+   * @returns
    * @memberof LoginService
    */
   public changePassword(id: number, data: any) {
@@ -104,56 +137,60 @@ export class LoginService {
 
   /**
    * Set the token to localstorage
-   * 
-   * @param {any} loginResult 
+   *
+   * @param {any} loginResult
    * @memberof LoginService
    */
   public setSession(loginResult: ILoginResult) {
     if (loginResult.token) {
-      localStorage.setItem('token', loginResult.token);
+      localStorage.setItem("token", loginResult.token);
     }
-    if(loginResult.expire) {
-      localStorage.setItem('expire', loginResult.expire.toString());
+    if (loginResult.expire) {
+      localStorage.setItem("expire", loginResult.expire.toString());
     }
   }
 
   public setUserWithLogin(response: ILoginResult): void {
-    const user : User = {
+    const user: User = {
       emailAddress: response.emailAddress,
       firstName: response.firstName,
       lastName: response.lastName,
       emailVerified: response.emailVerified,
-      token: response.token
-    }
-    this.user  = new User(user);
-    localStorage.setItem('user',JSON.stringify(this.user));
+      token: response.token,
+      follow: response.follow,
+      role: response.role,
+      userId: response.userId
+    };
+    this.user = new User(user);
+    localStorage.setItem("user", JSON.stringify(this.user));
+    this.logInOutEmitter.emit(true);
   }
 
   public setUserWithSignUp(response: ISignUpResult): void {
-    const user : User = {
+    const user: User = {
       userId: response.userId,
       emailAddress: response.emailAddress,
       firstName: response.firstName,
       lastName: response.lastName,
       emailVerified: response.emailVerified
-    }
-    this.user  = new User(user);
+    };
+    this.user = new User(user);
   }
 
   /**
    * Check if user is logged in
-   * 
-   * @returns 
+   *
+   * @returns
    * @memberof LoginService
    */
   public isLoggedIn() {
-      return moment().isBefore(this.getExpiration())
+    return moment().isBefore(this.getExpiration());
   }
 
   /**
    * Check if user is logged out
-   * 
-   * @returns 
+   *
+   * @returns
    * @memberof LoginService
    */
   public isLoggedOut() {
@@ -162,8 +199,8 @@ export class LoginService {
 
   /**
    * Get Login Success Emitter
-   * 
-   * @returns 
+   *
+   * @returns
    * @memberof LoginService
    */
   public getLogInOutEmitter() {
@@ -172,7 +209,7 @@ export class LoginService {
 
   /**
    * Emit Login success
-   * 
+   *
    * @memberof LoginService
    */
   public emitLogInOut() {
@@ -181,33 +218,31 @@ export class LoginService {
 
   /**
    * Get expiration time of token
-   * 
-   * @returns 
+   *
+   * @returns
    * @memberof LoginService
    */
   getExpiration() {
-    const expiration = localStorage.getItem('expire');
+    const expiration = localStorage.getItem("expire");
     return moment(expiration);
   }
 
   getUser() {
-    const user =  localStorage.getItem('user');
-    if(user) {
+    const user = localStorage.getItem("user");
+    if (user) {
       return JSON.parse(user);
     }
     return user;
   }
 
-
   /**
    * Log any server error
-   * 
-   * @param {HttpErrorResponse} err 
-   * @returns {Observable<any>} 
+   *
+   * @param {HttpErrorResponse} err
+   * @returns {Observable<any>}
    * @memberof LoginService
    */
   handleError(err: HttpErrorResponse): Observable<any> {
     throw throwError(err);
   }
-
 }

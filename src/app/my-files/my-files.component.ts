@@ -8,6 +8,7 @@ import * as jsPDF from "jspdf";
 import { LoginService } from "../service/login/login.service";
 import * as html2pdf from "html2pdf.js";
 import { NgxSpinnerService } from "ngx-spinner";
+import { IQa } from "../models/qa";
 
 enum FileType {
   Summary = 1,
@@ -28,6 +29,8 @@ export class MyFilesComponent implements OnInit {
   sortByCreatedAsc = true;
 
   sortByEditedAsc = false;
+
+  sortByOwnerAsc = false;
 
   selected = 0;
 
@@ -56,12 +59,14 @@ export class MyFilesComponent implements OnInit {
 
   editFile(file: IFile) {
     file.editedAt = new Date().toJSON();
+    const user = this.loginService.getUser();
 
-    this.fileService.updateFile(file).subscribe(() => {
+    this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
       const queryParams: NavigationExtras = {
         queryParams: {
           id: file.videoFileName,
-          edit: true
+          edit: true,
+          email: user.emailAddress
         }
       };
       if (file.hasSummary) {
@@ -119,8 +124,20 @@ export class MyFilesComponent implements OnInit {
     });
   }
 
-  sortByCreated() {
+  sortByOwner() {
+    this.sortByOwnerAsc = !this.sortByOwnerAsc;
     this.selected = 2;
+    this.files.sort((a, b) => {
+      if (this.sortByOwnerAsc) {
+        return a.userEmail.localeCompare(b.userEmail);
+      } else {
+        return b.userEmail.localeCompare(a.userEmail);
+      }
+    });
+  }
+
+  sortByCreated() {
+    this.selected = 3;
     this.sortByCreatedAsc = !this.sortByCreatedAsc;
     this.files.sort((a, b) => {
       if (this.sortByCreatedAsc) {
@@ -136,7 +153,7 @@ export class MyFilesComponent implements OnInit {
   }
 
   sortByEdited() {
-    this.selected = 3;
+    this.selected = 4;
     this.sortByEditedAsc = !this.sortByEditedAsc;
     this.files.sort((a, b) => {
       if (this.sortByEditedAsc) {
@@ -179,47 +196,62 @@ export class MyFilesComponent implements OnInit {
   }
 
   onSummaryDownload() {
-    this.downloadTextPdf(
-      this.selectedFile.hasSummary
-        ? this.selectedFile.summary
-        : this.selectedFile.qa,
-      this.selectedFile.originalName,
-      this.selectedFile
-    );
+    const user = this.loginService.getUser();
+    if (this.selectedFile.hasSummary) {
+      this.fileService
+        .getFile(this.selectedFile.videoFileName, user.emailAddress)
+        .subscribe(res => {
+          console.log(res);
+          this.downloadTextPdf(res.summary, res.originalName, res);
+        });
+    } else {
+      this.downloadQAPdf(
+        JSON.parse(this.selectedFile.qa).cards,
+        this.selectedFile.originalName,
+        this.selectedFile
+      );
+    }
   }
 
   giveDownloadFile(file: IFile) {
-    this.fileService.getFile(file.videoFileName).subscribe(res => {
-      if (file.audioFileName) {
-        const text = JSON.parse(res.text);
-        this.getCompleteFileTranscripts(
-          text,
-          file.originalName,
-          this.withSpeaker
-        );
-      } else {
-        this.downloadTextPdf(file.text, file.originalName, file);
-      }
-    });
+    const user = this.loginService.getUser();
+    this.fileService
+      .getFile(file.videoFileName, user.emailAddress)
+      .subscribe(res => {
+        if (file.audioFileName) {
+          const text = JSON.parse(res.text);
+          this.getCompleteFileTranscripts(
+            text,
+            file.originalName,
+            this.withSpeaker
+          );
+        } else {
+          this.downloadTextPdf(file.text, file.originalName, file);
+        }
+      });
   }
 
   giveDownloadDoc(file: IFile) {
-    this.fileService.getFile(file.videoFileName).subscribe(res => {
-      if (file.audioFileName) {
-        const text = JSON.parse(res.text);
-        this.getCompleteTranscriptDoc(
-          text,
-          file.originalName,
-          this.withSpeaker
-        );
-      } else {
-        this.getCompleteTranscriptText(res.text, file.originalName, file);
-      }
-    });
+    const user = this.loginService.getUser();
+    this.fileService
+      .getFile(file.videoFileName, user.emailAddress)
+      .subscribe(res => {
+        if (file.audioFileName) {
+          const text = JSON.parse(res.text);
+          this.getCompleteTranscriptDoc(
+            text,
+            file.originalName,
+            this.withSpeaker
+          );
+        } else {
+          this.getCompleteTranscriptText(res.text, file.originalName, file);
+        }
+      });
   }
 
   downloadTextPdf(text: string, name: string, file: IFile) {
-    this.fileService.updateFile(file).subscribe(() => {
+    const user = this.loginService.getUser();
+    this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
       var doc = new jsPDF();
       let height = 20;
       let pageHeight = doc.internal.pageSize.height;
@@ -232,6 +264,53 @@ export class MyFilesComponent implements OnInit {
           height = 20;
           currentPage += pageHeight;
         }
+        height += 7;
+      });
+      doc.save(name + ".pdf");
+    });
+  }
+
+  downloadQAPdf(text: IQa[], name: string, file: IFile) {
+    const user = this.loginService.getUser();
+    this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
+      var doc = new jsPDF();
+      let height = 20;
+      let pageHeight = doc.internal.pageSize.height;
+      let currentPage = pageHeight;
+      let idx = 1;
+      text.forEach(qa => {
+        let lines = doc.splitTextToSize(qa.question, 180);
+        doc.setFontType("bold");
+        doc.text(15, height, "Question: " + idx);
+        doc.setFontType("normal");
+        height += 7;
+        idx++;
+        lines.forEach(line => {
+          doc.text(15, height, line);
+          if (height + 7 > currentPage) {
+            doc.addPage();
+            height = 20;
+            currentPage += pageHeight;
+          }
+          height += 7;
+        });
+
+        doc.setFontType("bold");
+        doc.text(15, height, "Answer");
+        doc.setFontType("normal");
+        height += 7;
+        lines = doc.splitTextToSize(qa.answer, 180);
+        doc.setFontType("normal");
+        lines.forEach(line => {
+          doc.text(15, height, line);
+          if (height + 7 > currentPage) {
+            doc.addPage();
+            height = 20;
+            currentPage += pageHeight;
+          }
+          height += 7;
+        });
+
         height += 7;
       });
       doc.save(name + ".pdf");
@@ -289,7 +368,8 @@ export class MyFilesComponent implements OnInit {
   }
 
   getCompleteTranscriptText(text: any, name: string, file: IFile) {
-    this.fileService.updateFile(file).subscribe(() => {
+    const user = this.loginService.getUser();
+    this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
       var header =
         "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
         "xmlns:w='urn:schemas-microsoft-com:office:word' " +
@@ -297,6 +377,36 @@ export class MyFilesComponent implements OnInit {
         "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
       var footer = "</body></html>";
       let html = "<p>" + text + "</p>";
+      let sourceHTML = header + html + footer;
+
+      let source =
+        "data:application/vnd.ms-word;charset=utf-8," +
+        encodeURIComponent(sourceHTML);
+      let fileDownload = document.createElement("a");
+      document.body.appendChild(fileDownload);
+      fileDownload.href = source;
+      fileDownload.download = name + ".doc";
+      fileDownload.click();
+      document.body.removeChild(fileDownload);
+    });
+  }
+
+  getCompleteTranscriptTextQA(text: IQa[], name: string, file: IFile) {
+    const user = this.loginService.getUser();
+    this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
+      var header =
+        "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+        "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+        "xmlns='http://www.w3.org/TR/REC-html40'>" +
+        "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+      var footer = "</body></html>";
+      let html = "";
+      text.forEach(qa => {
+        html += "<strong>Question</strong>";
+        html += "<p>" + qa.question + "</p>";
+        html += "<strong>Answer</strong>";
+        html += "<p>" + qa.answer + "</p>";
+      });
       let sourceHTML = header + html + footer;
 
       let source =
@@ -353,21 +463,34 @@ export class MyFilesComponent implements OnInit {
 
   convertGSTTToSRT(string) {
     var obj = JSON.parse(string);
-    var i = 1;
+    var index = 1;
     var result = "";
+    var prev = -1;
     for (const line of obj) {
-      result += i++;
-      result += "\n";
-      var word = line.Alternatives[0].Words[0];
-      var ttime = word.StartTime.Seconds + word.StartTime.Nanos / 1000000000;
-      var time = this.convertSecondStringToRealtime(ttime + "");
-      result += this.formatTime(time) + " --> ";
+      let j,
+        chunk = 15;
+      const arr = line.Alternatives[0].Words;
+      for (let i = 0, j = arr.length; i < j; i += chunk) {
+        let temparray = arr.slice(i, i + chunk);
 
-      word = line.Alternatives[0].Words[line.Alternatives[0].Words.length - 1];
-      ttime = word.EndTime.Seconds + word.EndTime.Nanos / 1000000000;
-      time = this.convertSecondStringToRealtime(ttime + "");
-      result += this.formatTime(time) + "\n";
-      result += line.Alternatives[0].Transcript + "\n\n";
+        var word = temparray[0];
+        var ttime = word.StartTime.Seconds + word.StartTime.Nanos / 1000000000;
+        if (ttime < prev) {
+          continue;
+        }
+        var time = this.convertSecondStringToRealtime(ttime);
+        result += index++;
+        result += "\n";
+        result += this.formatTime(time) + " --> ";
+
+        word = temparray[temparray.length - 1];
+        ttime = word.EndTime.Seconds + word.EndTime.Nanos / 1000000000;
+        time = this.convertSecondStringToRealtime(ttime);
+        result += this.formatTime(time) + "\n";
+        prev = ttime;
+        result +=
+          temparray.reduce((text, cur) => text + " " + cur.Word, "") + "\n\n";
+      }
     }
     return result;
   }
@@ -383,11 +506,10 @@ export class MyFilesComponent implements OnInit {
     );
   }
 
-  convertSecondStringToRealtime(string) {
-    var seconds = string.substring(0, string.length - 1);
-    var hours = Math.floor(seconds / 3600);
-    var minutes = Math.floor((seconds % 3600) / 60);
-    seconds = Math.floor((seconds % 3600) % 60);
+  convertSecondStringToRealtime(time) {
+    var hours = Math.floor(time / 3600);
+    var minutes = Math.floor((time % 3600) / 60);
+    var seconds = Math.floor(time % 60);
     return {
       hours,
       minutes,

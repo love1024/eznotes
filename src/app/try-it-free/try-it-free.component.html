@@ -2,29 +2,27 @@
   <div class="try-it-free">
     <section class="section" fxFlex fxLayoutAlign="center center">
       <div class="col-md-6 align-self-center">
-        <p class="default-text large-text">First 30 Minutes of Transcription Free</p>
+        <p class="default-text large-text">
+          First 30 Minutes of Transcription Free
+        </p>
       </div>
     </section>
   </div>
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div class="form-div">
-      <form class="login-form" [formGroup]="signupForm"  (keydown)="onKeydown($event)">
+      <form
+        class="login-form"
+        [formGroup]="signupForm"
+        (keydown)="onKeydown($event)"
+      >
         <div class="form-group">
           <label>First Name</label>
-          <input
-            formControlName="firstName"
-            type="text"
-            class="form-control"
-          />
+          <input formControlName="firstName" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>Last Name</label>
-          <input
-          formControlName="lastName"
-            type="text"
-            class="form-control"
-          />
+          <input formControlName="lastName" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>User Email</label>
@@ -45,24 +43,68 @@
         <div class="form-group">
           <label>Confirm Password</label>
           <input
-          formControlName="confirmPassword"
+            formControlName="confirmPassword"
             type="password"
             class="form-control"
           />
-          <div class="error" *ngIf="confirmError">Confirm password mismatch</div>
+          <div class="error" *ngIf="confirmError">
+            Confirm password mismatch
+          </div>
         </div>
-        
-        <div class="form-group form-check">
-          <input formControlName="terms" type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1"
-            >Our Terms & Conditions</label>
-          <div class="error" *ngIf="termsError">Please accept terms and conditions</div>
+        <div class="form-group">
+          <ng-multiselect-dropdown
+            [placeholder]="'Select Institute'"
+            [data]="dropdownListInstitutes"
+            [(ngModel)]="selectedInstitute"
+            [ngModelOptions]="{ standalone: true }"
+            [settings]="dropdownSettingsInstitute"
+            (onSelect)="onInstituteSelect($event)"
+          >
+          </ng-multiselect-dropdown>
+          <div class="error" *ngIf="emptyInstitueError">
+            Please select an Institute
+          </div>
         </div>
-        
-        <div class="error" *ngIf="signupError" >User already exists</div>
-        <div class="error" *ngFor="let err of errors">{{err}}</div>
+        <div class="form-group">
+          <ng-multiselect-dropdown
+            [placeholder]="'Select Professor'"
+            [data]="dropdownListProfessors"
+            [(ngModel)]="selectedProfessors"
+            [ngModelOptions]="{ standalone: true }"
+            [settings]="dropdownSettingsProfessor"
+          >
+          </ng-multiselect-dropdown>
+          <div class="error" *ngIf="emptyProfessorError">
+            Please select an Institute
+          </div>
+        </div>
 
-        <button type="button" class="btn button-color col-md-12" (click)="onSubmit()" [attr.disabled]="signupForm.valid ? null: ''">Submit</button>
+        <div class="form-group form-check">
+          <input
+            formControlName="terms"
+            type="checkbox"
+            class="form-check-input"
+            id="exampleCheck1"
+          />
+          <label class="form-check-label" for="exampleCheck1"
+            >Our Terms & Conditions</label
+          >
+          <div class="error" *ngIf="termsError">
+            Please accept terms and conditions
+          </div>
+        </div>
+
+        <div class="error" *ngIf="signupError">User already exists</div>
+        <div class="error" *ngFor="let err of errors">{{ err }}</div>
+
+        <button
+          type="button"
+          class="btn button-color col-md-12"
+          (click)="onSubmit()"
+          [attr.disabled]="signupForm.valid ? null : ''"
+        >
+          Submit
+        </button>
         <br />
       </form>
     </div>

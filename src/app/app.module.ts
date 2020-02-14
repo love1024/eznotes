@@ -35,6 +35,7 @@ import { LoadingBarModule } from "@ngx-loading-bar/core";
 import { ConfirmationPopoverModule } from "angular-confirmation-popover";
 import { AngularDraggableModule } from "angular2-draggable";
 import { NgxPopperModule } from "ngx-popper";
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 // import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { LiveTextWindowComponent } from "./live-text-window/live-text-window.component";
@@ -82,6 +83,7 @@ import { LiveTextWindowComponent } from "./live-text-window/live-text-window.com
     AngularDraggableModule,
     // SocketIoModule.forRoot(config),
     NgxPopperModule.forRoot({}),
+    NgMultiSelectDropDownModule.forRoot(),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: "danger" // set defaults here
     })

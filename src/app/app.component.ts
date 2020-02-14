@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   polling;
   isNewFile = false;
+  role: string = "";
 
   constructor(
     public route: ActivatedRoute,
@@ -29,9 +30,15 @@ export class AppComponent implements OnInit {
     this.loginService.getLogInOutEmitter().subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
       if (this.isLoggedIn) {
-        this.polling = setInterval(() => {
-          // this.checkNewFile();
-        }, 5000);
+        if (!this.polling) {
+          this.polling = setInterval(() => {
+            this.checkNewFile();
+          }, 5000);
+        }
+
+        if (this.loginService.getUser()) {
+          this.role = this.loginService.getUser().role;
+        }
       } else {
         clearInterval(this.polling);
       }

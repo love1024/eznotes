@@ -31,6 +31,7 @@
           class="col-md-10 offset-md-1"
           columns="100"
           [(ngModel)]="query"
+          (input)="showWarning = false"
         >
         </textarea>
         <br /><br />
@@ -43,6 +44,12 @@
             Generate Answer
           </button>
         </div>
+        <p
+          style="color: red; text-align: center; margin-top: 16px;"
+          *ngIf="showWarning"
+        >
+          Please enter some text!
+        </p>
       </div>
       <br />
     </div>

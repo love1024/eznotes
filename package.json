@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "doc": "npx compodoc -p src/tsconfig.app.json"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
     "moment": "^2.24.0",
+    "ng-multiselect-dropdown": "^0.2.10",
     "ngx-bootstrap": "^4.2.0",
     "ngx-popper": "^7.0.0",
     "ngx-socket-io": "^3.0.1",
@@ -52,9 +54,10 @@
     "@angular/cli": "~7.3.8",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

@@ -21,6 +21,8 @@ export class SummaryComponent implements OnInit {
 
   generatedSummary = "";
 
+  currentUserEmail = "";
+
   constructor(
     private summaryService: SummaryService,
     private spinner: NgxSpinnerService,
@@ -50,17 +52,20 @@ export class SummaryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const fileName = params["id"];
       const isEdit = params["edit"];
+      this.currentUserEmail = params["email"];
       this.isEdit = isEdit;
 
-      this.fileService.getFile(fileName).subscribe(res => {
-        this.file = res;
-        this.generatedSummary = res.summary;
-        if (isEdit) {
-          this.text = res.summaryInput;
-        } else {
-          this.text = this.getCompleteFileTranscript(res.text);
-        }
-      });
+      this.fileService
+        .getFile(fileName, this.currentUserEmail)
+        .subscribe(res => {
+          this.file = res;
+          this.generatedSummary = res.summary;
+          if (isEdit) {
+            this.text = res.summaryInput;
+          } else {
+            this.text = this.getCompleteFileTranscript(res.text);
+          }
+        });
     });
   }
 
@@ -73,9 +78,11 @@ export class SummaryComponent implements OnInit {
     this.file.text = "";
     this.spinner.show();
     if (this.isEdit) {
-      this.fileService.updateFile(this.file).subscribe(res => {
-        this.spinner.hide();
-      });
+      this.fileService
+        .updateFileUse(this.file, this.currentUserEmail)
+        .subscribe(res => {
+          this.spinner.hide();
+        });
     } else {
       this.file.fileId = undefined;
       this.fileService.uploadFileWithText(this.file).subscribe(res => {

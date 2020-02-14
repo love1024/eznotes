@@ -32,11 +32,24 @@
 .home-item-container {
   margin-top: 80px;
   margin-bottom: 10px;
-  height:650px;
+  height: 650px;
 }
 .button-color:hover {
   background-color: $primary-button-color;
   color: white;
+}
+
+.list-item {
+  height: 100px;
+  i {
+    color: $primary-button-color;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 500;
+  }
 }
 
 .image-heading {
@@ -81,39 +94,39 @@
   .carousel-item {
     height: 100%;
     text-align: center;
-    width:80%;
+    width: 80%;
     margin-left: 10%;
     margin-top: 50px;
-    h1,h2 {
+    h1,
+    h2 {
       font-weight: 700;
     }
-
   }
 }
-.info-container{
-    p{
-        font-size:25px;
-        font-style: italic;
-    }
-    margin-bottom:80px;
-    margin-top: 20px;
+.info-container {
+  p {
+    font-size: 25px;
+    font-style: italic;
+  }
+  margin-bottom: 80px;
+  margin-top: 20px;
 }
-.checkbox-item-container{
-    padding-top:30px;
-    background-color: rgb(243, 239, 239);
-    height:300px;
-    h3{
-        display: inline;
-        font-weight: 600;
-    }
-    i{
-        color:$primary-button-color;
-        margin-right: 5px;
-    }
+.checkbox-item-container {
+  padding-top: 30px;
+  background-color: rgb(243, 239, 239);
+  height: 300px;
+  h3 {
+    display: inline;
+    font-weight: 600;
+  }
+  i {
+    color: $primary-button-color;
+    margin-right: 5px;
+  }
 }
-.checkbox-row{
-    height:80px;
-    padding:10px;
+.checkbox-row {
+  height: 80px;
+  padding: 10px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -133,17 +146,18 @@
   .checkbox-item-container {
     height: auto;
   }
-  .home-item-image{
-    .large-text{
+  .home-item-image {
+    .large-text {
       font-size: 20px;
     }
   }
-  .image-div{
+  .image-div {
     height: 250px;
   }
   .carousel-item {
-    margin-top:55px !important;
-    h1,h2 {
+    margin-top: 55px !important;
+    h1,
+    h2 {
       font-weight: 700;
       font-size: 25px;
     }

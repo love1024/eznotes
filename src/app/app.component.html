@@ -23,15 +23,18 @@
         <a class="nav-link title" routerLink="pricing">Pricing</a>
       </li> -->
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
-        <a class="title nav-link" routerLink="blog">Blog</a>
-      </li>
-      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a
           class="title nav-link menu-item"
           routerLink="tryFree"
           *ngIf="!isLoggedIn"
           >Try It Free</a
         >
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link" routerLink="blog">Media</a>
+      </li>
+      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+        <a class="title nav-link menu-item" routerLink="contact">Contact</a>
       </li>
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a
@@ -41,13 +44,13 @@
           >Login</a
         >
       </li>
-
-      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
-        <a class="title nav-link menu-item" routerLink="contact">Contact</a>
-      </li>
-      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+      <li
+        *ngIf="role == 'Professor'"
+        class="nav-item"
+        (click)="menuButton.click(); showFooter = true"
+      >
         <a class="nav-link title" routerLink="speech-to-text" *ngIf="isLoggedIn"
-          >Services</a
+          >Note taker</a
         >
       </li>
       <li class="nav-item">
@@ -56,7 +59,7 @@
           routerLink="myfiles"
           (click)="menuButton.click()"
           *ngIf="isLoggedIn"
-          >My Files
+          >My Notes
           <span class="badge badge-pill badge-dark notify" *ngIf="isNewFile"
             >New</span
           ></a

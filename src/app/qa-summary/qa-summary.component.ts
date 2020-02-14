@@ -26,6 +26,8 @@ export class QaSummaryComponent implements OnInit {
   currentIdx = 0;
   isEdit = false;
   file: IFile;
+  showWarning = false;
+  currentUserEmail = "";
 
   constructor(
     private summaryService: SummaryService,
@@ -40,19 +42,22 @@ export class QaSummaryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const fileName = params["id"];
       const isEdit = params["edit"];
+      this.currentUserEmail = params["email"];
       this.isEdit = isEdit;
 
-      this.fileService.getFile(fileName).subscribe((res: IFile) => {
-        this.file = res;
-        if (isEdit) {
-          this.text = res.qaInput;
-          const questionAns = JSON.parse(res.qa);
-          this.current = questionAns.cards;
-          this.play();
-        } else {
-          this.text = this.getCompleteFileTranscript(res.text);
-        }
-      });
+      this.fileService
+        .getFile(fileName, this.currentUserEmail)
+        .subscribe((res: IFile) => {
+          this.file = res;
+          if (isEdit) {
+            this.text = res.qaInput;
+            const questionAns = JSON.parse(res.qa);
+            this.current = questionAns.cards;
+            this.play();
+          } else {
+            this.text = this.getCompleteFileTranscript(res.text);
+          }
+        });
     });
   }
 
@@ -61,14 +66,20 @@ export class QaSummaryComponent implements OnInit {
   }
 
   generateSummary(popupName?: string, query?: string): void {
+    const queryText = query || this.query;
+
+    if (queryText == undefined || queryText == null || queryText == "") {
+      this.showWarning = true;
+      return;
+    }
     const payload = {
       Evidence: this.text,
-      Question: query != undefined ? query : this.query
+      Question: queryText
     };
     this.spinner.show(popupName);
     this.summaryService.queryText(payload).subscribe(res => {
       this.generatedSummary = res.result || "";
-      this.popupQ = query != undefined ? query : this.query;
+      this.popupQ = queryText;
       this.popupA = this.generatedSummary;
       this.current[this.currentIdx] = {
         question: this.popupQ,
@@ -98,6 +109,9 @@ export class QaSummaryComponent implements OnInit {
   }
 
   toggleCard() {
+    if (this.popupQ == undefined || this.popupQ == null || this.popupQ == "") {
+      return;
+    }
     this.isQuestion = !this.isQuestion;
     if (!this.isQuestion && this.popupA == "") {
       this.generateSummary("popup", this.popupQ);
@@ -128,10 +142,12 @@ export class QaSummaryComponent implements OnInit {
     this.file.text = "";
     this.spinner.show();
     if (this.isEdit) {
-      this.fileService.updateFile(this.file).subscribe(res => {
-        this.spinner.hide();
-        this.notifier.notify("success", "Card saved successfully");
-      });
+      this.fileService
+        .updateFileUse(this.file, this.currentUserEmail)
+        .subscribe(res => {
+          this.spinner.hide();
+          this.notifier.notify("success", "Card saved successfully");
+        });
     } else {
       this.file.fileId = undefined;
       this.fileService.uploadFileWithText(this.file).subscribe(res => {

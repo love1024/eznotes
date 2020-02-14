@@ -27,13 +27,13 @@
     </section>
   </div>
 </div>
-<div class="speech-to-text-div">
+<h4 class="row justify-content-center warning" *ngIf="showWarning">
+  Do not close application until the process is complete or the session will
+  ends.
+</h4>
+<div class="speech-to-text-div" *ngIf="isRecordingClicked">
   <br />
-  <h4 class="row justify-content-center warning" *ngIf="showWarning">
-    Do not close application until the process is complete or the session will
-    ends.
-  </h4>
-  <div class="col-md-12" [hidden]="!isRecordingClicked">
+  <div class="col-md-12">
     <div class="row justify-content-center">
       <h4>Record</h4>
     </div>
