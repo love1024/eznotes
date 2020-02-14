@@ -15,7 +15,7 @@ TimeAgo.addLocale(en);
   styleUrls: ["./editor.component.scss"]
 })
 export class EditorComponent implements OnInit {
-  @ViewChild("videoPlayer") videoplayer: ElementRef;
+  @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;
 
   tab = "textSummary";
 

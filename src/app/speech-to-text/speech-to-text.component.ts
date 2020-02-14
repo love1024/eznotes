@@ -49,9 +49,9 @@ export class SpeechToTextComponent implements OnInit {
 
   liveTranscriptionContext: any;
 
-  @ViewChild("videoPlayer") videoPlayer;
+  @ViewChild("videoPlayer", { static: false }) videoPlayer;
 
-  @ViewChild("audoPlayer") audioPlayer;
+  @ViewChild("audoPlayer", { static: false }) audioPlayer;
 
   player: any;
 
