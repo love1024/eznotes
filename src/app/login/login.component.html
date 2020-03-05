@@ -10,7 +10,11 @@
 
   <div fxFlex="100" fxLayoutAlign="center center">
     <div class="form-div">
-      <form class="login-form" [formGroup]="loginForm" (keydown)="onKeydown($event)">
+      <form
+        class="login-form"
+        [formGroup]="loginForm"
+        (keydown)="onKeydown($event)"
+      >
         <div class="form-group">
           <label for="email">Email address</label>
           <input
@@ -30,17 +34,26 @@
             id="exampleInputPassword1"
           />
         </div>
-        <button type="button" class="btn button-color col-md-12" (click)="onSubmit()" [attr.disabled]="loginForm.valid ? null: ''">Submit</button>
+        <button
+          type="button"
+          class="btn button-color col-md-12"
+          (click)="onSubmit()"
+          [attr.disabled]="loginForm.valid ? null : ''"
+        >
+          Submit
+        </button>
         <div class="form-group form-check">
-        <div class="error margin-top" *ngIf="showError">email and password mismatch</div>
-        <div class="error" *ngFor="let err of errors">{{err}}</div>
+          <div class="error margin-top" *ngIf="showError">
+            email and password mismatch
+          </div>
+          <div class="error" *ngFor="let err of errors">{{ err }}</div>
         </div>
         <div>
           <a routerLink="/forget">Forgot your Password?</a>
         </div>
-        <div class="margin-top">
+        <!-- <div class="margin-top">
           <a href="" routerLink="/tryFree">Not a member yet? Sign up Now.</a>
-        </div>
+        </div> -->
       </form>
     </div>
   </div>

@@ -25,15 +25,35 @@
 
   <div class="contact-div row">
     <div class="col-7 offset-md-1">
-      <form>
+      <form [formGroup]="form">
         <div class="form-group">
-          <input type="text" placeholder="Name" class="form-control" />
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            class="form-control"
+          />
+        </div>
+        <div class="error" *ngIf="nameError">
+          Name is required
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Email" class="form-control" />
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            class="form-control"
+          />
+        </div>
+        <div class="error" *ngIf="emailError">
+          Email is required
+        </div>
+        <div class="error" *ngIf="emailInvalidError">
+          Email is not valid
         </div>
         <div class="form-group">
           <textarea
+            formControlName="message"
             class="form-control"
             rows="6"
             placeholder="Message"
@@ -41,7 +61,11 @@
           ></textarea>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
-          <button type="button" class="btn leave-message button-color">
+          <button
+            type="button"
+            class="btn leave-message button-color"
+            (click)="onSubmit()"
+          >
             LEAVE A MESSAGE
           </button>
         </div>
@@ -57,3 +81,6 @@
   </div>
   <br /><br />
 </div>
+
+<br /><br />
+<notifier-container></notifier-container>

@@ -22,14 +22,14 @@
       <!-- <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="nav-link title" routerLink="pricing">Pricing</a>
       </li> -->
-      <li class="nav-item" (click)="menuButton.click(); showFooter = true">
+      <!-- <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a
           class="title nav-link menu-item"
           routerLink="tryFree"
           *ngIf="!isLoggedIn"
           >Try It Free</a
         >
-      </li>
+      </li> -->
       <li class="nav-item" (click)="menuButton.click(); showFooter = true">
         <a class="title nav-link" routerLink="blog">Media</a>
       </li>
@@ -45,7 +45,7 @@
         >
       </li>
       <li
-        *ngIf="role == 'Professor'"
+        *ngIf="role == 'Professor' || role == 'User'"
         class="nav-item"
         (click)="menuButton.click(); showFooter = true"
       >
@@ -80,7 +80,7 @@
 
 <div class="login-footer" *ngIf="showFooter">
   <div class="row justify-items-center">
-    <div class="col-6 footer-item-1">
+    <div class="col-4 footer-item-1">
       <h4 class="default-text text-center">Reach Us:</h4>
       <div class="text-center">
         <i
@@ -91,7 +91,10 @@
         <h6 class="default-text text-center">contact@Eznotes.com</h6> -->
       </div>
     </div>
-    <div class="col-6 footer-item-1">
+    <div class="col-4 logo-bottom" routerLink="/home">
+      <img src="assets/logo-t.png" (click)="goToPage('home')" />
+    </div>
+    <div class="col-4 footer-item-1">
       <h4 class="default-text text-center">Follow Us:</h4>
       <div class="text-center">
         <div class="social-media-icon twitter">

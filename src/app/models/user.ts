@@ -7,6 +7,7 @@ export class User {
   public token?: string;
   role?: string;
   follow?: string;
+  parentUserId?: number;
 
   constructor(x: User) {
     this.userId = x.userId;
@@ -17,6 +18,7 @@ export class User {
     this.token = x.token;
     this.role = x.role;
     this.follow = x.follow;
+    this.parentUserId = x.parentUserId;
   }
 }
 
@@ -29,4 +31,5 @@ export interface IUser {
   token?: string;
   role?: string;
   follow?: string;
+  parentUserId?: number;
 }

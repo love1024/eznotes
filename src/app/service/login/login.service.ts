@@ -6,7 +6,7 @@ import {
   HttpHeaders
 } from "@angular/common/http";
 import { Login, ILoginResult } from "src/app/models/login";
-import { Observable, throwError } from "rxjs";
+import { Observable, throwError, BehaviorSubject } from "rxjs";
 import { tap, shareReplay, catchError } from "rxjs/operators";
 
 import * as moment from "moment";
@@ -29,7 +29,9 @@ export class LoginService {
   private url = environment.server;
 
   /** Emitter to emit login and logout success*/
-  private logInOutEmitter: EventEmitter<boolean> = new EventEmitter();
+  private logInOutEmitter: BehaviorSubject<boolean> = new BehaviorSubject(
+    false
+  );
 
   public user: User;
 
@@ -159,11 +161,12 @@ export class LoginService {
       token: response.token,
       follow: response.follow,
       role: response.role,
-      userId: response.userId
+      userId: response.userId,
+      parentUserId: response.parentUserId
     };
     this.user = new User(user);
     localStorage.setItem("user", JSON.stringify(this.user));
-    this.logInOutEmitter.emit(true);
+    this.logInOutEmitter.next(true);
   }
 
   public setUserWithSignUp(response: ISignUpResult): void {
@@ -213,7 +216,7 @@ export class LoginService {
    * @memberof LoginService
    */
   public emitLogInOut() {
-    this.logInOutEmitter.emit(this.isLoggedIn());
+    this.logInOutEmitter.next(this.isLoggedIn());
   }
 
   /**

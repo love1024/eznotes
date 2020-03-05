@@ -14,7 +14,7 @@ import { ServicesComponent } from "./services/services.component";
 import { SummaryComponent } from "./summary/summary.component";
 import { QaSummaryComponent } from "./qa-summary/qa-summary.component";
 import { SpeechToTextComponent } from "./speech-to-text/speech-to-text.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CommonModule } from "@angular/common";
 import { HomeComponent } from "./home/home.component";
@@ -37,10 +37,11 @@ import { AngularDraggableModule } from "angular2-draggable";
 import { NgxPopperModule } from "ngx-popper";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
-// import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { LiveTextWindowComponent } from "./live-text-window/live-text-window.component";
+import { InterceptorService } from "./service/interceptor/interceptor.service";
 
-// const config: SocketIoConfig = { url: "http://localhost:1337" };
+const config: SocketIoConfig = { url: "https://eznotes.io:5002" };
 
 @NgModule({
   declarations: [
@@ -81,14 +82,20 @@ import { LiveTextWindowComponent } from "./live-text-window/live-text-window.com
     NotifierModule,
     LoadingBarModule,
     AngularDraggableModule,
-    // SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(config),
     NgxPopperModule.forRoot({}),
     NgMultiSelectDropDownModule.forRoot(),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: "danger" // set defaults here
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

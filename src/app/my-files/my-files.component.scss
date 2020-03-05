@@ -2,7 +2,7 @@
 .blog-image {
   margin-top: 80px;
   height: 200px;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-3.jpg);
+  background-image: url(https://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-3.jpg);
   background-position: center;
   background-size: cover;
   p {
@@ -105,11 +105,14 @@
   }
 }
 
+.form-group {
+  width: 50%;
+}
+
 .button-color {
   background-color: $primary-button-color;
   border-color: $primary-button-color;
   color: white;
-  width: 80px;
   margin-bottom: 10px;
   height: 40px;
 }
@@ -140,8 +143,6 @@ th {
     }
   }
   .file {
-    width: 70%;
-    max-width: 70%;
     flex: none;
     text-align: left;
   }

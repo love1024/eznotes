@@ -4,7 +4,7 @@ import * as $ from "jquery";
 import { FileService } from "../service/file/file.service";
 import { NotifierService } from "angular-notifier";
 import { LoadingBarService } from "@ngx-loading-bar/core";
-// import { Socket } from "ngx-socket-io";
+import { Socket } from "ngx-socket-io";
 import { IFile } from "../models/fileitem";
 
 declare var RecordRTCPromisesHandler;
@@ -60,13 +60,14 @@ export class SpeechToTextComponent implements OnInit {
   constructor(
     private notificationService: NotifierService,
     private fileService: FileService,
-    private loadingBar: LoadingBarService // private socketEvent: Socket
+    private loadingBar: LoadingBarService,
+    private socketEvent: Socket
   ) {
-    // this.socketEvent.fromEvent("connect").subscribe(e => this.socketConnect(e));
-    // this.socketEvent
-    //   .fromEvent("messages")
-    //   .subscribe(e => this.socketMessages(e));
-    // this.socketEvent.fromEvent("speechData").subscribe(e => this.socketData(e));
+    this.socketEvent.fromEvent("connect").subscribe(e => this.socketConnect(e));
+    this.socketEvent
+      .fromEvent("messages")
+      .subscribe(e => this.socketMessages(e));
+    this.socketEvent.fromEvent("speechData").subscribe(e => this.socketData(e));
   }
 
   ngOnInit() {
@@ -144,6 +145,7 @@ export class SpeechToTextComponent implements OnInit {
     this.isLiveNotes = true;
     this.recordingDisabled = false;
     this.player = this.audioPlayer;
+    localStorage.setItem("liveText", "");
     const tab = window.open(
       location.origin + "/live-text",
       "",
@@ -174,6 +176,7 @@ export class SpeechToTextComponent implements OnInit {
         this.recorder.startRecording();
       })
       .catch(err => {
+        console.log(err);
         this.recordingInitiated = false;
         this.recordingDisabled = true;
       });
@@ -194,7 +197,7 @@ export class SpeechToTextComponent implements OnInit {
   recordAudio(): void {
     let context, processor;
     if (this.isLiveNotes) {
-      // this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
+      this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
       let AudioContext =
         (window as any).AudioContext || (window as any).webkitAudioContext;
       context = new AudioContext({
@@ -240,7 +243,7 @@ export class SpeechToTextComponent implements OnInit {
 
   stopRecording(): void {
     if (this.isLiveNotes) {
-      // this.socketEvent.emit("endGoogleCloudStream", "");
+      this.socketEvent.emit("endGoogleCloudStream", "");
       if (this.liveTranscriptionInput) {
         this.liveTranscriptionInput.disconnect(this.liveTranscriptionProcessor);
       }
@@ -313,7 +316,7 @@ export class SpeechToTextComponent implements OnInit {
     var left = e.inputBuffer.getChannelData(0);
     // var left16 = convertFloat32ToInt16(left); // old 32 to 16 function
     var left16 = this.downsampleBuffer(left, 44100, 16000);
-    // this.socketEvent.emit("binaryData", left16);
+    this.socketEvent.emit("binaryData", left16);
   }
 
   downsampleBuffer(buffer, sampleRate, outSampleRate) {
@@ -349,7 +352,7 @@ export class SpeechToTextComponent implements OnInit {
   }
 
   socketConnect(data) {
-    // this.socketEvent.emit("join", "Server Connected to Client");
+    this.socketEvent.emit("join", "Server Connected to Client");
   }
 
   socketMessages(data) {

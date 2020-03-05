@@ -2,7 +2,7 @@
 .pricing {
   margin-top: 80px;
   height: 220px;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/money-3523131_1280.jpg);
+  background-image: url(https://159.89.118.118/wp-content/uploads/2019/03/money-3523131_1280.jpg);
   background-position: center;
   background-size: cover;
   p {
@@ -26,7 +26,7 @@
 }
 
 .pic-div {
-  background-image: url(http://159.89.118.118/wp-content/uploads/2018/04/business-01.jpg);
+  background-image: url(https://159.89.118.118/wp-content/uploads/2018/04/business-01.jpg);
   height: 700px;
 }
 
@@ -155,74 +155,73 @@ textarea {
 
 .contact-div {
   background-color: white;
-  height:450px;
+  height: 450px;
   margin-top: 20px;
 }
 
 @media only screen and (max-width: 800px) {
-  .price-dialog{
-    width:80%;
-    h2{
-      font-size:30px;
+  .price-dialog {
+    width: 80%;
+    h2 {
+      font-size: 30px;
     }
   }
-  .team-dialog{
+  .team-dialog {
     width: 80%;
-    h4{
+    h4 {
       font-size: 20px;
     }
   }
-  .grey-background > h1{
+  .grey-background > h1 {
     font-size: 40px;
   }
-  
-  .grey-gradient-background.row .pic-div.row{
+
+  .grey-gradient-background.row .pic-div.row {
     margin-right: 0px;
   }
   .leave-message {
     font-size: 15px;
   }
-  .pic-div{
-    height:auto;
+  .pic-div {
+    height: auto;
   }
 
-  .pic-div.row{
+  .pic-div.row {
     flex-direction: column;
-    .col-3{
+    .col-3 {
       margin-left: 10%;
       min-width: 80%;
     }
-    .col-6{
+    .col-6 {
       margin-left: 10%;
       min-width: 80%;
     }
-
   }
-  .contact-mail{
+  .contact-mail {
     font-size: 20px;
   }
-  .contact-div{
+  .contact-div {
     margin-bottom: 10px;
   }
-  .price-button{
-    width:80%;
+  .price-button {
+    width: 80%;
   }
-  .team-button{
-    width:80%;
+  .team-button {
+    width: 80%;
   }
-  .pricing{
-    p{
+  .pricing {
+    p {
       font-size: 20px;
     }
   }
 }
 
-.contact-mail{
-  height:auto;
-  width:100%;
+.contact-mail {
+  height: auto;
+  width: 100%;
   text-align: center;
 }
-.grey-gradient-background.row{
+.grey-gradient-background.row {
   margin-left: 0px;
   margin-right: 0px;
 }

@@ -51,34 +51,6 @@
             Confirm password mismatch
           </div>
         </div>
-        <div class="form-group">
-          <ng-multiselect-dropdown
-            [placeholder]="'Select Institute'"
-            [data]="dropdownListInstitutes"
-            [(ngModel)]="selectedInstitute"
-            [ngModelOptions]="{ standalone: true }"
-            [settings]="dropdownSettingsInstitute"
-            (onSelect)="onInstituteSelect($event)"
-          >
-          </ng-multiselect-dropdown>
-          <div class="error" *ngIf="emptyInstitueError">
-            Please select an Institute
-          </div>
-        </div>
-        <div class="form-group">
-          <ng-multiselect-dropdown
-            [placeholder]="'Select Professor'"
-            [data]="dropdownListProfessors"
-            [(ngModel)]="selectedProfessors"
-            [ngModelOptions]="{ standalone: true }"
-            [settings]="dropdownSettingsProfessor"
-          >
-          </ng-multiselect-dropdown>
-          <div class="error" *ngIf="emptyProfessorError">
-            Please select an Institute
-          </div>
-        </div>
-
         <div class="form-group form-check">
           <input
             formControlName="terms"

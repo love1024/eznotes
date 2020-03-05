@@ -20,6 +20,16 @@ button {
   cursor: pointer;
 }
 
+.logo-bottom {
+  text-align: center;
+  position: relative;
+  top: -35px;
+
+  img {
+    width: 160px;
+  }
+}
+
 .pd-2 {
   padding: 8px;
 }
@@ -43,4 +53,20 @@ button {
 .notify {
   float: right;
   margin-bottom: -15px;
+}
+
+@media only screen and (max-width: 800px) {
+  .logo-bottom {
+    text-align: center;
+    position: relative;
+    top: -35px;
+    left: -35px;
+    img {
+      width: 130px;
+    }
+  }
+
+  .notify {
+    float: none;
+  }
 }

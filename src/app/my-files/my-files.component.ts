@@ -3,12 +3,15 @@ import { Router, NavigationExtras } from "@angular/router";
 import { FileService } from "../service/file/file.service";
 import { IFile } from "../models/fileitem";
 import { NotifierService } from "angular-notifier";
-import { of, Subject } from "rxjs";
+import { of, Subject, Observable } from "rxjs";
 import * as jsPDF from "jspdf";
 import { LoginService } from "../service/login/login.service";
 import * as html2pdf from "html2pdf.js";
 import { NgxSpinnerService } from "ngx-spinner";
 import { IQa } from "../models/qa";
+import { IDropdownSettings } from "ng-multiselect-dropdown";
+import { UserService } from "../service/user/user.service";
+import { IUser } from "../models/user";
 
 enum FileType {
   Summary = 1,
@@ -32,6 +35,8 @@ export class MyFilesComponent implements OnInit {
 
   sortByOwnerAsc = false;
 
+  openFollowProfessor = false;
+
   selected = 0;
 
   withSpeaker = false;
@@ -42,24 +47,59 @@ export class MyFilesComponent implements OnInit {
 
   subject$ = new Subject<string>();
 
+  dropdownListProfessors = [];
+
+  selectedProfessors = [];
+
+  dropdownSettingsProfessor: IDropdownSettings = {};
+
+  follow = "";
+
+  user: IUser;
+
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
     private fileService: FileService,
     private notifier: NotifierService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.user = this.loginService.getUser();
+    this.getFiles();
+    this.getAllProfessors();
+
+    this.userService.getUserInfo(this.user.userId).subscribe(user => {
+      this.follow = user.follow;
+    });
+    this.dropdownSettingsProfessor = {
+      singleSelection: false,
+      idField: "id",
+      textField: "value",
+      selectAllText: "Select All",
+      unSelectAllText: "UnSelect All",
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+  }
+
+  getFiles(): void {
+    this.spinner.show();
     this.fileService.getFiles().subscribe(files => {
       this.files = files;
       this.sortByCreated();
+      this.spinner.hide();
+
+      this.getNames();
     });
   }
 
   editFile(file: IFile) {
     file.editedAt = new Date().toJSON();
     const user = this.loginService.getUser();
+    this.follow = user.follow;
 
     this.fileService.updateFile(file, user.emailAddress).subscribe(() => {
       const queryParams: NavigationExtras = {
@@ -75,6 +115,67 @@ export class MyFilesComponent implements OnInit {
         this.router.navigate(["qa-summary"], queryParams);
       } else {
         this.router.navigate(["editor"], queryParams);
+      }
+    });
+  }
+
+  getNames(): void {
+    this.files.forEach(async file => {
+      const user = await this.getUserInfoByEmail(file.userEmail);
+      file.firstName = user.firstName;
+      file.lastName = user.lastName;
+    });
+  }
+
+  async getUserInfoByEmail(email: string): Promise<any> {
+    return await this.userService.getUserInfoByEmail(email);
+  }
+
+  onFollowSubmit(): void {
+    let follow = "";
+    this.selectedProfessors.forEach(inst => {
+      follow += `${inst.id}, `;
+    });
+
+    this.spinner.show();
+    this.userService.followProfessors({ follow: follow }).subscribe(res => {
+      this.spinner.hide();
+      this.follow = follow;
+      this.getFiles();
+    });
+  }
+
+  getAllProfessors(): void {
+    this.spinner.show();
+    this.userService
+      .getAllProfessors(this.user.parentUserId)
+      .subscribe(professors => {
+        this.dropdownListProfessors = professors.map(inst => {
+          return {
+            id: inst.userId,
+            value: `${inst.firstName} ${inst.lastName}`
+          };
+        });
+        this.spinner.hide();
+        this.getSelectedProfessor(professors);
+      });
+  }
+
+  getSelectedProfessor(professors: IUser[]): void {
+    if (!this.follow) {
+      return;
+    }
+    const professorId = this.follow.split(",");
+    this.selectedProfessors = [];
+    professorId.forEach(p => {
+      if (p) {
+        const found = professors.filter(prof => prof.userId == +p);
+        if (found.length > 0) {
+          this.selectedProfessors.push({
+            id: found[0].userId,
+            value: `${found[0].firstName} ${found[0].lastName}`
+          });
+        }
       }
     });
   }
@@ -96,7 +197,11 @@ export class MyFilesComponent implements OnInit {
   }
 
   changeName(file: IFile, newName: string) {
-    const data = { text: newName };
+    const data = {
+      text: newName,
+      filename: file.videoFileName,
+      email: this.user.emailAddress
+    };
     this.fileService.changeName(data, file.fileId).subscribe();
   }
 

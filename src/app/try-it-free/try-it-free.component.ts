@@ -21,23 +21,7 @@ export class TryItFreeComponent implements OnInit {
 
   signupError = false;
 
-  emptyInstitueError = false;
-
-  emptyProfessorError = false;
-
   errors = [];
-
-  dropdownListInstitutes = [];
-
-  dropdownListProfessors = [];
-
-  selectedInstitute = [];
-
-  selectedProfessors = [];
-
-  dropdownSettingsInstitute: IDropdownSettings = {};
-
-  dropdownSettingsProfessor: IDropdownSettings = {};
 
   constructor(
     private fb: FormBuilder,
@@ -56,64 +40,27 @@ export class TryItFreeComponent implements OnInit {
       confirmPassword: [""],
       terms: [false]
     });
-
-    this.dropdownSettingsInstitute = {
-      singleSelection: true,
-      idField: "id",
-      textField: "value",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 5,
-      allowSearchFilter: true
-    };
-
-    this.dropdownSettingsProfessor = {
-      singleSelection: false,
-      idField: "id",
-      textField: "value",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 5,
-      allowSearchFilter: true
-    };
-
-    this.userService.getAllInstitutes().subscribe(institutes => {
-      this.dropdownListInstitutes = institutes.map(inst => {
-        return { id: inst.userId, value: `${inst.firstName} ${inst.lastName}` };
-      });
-    });
   }
 
   onSubmit() {
-    this.termsError = this.confirmError = this.emptyInstitueError = this.emptyProfessorError = this.signupError = false;
+    this.termsError = this.confirmError = this.signupError = false;
     if (!this.signupForm.value.terms) {
       this.termsError = true;
     } else if (
       this.signupForm.value.confirmPassword != this.signupForm.value.password
     ) {
       this.confirmError = true;
-    } else if (this.selectedInstitute.length == 0) {
-      this.emptyInstitueError = true;
-    } else if (this.selectedProfessors.length == 0) {
-      this.emptyProfessorError = true;
     } else {
       this.signupError = false;
       this.termsError = false;
       this.confirmError = false;
       this.spinner.show();
 
-      let follow = "";
-      this.selectedProfessors.forEach(inst => {
-        follow += `${inst.id}, `;
-      });
-
       const user: ISignUp = {
         emailAddress: this.signupForm.value.emailAddress,
         password: this.signupForm.value.password,
         firstName: this.signupForm.value.firstName,
-        lastName: this.signupForm.value.lastName,
-        parentUserId: this.selectedInstitute[0].id,
-        follow: follow
+        lastName: this.signupForm.value.lastName
       };
 
       this.loginService.signUp(user).subscribe(
@@ -137,15 +84,5 @@ export class TryItFreeComponent implements OnInit {
     if (event.key == "Enter") {
       this.onSubmit();
     }
-  }
-
-  onInstituteSelect(event): void {
-    this.spinner.show();
-    this.userService.getAllProfessors(event.id).subscribe(professors => {
-      this.dropdownListProfessors = professors.map(inst => {
-        return { id: inst.userId, value: `${inst.firstName} ${inst.lastName}` };
-      });
-      this.spinner.hide();
-    });
   }
 }

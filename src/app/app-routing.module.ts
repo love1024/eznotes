@@ -56,10 +56,10 @@ const routes: Routes = [
     path: "blog",
     component: BlogsComponent
   },
-  {
-    path: "tryFree",
-    component: TryItFreeComponent
-  },
+  // {
+  //   path: "tryFree",
+  //   component: TryItFreeComponent
+  // },
   {
     path: "liivlabs-academics",
     component: LiivlabsAcademicComponent

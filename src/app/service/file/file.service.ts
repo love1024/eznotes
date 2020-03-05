@@ -75,10 +75,7 @@ export class FileService {
   }
 
   changeName(data, fileId): Observable<void> {
-    return this.http.post<void>(
-      `${this.api}api/file/filename?fileId=${fileId}`,
-      data
-    );
+    return this.http.post<void>(`${this.api}api/file/filename`, data);
   }
 
   getFile(name: string, email: string): Observable<any> {

@@ -29,9 +29,9 @@
 </div>
 <h4 class="row justify-content-center warning" *ngIf="showWarning">
   Do not close application until the process is complete or the session will
-  ends.
+  end.
 </h4>
-<div class="speech-to-text-div" *ngIf="isRecordingClicked">
+<div class="speech-to-text-div" [hidden]="!isRecordingClicked">
   <br />
   <div class="col-md-12">
     <div class="row justify-content-center">
@@ -114,11 +114,11 @@
   <div class="col-md-4 review-items">
     <div class="feedback-item">
       <div>
-        <div>
+        <!-- <div>
           <img
             src="http://159.89.118.118/wp-content/uploads/2019/03/imgpsh_fullsize_anim-5.png"
           />
-        </div>
+        </div> -->
         <br />
         <h3>For Excellent Notes</h3>
         <p>

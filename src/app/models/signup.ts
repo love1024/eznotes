@@ -9,8 +9,6 @@ export interface ISignUp {
   password: string;
   firstName: string;
   lastName: string;
-  follow: string;
-  parentUserId: number;
 }
 
 export interface ISignUpResult {
@@ -19,6 +17,4 @@ export interface ISignUpResult {
   firstName: string;
   lastName: string;
   emailVerified: boolean;
-  follow: string;
-  parentUserId: number;
 }

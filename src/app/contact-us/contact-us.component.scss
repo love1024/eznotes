@@ -2,7 +2,7 @@
 .contact-image {
   margin-top: 80px;
   height: 330px;
-  background-image: url(http://159.89.118.118/wp-content/uploads/2019/03/telephone-call-communication-technology-163173.jpeg);
+  background-image: url(https://159.89.118.118/wp-content/uploads/2019/03/telephone-call-communication-technology-163173.jpeg);
   background-position: center;
   background-size: cover;
   p {
@@ -57,7 +57,7 @@ textarea {
   border: 2px solid lightgray;
 }
 @media only screen and (max-width: 1000px) {
-  .contact-div{
+  .contact-div {
     flex-direction: column;
   }
   .leave-message {
@@ -68,18 +68,18 @@ textarea {
       font-size: 30px;
     }
   }
-  .col-7{
-    width:80%;
+  .col-7 {
+    width: 80%;
     margin-left: 10%;
-    flex:none;
+    flex: none;
     max-width: 80%;
-    margin-bottom:20px;
+    margin-bottom: 20px;
   }
-  .col-3{
+  .col-3 {
     text-align: center;
-    width:50%;
-    flex:none;
-    max-width:50%;
+    width: 50%;
+    flex: none;
+    max-width: 50%;
     margin-left: 25%;
   }
 }

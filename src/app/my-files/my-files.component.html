@@ -7,6 +7,34 @@
     </section>
   </div>
 </div>
+<div style="width: 88%; margin: 0 auto; margin-bottom: 50px;">
+  <button
+    *ngIf="user?.role == 'Student'"
+    class="btn button-color button-blue generate"
+    (click)="openFollowProfessor = !openFollowProfessor"
+  >
+    Follow Professors
+  </button>
+  <div *ngIf="openFollowProfessor">
+    <div class="form-group">
+      <ng-multiselect-dropdown
+        [placeholder]="'Select Professor'"
+        [data]="dropdownListProfessors"
+        [(ngModel)]="selectedProfessors"
+        [ngModelOptions]="{ standalone: true }"
+        [settings]="dropdownSettingsProfessor"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <button
+      class="btn button-color button-blue generate"
+      (click)="onFollowSubmit()"
+    >
+      Submit
+    </button>
+  </div>
+</div>
 <div class="col-md-12 center-90 min-height table">
   <div class="accordion" id="accordionExample">
     <div class="card header-card">
@@ -89,7 +117,7 @@
         <div class="card-header card-div">
           <div class="row justify-content-between align-items-center">
             <p
-              class="mb-0 col-2 file filename"
+              class="mb-lg-0 mb-2 col-12 col-lg-2 file filename"
               contenteditable="true"
               (input)="changeName(file, $event.target.innerText)"
               [ngClass]="{ bold: file.isNew }"
@@ -105,7 +133,7 @@
             <p class="mb-0 col-1 small-text size" *ngIf="file.hasSummary">-</p>
             <p class="mb-0 col-1 small-text size" *ngIf="file.hasQa">-</p>
             <p class="mb-0 col-2 small-text date">
-              {{ file.userEmail }}
+              {{ file?.firstName + " " + file?.lastName }}
             </p>
             <p class="mb-0 col-2 small-text date">
               {{ file.createdAt | date: "dd MMM yyyy" }}

@@ -30,4 +30,8 @@ export interface IFile {
   qaInput?: string;
 
   qa?: string;
+
+  firstName?: string;
+
+  lastName?: string;
 }
