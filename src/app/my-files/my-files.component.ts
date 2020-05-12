@@ -300,21 +300,32 @@ export class MyFilesComponent implements OnInit {
     );
   }
 
-  onSummaryDownload() {
+  onSummaryDownload(isDoc = false) {
     const user = this.loginService.getUser();
     if (this.selectedFile.hasSummary) {
       this.fileService
         .getFile(this.selectedFile.videoFileName, user.emailAddress)
         .subscribe(res => {
-          console.log(res);
-          this.downloadTextPdf(res.summary, res.originalName, res);
+          if (isDoc) {
+            this.getCompleteTranscriptText(res.summary, res.originalName, res);
+          } else {
+            this.downloadTextPdf(res.summary, res.originalName, res);
+          }
         });
     } else {
-      this.downloadQAPdf(
-        JSON.parse(this.selectedFile.qa).cards,
-        this.selectedFile.originalName,
-        this.selectedFile
-      );
+      this.fileService
+        .getFile(this.selectedFile.videoFileName, user.emailAddress)
+        .subscribe(res => {
+          if (isDoc) {
+            this.getCompleteTranscriptTextQA(
+              JSON.parse(res.qa).cards,
+              res.originalName,
+              res
+            );
+          } else {
+            this.downloadQAPdf(JSON.parse(res.qa).cards, res.originalName, res);
+          }
+        });
     }
   }
 
@@ -527,6 +538,7 @@ export class MyFilesComponent implements OnInit {
   }
 
   getCompleteTranscriptDoc(text: any, name: string, withSpeaker: boolean) {
+    console.log(text);
     var header =
       "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
       "xmlns:w='urn:schemas-microsoft-com:office:word' " +

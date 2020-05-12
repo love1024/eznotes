@@ -60,7 +60,7 @@
     color: $primary-button-color;
   }
   p {
-    font-size: 18px;
+    font-size: 15px;
   }
   .row {
     margin-bottom: 8px;
@@ -126,6 +126,25 @@ th {
 .table .thead-light th {
   background-color: $primary-button-color;
   color: white;
+}
+
+@media only screen and (max-width: 1400px) {
+  .center-90 {
+    width: 100%;
+  }
+  .card-div {
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .card-div {
+    p {
+      font-size: 10px;
+    }
+  }
 }
 
 @media only screen and (max-width: 900px) {

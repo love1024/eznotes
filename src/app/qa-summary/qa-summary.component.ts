@@ -56,6 +56,7 @@ export class QaSummaryComponent implements OnInit {
             this.play();
           } else {
             this.text = this.getCompleteFileTranscript(res.text);
+            this.play();
           }
         });
     });
@@ -106,6 +107,7 @@ export class QaSummaryComponent implements OnInit {
   closePopup() {
     this.isPopupOpen = false;
     this.currentIdx = 0;
+    this.router.navigateByUrl("/myfiles");
   }
 
   toggleCard() {

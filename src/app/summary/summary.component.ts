@@ -6,6 +6,7 @@ import * as $ from "jquery";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FileService } from "../service/file/file.service";
 import { IFile } from "../models/fileitem";
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: "app-summary",
@@ -28,7 +29,8 @@ export class SummaryComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private fileService: FileService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private notifier: NotifierService
   ) {}
 
   ngOnInit() {
@@ -82,11 +84,13 @@ export class SummaryComponent implements OnInit {
         .updateFileUse(this.file, this.currentUserEmail)
         .subscribe(res => {
           this.spinner.hide();
+          this.notifier.notify("success", "Summary saved successfully");
         });
     } else {
       this.file.fileId = undefined;
       this.fileService.uploadFileWithText(this.file).subscribe(res => {
         this.spinner.hide();
+        this.notifier.notify("success", "Summary saved successfully");
       });
     }
   }

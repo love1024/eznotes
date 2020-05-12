@@ -73,7 +73,7 @@
               *ngIf="!sortByOwnerAsc && selected == 2"
             ></i>
           </p>
-          <p class=" mb-0 col-2 pointer" (click)="sortByCreated()">
+          <p class="mb-0 col-2 pointer" (click)="sortByCreated()">
             Created Date
             <i
               class="fa fa-caret-down"
@@ -84,7 +84,7 @@
               *ngIf="!sortByCreatedAsc && selected == 3"
             ></i>
           </p>
-          <p class=" mb-0 col-2 pointer" (click)="sortByEdited()">
+          <p class="mb-0 col-2 pointer" (click)="sortByEdited()">
             Modified Date
             <i
               class="fa fa-caret-down"
@@ -95,7 +95,7 @@
               *ngIf="!sortByEditedAsc && selected == 4"
             ></i>
           </p>
-          <p class=" mb-0 col-1 pointer" (click)="sortByEdited()">
+          <p class="mb-0 col-1 pointer" (click)="sortByEdited()">
             File Type
             <i
               class="fa fa-caret-down"
@@ -106,7 +106,7 @@
               *ngIf="!sortByEditedAsc && selected == 5"
             ></i>
           </p>
-          <p class=" mb-0 col-2 pointer">Actions</p>
+          <p class="mb-0 col-2 pointer">Actions</p>
         </div>
       </div>
     </div>
@@ -138,10 +138,10 @@
             <p class="mb-0 col-2 small-text date">
               {{ file.createdAt | date: "dd MMM yyyy" }}
             </p>
-            <p class=" mb-0 col-2 small-text date">
+            <p class="mb-0 col-2 small-text date">
               {{ file.editedAt | date: "dd MMM yyyy" }}
             </p>
-            <p class=" mb-0 col-1 small-text date">
+            <p class="mb-0 col-1 small-text date">
               {{
                 file.hasSummary
                   ? "Summary"
@@ -151,48 +151,97 @@
               }}
             </p>
             <p class="mb-0 col-2">
-              <i class="fa fa-pencil action-icon" (click)="editFile(file)"></i>
-              <i
-                *ngIf="file.hasSummary || file.hasQa"
-                class="fa fa-download action-icon"
-                (popperOnShown)="onDownloadShown(file)"
-                [popper]="summaryDownload"
-                [popperTrigger]="'click'"
+              <span
+                [popper]="editNote"
+                [popperTrigger]="'hover'"
                 [popperHideOnClickOutside]="true"
                 [popperHideOnScroll]="true"
-                [popperPlacement]="'left'"
+                [popperPlacement]="'top'"
                 [popperStyles]="{
-                  'background-color': '#fff',
-                  border: 0,
-                  padding: '16px 32px'
+                  'background-color': '#fff'
                 }"
               >
-              </i>
-              <i
-                *ngIf="!file.hasSummary && !file.hasQa"
-                class="fa fa-download action-icon"
-                (popperOnShown)="onDownloadShown(file)"
-                [popper]="transcriptionDownload"
-                [popperTrigger]="'click'"
+                <i
+                  class="fa fa-pencil action-icon"
+                  (click)="editFile(file)"
+                ></i>
+              </span>
+              <span
+                [popper]="downloadNote"
+                [popperTrigger]="'hover'"
                 [popperHideOnClickOutside]="true"
                 [popperHideOnScroll]="true"
-                [popperPlacement]="'left'"
+                [popperPlacement]="'top'"
                 [popperStyles]="{
-                  'background-color': 'white',
-                  border: 0,
-                  padding: '16px 0',
-                  'border-radius': 0,
-                  'box-shadow': '0px 0px 6px lightgray'
+                  'background-color': '#fff'
                 }"
               >
-              </i>
-              <i
-                mwlConfirmationPopover
-                class="fa fa-trash action-icon"
-                [popoverTitle]="'Delete file'"
-                [popoverMessage]="'Do you want to delete this file?'"
-                (confirm)="deleteFile(file)"
-              ></i>
+                <i
+                  *ngIf="file.hasSummary || file.hasQa"
+                  class="fa fa-download action-icon"
+                  (popperOnShown)="onDownloadShown(file)"
+                  [popper]="summaryDownload"
+                  [popperTrigger]="'click'"
+                  [popperHideOnClickOutside]="true"
+                  [popperHideOnScroll]="true"
+                  [popperPlacement]="'left'"
+                  [popperStyles]="{
+                    'background-color': '#fff',
+                    border: 0,
+                    padding: '16px 0',
+                    'border-radius': 0,
+                    'box-shadow': '0px 0px 6px lightgray'
+                  }"
+                >
+                </i>
+              </span>
+              <span
+                [popper]="downloadNote"
+                [popperTrigger]="'hover'"
+                [popperHideOnClickOutside]="true"
+                [popperHideOnScroll]="true"
+                [popperPlacement]="'top'"
+                [popperStyles]="{
+                  'background-color': '#fff'
+                }"
+              >
+                <i
+                  *ngIf="!file.hasSummary && !file.hasQa"
+                  class="fa fa-download action-icon"
+                  (popperOnShown)="onDownloadShown(file)"
+                  [popper]="transcriptionDownload"
+                  [popperTrigger]="'click'"
+                  [popperHideOnClickOutside]="true"
+                  [popperHideOnScroll]="true"
+                  [popperPlacement]="'left'"
+                  [popperStyles]="{
+                    'background-color': 'white',
+                    border: 0,
+                    padding: '16px 0',
+                    'border-radius': 0,
+                    'box-shadow': '0px 0px 6px lightgray'
+                  }"
+                >
+                </i>
+              </span>
+              <span
+                [popper]="deleteNote"
+                [popperTrigger]="'hover'"
+                [popperHideOnClickOutside]="true"
+                [popperHideOnScroll]="true"
+                [popperPlacement]="'top'"
+                [popperStyles]="{
+                  'background-color': '#fff'
+                }"
+              >
+                <i
+                  mwlConfirmationPopover
+                  class="fa fa-trash action-icon"
+                  [popoverTitle]="'Delete file'"
+                  [popoverMessage]="'Do you want to delete this file?'"
+                  (confirm)="deleteFile(file)"
+                ></i>
+              </span>
             </p>
           </div>
         </div>
@@ -206,28 +255,53 @@
 <ngx-spinner></ngx-spinner>
 
 <popper-content #summaryDownload>
-  <p class="bold download-item" (click)="onSummaryDownload()">Download</p>
+  <p class="bold download-item" (click)="onSummaryDownload()">
+    <i class="fa fa-file-pdf-o action-icon" style="color: gray;"></i>
+    Download Pdf
+  </p>
+  <p class="bold download-item" (click)="onSummaryDownload(true)">
+    <i class="fa fa-file-text-o action-icon" style="color: gray;"></i>
+    Download Docs
+  </p>
+</popper-content>
+
+<popper-content #editNote>
+  <p class="bold download-item">
+    Edit Note
+  </p>
+</popper-content>
+
+<popper-content #deleteNote>
+  <p class="bold download-item">
+    Delete Note
+  </p>
+</popper-content>
+
+<popper-content #downloadNote>
+  <p class="bold download-item">
+    Download Note
+  </p>
 </popper-content>
 
 <popper-content #transcriptionDownload>
   <p class="download-item" (click)="onDownload(true, false)">
-    <i class="fa fa-file-pdf-o  action-icon" style="color: gray"></i>
+    <i class="fa fa-file-pdf-o action-icon" style="color: gray;"></i>
     Download Pdf
   </p>
   <p class="download-item" (click)="onDownload(true, true)">
-    <i class="fa fa-file-pdf-o  action-icon" style="color: gray"></i>
+    <i class="fa fa-file-pdf-o action-icon" style="color: gray;"></i>
     Download Pdf(Speaker)
   </p>
   <p class="download-item" (click)="onDownload(false, false)">
-    <i class="fa fa-file-text-o action-icon" style="color: gray"></i> Download
+    <i class="fa fa-file-text-o action-icon" style="color: gray;"></i> Download
     Docs
   </p>
   <p class="download-item" (click)="onDownload(false, true)">
-    <i class="fa fa-file-text-o action-icon" style="color: gray"></i>
+    <i class="fa fa-file-text-o action-icon" style="color: gray;"></i>
     Download Docs(Speaker)
   </p>
   <p class="download-item" (click)="onCaptionDownload()">
-    <i class="fa fa-file-video-o action-icon" style="color: gray"></i>
+    <i class="fa fa-file-video-o action-icon" style="color: gray;"></i>
     Download Caption Video
   </p>
 </popper-content>

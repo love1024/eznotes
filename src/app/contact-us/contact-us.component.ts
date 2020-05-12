@@ -53,6 +53,7 @@ export class ContactUsComponent implements OnInit {
       };
       this.userService.contactUs(input).subscribe(
         () => {
+          this.createForm();
           this.notificationService.notify(
             "success",
             "Request sent!, we will contact you soon"

@@ -39,6 +39,8 @@ export class SpeechToTextComponent implements OnInit {
 
   isLiveNotes = false;
 
+  isScreenShare = false;
+
   removeLastSentence = false;
 
   showWarning = false;
@@ -153,6 +155,11 @@ export class SpeechToTextComponent implements OnInit {
     );
   }
 
+  startLiveNotesWithScreenShare(): void {
+    this.startLiveNotes();
+    this.isScreenShare = true;
+  }
+
   record(): void {
     if (this.recordingVideo) {
       this.recordVideo();
@@ -194,8 +201,62 @@ export class SpeechToTextComponent implements OnInit {
     this.recorder.recordRTC.resumeRecording();
   }
 
+  // recordScreenshare(): void {
+  //   let context, processor;
+
+  //   if (this.isLiveNotes) {
+  //     this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
+  //     let AudioContext =
+  //       (window as any).AudioContext || (window as any).webkitAudioContext;
+  //     context = new AudioContext({
+  //       latencyHint: "interactive"
+  //     });
+  //     this.liveTranscriptionContext = context;
+  //     processor = context.createScriptProcessor(2048, 1, 1);
+  //     this.liveTranscriptionProcessor = processor;
+  //     processor.connect(context.destination);
+  //     context.resume();
+  //   }
+
+  //   navigator.mediaDevices
+  //     .getUserMedia({ audio: true, video: false })
+  //     .then(stream => {
+  //       this.stream = stream;
+  //       this.player.nativeElement.srcObject = stream;
+
+  //       navigator.mediaDevices
+  //         .getDisplayMedia({ audio: true, video: true })
+  //         .then(str => {
+  //           // Live transcription
+  //           let input = context.createMediaStreamSource(str);
+  //           this.liveTranscriptionInput = input;
+  //           input.connect(processor);
+  //           processor.onaudioprocess = e => {
+  //             this.microphoneProcess(e);
+  //           };
+
+  //           this.recorder = new RecordRTCPromisesHandler(str, {
+  //             type: "video",
+  //             mimeType: "video/webm"
+  //           });
+  //           this.recordingStarted = true;
+  //           this.recordingInitiated = false;
+  //           this.recorder.startRecording();
+  //         });
+  //     })
+  //     .catch(err => {
+  //       this.recordingInitiated = false;
+  //       this.recordingDisabled = true;
+  //     });
+  // }
+
   recordAudio(): void {
+    // if (this.isScreenShare) {
+    //   this.recordScreenshare();
+    //   return;
+    // }
     let context, processor;
+
     if (this.isLiveNotes) {
       this.socketEvent.emit("startGoogleCloudStream", ""); //init socket Google Speech Connection
       let AudioContext =
@@ -214,6 +275,8 @@ export class SpeechToTextComponent implements OnInit {
       .getUserMedia({ audio: true, video: false })
       .then(stream => {
         this.stream = stream;
+
+        // this.recordScreenshare();
 
         if (this.isLiveNotes) {
           // Live transcription
