@@ -31,7 +31,7 @@
     "javascript-time-ago": "^2.0.2",
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-bootstrap": "^4.2.0",
     "ngx-spinner": "^7.1.4",
     "pdfjs-dist": "^2.0.943",
